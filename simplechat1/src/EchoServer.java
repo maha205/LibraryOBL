@@ -73,7 +73,6 @@ public class EchoServer extends AbstractServer
 	      case "Update":
 	    	UpdatedUserStatusMembership(msg.get(0),msg.get(1));
 	    	break;
-	
 	    }
 	    
 	    try {

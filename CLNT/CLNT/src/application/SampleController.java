@@ -33,32 +33,16 @@ public class SampleController {
     void getid(ActionEvent event) {
       String ID = IDinput.getText();
       ArrayList<String> msg = new ArrayList<String>();
-      Object result = new ArrayList<String>();
+      ArrayList<String>  result = new ArrayList<String>();
 
          System.out.println(ID);
      	 msg.add(""+ID);
      	 msg.add("GetData");
-//     	 try {
-//     	//result = (ArrayList<String>)Main.client.sendToServer(msg);
-//	//	System.out.println(Main.client.sendToServer(msg));
-		try {
-			Main.client.sendToServer(msg);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-//		} catch (ClassNotFoundException e) {
-//			System.out.println("aaaa");
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println("bbbbb");
-//
-//			e.printStackTrace();
-//		}
-
- 
+     	 result = (ArrayList<String>)Main.client.Request(msg);
+     //	 System.out.println(result.get(3));
+     	 
+     	 
+//	Main.client.handleMessageFromServer(result);
     }
 
 }

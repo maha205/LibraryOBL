@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import ocsf.client.*;
 
@@ -12,14 +13,14 @@ public class Client extends AbstractClient {
 	public void handleMessageFromServer(Object msg) {
 	}
 
-//	public Object Request(Request request) {
-//		try {
-//			return this.sendToServer(request);
-//		} catch (ClassNotFoundException | IOException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+	public Object Request(ArrayList<String> request) {
+		try {
+			return this.sendToServer(request);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	protected void finalize() {
 		close();
