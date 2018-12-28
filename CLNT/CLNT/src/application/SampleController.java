@@ -43,8 +43,9 @@ public class SampleController {
      	 msg.add("GetData");
      	 result = (ArrayList<String>)Main.client.Request(msg);
      	 System.out.println(result);
-     	if(result!= null)
+     	if(result.size() >0)
      	{
+     		Errormsg.setVisible(false);
      	 IDtxt.setVisible(true);
        	 FirstName.setVisible(true);
        	 Status.setVisible(true);
@@ -58,10 +59,10 @@ public class SampleController {
      	{
      		Errormsg.setVisible(true);
      		IDtxt.setVisible(false);
-        	 FirstName.setVisible(false);
-        	 Status.setVisible(false);
-        	 Operation.setVisible(false);
-        	 System.out.println("not found");
+        	FirstName.setVisible(false);
+        	Status.setVisible(false);
+           Operation.setVisible(false);
+        	System.out.println("not found");
      	}
      		 
     

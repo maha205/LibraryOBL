@@ -192,7 +192,6 @@ public class EchoServer extends AbstractServer
 	 			studentsInfo.add(""+rs.getString(4));
 	 			studentsInfo.add(""+rs.getString(5));
 	 			studentsInfo.add("GetData");
-
 	 			return studentsInfo;
 			}
 	 		
