@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <center>
       <AnchorPane prefHeight="333.0" prefWidth="428.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="IDinput" alignment="CENTER" layoutX="139.0" layoutY="14.0" promptText="Student ID" />
-            <Button fx:id="SBMT" layoutX="187.0" layoutY="45.0" onAction="#getid" text="Submit" />
+            <Button fx:id="SBMT" layoutX="187.0" layoutY="54.0" onAction="#getid" text="Submit" />
             <Text fx:id="FirstName" layoutX="185.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
-            <Text fx:id="LastName" layoutX="185.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+            <Text fx:id="Operation" layoutX="185.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Operation" />
             <Text fx:id="IDtxt" layoutX="206.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
             <Text fx:id="Status" layoutX="196.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
             <MenuButton fx:id="menu" layoutX="130.0" layoutY="190.0" mnemonicParsing="false" text="Choose Satatus">
@@ -25,6 +25,7 @@
               </items>
             </MenuButton>
             <Button fx:id="UPDT" layoutX="254.0" layoutY="190.0" onAction="#getid" text="Update" />
+            <Text fx:id="Errormsg" fill="RED" layoutX="179.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not Found ! " visible="false" />
          </children>
       </AnchorPane>
    </center>

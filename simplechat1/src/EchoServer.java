@@ -179,6 +179,7 @@ public class EchoServer extends AbstractServer
 	{
 		Statement stmt;
 		ArrayList<String> studentsInfo = new ArrayList<String>();
+	
 		try 
 		{
 			stmt = conn.createStatement();
@@ -194,7 +195,12 @@ public class EchoServer extends AbstractServer
 
 	 			return studentsInfo;
 			}
-		  rs.close();
+	 		
+		  else
+		  {
+			   rs.close();
+	 			return studentsInfo ;
+		  }
 		} catch (SQLException e)
 		{
 			e.printStackTrace();

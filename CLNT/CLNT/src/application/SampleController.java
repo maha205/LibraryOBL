@@ -21,13 +21,16 @@ public class SampleController {
     private Text FirstName;
 
     @FXML
-    private Text LastName;
+    private Text Operation;
 
     @FXML
     private Text IDtxt;
 
     @FXML
     private Text Status;
+    
+    @FXML
+    private Text Errormsg;
 
     @FXML
     void getid(ActionEvent event) {
@@ -39,10 +42,28 @@ public class SampleController {
      	 msg.add(""+ID);
      	 msg.add("GetData");
      	 result = (ArrayList<String>)Main.client.Request(msg);
-     //	 System.out.println(result.get(3));
-     	 
-     	 
-//	Main.client.handleMessageFromServer(result);
+     	 System.out.println(result);
+     	if(result!= null)
+     	{
+     	 IDtxt.setVisible(true);
+       	 FirstName.setVisible(true);
+       	 Status.setVisible(true);
+       	 Operation.setVisible(true);
+     	 IDtxt.setText(result.get(0));
+     	 FirstName.setText(result.get(1));
+     	 Status.setText(result.get(2));
+     	 Operation.setText(result.get(3));
+      }
+     	else
+     	{
+     		Errormsg.setVisible(true);
+     		IDtxt.setVisible(false);
+        	 FirstName.setVisible(false);
+        	 Status.setVisible(false);
+        	 Operation.setVisible(false);
+        	 System.out.println("not found");
+     	}
+     		 
+    
     }
-
 }
