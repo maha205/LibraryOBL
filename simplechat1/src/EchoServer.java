@@ -71,7 +71,8 @@ public class EchoServer extends AbstractServer
 	    	 break;
 	    	
 	      case "Update":
-	    	UpdatedUserStatusMembership(msg.get(0),msg.get(1));
+	    	msg = UpdatedUserStatusMembership(msg.get(0),msg.get(1));
+	    	 System.out.println("Update User data");
 	    	break;
 	    }
 	    
@@ -209,9 +210,10 @@ public class EchoServer extends AbstractServer
 	}
   
     //printCUserData(String studentID) get studen ID and print all the data for the student 
-    public static void UpdatedUserStatusMembership(String studentID,String SStatusMembership)
+    public static ArrayList<String> UpdatedUserStatusMembership(String studentID,String SStatusMembership)
 	{
 		Statement stmt;
+		ArrayList<String> update = new ArrayList<String>();
 		try 
 		{
 			stmt = conn.createStatement();
@@ -220,10 +222,17 @@ public class EchoServer extends AbstractServer
 	 		if(rs.next())//if the student is existing 
 	 		{
 	 			stmt.executeUpdate("UPDATE student SET StatusMembership ='"+SStatusMembership+"' WHERE StudentId = '"+studentID+"';");
+	 			update.add(SStatusMembership);
+	 			return update;
 	 		}
 			
-			rs.close();
+	 		 else
+			  {
+				   rs.close();
+		 			return update ;
+			  }
 		} catch (SQLException e) {e.printStackTrace();}
+		return update;
 	}
 
 	
