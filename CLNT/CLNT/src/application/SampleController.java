@@ -41,7 +41,8 @@ public class SampleController {
     
     private int flag = 0 ;
     @FXML
-    void getid(ActionEvent event) {
+    void getid(ActionEvent event) 
+    {
       String ID = IDinput.getText();
       ArrayList<String> msg = new ArrayList<String>();
       ArrayList<String>  result = new ArrayList<String>();
@@ -63,10 +64,10 @@ public class SampleController {
      	 Status.setText(result.get(2));
      	 Operation.setText(result.get(3));
      	 if(flag==0)
-     		 {
+     	{
      		    cmboChoose.getItems().addAll("Locked", "Frozen", "Active","NotRegistered");
      		    flag = 1 ;
-     		 }
+        }
       }
      	else
      	{
@@ -98,5 +99,10 @@ public class SampleController {
     	if(result.get(0).equals(null))
     		 Status.setText( Status.getText()); 
     	
+    }
+    
+    public void IPError() 
+    {
+    	System.out.println("is not Connected !!!");
     }
 }

@@ -26,6 +26,7 @@ public class IPController {
     @FXML
     void connect(ActionEvent event) throws IOException 
     {
+    	if(ipaddr.getText().equals(null)) IPError() ;
         Config.getConfig().setHost(ipaddr.getText());
         Config.getConfig().setPort(Integer.parseInt(portTxt.getText()));
     	Config cfg = Config.getConfig();
@@ -37,7 +38,8 @@ public class IPController {
 		//client = new Client("localhost",5555); in my computer :)
 		 client = new Client(cfg.getHost(),cfg.getPort());
 		 client.open();
-		 if(client.isConnected()){
+		 if(client.isConnected())
+		 {
 			System.out.println("isConnected");
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
