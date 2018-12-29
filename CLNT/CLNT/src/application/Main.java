@@ -41,9 +41,6 @@ public class Main extends Application {
 		}
 		else
 			System.exit(0);
-		System.out.println("hello");
-		
-		
 	
 	}
 }
