@@ -62,7 +62,6 @@ public class SampleController {
            Operation.setVisible(false);
         	System.out.println("not found");
      	}
-     		 
-    
+     	System.out.println("not found");
     }
 }
