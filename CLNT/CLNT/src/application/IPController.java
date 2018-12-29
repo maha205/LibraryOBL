@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 
 public class IPController {
 
-	public static String IPaddress = null ;
 	public static Client client = null;
     @FXML
     private TextField ipaddr;
@@ -23,10 +22,12 @@ public class IPController {
     private Button ConnectButton;
 
     @FXML
+    private TextField portTxt;
+    @FXML
     void connect(ActionEvent event) throws IOException 
     {
-        IPaddress = ipaddr.getText();
-        Config.getConfig().setHost(IPaddress);
+        Config.getConfig().setHost(ipaddr.getText());
+        Config.getConfig().setPort(Integer.parseInt(portTxt.getText()));
     	Config cfg = Config.getConfig();
 		if (client != null)
 		{
@@ -34,7 +35,7 @@ public class IPController {
 			client = null;
 		}
 		//client = new Client("localhost",5555); in my computer :)
-		client = new Client(cfg.getHost(),cfg.getPort());
+		 client = new Client(cfg.getHost(),cfg.getPort());
 		 client.open();
 		 if(client.isConnected()){
 			System.out.println("isConnected");
