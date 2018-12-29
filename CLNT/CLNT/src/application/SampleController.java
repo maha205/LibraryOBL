@@ -47,7 +47,7 @@ public class SampleController {
       ArrayList<String>  result = new ArrayList<String>();
      	 msg.add(""+ID);
      	 msg.add("GetData");
-     	 result = (ArrayList<String>)Main.client.Request(msg);
+     	 result = (ArrayList<String>)IPController.client.Request(msg);
      	 System.out.println(result);
      	if(result.size() >0)
      	{
@@ -91,7 +91,7 @@ public class SampleController {
     	 msg.add(ID);
     	 msg.add(stuts);
     	 msg.add("Update");
-    	 result = (ArrayList<String>)Main.client.Request(msg);
+    	 result = (ArrayList<String>)IPController.client.Request(msg);
     
      	 System.out.println(result);
      	 Status.setText(result.get(0)); 
