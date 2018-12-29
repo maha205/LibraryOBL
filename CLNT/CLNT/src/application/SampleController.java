@@ -37,8 +37,6 @@ public class SampleController {
       String ID = IDinput.getText();
       ArrayList<String> msg = new ArrayList<String>();
       ArrayList<String>  result = new ArrayList<String>();
-
-         System.out.println(ID);
      	 msg.add(""+ID);
      	 msg.add("GetData");
      	 result = (ArrayList<String>)Main.client.Request(msg);
