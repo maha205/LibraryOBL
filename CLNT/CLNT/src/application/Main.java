@@ -36,6 +36,7 @@ public class Main extends Application {
 		client.open();
 		if(client.isConnected()){
 			System.out.println("isConnected");
+			System.out.println("isConnected");
 			launch(args);
 
 		}
