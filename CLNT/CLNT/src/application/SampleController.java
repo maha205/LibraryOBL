@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -33,6 +34,11 @@ public class SampleController {
     private Text Errormsg;
 
     @FXML
+    private ComboBox <String> cmboChoose;
+    @FXML
+    private Button UPDT;
+    
+    @FXML
     void getid(ActionEvent event) {
       String ID = IDinput.getText();
       ArrayList<String> msg = new ArrayList<String>();
@@ -43,7 +49,9 @@ public class SampleController {
      	 System.out.println(result);
      	if(result.size() >0)
      	{
-     		Errormsg.setVisible(false);
+     	 Errormsg.setVisible(false);
+     	 cmboChoose.setVisible(true);
+     	 UPDT.setVisible(true);
      	 IDtxt.setVisible(true);
        	 FirstName.setVisible(true);
        	 Status.setVisible(true);
@@ -52,16 +60,33 @@ public class SampleController {
      	 FirstName.setText(result.get(1));
      	 Status.setText(result.get(2));
      	 Operation.setText(result.get(3));
+     	 cmboChoose.getItems().addAll("Locked", "Frozen", "Active","NotRegistered");
       }
      	else
      	{
      		Errormsg.setVisible(true);
+     		cmboChoose.setVisible(false);
+        	 UPDT.setVisible(false);
      		IDtxt.setVisible(false);
         	FirstName.setVisible(false);
         	Status.setVisible(false);
-           Operation.setVisible(false);
+            Operation.setVisible(false);
         	System.out.println("not found");
      	}
-     	System.out.println("not found");
+    }
+    
+    @FXML
+    void Update(ActionEvent event)
+    {
+    	 String ID = IDinput.getText() ;
+    	 String stuts = (String)cmboChoose.getSelectionModel().getSelectedItem();
+    	 ArrayList<String> msg = new ArrayList<String>();
+    	 ArrayList<String>  result = new ArrayList<String>();
+    	 msg.add(ID);
+    	 msg.add(stuts);
+    	 msg.add("Update");
+    	 result = (ArrayList<String>)Main.client.Request(msg);
+     	 System.out.println(result);
+     	 Status.setText(result.get(0));
     }
 }
