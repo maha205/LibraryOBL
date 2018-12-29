@@ -92,7 +92,11 @@ public class SampleController {
     	 msg.add(stuts);
     	 msg.add("Update");
     	 result = (ArrayList<String>)Main.client.Request(msg);
+    
      	 System.out.println(result);
-     	 Status.setText(result.get(0));
+     	 Status.setText(result.get(0)); 
+    	if(result.get(0).equals(null))
+    		 Status.setText( Status.getText()); 
+    	
     }
 }
