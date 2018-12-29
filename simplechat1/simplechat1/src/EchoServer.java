@@ -51,12 +51,6 @@ public class EchoServer extends AbstractServer
    * @param msg The message received from the client.
    * @param client The connection from which the message originated.
    */
-//  public void handleMessageFromClient (Object msg, ConnectionToClient client)
-//  {
-//	    System.out.println("Message received: " + msg + " from " + client);
-//	    this.sendToAllClients(msg);
-//  }
-  
  
   public void handleMessageFromClient(Object message, ConnectionToClient client)
   {
@@ -166,7 +160,7 @@ public class EchoServer extends AbstractServer
     try 
     {
        conn = DriverManager.getConnection("jdbc:mysql://localhost/librarysys","root","Aa123456");
-      System.out.println("SQL connection succeed");
+       System.out.println("SQL connection succeed");
  	}catch (SQLException ex) 
  	 {/* handle any errors*/
        System.out.println("SQLException: " + ex.getMessage());
