@@ -31,7 +31,8 @@ public class Main extends Application {
 			client.close();
 			client = null;
 		}
-		client = new Client("localhost",5555);
+		//client = new Client("localhost",5555); in my computer :)
+		client = new Client(cfg.getHost(),cfg.getPort());
 		client.open();
 		if(client.isConnected()){
 			System.out.println("isConnected");

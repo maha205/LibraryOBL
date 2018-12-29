@@ -2,8 +2,8 @@ package application;
 
 public class Config {
 	public boolean isDebug= true;
-	private String host = "localhost";
-	private int port = 5555;
+	public String host = "localhost";
+	public int port = 5555;
 	
 	private static Config instance = new Config();
 
