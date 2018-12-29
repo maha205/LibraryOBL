@@ -34,12 +34,10 @@ public class SampleController {
     private Text Errormsg;
 
     @FXML
-    public ComboBox <String> cmboChoose;
-    
+    private ComboBox <String> cmboChoose;
     @FXML
     private Button UPDT;
     
-    private int flag = 0 ;
     @FXML
     void getid(ActionEvent event) {
       String ID = IDinput.getText();
@@ -62,11 +60,7 @@ public class SampleController {
      	 FirstName.setText(result.get(1));
      	 Status.setText(result.get(2));
      	 Operation.setText(result.get(3));
-     	 if(flag==0)
-     		 {
-     		    cmboChoose.getItems().addAll("Locked", "Frozen", "Active","NotRegistered");
-     		    flag = 1 ;
-     		 }
+     	 cmboChoose.getItems().addAll("Locked", "Frozen", "Active","NotRegistered");
       }
      	else
      	{
