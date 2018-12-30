@@ -87,19 +87,18 @@ public class SampleController {
     {
     	 String ID = IDinput.getText() ;
     	 String stuts = (String)cmboChoose.getSelectionModel().getSelectedItem();
-    	 System.out.println(stuts); 
     	 ArrayList<String> msg = new ArrayList<String>();
     	 ArrayList<String>  result = new ArrayList<String>();
     	 msg.add(ID);
     	 msg.add(stuts);
     	 msg.add("Update");
-    	 if(stuts.equals(null))
-    		 Status.setText(Status.getText()); 
-    	 else
-    	  result = (ArrayList<String>)IPController.client.Request(msg);
+    	 result = (ArrayList<String>)IPController.client.Request(msg);
     
      	 System.out.println(result);
      	 Status.setText(result.get(0)); 
+    	if(result.get(0).equals(null))
+    		 Status.setText( Status.getText()); 
+    	
     }
     
     public void IPError() 
