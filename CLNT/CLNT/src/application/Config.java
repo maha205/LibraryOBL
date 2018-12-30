@@ -3,7 +3,7 @@ package application;
 public class Config {
 	public boolean isDebug= true;
 	public String host = null;
-	public int port = 5555;
+	public int port = 0;
 	
 	private static Config instance = new Config();
 

@@ -26,7 +26,7 @@ public class IPController {
     @FXML
     void connect(ActionEvent event) throws IOException 
     {
-    	if(ipaddr.getText().equals(null)) IPError() ;
+    	if(ipaddr.getText().equals(null) || portTxt.getText().equals(null)) IPError() ;
         Config.getConfig().setHost(ipaddr.getText());
         Config.getConfig().setPort(Integer.parseInt(portTxt.getText()));
     	Config cfg = Config.getConfig();
