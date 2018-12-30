@@ -41,6 +41,7 @@ public class IPController {
 		 if(client.isConnected())
 		 {
 			System.out.println("isConnected");
+			System.out.println("isConnected");
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
