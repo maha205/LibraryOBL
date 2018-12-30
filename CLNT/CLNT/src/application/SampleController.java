@@ -99,7 +99,6 @@ public class SampleController {
     	  result = (ArrayList<String>)IPController.client.Request(msg);
     
      	 System.out.println(result);
-     	System.out.println(result);
      	 Status.setText(result.get(0)); 
     }
     
