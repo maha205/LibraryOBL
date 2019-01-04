@@ -16,6 +16,7 @@
             <Text layoutX="118.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UserID" />
             <Text layoutX="109.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
             <Text layoutX="213.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign-In" />
+            <Text fx:id="notFound" layoutX="200.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Not Found !" />
          </children>
       </AnchorPane>
    </top>

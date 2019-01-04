@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 public class loginController {
 
+  
     @FXML
     private Button login;
     @FXML
@@ -47,6 +48,8 @@ public class loginController {
     		primaryStage.setScene(scene);		
     		primaryStage.show();
      	}
+    	//else
+    	//	notFound.setVisible(true);
 
     }
 
