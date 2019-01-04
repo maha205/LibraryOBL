@@ -74,6 +74,11 @@ public class EchoServer extends AbstractServer
 	    	msg = UpdatedUserStatusMembership(msg.get(0),msg.get(1));
 	    	 System.out.println("Update User data");
 	    	break;
+	    	
+	      case "login":
+		    	 msg = (loginUser(msg.get(0),msg.get(1)));
+				 System.out.println("Return User data");
+		    	 break;
 	    }
 	    
 	    try {
@@ -235,6 +240,31 @@ public class EchoServer extends AbstractServer
 		return update;
 	}
 
-	
+    //loginUser(String studentID,String pass) get user ID and passsword and return if the user is subscription or not
+    public static ArrayList<String> loginUser(String studentID,String pass)
+    {
+    	Statement stmt;
+		ArrayList<String> UserLogin = new ArrayList<String>();
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM student  WHERE StudentId = "+studentID);
+			
+	 		if(rs.next())//if the student is existing 
+	 		{
+	 			//studentsInfo.add(""+rs.getString(1));
+	 			if(rs.getString(1).equals(pass))
+	 				UserLogin.add("login");
+	 			return UserLogin;
+	 		}
+			
+	 		 else
+			  {
+				   rs.close();
+		 			return UserLogin ;
+			  }
+		} catch (SQLException e) {e.printStackTrace();}
+		return UserLogin;
+    }
 }
 //End of EchoServer class

@@ -15,7 +15,7 @@
             <Button fx:id="ConnectButton" layoutX="173.0" layoutY="159.0" mnemonicParsing="false" onAction="#connect" text="Connect" />
             <Text layoutX="40.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP Address" />
             <Text layoutX="47.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port" />
-            <TextField fx:id="portTxt" layoutX="129.0" layoutY="115.0" promptText="        port" />
+            <TextField fx:id="portTxt" alignment="CENTER" layoutX="129.0" layoutY="115.0" promptText="        port" />
          </children>
       </AnchorPane>
    </center>
