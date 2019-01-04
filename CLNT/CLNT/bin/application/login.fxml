@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.loginController">
-   <top>
+   <bottom>
       <AnchorPane fx:id="notFound" prefHeight="494.0" prefWidth="535.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="login" layoutX="227.0" layoutY="272.0" mnemonicParsing="false" onAction="#loginFunc" text="login" />
@@ -16,8 +16,10 @@
             <Text layoutX="118.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UserID" />
             <Text layoutX="109.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
             <Text layoutX="213.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign-In" />
-            <Text fx:id="notFound" layoutX="200.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Not Found !" visible="false" />
+            <Text fx:id="notFoun" fill="RED" layoutX="193.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Not Found !" visible="false" />
+            <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, User !" />
+            <Button fx:id="back" layoutX="14.0" layoutY="448.0" mnemonicParsing="false" onAction="#backGui" text="Back" />
          </children>
       </AnchorPane>
-   </top>
+   </bottom>
 </BorderPane>
