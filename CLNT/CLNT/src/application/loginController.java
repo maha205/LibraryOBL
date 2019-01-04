@@ -12,8 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
+
 
 public class loginController {
     @FXML
@@ -42,6 +41,8 @@ public class loginController {
     	System.out.println(result);
     	if(result.size() > 0)
      	{
+    	  if(result.get(0).equals("student"))
+    	  {
     		((Node)event.getSource()).getScene().getWindow().hide();
     		Stage primaryStage = new Stage();
     		FXMLLoader loader = new FXMLLoader();
@@ -51,6 +52,20 @@ public class loginController {
     		
     		primaryStage.setScene(scene);		
     		primaryStage.show();
+    	   }
+    	  
+    	  else if(result.get(0).equals("librarian"))
+    	   {
+    		 ((Node)event.getSource()).getScene().getWindow().hide();
+        	  Stage primaryStage = new Stage();
+        	  FXMLLoader loader = new FXMLLoader();
+        	  Pane root = loader.load(getClass().getResource("/application/LibrarianProfileProfile.fxml").openStream());
+        		
+        	  Scene scene = new Scene(root);			
+        		
+        	  primaryStage.setScene(scene);		
+        	  primaryStage.show();
+    		}
      	}
     }
 

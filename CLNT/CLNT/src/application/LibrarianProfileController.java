@@ -1,5 +1,6 @@
 package application;
 
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -8,29 +9,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class StudentProfileController {
-	 @FXML
-	 private Button edit;
+public class LibrarianProfileController {
 
-	 @FXML
-	 private Button signUp;
-   
     @FXML
-    void optionFunc(ActionEvent event) 
-    {
-    
+    private MenuButton Options;
+
+    @FXML
+    private Button editBtn;
+
+    @FXML
+    private Button logout;
+
+    @FXML
+    void OptionsFunc(ActionEvent event) {
+
     }
+
     @FXML
     void editFunc(ActionEvent event) {
 
     }
 
     @FXML
-    void signUpFunc(ActionEvent event) throws IOException
+    void logoutFunc(ActionEvent event) throws IOException 
     {
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
