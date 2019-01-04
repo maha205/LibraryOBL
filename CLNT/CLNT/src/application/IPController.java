@@ -44,7 +44,7 @@ public class IPController {
 			((Node)event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/application/Sample.fxml").openStream());
+			Pane root = loader.load(getClass().getResource("/application/login.fxml").openStream());
 			
 			Scene scene = new Scene(root);			
 			
