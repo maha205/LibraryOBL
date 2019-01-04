@@ -19,7 +19,6 @@
             <Text fx:id="notFoun" fill="RED" layoutX="193.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Not Found !" visible="false" />
             <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, User !" />
             <Button fx:id="back" layoutX="14.0" layoutY="445.0" mnemonicParsing="false" onAction="#backGui" prefHeight="34.0" prefWidth="92.0" text="Back" />
-            <Button layoutX="12.0" layoutY="404.0" mnemonicParsing="false" text="Search Book" />
          </children>
       </AnchorPane>
    </bottom>

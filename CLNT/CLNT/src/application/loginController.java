@@ -39,8 +39,6 @@ public class loginController {
     	msg.add("login");
     	result = (ArrayList<String>)IPController.client.Request(msg);
     	System.out.println(result);
-    	if(result.size() > 0)
-     	{
     	  if(result.get(0).equals("student"))
     	  {
     		((Node)event.getSource()).getScene().getWindow().hide();
@@ -59,14 +57,13 @@ public class loginController {
     		 ((Node)event.getSource()).getScene().getWindow().hide();
         	  Stage primaryStage = new Stage();
         	  FXMLLoader loader = new FXMLLoader();
-        	  Pane root = loader.load(getClass().getResource("/application/LibrarianProfileProfile.fxml").openStream());
+        	  Pane root = loader.load(getClass().getResource("/application/LibrarianProfile.fxml").openStream());
         		
         	  Scene scene = new Scene(root);			
         		
         	  primaryStage.setScene(scene);		
         	  primaryStage.show();
     		}
-     	}
     }
 
     @FXML

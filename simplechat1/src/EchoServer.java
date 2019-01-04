@@ -76,13 +76,7 @@ public class EchoServer extends AbstractServer
 	    	break;
 	    	
 	      case "login":
-		    	// msg = (loginUserStudent(msg.get(0),msg.get(1))); //student login
-	    	  msg =(loginUserLibririan(msg.get(0),msg.get(1))); //Libririan login
-		    	 if(msg.equals(null))  
-		    	  {
-		    		// msg = null;
-		    		 msg = (loginUserStudent(msg.get(0),msg.get(1))); //student login
-		    	  }
+		    	 msg = (loginUser(msg.get(0),msg.get(1))); //student login
 				 System.out.println("Return User data");
 		    	 break;
 	    }
@@ -247,7 +241,7 @@ public class EchoServer extends AbstractServer
 	}
 
     //loginUser(String studentID,String pass) get user ID and passsword and return if the user is subscription or not
-    public static ArrayList<String> loginUserStudent(String UserID,String pass)
+    public static ArrayList<String> loginUser(String UserID,String pass)
     {
     	Statement stmt;
 		ArrayList<String> UserLogin = new ArrayList<String>();
@@ -264,7 +258,7 @@ public class EchoServer extends AbstractServer
 	 		rs1.close();
 		} catch (SQLException e) {e.printStackTrace();}	
 	
-		return UserLogin;
+		return loginUserLibririan (UserID, pass);
     }
     public static ArrayList<String> loginUserLibririan(String UserID,String pass)
     {
