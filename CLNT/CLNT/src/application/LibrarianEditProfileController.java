@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +14,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class LibrarianEditProfileController {
-
+public class LibrarianEditProfileController 
+{
     @FXML
     private Button upEmailBtn;
 
@@ -95,7 +96,45 @@ public class LibrarianEditProfileController {
     @FXML
     void saveFunc(ActionEvent event)
     {
-
+    	ArrayList<String> msg = new ArrayList<String>();
+        ArrayList<String>  result = new ArrayList<String>();
+        try{
+        	if(!(emailTxt.getText().equals(null)))
+        	{
+        		msg.add(loginController.LibrarianId);
+        		msg.add(emailTxt.getText());
+        		msg.add("UpdateEmailLibrarian");
+        		result = (ArrayList<String>)IPController.client.Request(msg);
+            	System.out.println(result);
+        	}
+        	
+        }catch( NullPointerException  e) {e.printStackTrace();  }
+    	
+    	
+       try{
+           if(!(phontTxt.getText().equals(null)))    	
+    	   {
+    	   	msg.add(loginController.LibrarianId);
+    		msg.add(phontTxt.getText());
+    		msg.add("UpdatephontLibrariant");
+    		result = (ArrayList<String>)IPController.client.Request(msg);
+    	    System.out.println(result);
+    	   }
+       }catch( NullPointerException  e) {e.printStackTrace();  }
+    		
+     try{
+    	if(!(oldPassTxt.getText().equals(null)) && !(newPassTxt.getText().equals(null)) && !(assertPassTxt.getText().equals(null)) )
+    	{
+    		
+    		msg.add(loginController.LibrarianId);
+    		msg.add(oldPassTxt.getText());
+    		msg.add(newPassTxt.getText());
+    		msg.add(assertPassTxt.getText());
+    		msg.add("UpdatePasswordLibrarian");
+    		result = (ArrayList<String>)IPController.client.Request(msg);
+    	    System.out.println(result);
+    	}
+       }catch( NullPointerException  e) {e.printStackTrace();  }
     }
 
     @FXML

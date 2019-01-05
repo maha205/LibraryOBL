@@ -51,13 +51,7 @@ public class EchoServer extends AbstractServer
    * @param msg The message received from the client.
    * @param client The connection from which the message originated.
    */
-//  public void handleMessageFromClient (Object msg, ConnectionToClient client)
-//  {
-//	    System.out.println("Message received: " + msg + " from " + client);
-//	    this.sendToAllClients(msg);
-//  }
-  
- 
+
   public void handleMessageFromClient(Object message, ConnectionToClient client)
   {
 	    System.out.println("Message received: " + message + " from " + client);
@@ -80,18 +74,33 @@ public class EchoServer extends AbstractServer
 				 System.out.println("login User");
 		    	 break;
 		    	 
-	      case "UpdateEmail":
+	      case "UpdateEmailStudent":
 	    	     msg = (UpdatedStudentEmail(msg.get(0),msg.get(1))); //student email update
 				 System.out.println("Update student Email");
 		    	 break;
 		    	 
-	      case "Updatephont":
+	      case "UpdatephontStudent":
 	    	  msg = (UpdatedStudentPhone(msg.get(0),msg.get(1))); //student email update
 			  System.out.println("Update student Phone");
 		      break;
 		      
-	      case "UpdatePassword":
+	      case "UpdatePasswordStudent":
 	    	  msg = (UpdatedStudentPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3))); //student password update
+			  System.out.println("Update student Password");
+		      break;
+		      
+	      case "UpdateEmailLibrarian":
+	    	     msg = (UpdatedLibrarianEmail(msg.get(0),msg.get(1))); //student email update
+				 System.out.println("Update student Email");
+		    	 break;
+		    	 
+	      case "UpdatephontLibrariant":
+	    	  msg = (UpdatedLibrarianPhone(msg.get(0),msg.get(1))); //student email update
+			  System.out.println("Update student Phone");
+		      break;
+		      
+	      case "UpdatePasswordLibrarian":
+	    	  msg = (UpdatedLibrarianPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3))); //student password update
 			  System.out.println("Update student Password");
 		      break;
 	    }
@@ -363,5 +372,74 @@ public class EchoServer extends AbstractServer
    		}
    		return update;
    	}
+    public static ArrayList<String> UpdatedLibrarianEmail(String LibrariandentID,String Email)
+  	{
+  		Statement stmt;
+  		ArrayList<String> update = new ArrayList<String>();
+  		try 
+  		{
+  			stmt = conn.createStatement();
+  			ResultSet rs = stmt.executeQuery("SELECT * FROM librarian WHERE Id = "+LibrariandentID);
+  			
+  	 		if(rs.next())//if the librarian is existing 
+  	 		{
+  	 			stmt.executeUpdate("UPDATE librarian SET email ='"+Email+"' WHERE Id = '"+LibrariandentID+"';");
+  	 			update.add(Email);
+  	 			  rs.close();
+  	 			return update;
+  	 		}
+  		} catch (SQLException e)
+  		{
+  			e.printStackTrace();
+  			return update;
+  		}
+  		return update;
+  	}
+      public static ArrayList<String> UpdatedLibrarianPhone(String LibrariandentID,String Phone)
+     	{
+     		Statement stmt;
+     		ArrayList<String> update = new ArrayList<String>();
+     		try 
+     		{
+     			stmt = conn.createStatement();
+     			ResultSet rs = stmt.executeQuery("SELECT * FROM librarian WHERE Id = "+LibrariandentID);
+     			
+     	 		if(rs.next())//if the librarian is existing 
+     	 		{
+     	 			stmt.executeUpdate("UPDATE librarian SET phone ='"+Phone+"' WHERE Id = '"+LibrariandentID+"';");
+     	 			update.add(Phone);
+     	 			  rs.close();
+     	 			return update;
+     	 		}
+     		} catch (SQLException e)
+     		{
+     			e.printStackTrace();
+     			return update;
+     		}
+     		return update;
+     	}
+      public static ArrayList<String> UpdatedLibrarianPassword(String UserID,String oldPass ,String newPass ,String AssertPass)
+     	{
+     		Statement stmt;
+     		ArrayList<String> update = new ArrayList<String>();
+     		try 
+     		{
+     			stmt = conn.createStatement();
+     			ResultSet rs = stmt.executeQuery("SELECT * FROM useworker WHERE userID ="+UserID);
+     			
+     	 		if(rs.next() && newPass.equals(AssertPass) && rs.getString(2).equals(oldPass))//if the librarian is existing 
+     	 		{
+     	 		   stmt.executeUpdate("UPDATE useworker SET password ='"+newPass+"' WHERE UserID ='"+UserID+"';");
+     	 		   update.add(newPass);
+     	 		   rs.close();
+     	 	       return update;
+     	 		}
+     		} catch (SQLException e)
+     		{
+     			e.printStackTrace();
+     			return update;
+     		}
+     		return update;
+     	}
 }
 //End of EchoServer class

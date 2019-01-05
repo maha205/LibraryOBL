@@ -86,7 +86,7 @@ public class editStudentProfileController
         	{
         		msg.add(loginController.StudentId);
         		msg.add(emailTxt.getText());
-        		msg.add("UpdateEmail");
+        		msg.add("UpdateEmailStudent");
         		result = (ArrayList<String>)IPController.client.Request(msg);
             	System.out.println(result);
         	}
@@ -99,7 +99,7 @@ public class editStudentProfileController
     	   {
     	   	msg.add(loginController.StudentId);
     		msg.add(phontTxt.getText());
-    		msg.add("Updatephont");
+    		msg.add("UpdatephontStudent");
     		result = (ArrayList<String>)IPController.client.Request(msg);
     	    System.out.println(result);
     	   }
@@ -113,7 +113,7 @@ public class editStudentProfileController
     		msg.add(oldPassTxt.getText());
     		msg.add(newPassTxt.getText());
     		msg.add(assertPassTxt.getText());
-    		msg.add("UpdatePassword");
+    		msg.add("UpdatePasswordStudent");
     		result = (ArrayList<String>)IPController.client.Request(msg);
     	    System.out.println(result);
     	}
