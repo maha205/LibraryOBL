@@ -37,6 +37,7 @@
             <Button fx:id="backBtn" layoutX="23.0" layoutY="467.0" mnemonicParsing="false" onAction="#backFunc" text="Back" />
             <Button fx:id="saveBtn" layoutX="367.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveFunc" text="Save" />
             <Button fx:id="exitBtn" layoutX="650.0" layoutY="467.0" mnemonicParsing="false" onAction="#exitFun" text="Exit" />
+            <Text layoutX="23.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Student!" />
          </children>
       </AnchorPane>
    </center>

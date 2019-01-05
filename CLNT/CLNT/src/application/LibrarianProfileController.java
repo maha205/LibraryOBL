@@ -30,8 +30,18 @@ public class LibrarianProfileController {
     }
 
     @FXML
-    void editFunc(ActionEvent event) {
+    void editFunc(ActionEvent event) throws IOException 
+    {
 
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/LibrarianEditProfile.fxml").openStream());
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
     }
 
     @FXML

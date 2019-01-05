@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.LibrarianEditProfileController">
+   <right>
+      <AnchorPane prefHeight="720.0" prefWidth="751.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#0d81ae" layoutX="126.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Librarian Profile">
+               <font>
+                  <Font name="System Bold Italic" size="47.0" />
+               </font>
+            </Text>
+            <Text layoutX="23.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Librarian!" />
+            <Text fill="#0d81ae" layoutX="143.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Menu:">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Text>
+            <Button layoutX="127.0" layoutY="255.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="174.0" text="Update E-mail" />
+            <Button layoutX="127.0" layoutY="298.0" mnemonicParsing="false" text="Update Phone Number" />
+            <Button layoutX="127.0" layoutY="338.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="175.0" text="Update Password" />
+            <Text fx:id="email" layoutX="336.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:" visible="false" />
+            <Text fx:id="phone" layoutX="324.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:" visible="false" />
+            <Text fx:id="oldPasswordTochange" layoutX="338.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Old Password:" visible="false" />
+            <Text fx:id="newPass" layoutX="336.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password:" visible="false" />
+            <Text fx:id="AssertPass" layoutX="336.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assert New Password:" visible="false" />
+            <TextField fx:id="emailTxt" layoutX="394.0" layoutY="250.0" prefHeight="32.0" prefWidth="202.0" promptText="example@example.example" visible="false" />
+            <TextField fx:id="phontTxt" alignment="CENTER" layoutX="440.0" layoutY="267.0" promptText="05*-*******" visible="false" />
+            <TextField fx:id="oldPassTxt" alignment="CENTER" layoutX="488.0" layoutY="256.0" promptText="********" visible="false" />
+            <TextField fx:id="newPassTxt" alignment="CENTER" layoutX="488.0" layoutY="298.0" promptText="********" visible="false" />
+            <TextField fx:id="assertPassTxt" alignment="CENTER" layoutX="488.0" layoutY="336.0" promptText="********" visible="false" />
+            <Button layoutX="367.0" layoutY="421.0" mnemonicParsing="false" text="save" />
+            <Button fx:id="backBtn" layoutX="23.0" layoutY="666.0" mnemonicParsing="false" onAction="#backFunc" text="Back" />
+            <Button fx:id="exitBtn" layoutX="663.0" layoutY="666.0" mnemonicParsing="false" onAction="#exitFun" text="Exit" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
