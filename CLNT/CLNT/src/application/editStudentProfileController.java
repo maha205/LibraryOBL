@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,9 +77,47 @@ public class editStudentProfileController
     }
 
     @FXML
-    void saveFunc(ActionEvent event) 
-   {
-
+    void saveFunc(ActionEvent event) throws NullPointerException 
+    {
+    	ArrayList<String> msg = new ArrayList<String>();
+        ArrayList<String>  result = new ArrayList<String>();
+        try{
+        	if(!(emailTxt.getText().equals(null)))
+        	{
+        		msg.add(loginController.StudentId);
+        		msg.add(emailTxt.getText());
+        		msg.add("UpdateEmail");
+        		result = (ArrayList<String>)IPController.client.Request(msg);
+            	System.out.println(result);
+        	}
+        	
+        }catch( NullPointerException  e) {e.printStackTrace();  }
+    	
+    	
+       try{
+           if(!(phontTxt.getText().equals(null)))    	
+    	   {
+    	   	msg.add(loginController.StudentId);
+    		msg.add(phontTxt.getText());
+    		msg.add("Updatephont");
+    		result = (ArrayList<String>)IPController.client.Request(msg);
+    	    System.out.println(result);
+    	   }
+       }catch( NullPointerException  e) {e.printStackTrace();  }
+    		
+       try{
+    	if(!(oldPassTxt.getText().equals(null)) && !(newPassTxt.getText().equals(null)) && !(assertPassTxt.getText().equals(null)) )
+    	{
+    		
+    		msg.add(loginController.StudentId);
+    		msg.add(oldPassTxt.getText());
+    		msg.add(newPassTxt.getText());
+    		msg.add(assertPassTxt.getText());
+    		msg.add("UpdatePassword");
+    		result = (ArrayList<String>)IPController.client.Request(msg);
+    	    System.out.println(result);
+    	}
+       }catch( NullPointerException  e) {e.printStackTrace();  }
     }
     @FXML
     void updateEmailFunc(ActionEvent event) 
@@ -93,6 +132,11 @@ public class editStudentProfileController
     	AssertPass.setVisible(false);
     	assertPassTxt.setVisible(false);
     	oldPasswordTochange.setVisible(false);
+    	
+    	phontTxt.setText(null);
+    	newPassTxt.setText(null);
+    	assertPassTxt.setText(null);
+    	oldPassTxt.setText(null);
     }
 
     @FXML
@@ -108,6 +152,9 @@ public class editStudentProfileController
     	AssertPass.setVisible(true);
     	assertPassTxt.setVisible(true);
     	oldPasswordTochange.setVisible(true);
+    	
+    	phontTxt.setText(null);
+    	emailTxt.setText(null);
     }
 
     @FXML
@@ -123,6 +170,11 @@ public class editStudentProfileController
     	AssertPass.setVisible(false);
     	assertPassTxt.setVisible(false);
     	oldPasswordTochange.setVisible(false);
+    	
+    	emailTxt.setText(null);
+    	newPassTxt.setText(null);
+    	assertPassTxt.setText(null);
+    	oldPassTxt.setText(null);
     }
     @FXML
     void exitFun(ActionEvent event) throws IOException 

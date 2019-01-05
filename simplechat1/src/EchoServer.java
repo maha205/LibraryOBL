@@ -77,8 +77,23 @@ public class EchoServer extends AbstractServer
 	    	
 	      case "login":
 		    	 msg = (loginUser(msg.get(0),msg.get(1))); //student login
-				 System.out.println("Return User data");
+				 System.out.println("login User");
 		    	 break;
+		    	 
+	      case "UpdateEmail":
+	    	     msg = (UpdatedStudentEmail(msg.get(0),msg.get(1))); //student email update
+				 System.out.println("Update student Email");
+		    	 break;
+		    	 
+	      case "Updatephont":
+	    	  msg = (UpdatedStudentPhone(msg.get(0),msg.get(1))); //student email update
+			  System.out.println("Update student Phone");
+		      break;
+		      
+	      case "UpdatePassword":
+	    	  msg = (UpdatedStudentPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3))); //student password update
+			  System.out.println("Update student Password");
+		      break;
 	    }
 	    
 	    try {
@@ -279,5 +294,74 @@ public class EchoServer extends AbstractServer
 		} catch (SQLException e) {e.printStackTrace();}	
 		return UserLogin;
     }
+    public static ArrayList<String> UpdatedStudentEmail(String studentID,String Email)
+	{
+		Statement stmt;
+		ArrayList<String> update = new ArrayList<String>();
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM student  WHERE StudentId = "+studentID);
+			
+	 		if(rs.next())//if the student is existing 
+	 		{
+	 			stmt.executeUpdate("UPDATE student SET Email ='"+Email+"' WHERE StudentId = '"+studentID+"';");
+	 			update.add(Email);
+	 			  rs.close();
+	 			return update;
+	 		}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			return update;
+		}
+		return update;
+	}
+    public static ArrayList<String> UpdatedStudentPhone(String studentID,String Phone)
+   	{
+   		Statement stmt;
+   		ArrayList<String> update = new ArrayList<String>();
+   		try 
+   		{
+   			stmt = conn.createStatement();
+   			ResultSet rs = stmt.executeQuery("SELECT * FROM student  WHERE StudentId = "+studentID);
+   			
+   	 		if(rs.next())//if the student is existing 
+   	 		{
+   	 			stmt.executeUpdate("UPDATE student SET phone ='"+Phone+"' WHERE StudentId = '"+studentID+"';");
+   	 			update.add(Phone);
+   	 			  rs.close();
+   	 			return update;
+   	 		}
+   		} catch (SQLException e)
+   		{
+   			e.printStackTrace();
+   			return update;
+   		}
+   		return update;
+   	}
+    public static ArrayList<String> UpdatedStudentPassword(String UserID,String oldPass ,String newPass ,String AssertPass)
+   	{
+   		Statement stmt;
+   		ArrayList<String> update = new ArrayList<String>();
+   		try 
+   		{
+   			stmt = conn.createStatement();
+   			ResultSet rs = stmt.executeQuery("SELECT * FROM userstudent WHERE UserID ="+UserID);
+   			
+   	 		if(rs.next() && newPass.equals(AssertPass) && rs.getString(2).equals(oldPass))//if the student is existing 
+   	 		{
+   	 		   stmt.executeUpdate("UPDATE userstudent SET Password ='"+newPass+"' WHERE UserID ='"+UserID+"';");
+   	 		   update.add(newPass);
+   	 		   rs.close();
+   	 	       return update;
+   	 		}
+   		} catch (SQLException e)
+   		{
+   			e.printStackTrace();
+   			return update;
+   		}
+   		return update;
+   	}
 }
 //End of EchoServer class

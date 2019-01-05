@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 
 
 public class loginController {
+	
+	public static String StudentId ;
+	public static String LibrarianId ;
     @FXML
     private Button login;
     
@@ -41,6 +44,7 @@ public class loginController {
     	System.out.println(result);
     	  if(result.get(0).equals("student"))
     	  {
+    		  StudentId=userID.getText();
     		((Node)event.getSource()).getScene().getWindow().hide();
     		Stage primaryStage = new Stage();
     		FXMLLoader loader = new FXMLLoader();
@@ -54,6 +58,7 @@ public class loginController {
     	  
     	  else if(result.get(0).equals("librarian"))
     	   {
+    		  LibrarianId=userID.getText();
     		 ((Node)event.getSource()).getScene().getWindow().hide();
         	  Stage primaryStage = new Stage();
         	  FXMLLoader loader = new FXMLLoader();
