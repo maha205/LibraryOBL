@@ -41,8 +41,18 @@ public class LibrarianProfileController {
 		primaryStage.show();
     }
     @FXML
-    void OpenNewSubscription(ActionEvent event) {
-
+    void OpenNewSubscription(ActionEvent event) throws IOException 
+    {
+    	editStudentProfileController.FormBack ="LibrarianProfile";
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/singUp.fxml").openStream());
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
     }
 
     @FXML
