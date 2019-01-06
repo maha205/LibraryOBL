@@ -17,15 +17,6 @@ import javafx.stage.Stage;
 public class LibrarianEditProfileController 
 {
     @FXML
-    private Button upEmailBtn;
-
-    @FXML
-    private Button upPhone;
-
-    @FXML
-    private Button upPass;
-
-    @FXML
     private Text email;
 
     @FXML
@@ -41,28 +32,19 @@ public class LibrarianEditProfileController
     private Text AssertPass;
 
     @FXML
-    private TextField emailTxt;
+    private TextField emailTxt = null;
 
     @FXML
-    private TextField phontTxt;
+    private TextField phontTxt = null;
 
     @FXML
-    private TextField oldPassTxt;
+    private TextField oldPassTxt = null;
 
     @FXML
-    private TextField newPassTxt;
+    private TextField newPassTxt = null;
 
     @FXML
-    private TextField assertPassTxt;
-
-    @FXML
-    private Button saveBtn;
-
-    @FXML
-    private Button backBtn;
-
-    @FXML
-    private Button exitBtn;
+    private TextField assertPassTxt = null;
 
     @FXML
     void backFunc(ActionEvent event) throws IOException
@@ -99,7 +81,7 @@ public class LibrarianEditProfileController
     	ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
         try{
-        	if(!(emailTxt.getText().equals(null)))
+        	if(!(emailTxt.getText().equals(null)) && phontTxt.getText().equals(null) )
         	{
         		msg.add(sigINController.LibrarianId);
         		msg.add(emailTxt.getText());
@@ -112,7 +94,7 @@ public class LibrarianEditProfileController
     	
     	
        try{
-           if(!(phontTxt.getText().equals(null)))    	
+    	   if(!(phontTxt.getText().equals(null)) && emailTxt.getText().equals(null))     	
     	   {
     	   	msg.add(sigINController.LibrarianId);
     		msg.add(phontTxt.getText());

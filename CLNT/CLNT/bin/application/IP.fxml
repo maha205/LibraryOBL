@@ -4,19 +4,30 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane prefHeight="260.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.IPController">
-   <center>
-      <AnchorPane prefHeight="568.0" prefWidth="829.0" BorderPane.alignment="CENTER">
+   <left>
+      <AnchorPane prefHeight="354.0" prefWidth="477.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="ipaddr" alignment="CENTER" layoutX="129.0" layoutY="73.0" promptText="IP Address" />
-            <Text layoutX="61.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter the IP Addres and the Ports" />
-            <Button fx:id="ConnectButton" layoutX="173.0" layoutY="159.0" mnemonicParsing="false" onAction="#connect" text="Connect" />
-            <Text layoutX="40.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP Address" />
-            <Text layoutX="47.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port" />
-            <TextField fx:id="portTxt" alignment="CENTER" layoutX="129.0" layoutY="115.0" promptText="        port" />
+            <TextField fx:id="ipaddr" alignment="CENTER" layoutX="155.0" layoutY="87.0" promptText="IP Address" />
+            <Text fill="#177f36" layoutX="85.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter the IP Addres and the Ports">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font></Text>
+            <Button fx:id="ConnectButton" layoutX="174.0" layoutY="188.0" mnemonicParsing="false" onAction="#connect" text="Connect" />
+            <Text fill="#177f36" layoutX="70.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP Address:">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font></Text>
+            <Text fill="#177f36" layoutX="92.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port:">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font></Text>
+            <TextField fx:id="portTxt" alignment="CENTER" layoutX="155.0" layoutY="130.0" promptText="        port" />
+            <Text layoutX="9.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, User!" />
          </children>
       </AnchorPane>
-   </center>
+   </left>
 </BorderPane>

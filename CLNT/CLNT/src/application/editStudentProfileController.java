@@ -29,38 +29,21 @@ public class editStudentProfileController
     private Text AssertPass;
     @FXML
     private Text oldPasswordTochange;
-   @FXML
-   private Button upEmailBtn;
-
-	@FXML
-	private Button upPhone;
-
-	 @FXML
-	 private Button upPass;
+ 
+    @FXML
+    private TextField emailTxt = null;
 
     @FXML
-    private TextField emailTxt;
+    private TextField phontTxt = null;
 
     @FXML
-    private TextField phontTxt;
+    private TextField oldPassTxt = null;
 
     @FXML
-    private TextField oldPassTxt;
+    private TextField newPassTxt = null;
 
     @FXML
-    private TextField newPassTxt;
-
-    @FXML
-    private TextField assertPassTxt;
-
-    @FXML
-    private Button backBtn;
-
-    @FXML
-    private Button saveBtn;
-
-    @FXML
-    private Button exitBtn;
+    private TextField assertPassTxt = null;
     @FXML
     void backFunc(ActionEvent event) throws IOException 
     {
@@ -79,10 +62,11 @@ public class editStudentProfileController
     @FXML
     void saveFunc(ActionEvent event) throws NullPointerException 
     {
+    	
     	ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
         try{
-        	if(!(emailTxt.getText().equals(null)))
+        	if(!(emailTxt.getText().equals(null)) && phontTxt.getText().equals(null) )
         	{
         		msg.add(sigINController.StudentId);
         		msg.add(emailTxt.getText());
@@ -95,7 +79,7 @@ public class editStudentProfileController
     	
     	
        try{
-           if(!(phontTxt.getText().equals(null)))    	
+           if(!(phontTxt.getText().equals(null)) && emailTxt.getText().equals(null))    	
     	   {
     	   	msg.add(sigINController.StudentId);
     		msg.add(phontTxt.getText());
