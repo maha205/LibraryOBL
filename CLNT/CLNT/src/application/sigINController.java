@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -32,7 +33,6 @@ public class sigINController {
     @FXML
     void loginFunc(ActionEvent event) throws IOException
     {
-    	
     	String UserID = userID.getText();
     	String UserPass = pass.getText();
         ArrayList<String> msg = new ArrayList<String>();

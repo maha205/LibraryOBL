@@ -21,6 +21,8 @@
             <Text fx:id="Errormsg" fill="RED" layoutX="164.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not Found ! " visible="false" />
             <ComboBox fx:id="cmboChoose" layoutX="94.0" layoutY="259.0" prefHeight="30.0" prefWidth="171.0" promptText="Choose Satatus" visible="false" />
             <Text layoutX="38.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID :" />
+            <Button layoutX="13.0" layoutY="290.0" mnemonicParsing="false" onAction="#backForm" text="Back" />
+            <Button layoutX="338.0" layoutY="290.0" mnemonicParsing="false" onAction="#logout" text="Log-Out" />
          </children>
       </AnchorPane>
    </top>

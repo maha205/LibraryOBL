@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,16 +9,16 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StudentProfileController">
-   <top>
-      <AnchorPane prefHeight="693.0" prefWidth="867.0" BorderPane.alignment="CENTER">
+   <bottom>
+      <AnchorPane prefHeight="579.0" prefWidth="876.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Student!" />
-            <Text fill="#ae1d1d" layoutX="304.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Profile">
+            <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Student!" />
+            <Text fill="#ae1d1d" layoutX="283.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Profile">
                <font>
                   <Font name="System Bold Italic" size="37.0" />
                </font>
             </Text>
-            <TableView layoutX="28.0" layoutY="307.0" prefHeight="340.0" prefWidth="795.0">
+            <TableView layoutX="18.0" layoutY="228.0" prefHeight="302.0" prefWidth="822.0">
               <columns>
                 <TableColumn prefWidth="95.0" text="Book Name" />
                 <TableColumn prefWidth="102.0" text="Book Author" />
@@ -33,22 +31,18 @@
                   <TableColumn prefWidth="75.0" text="Quantity" />
               </columns>
             </TableView>
-            <Text layoutX="317.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Current Loaned Books">
+            <Text fill="#ae1d1d" layoutX="292.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Current Loaned Books">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold Italic" size="17.0" />
                </font>
             </Text>
-            <MenuButton layoutX="348.0" layoutY="84.0" mnemonicParsing="false" text="Student's options">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Search Book" />
-                <MenuItem mnemonicParsing="false" text="Order Book" />
-                  <MenuItem mnemonicParsing="false" text="Loan Book" />
-                  <MenuItem mnemonicParsing="false" text="Extend Loan Duration" />
-              </items>
-            </MenuButton>
-            <Button fx:id="edit" layoutX="763.0" layoutY="8.0" mnemonicParsing="false" onAction="#editFunc" text="Edit Profile" />
-            <Button fx:id="signUp" layoutX="14.0" layoutY="655.0" mnemonicParsing="false" onAction="#signUpFunc" text="Log-Up" />
+            <Button fx:id="edit" layoutX="781.0" layoutY="-1.0" mnemonicParsing="false" onAction="#editFunc" prefHeight="26.0" prefWidth="95.0" text="Edit Profile" />
+            <Button fx:id="signUp" layoutX="26.0" layoutY="537.0" mnemonicParsing="false" onAction="#signUpFunc" text="Log-out" />
+            <Button layoutX="674.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="17.0" prefWidth="107.0" text="Search Book" />
+            <Button layoutX="579.0" layoutY="-1.0" mnemonicParsing="false" onAction="#OrderBook" prefHeight="19.0" prefWidth="101.0" text="Order Book" />
+            <Button layoutX="495.0" layoutY="-1.0" mnemonicParsing="false" onAction="#LoanBook" prefHeight="16.0" prefWidth="93.0" text="Loan Book" />
+            <Button layoutX="330.0" layoutY="-1.0" mnemonicParsing="false" onAction="#ExtendLoanDuration" prefHeight="23.0" prefWidth="165.0" text="Extend Loan Duration" />
          </children>
       </AnchorPane>
-   </top>
+   </bottom>
 </BorderPane>

@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -18,15 +17,31 @@ public class StudentProfileController {
 
 	 @FXML
 	 private Button signUp;
-   
-    @FXML
-    void optionFunc(ActionEvent event) 
-    {
-    
-    }
+	  @FXML
+	  
+	 void ExtendLoanDuration(ActionEvent event) {
+
+	 }
+
+	 @FXML
+	void LoanBook(ActionEvent event) 
+	 {
+
+	 }
+
+	 @FXML
+	 void OrderBook(ActionEvent event) {
+
+	  }
+
+	  @FXML
+	 void searchBook(ActionEvent event) {
+
+	  }
     @FXML
     void editFunc(ActionEvent event)throws IOException
     {
+    	editStudentProfileController.FormBack ="StudentProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
