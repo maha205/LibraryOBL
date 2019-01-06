@@ -8,7 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-public class SampleController {
+public class UpdateStudentStatusController {
 
     @FXML
     private TextField IDinput;
