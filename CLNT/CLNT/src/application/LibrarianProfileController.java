@@ -50,7 +50,7 @@ public class LibrarianProfileController {
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/loginUser.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		

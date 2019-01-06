@@ -1,7 +1,4 @@
-
 package application;
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
@@ -16,13 +13,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
-public class loginUserController  {
+public class sigINController {
 	
 	public static String StudentId ;
 	public static String LibrarianId ;
-    @FXML
-    private Button login;
-    
     @FXML
     private TextField userID;
 
@@ -48,8 +42,11 @@ public class loginUserController  {
     	msg.add("login");
     	result = (ArrayList<String>)IPController.client.Request(msg);
     	System.out.println(result);
+    	if(result.size() >0) 
+    	{
     	  if(result.get(0).equals("student"))
     	  {
+    		  NotFound.setVisible(false);
     		  StudentId=userID.getText();
     		((Node)event.getSource()).getScene().getWindow().hide();
     		Stage primaryStage = new Stage();
@@ -64,6 +61,7 @@ public class loginUserController  {
     	  
     	  else if(result.get(0).equals("librarian"))
     	   {
+    		  NotFound.setVisible(false);
     		  LibrarianId=userID.getText();
     		 ((Node)event.getSource()).getScene().getWindow().hide();
         	  Stage primaryStage = new Stage();
@@ -75,6 +73,9 @@ public class loginUserController  {
         	  primaryStage.setScene(scene);		
         	  primaryStage.show();
     		}
+    	}
+    	else
+    		NotFound.setVisible(true);
     }
 
     @FXML

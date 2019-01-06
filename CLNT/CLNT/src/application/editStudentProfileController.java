@@ -84,7 +84,7 @@ public class editStudentProfileController
         try{
         	if(!(emailTxt.getText().equals(null)))
         	{
-        		msg.add(loginUserController.StudentId);
+        		msg.add(sigINController.StudentId);
         		msg.add(emailTxt.getText());
         		msg.add("UpdateEmailStudent");
         		result = (ArrayList<String>)IPController.client.Request(msg);
@@ -97,7 +97,7 @@ public class editStudentProfileController
        try{
            if(!(phontTxt.getText().equals(null)))    	
     	   {
-    	   	msg.add(loginUserController.StudentId);
+    	   	msg.add(sigINController.StudentId);
     		msg.add(phontTxt.getText());
     		msg.add("UpdatephontStudent");
     		result = (ArrayList<String>)IPController.client.Request(msg);
@@ -109,7 +109,7 @@ public class editStudentProfileController
     	if(!(oldPassTxt.getText().equals(null)) && !(newPassTxt.getText().equals(null)) && !(assertPassTxt.getText().equals(null)) )
     	{
     		
-    		msg.add(loginUserController.StudentId);
+    		msg.add(sigINController.StudentId);
     		msg.add(oldPassTxt.getText());
     		msg.add(newPassTxt.getText());
     		msg.add(assertPassTxt.getText());
@@ -182,7 +182,7 @@ public class editStudentProfileController
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/loginUser.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		

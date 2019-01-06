@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.loginUserControllerController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.loginUserController">
    <top>
       <AnchorPane prefHeight="432.0" prefWidth="497.0" BorderPane.alignment="CENTER">
          <children>

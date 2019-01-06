@@ -36,7 +36,6 @@ public class mainFormController {
 		
 		primaryStage.setScene(scene);		
 		primaryStage.show();
-
     }
 
     @FXML
@@ -45,17 +44,17 @@ public class mainFormController {
     }
 
     @FXML
-    void signInFunc(ActionEvent event) throws IOException {
+    void signInFunc(ActionEvent event) throws IOException 
+    {
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/loginUser.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
 		primaryStage.show();
-
     }
 
     @FXML

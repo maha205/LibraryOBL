@@ -85,7 +85,7 @@ public class LibrarianEditProfileController
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/loginUser.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/login.fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		
@@ -101,7 +101,7 @@ public class LibrarianEditProfileController
         try{
         	if(!(emailTxt.getText().equals(null)))
         	{
-        		msg.add(loginUserController.LibrarianId);
+        		msg.add(sigINController.LibrarianId);
         		msg.add(emailTxt.getText());
         		msg.add("UpdateEmailLibrarian");
         		result = (ArrayList<String>)IPController.client.Request(msg);
@@ -114,7 +114,7 @@ public class LibrarianEditProfileController
        try{
            if(!(phontTxt.getText().equals(null)))    	
     	   {
-    	   	msg.add(loginUserController.LibrarianId);
+    	   	msg.add(sigINController.LibrarianId);
     		msg.add(phontTxt.getText());
     		msg.add("UpdatephontLibrariant");
     		result = (ArrayList<String>)IPController.client.Request(msg);
@@ -126,7 +126,7 @@ public class LibrarianEditProfileController
     	if(!(oldPassTxt.getText().equals(null)) && !(newPassTxt.getText().equals(null)) && !(assertPassTxt.getText().equals(null)) )
     	{
     		
-    		msg.add(loginUserController.LibrarianId);
+    		msg.add(sigINController.LibrarianId);
     		msg.add(oldPassTxt.getText());
     		msg.add(newPassTxt.getText());
     		msg.add(assertPassTxt.getText());
