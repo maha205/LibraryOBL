@@ -7,10 +7,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.singUpController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.singUpController">
    <left>
-      <AnchorPane prefHeight="501.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="475.0" prefWidth="635.0" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Librarian!" />
             <Text fill="#a83939" layoutX="223.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign-Up">
@@ -46,23 +45,28 @@
             <Text layoutX="80.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <TextField fx:id="id" alignment="CENTER" layoutX="223.0" layoutY="161.0" prefHeight="31.0" prefWidth="192.0" promptText="example" />
             <TextField fx:id="name" alignment="CENTER" layoutX="223.0" layoutY="204.0" prefHeight="31.0" prefWidth="193.0" promptText="example" />
-            <TextField fx:id="email" layoutX="223.0" layoutY="246.0" prefHeight="31.0" prefWidth="194.0" promptText="example@example.example" />
+            <TextField fx:id="email" alignment="CENTER" layoutX="223.0" layoutY="246.0" prefHeight="31.0" prefWidth="194.0" promptText="example@example.example" />
             <TextField fx:id="phone" alignment="CENTER" layoutX="223.0" layoutY="289.0" prefHeight="31.0" prefWidth="194.0" promptText="05*-*******" />
             <Button layoutX="241.0" layoutY="348.0" mnemonicParsing="false" onAction="#singUP" text="Sign-Up">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="14.0" layoutY="460.0" mnemonicParsing="false" onAction="#back" text="Back">
+            <Button layoutX="12.0" layoutY="445.0" mnemonicParsing="false" onAction="#back" text="Back">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="525.0" layoutY="460.0" mnemonicParsing="false" onAction="#logout" text="logout">
+            <Button layoutX="545.0" layoutY="445.0" mnemonicParsing="false" onAction="#logout" text="logout">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
+            <Text fx:id="userExist" fill="RED" layoutX="426.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username is already taken" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </left>

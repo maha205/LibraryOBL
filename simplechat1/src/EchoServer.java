@@ -103,6 +103,12 @@ public class EchoServer extends AbstractServer
 	    	  msg = (UpdatedLibrarianPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3))); //student password update
 			  System.out.println("Update student Password");
 		      break;
+		      
+	      case "signUP":
+	    	  msg = signUp(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
+	    	  System.out.println("Insert Student");
+		      break;
+	    	  
 	    }
 	    
 	    try {
@@ -419,7 +425,7 @@ public class EchoServer extends AbstractServer
      		return update;
      	}
       public static ArrayList<String> UpdatedLibrarianPassword(String UserID,String oldPass ,String newPass ,String AssertPass)
-     	{
+      {
      		Statement stmt;
      		ArrayList<String> update = new ArrayList<String>();
      		try 
@@ -440,6 +446,31 @@ public class EchoServer extends AbstractServer
      			return update;
      		}
      		return update;
-     	}
+     }
+      
+      public static ArrayList<String> signUp(String studentID,String name,String Email ,String phoneNumber)
+      {
+     		Statement stmt;
+     		ArrayList<String> update = new ArrayList<String>();
+     		try 
+     		{
+     			stmt = conn.createStatement();
+     			ResultSet rs = stmt.executeQuery("SELECT * FROM student WHERE StudentId ="+studentID);
+     			
+     	 		if(!rs.next())//if the student is not existing 
+     	 		{
+     	 		   stmt.executeUpdate("INSERT INTO student (StudentId ,StudentName ,Email,phone) VALUES('"+studentID+"','"+name+"','"+Email+"','"+phoneNumber+"')");
+     	 		 stmt.executeUpdate("INSERT INTO userstudent (UserID ,Password ) VALUES('"+studentID+"','"+studentID+"')");
+     	 		   update.add("signUP");
+     	 		   rs.close();
+     	 	       return update;
+     	 		}
+     		} catch (SQLException e)
+     		{
+     			e.printStackTrace();
+     			return update;
+     		}
+     		return update;
+     }
 }
 //End of EchoServer class
