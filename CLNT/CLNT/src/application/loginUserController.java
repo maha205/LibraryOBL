@@ -1,3 +1,4 @@
+
 package application;
 
 
@@ -11,10 +12,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
-public class loginController {
+public class loginUserController  {
 	
 	public static String StudentId ;
 	public static String LibrarianId ;
@@ -31,8 +33,12 @@ public class loginController {
     private Button back;
     
     @FXML
+    private Text NotFound;
+    
+    @FXML
     void loginFunc(ActionEvent event) throws IOException
     {
+    	
     	String UserID = userID.getText();
     	String UserPass = pass.getText();
         ArrayList<String> msg = new ArrayList<String>();
@@ -73,6 +79,19 @@ public class loginController {
 
     @FXML
     void backGui(ActionEvent event) throws IOException{
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/mainForm.fxml").openStream());
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
+    }
+    
+    @FXML
+    void exitGui(ActionEvent event) throws IOException {
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();

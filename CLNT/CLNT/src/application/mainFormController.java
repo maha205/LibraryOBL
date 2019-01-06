@@ -49,7 +49,7 @@ public class mainFormController {
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/login.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/loginUser.fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		
