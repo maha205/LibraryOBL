@@ -24,9 +24,17 @@ public class StudentProfileController {
 	 }
 
 	 @FXML
-	void LoanBook(ActionEvent event) 
+	void LoanBook(ActionEvent event) throws IOException 
 	 {
-
+		 ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/loanBook.fxml").openStream());
+	  		
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
 	 }
 
 	 @FXML
