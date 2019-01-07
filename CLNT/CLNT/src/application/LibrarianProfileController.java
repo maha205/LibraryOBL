@@ -23,8 +23,18 @@ public class LibrarianProfileController {
     private Button logout;
 
     @FXML
-    void returning(ActionEvent event) {
-
+    void returning(ActionEvent event) throws IOException 
+    {
+    	editStudentProfileController.editStudentBack ="LibrarianProfile";
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/returnBook.fxml").openStream());
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
     }
     @FXML
     void editStudentProfile(ActionEvent event) throws IOException
