@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class editStudentProfileController 
 {
-	public static String FormBack ;
+	public static String editStudentBack ;
     @FXML
     private Text email;
 
@@ -52,7 +52,7 @@ public class editStudentProfileController
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/"+FormBack+".fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/"+editStudentBack+".fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		

@@ -32,7 +32,7 @@ public class singUpController {
     @FXML
     void back(ActionEvent event) throws IOException 
     {
-    	editStudentProfileController.FormBack ="LibrarianProfile";
+    	editStudentProfileController.editStudentBack ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -47,7 +47,7 @@ public class singUpController {
     @FXML
     void logout(ActionEvent event) throws IOException
     {
-    	editStudentProfileController.FormBack ="LibrarianProfile";
+    	editStudentProfileController.editStudentBack ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();

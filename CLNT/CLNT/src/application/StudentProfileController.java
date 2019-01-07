@@ -35,13 +35,23 @@ public class StudentProfileController {
 	  }
 
 	  @FXML
-	 void searchBook(ActionEvent event) {
-
+	 void searchBook(ActionEvent event) throws IOException
+	  {
+		   mainFormController.backSearch = "StudentProfile";
+		  ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/SearchBook.fxml").openStream());
+	  		
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
 	  }
     @FXML
     void editFunc(ActionEvent event)throws IOException
     {
-    	editStudentProfileController.FormBack ="StudentProfile";
+    	editStudentProfileController.editStudentBack ="StudentProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();

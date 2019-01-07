@@ -29,7 +29,7 @@ public class LibrarianProfileController {
     @FXML
     void editStudentProfile(ActionEvent event) throws IOException
     {
-    	editStudentProfileController.FormBack ="LibrarianProfile";
+    	editStudentProfileController.editStudentBack ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -43,7 +43,7 @@ public class LibrarianProfileController {
     @FXML
     void OpenNewSubscription(ActionEvent event) throws IOException 
     {
-    	editStudentProfileController.FormBack ="LibrarianProfile";
+    	editStudentProfileController.editStudentBack ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();

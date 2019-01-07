@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class mainFormController {
-
+    static String backSearch ;
     @FXML
     private Button signIn;
 
@@ -39,8 +39,18 @@ public class mainFormController {
     }
 
     @FXML
-    void searchFunc(ActionEvent event) {
-
+    void searchFunc(ActionEvent event) throws IOException 
+    {
+    	backSearch ="mainForm";
+    	((Node)event.getSource()).getScene().getWindow().hide();
+  		Stage primaryStage = new Stage();
+  		FXMLLoader loader = new FXMLLoader();
+  		Pane root = loader.load(getClass().getResource("/application/SearchBook.fxml").openStream());
+  		
+  		Scene scene = new Scene(root);			
+  		
+  		primaryStage.setScene(scene);		
+  		primaryStage.show();
     }
 
     @FXML
