@@ -19,8 +19,17 @@ public class StudentProfileController {
 	 private Button signUp;
 	  @FXML
 	  
-	 void ExtendLoanDuration(ActionEvent event) {
-
+	 void ExtendLoanDuration(ActionEvent event) throws IOException 
+	 {
+		  ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/ExternLoanBook.fxml").openStream());
+	  		
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
 	 }
 
 	 @FXML
