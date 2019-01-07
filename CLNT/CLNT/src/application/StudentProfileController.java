@@ -47,9 +47,18 @@ public class StudentProfileController {
 	 }
 
 	 @FXML
-	 void OrderBook(ActionEvent event) {
-
-	  }
+	 void OrderBook(ActionEvent event) throws IOException 
+	 {
+		 ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/OrderBook.fxml").openStream());
+	  		
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
+	 }
 
 	  @FXML
 	 void searchBook(ActionEvent event) throws IOException
