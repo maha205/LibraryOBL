@@ -3,12 +3,15 @@
 // license found at www.lloseng.com 
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.sql.*;
+import java.text.DecimalFormat;
+//import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 import ocsf.server.*;
+import java.util.*;
+import java.util.Date; 
 /**
  * This class overrides some of the methods in the abstract 
  * superclass in order to give more functionality to the server.
@@ -24,7 +27,9 @@ public class EchoServer extends AbstractServer
   //Class variables *************************************************
 	static Connection conn ; 
 	private Logger logger = new Logger(true);
-
+	private int day;
+	private int month;
+	private int year;
   /**
    * The default port to listen on.
    */
@@ -108,6 +113,16 @@ public class EchoServer extends AbstractServer
 	    	  msg = signUp(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
 	    	  System.out.println("Insert Student");
 		      break;
+		      
+	      case "ExtendLoan":
+			try {
+				msg = ExternLoanBook(msg.get(0),msg.get(1));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+    	  System.out.println("Extern Loan Book");
+	      break;
 	    	  
 	    }
 	    
@@ -165,11 +180,13 @@ public class EchoServer extends AbstractServer
    *
    * @param args[0] The port number to listen on.  Defaults to 5555 
    *          if no argument is entered.
+ * @throws SQLException 
    */
-  public static void main(String[] args) 
+  public static void main(String[] args)  throws IOException, SQLException 
   {
     int port = 0; //Port to listen on
     connectToDB();
+    System.out.println(ExternLoanBook("318301488" ,"1564893212"));
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -460,7 +477,7 @@ public class EchoServer extends AbstractServer
      	 		if(!rs.next())//if the student is not existing 
      	 		{
      	 		   stmt.executeUpdate("INSERT INTO student (StudentId ,StudentName ,Email,phone) VALUES('"+studentID+"','"+name+"','"+Email+"','"+phoneNumber+"')");
-     	 		 stmt.executeUpdate("INSERT INTO userstudent (UserID ,Password ) VALUES('"+studentID+"','"+studentID+"')");
+     	 		   stmt.executeUpdate("INSERT INTO userstudent (UserID ,Password ) VALUES('"+studentID+"','"+studentID+"')");
      	 		   update.add("signUP");
      	 		   rs.close();
      	 	       return update;
@@ -472,5 +489,79 @@ public class EchoServer extends AbstractServer
      		}
      		return update;
      }
+      
+      public static ArrayList<String> ExternLoanBook(String Studentid ,String bookID)  throws SQLException 
+      {
+    	Statement stmt ,stmt2;
+    	int diffDays = 0;
+   		ArrayList<String> Extern = new ArrayList<String>();
+   		String copyID = null  ,outputtwoWeeksAfter = null;
+   		
+ 			stmt = conn.createStatement();
+ 			ResultSet rs = stmt.executeQuery("SELECT * FROM iteminloan WHERE StudentID ="+Studentid);
+ 			if(rs.next())
+ 			{
+ 		    	copyID = rs.getString(3);
+ 		    	System.out.println(copyID);
+ 			
+ 	 		  if( rs.getString(2).equals(bookID) && rs.getString(3).equals(copyID))//if the student loan the book
+ 	 		  {
+ 	 			stmt2 = conn.createStatement();
+ 	 			ResultSet rs1 = stmt2.executeQuery("SELECT * FROM copy WHERE idcopy ="+copyID);
+ 	 			
+ 	 	        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+ 	 		    Calendar c1 = Calendar.getInstance();
+ 	 		    c1.setTime(new Date()); // Now use today date.
+ 	 		    String outputcurrentDate = currentDate.format(c1.getTime());
+ 	 		    System.out.println(outputcurrentDate);
+ 	
+ 	 	       try {
+ 	 			String date1 = outputcurrentDate;
+ 	 			String date2 = rs.getString(6);//return day ;
+
+ 	 			String format = "dd/MM/yyyy";
+
+ 	 			SimpleDateFormat sdf = new SimpleDateFormat(format);
+
+ 	 			Date dateObj1 = sdf.parse(date1);
+ 	 			Date dateObj2 = sdf.parse(date2);
+ 	 			System.out.println(dateObj1);
+ 	 			System.out.println(dateObj2 + "\n");
+
+ 	 			DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+
+ 	 			// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+ 	 			long diff = dateObj2.getTime() - dateObj1.getTime();
+
+ 	 			 diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+ 	 			System.out.println("difference between days: " + diffDays);
+
+
+ 	 		} catch (Exception e) {
+ 	 			e.printStackTrace();
+ 	 		}
+ 	 			
+ 	 			if(rs1.next() && rs1.getInt(5)==0 && diffDays <= 7 && diffDays >= 0) //there are no orders for this book 
+ 	 			{	 	 		
+ 	 	 		    SimpleDateFormat twoWeeksAfter = new SimpleDateFormat("dd/MM/yyyy");
+ 	 	 		    Calendar c2 = Calendar.getInstance();
+ 	 	 		    c2.setTime(new Date()); // Now use today date.
+ 	 	 		    c2.add(Calendar.DATE, 14); // Adding 14 days
+ 	 	 		    outputtwoWeeksAfter = twoWeeksAfter.format(c2.getTime());
+ 	 	 		
+ 	 	 		     Extern.add(outputtwoWeeksAfter);
+ 	 				 stmt.executeUpdate("UPDATE iteminloan SET loanDate ='"+outputcurrentDate+"' WHERE BookID ='"+bookID+"' AND CopyID ='"+copyID+"';");
+ 	 				 stmt.executeUpdate("UPDATE iteminloan SET returnDate ='"+outputtwoWeeksAfter+"' WHERE BookID ='"+bookID+"' AND CopyID ='"+copyID+"';");
+ 	 				 Extern.add("Extern");
+ 	 			}
+
+ 	 		   rs.close();
+ 	 		 return Extern;
+ 	 		}
+ 		}
+
+   		return Extern;
+      }
+      
 }
 //End of EchoServer class

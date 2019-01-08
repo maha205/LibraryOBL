@@ -7,9 +7,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.ExternLoanBookController">
-   <top>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ExternLoanBookController">
+   <center>
       <AnchorPane prefHeight="532.0" prefWidth="556.0" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Student!" />
@@ -18,11 +17,31 @@
                   <Font name="System Bold Italic" size="42.0" />
                </font>
             </Text>
-            <TextField layoutX="134.0" layoutY="154.0" promptText="ID/Name Book" />
+            <TextField fx:id="bookID" layoutX="134.0" layoutY="154.0" promptText="Book's ID" />
             <Button layoutX="321.0" layoutY="154.0" mnemonicParsing="false" onAction="#ExtendLoan" text="Extend Loan Duration " />
-            <Button layoutX="47.0" layoutY="457.0" mnemonicParsing="false" onAction="#BackGui" text="Back" />
-            <Button layoutX="477.0" layoutY="473.0" mnemonicParsing="false" onAction="#exitGui" text="Exit" />
+            <Button layoutX="29.0" layoutY="487.0" mnemonicParsing="false" onAction="#BackGui" text="Back" />
+            <Button layoutX="477.0" layoutY="473.0" mnemonicParsing="false" onAction="#exitGui" text="logOut" />
+            <Text fx:id="errorMsg" fill="RED" layoutX="181.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extend cannot be completed!" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="succesful" fill="#09a82c" layoutX="204.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extend successful" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="dayMsg" fill="#09a82c" layoutX="130.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The new Date for returning is :" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="dateReturn" fill="#09a82c" layoutX="356.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-   </top>
+   </center>
 </BorderPane>
