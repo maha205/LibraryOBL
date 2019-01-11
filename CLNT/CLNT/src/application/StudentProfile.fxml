@@ -38,9 +38,8 @@
             <Button fx:id="edit" layoutX="781.0" layoutY="-1.0" mnemonicParsing="false" onAction="#editFunc" prefHeight="26.0" prefWidth="95.0" text="Edit Profile" />
             <Button fx:id="signUp" layoutX="26.0" layoutY="537.0" mnemonicParsing="false" onAction="#signUpFunc" text="Log-out" />
             <Button layoutX="674.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="17.0" prefWidth="107.0" text="Search Book" />
-            <Button layoutX="579.0" layoutY="-1.0" mnemonicParsing="false" onAction="#OrderBook" prefHeight="19.0" prefWidth="101.0" text="Order Book" />
-            <Button layoutX="495.0" layoutY="-1.0" mnemonicParsing="false" onAction="#LoanBook" prefHeight="16.0" prefWidth="93.0" text="Loan Book" />
-            <Button layoutX="330.0" layoutY="-1.0" mnemonicParsing="false" onAction="#ExtendLoanDuration" prefHeight="23.0" prefWidth="165.0" text="Extend Loan Duration" />
+            <Button layoutX="581.0" layoutY="-1.0" mnemonicParsing="false" onAction="#LoanBook" prefHeight="16.0" prefWidth="93.0" text="Loan Book" />
+            <Button layoutX="426.0" layoutY="-1.0" mnemonicParsing="false" onAction="#ExtendLoanDuration" prefHeight="23.0" prefWidth="165.0" text="Extend Loan Duration" />
          </children>
       </AnchorPane>
    </bottom>

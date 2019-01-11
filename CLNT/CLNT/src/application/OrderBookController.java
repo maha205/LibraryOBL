@@ -6,11 +6,36 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class OrderBookController 
 {
+    @FXML
+    private TextField studentName;
+
+    @FXML
+    private TextField studentID;
+
+    @FXML
+    private TextField studentPhoneNumber;
+
+    @FXML
+    private TextField studentEmail;
+
+    @FXML
+    private TextField BookName;
+
+    @FXML
+    private TextField BookID;
+
+    @FXML
+    private TextField CopyID;
+
+    @FXML
+    private TextField OrderDate;
+    
     @FXML
     void BackGui(ActionEvent event) throws IOException 
     {
@@ -39,14 +64,9 @@ public class OrderBookController
   		primaryStage.show();
     }
 
-    @FXML
-    void orderBook(ActionEvent event)
-    {
-
-    }
 
     @FXML
-    void searchFunc(ActionEvent event)
+    void approvedOrder(ActionEvent event) 
     {
 
     }

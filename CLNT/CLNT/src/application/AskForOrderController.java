@@ -9,9 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-public class AskForOrderController {
-
-
+public class AskForOrderController 
+{
     @FXML
     void LogoutGui(ActionEvent event) throws IOException {
     	 ((Node)event.getSource()).getScene().getWindow().hide();
@@ -54,9 +53,17 @@ public class AskForOrderController {
     }
 
     @FXML
-    void yesOrder(ActionEvent event) {
-    	
-
+    void yesOrder(ActionEvent event) throws IOException 
+    {
+    	 ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/OrderBook.fxml").openStream());
+	  		
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
     }
 
 }
