@@ -37,6 +37,7 @@
             <Button layoutX="386.0" layoutY="579.0" mnemonicParsing="false" onAction="#LoanBook" text="Loan Book" />
             <Button layoutX="31.0" layoutY="610.0" mnemonicParsing="false" onAction="#BackGui" text="Back" />
             <Button layoutX="777.0" layoutY="610.0" mnemonicParsing="false" onAction="#exitGui" text="Exit" />
+            <Button layoutX="383.0" layoutY="613.0" mnemonicParsing="false" onAction="#orderBook" text="Order Book" />
          </children>
       </AnchorPane>
    </top>
