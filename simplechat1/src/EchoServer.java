@@ -123,7 +123,16 @@ public class EchoServer extends AbstractServer
 			}
     	  System.out.println("Extern Loan Book");
 	      break;
-	    	  
+	      
+	      case "OrderBook":
+	    	  try {
+				msg=OrderBook(msg.get(0),msg.get(1),msg.get(2));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Order Book");
+		      break;
 	    }
 	    
 	    try {
@@ -554,7 +563,6 @@ public class EchoServer extends AbstractServer
  	 				 stmt.executeUpdate("UPDATE iteminloan SET returnDate ='"+outputtwoWeeksAfter+"' WHERE BookID ='"+bookID+"' AND CopyID ='"+copyID+"';");
  	 				 Extern.add("Extern");
  	 			}
-
  	 		   rs.close();
  	 		 return Extern;
  	 		}
@@ -562,6 +570,47 @@ public class EchoServer extends AbstractServer
 
    		return Extern;
       }
+      
+      public static ArrayList<String> OrderBook(String Studentid ,String bookId ,String copyID)  throws SQLException 
+      {
+    	Statement stmt ,stmt2;
+   		ArrayList<String> Order = new ArrayList<String>();
+   		
+ 			stmt = conn.createStatement();
+ 			ResultSet rs = stmt.executeQuery("SELECT * FROM student WHERE StudentID ="+Studentid);
+ 			if(rs.next())
+ 			{
+ 		    	Order.add(rs.getString(2));//Student Name
+ 		    	Order.add(Studentid);//Student ID
+ 		    	Order.add(rs.getString(6));//Student phone Number
+ 		    	Order.add(rs.getString(7));//Student E-mail
+ 		    	
+ 		    	stmt2 = conn.createStatement();
+ 	 			ResultSet rs1 = stmt2.executeQuery("SELECT * FROM book WHERE bookID ='"+bookId+"';");
+ 	 			if(rs1.next())
+ 	 			{
+ 	 				Order.add(rs1.getString(2));//Book Name
+ 	 				Order.add(bookId);//Book ID
+ 		 		    Order.add(copyID);//copy ID
+ 	 			}
+ 	 			
+ 	 	        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+ 	 		    Calendar c1 = Calendar.getInstance();
+ 	 		    c1.setTime(new Date()); // Now use today date.
+ 	 		    String outputcurrentDate = currentDate.format(c1.getTime());
+ 	 		    System.out.println(outputcurrentDate);
+ 	 		    Order.add(outputcurrentDate);//current Date
+ 	 	      
+ 	 		
+ 	 		   rs.close();
+ 	 		 return Order;
+ 	 		}
+ 			return Order;
+
+      }
+      
+      
+      
       
 }
 //End of EchoServer class

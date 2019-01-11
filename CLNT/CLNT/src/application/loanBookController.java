@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 public class loanBookController 
 {
+	public static String OrderBookID = null;
+	public static String OrderCopyID = null;
     @FXML
     private TextField bookName;
 
