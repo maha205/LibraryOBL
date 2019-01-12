@@ -17,7 +17,7 @@
                   <Font name="System Bold Italic" size="42.0" />
                </font>
             </Text>
-            <TextField fx:id="bookID" layoutX="134.0" layoutY="154.0" promptText="Book's ID" />
+            <TextField fx:id="bookID" layoutX="134.0" layoutY="154.0" promptText="Book's Name" />
             <Button layoutX="321.0" layoutY="154.0" mnemonicParsing="false" onAction="#ExtendLoan" text="Extend Loan Duration " />
             <Button layoutX="29.0" layoutY="487.0" mnemonicParsing="false" onAction="#BackGui" text="Back" />
             <Button layoutX="477.0" layoutY="473.0" mnemonicParsing="false" onAction="#exitGui" text="logOut" />

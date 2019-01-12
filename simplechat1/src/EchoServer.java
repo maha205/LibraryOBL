@@ -124,24 +124,35 @@ public class EchoServer extends AbstractServer
     	  System.out.println("Extern Loan Book");
 	      break;
 	      
-	      case "OrderBook":
+	      case "ShowOrderBook":
 	    	  try {
-				msg=OrderBook(msg.get(0),msg.get(1),msg.get(2));
+				msg=ShowOrderBook(msg.get(0),msg.get(1),msg.get(2));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 	    	  System.out.println("Order Book");
 		      break;
-	    }
-	    
+	   
+	     case "approvedOrderBook":
+	    	 try {
+				msg=approvedOrderBook(msg.get(0),msg.get(1),msg.get(2));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	 System.out.println("Order Book");
+		     break;
+	    	 
+
+	    	 }
 	    try {
-	    	System.out.println(msg);
-			client.sendToClient(msg);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	System.out.println(msg);
+		client.sendToClient(msg);
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
     
   /**
@@ -195,7 +206,6 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
-    System.out.println(ExternLoanBook("318301488" ,"1564893212"));
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -499,19 +509,25 @@ public class EchoServer extends AbstractServer
      		return update;
      }
       
-      public static ArrayList<String> ExternLoanBook(String Studentid ,String bookID)  throws SQLException 
+      public static ArrayList<String> ExternLoanBook(String Studentid ,String bookName)  throws SQLException 
       {
     	Statement stmt ,stmt2;
     	int diffDays = 0;
    		ArrayList<String> Extern = new ArrayList<String>();
-   		String copyID = null  ,outputtwoWeeksAfter = null;
+   		String copyID = null  ,outputtwoWeeksAfter = null ,bookID=null ;
    		
- 			stmt = conn.createStatement();
+ 		stmt = conn.createStatement();
+ 		ResultSet rs2 = stmt.executeQuery("SELECT * FROM book WHERE bookName ='"+bookName+"';");
+ 		
+ 		if(rs2.next())
+ 		{
+ 			bookID=rs2.getString(1);
+ 			System.out.println(bookID);
  			ResultSet rs = stmt.executeQuery("SELECT * FROM iteminloan WHERE StudentID ="+Studentid);
  			if(rs.next())
  			{
- 		    	copyID = rs.getString(3);
- 		    	System.out.println(copyID);
+ 		     copyID = rs.getString(3);
+ 		     System.out.println(copyID);
  			
  	 		  if( rs.getString(2).equals(bookID) && rs.getString(3).equals(copyID))//if the student loan the book
  	 		  {
@@ -563,19 +579,23 @@ public class EchoServer extends AbstractServer
  	 				 stmt.executeUpdate("UPDATE iteminloan SET returnDate ='"+outputtwoWeeksAfter+"' WHERE BookID ='"+bookID+"' AND CopyID ='"+copyID+"';");
  	 				 Extern.add("Extern");
  	 			}
+ 	 		  }
  	 		   rs.close();
  	 		 return Extern;
  	 		}
  		}
-
+ 		
    		return Extern;
       }
       
-      public static ArrayList<String> OrderBook(String Studentid ,String bookId ,String copyID)  throws SQLException 
+      public static ArrayList<String> ShowOrderBook(String Studentid ,String bookId ,String copyID)  throws SQLException 
       {
-    	Statement stmt ,stmt2;
+    	Statement stmt ,stmt1,stmt2;
    		ArrayList<String> Order = new ArrayList<String>();
-   		
+   		stmt1 = conn.createStatement();
+	    ResultSet rs3 = stmt1.executeQuery("SELECT * FROM book WHERE bookID ="+bookId);
+   		if(rs3.next() && rs3.getInt(9) < rs3.getInt(8))
+   		{
  			stmt = conn.createStatement();
  			ResultSet rs = stmt.executeQuery("SELECT * FROM student WHERE StudentID ="+Studentid);
  			if(rs.next())
@@ -591,7 +611,7 @@ public class EchoServer extends AbstractServer
  	 			{
  	 				Order.add(rs1.getString(2));//Book Name
  	 				Order.add(bookId);//Book ID
- 		 		    Order.add(copyID);//copy ID
+ 		 		    Order.add(copyIDtoOrder(bookId));//copy ID to order
  	 			}
  	 			
  	 	        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
@@ -605,12 +625,63 @@ public class EchoServer extends AbstractServer
  	 		   rs.close();
  	 		 return Order;
  	 		}
+   		}
  			return Order;
 
       }
+      public static ArrayList<String> approvedOrderBook(String Studentid ,String bookId ,String copyID)  throws SQLException 
+      {
+    	Statement stmt ,stmt1,stmt2,stmt3;
+   		ArrayList<String> Order = new ArrayList<String>();
+   		
+   	    SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+	    Calendar c1 = Calendar.getInstance();
+	    c1.setTime(new Date()); // Now use today date.
+	    String outputcurrentDate = currentDate.format(c1.getTime());
+	    System.out.println(outputcurrentDate);
+	    
+   		stmt = conn.createStatement();
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM book WHERE bookID ="+bookId);
+   		if(rs.next() && rs.getInt(9)< rs.getInt(8))
+   		{
+   		    copyID=copyIDtoOrder(bookId);
+   		    if(!(copyID.equals("")))
+   		    {
+   		    	int OrderNumber =rs.getInt(9) + 1 ;//Order Qantity
+   		    	int OrderStatus =1;
+   		    	
+   		    	stmt2 = conn.createStatement();
+   	   		    stmt2.executeUpdate("UPDATE book SET OrderQantity ='"+OrderNumber+"' WHERE  bookID ="+bookId);
+   	   		    
+   	   		    stmt3 = conn.createStatement();
+			    stmt3.executeUpdate("INSERT INTO booksorder (StudentID ,BookID ,CopyID,OrderDate ,OrderStatus,OrderNumber) VALUES('"+Studentid+"','"+bookId+"','"+copyID+"','"+outputcurrentDate+"' ,'"+OrderStatus+"' , '"+OrderNumber+"')");
+			   
+			    
+   		    	stmt1 = conn.createStatement();
+   		    	stmt.executeQuery("UPDATE copy SET order ='"+OrderStatus+"' WHERE  idcopy ="+copyID);
+   			     
+   		        Order.add("ApprovedThisOrder");
+   		    }
+   		}
+ 		return Order;
+      }
       
-      
-      
-      
+      public static String copyIDtoOrder(String bookId)  throws SQLException 
+      {
+    	  Statement stmt;
+    	  String copID=null;
+    	  stmt = conn.createStatement();
+  	      ResultSet rs = stmt.executeQuery("SELECT * FROM copy WHERE bookID ="+bookId);
+  	      
+  		  while(rs.next())
+  		  {
+  		    if(rs.getInt(5)==0)//copy to order
+  		    {
+  		       copID=rs.getString(1);
+  		       return copID;
+  		    }
+  		  }
+		return copID;
+      }  
 }
 //End of EchoServer class

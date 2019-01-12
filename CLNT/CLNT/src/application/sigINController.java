@@ -16,8 +16,8 @@ import javafx.stage.Stage;
 
 public class sigINController {
 	
-	public static String StudentId ;
-	public static String LibrarianId ;
+	public static String StudentId =null ;
+	public static String LibrarianId =null ;
     @FXML
     private TextField userID;
 

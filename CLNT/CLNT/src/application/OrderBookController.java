@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class OrderBookController 
-{    @FXML
+{   @FXML
     private Text studentNameTxt;
 
     @FXML
@@ -62,15 +62,11 @@ public class OrderBookController
     @FXML
     private TextField OrderDate;
 
-  //  @FXML
-  //  private Button approvedByn;
-
-   // @FXML
-  //  private Button show;
-
     @FXML
     private Text showText;
 
+    @FXML
+    private Text errorShow;
     @FXML
     void BackGui(ActionEvent event) throws IOException 
     {
@@ -120,9 +116,6 @@ public class OrderBookController
             BookID.setVisible(true);
              CopyID.setVisible(true);
             OrderDate.setVisible(true);
-          ////  approvedByn.setVisible(true);
-           ///  show.setVisible(false);
-             showText.setVisible(false);
              
     	     String StudentID = sigINController.StudentId ;
     		 ArrayList<String> msg = new ArrayList<String>();
@@ -130,11 +123,12 @@ public class OrderBookController
     	     msg.add(""+StudentID);
     	     msg.add(loanBookController.OrderBookID);
     	     msg.add(loanBookController.OrderCopyID);
-    	     msg.add("OrderBook");
+    	     msg.add("ShowOrderBook");
     	     result = (ArrayList<String>)IPController.client.Request(msg);
     	     System.out.println(result);
     	     if(result.size()>0)
     	     {
+    	    	 errorShow.setVisible(false);
     	    	studentName.setText(result.get(0));
                 studentID.setText(result.get(1));
                 studentPhoneNumber.setText(result.get(2));
@@ -144,34 +138,50 @@ public class OrderBookController
                CopyID.setText(result.get(6));
                OrderDate.setText(result.get(7));
     	     }
+    	     else
+    	    	{
+    	    		errorShow.setVisible(true);
+    	    		studentNameTxt.setVisible(false);
+    	    		StudentIDTxt.setVisible(false);
+    	            StudentPhoneTxt.setVisible(false);
+    	            StudentEmailTxt.setVisible(false);
+    	            BooknameTxt.setVisible(false);
+    	            BookIDTxt.setVisible(false);
+    	            copyIDTxt.setVisible(false);
+    	            DateOrderText.setVisible(false);
+    	            studentName.setVisible(false);
+    	             studentID.setVisible(false);
+    	            studentPhoneNumber.setVisible(false);
+    	            studentEmail.setVisible(false);
+    	             BookName.setVisible(false);
+    	            BookID.setVisible(false);
+    	             CopyID.setVisible(false);
+    	            OrderDate.setVisible(false);
+    	    	}
     	}
-    	else
-    	{
-    		studentNameTxt.setVisible(false);
-    		StudentIDTxt.setVisible(false);
-            StudentPhoneTxt.setVisible(false);
-            StudentEmailTxt.setVisible(false);
-            BooknameTxt.setVisible(false);
-            BookIDTxt.setVisible(false);
-            copyIDTxt.setVisible(false);
-            DateOrderText.setVisible(false);
-            studentName.setVisible(false);
-             studentID.setVisible(false);
-            studentPhoneNumber.setVisible(false);
-            studentEmail.setVisible(false);
-             BookName.setVisible(false);
-            BookID.setVisible(false);
-             CopyID.setVisible(false);
-            OrderDate.setVisible(false);
-            //approvedByn.setVisible(false);
-           //  show.setVisible(true);
-             showText.setVisible(true);
-    	}
+    	
     }
     @FXML
     void approvedOrder(ActionEvent event) 
     {
-    	
+    	if(!(loanBookController.OrderBookID.equals(null)) && !(loanBookController.OrderCopyID.equals(null)))
+    	{   
+    	     String StudentID = sigINController.StudentId ;
+    		 ArrayList<String> msg = new ArrayList<String>();
+    	     ArrayList<String>  result = new ArrayList<String>();
+    	     msg.add(""+StudentID);
+    	     msg.add(loanBookController.OrderBookID);
+    	     msg.add(loanBookController.OrderCopyID);
+    	     msg.add("approvedOrderBook");
+    	     result = (ArrayList<String>)IPController.client.Request(msg);
+    	     System.out.println(result);
+    	     if(result.size()>0)
+    	     {
+    	    	errorShow.setVisible(false);
+
+    	     }
+    	   
+    	}
     }
     @FXML
     void cancelOrder(ActionEvent event) throws IOException 
