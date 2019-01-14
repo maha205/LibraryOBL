@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class editStudentProfileController 
 {
 	public static String editStudentBack ;
+    
     @FXML
     private Text email;
 
@@ -67,7 +68,7 @@ public class editStudentProfileController
     	ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
         try{
-        	if(!(emailTxt.getText().equals(null)) && phontTxt.getText().equals(null) )
+        	if(!(emailTxt.getText().equals(null)))
         	{
         		msg.add(sigINController.StudentId);
         		msg.add(emailTxt.getText());
@@ -80,7 +81,7 @@ public class editStudentProfileController
     	
     	
        try{
-           if(!(phontTxt.getText().equals(null)) && emailTxt.getText().equals(null))    	
+           if(!(phontTxt.getText().equals(null)))  	
     	   {
     	   	msg.add(sigINController.StudentId);
     		msg.add(phontTxt.getText());
@@ -91,7 +92,7 @@ public class editStudentProfileController
        }catch( NullPointerException  e) {e.printStackTrace();  }
     		
        try{
-    	if(!(oldPassTxt.getText().equals(null)) && !(newPassTxt.getText().equals(null)) && !(assertPassTxt.getText().equals(null)) )
+    	if(!(oldPassTxt.getText().equals(null)) && !(newPassTxt.getText().equals(null)) && !(assertPassTxt.getText().equals(null))) 
     	{
     		
     		msg.add(sigINController.StudentId);

@@ -53,6 +53,7 @@ public class LibrarianEditStudentProfileController
 
     @FXML
     private TextField id;
+    
     @FXML
     void backGui(ActionEvent event) throws IOException
     {
@@ -99,15 +100,15 @@ public class LibrarianEditStudentProfileController
     @FXML
     void showStudentData(ActionEvent event) 
     {
-     String idStudent = id.getText();
      ArrayList<String> msg = new ArrayList<String>();
      ArrayList<String>  result = new ArrayList<String>();
-     msg.add(idStudent);
+     msg.add(id.getText());
      msg.add("StudentToEditByLibrarian");
-    result = (ArrayList<String>)IPController.client.Request(msg);
-    System.out.println(result);
+     result = (ArrayList<String>)IPController.client.Request(msg);
+     System.out.println(result);
       if(result.size() >0)
        {
+    	  sigINController.StudentId =id.getText();
           StudentIDTxt.setVisible(true);
           StudentNameTxt.setVisible(true);
          emailTxt.setVisible(true);

@@ -709,7 +709,7 @@ public class EchoServer extends AbstractServer
   	 			studentsInfo.add(rs.getString(6));//Student Phone Number
   	 	
   	 			stmt1 = conn.createStatement();
-  	  			ResultSet rs1 = stmt1.executeQuery("SELECT * FROM userstudent  WHERE StudentId = "+studentID);
+  	  			ResultSet rs1 = stmt1.executeQuery("SELECT * FROM userstudent  WHERE UserID = "+studentID);
   	  			
   	  			if(rs1.next()) 
   	  			   studentsInfo.add(rs1.getString(2));//Student Password

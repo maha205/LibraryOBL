@@ -7,8 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.LibrarianEditStudentProfileController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LibrarianEditStudentProfileController">
    <center>
       <AnchorPane prefHeight="567.0" prefWidth="635.0" BorderPane.alignment="CENTER">
          <children>
@@ -18,7 +17,6 @@
                   <Font name="System Bold Italic" size="47.0" />
                </font>
             </Text>
-            <TextField alignment="CENTER" layoutX="215.0" layoutY="134.0" promptText="StudentID" />
             <Text fill="#0780c6" layoutX="104.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID:">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
@@ -58,6 +56,7 @@
             <Button fx:id="editProfile" layoutX="253.0" layoutY="421.0" mnemonicParsing="false" onAction="#editProfileFunc" text="Edit Profile" visible="false" />
             <Button layoutX="31.0" layoutY="516.0" mnemonicParsing="false" onAction="#backGui" text="Back" />
             <Button layoutX="541.0" layoutY="516.0" mnemonicParsing="false" onAction="#logoutGui" text="Logout" />
+            <TextField fx:id="id" alignment="CENTER" layoutX="222.0" layoutY="134.0" promptText="StudentID" />
          </children>
       </AnchorPane>
    </center>
