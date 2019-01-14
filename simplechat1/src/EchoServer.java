@@ -144,7 +144,15 @@ public class EchoServer extends AbstractServer
 	    	 System.out.println("Order Book");
 		     break;
 	    	 
-
+	     case "StudentToEditByLibrarian":
+	    	 try {
+				msg =StudentToEditByLibrarian(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	 System.out.println("Order Book");
+		     break;
 	    	 }
 	    try {
     	System.out.println(msg);
@@ -647,8 +655,8 @@ public class EchoServer extends AbstractServer
    		    copyID=copyIDtoOrder(bookId);
    		    if(!(copyID.equals("")))
    		    {
-   		    	int OrderNumber =rs.getInt(9) + 1 ;//Order Qantity
-   		    	int OrderStatus =1;
+   		    	int OrderNumber = rs.getInt(9) + 1 ;//Order Qantity
+   		    	int OrderStatus = 1;
    		    	
    		    	stmt2 = conn.createStatement();
    	   		    stmt2.executeUpdate("UPDATE book SET OrderQantity ='"+OrderNumber+"' WHERE  bookID ="+bookId);
@@ -658,7 +666,7 @@ public class EchoServer extends AbstractServer
 			   
 			    
    		    	stmt1 = conn.createStatement();
-   		    	stmt.executeQuery("UPDATE copy SET order ='"+OrderStatus+"' WHERE  idcopy ="+copyID);
+   		    	stmt1.executeUpdate("UPDATE copy SET order ='"+OrderStatus+"' WHERE  idcopy ="+copyID);
    			     
    		        Order.add("ApprovedThisOrder");
    		    }
@@ -682,6 +690,45 @@ public class EchoServer extends AbstractServer
   		    }
   		  }
 		return copID;
-      }  
+      } 
+      
+      public static ArrayList<String> StudentToEditByLibrarian(String studentID) throws SQLException 
+  	{
+  		Statement stmt ,stmt1;
+  		ArrayList<String> studentsInfo = new ArrayList<String>();
+  	
+  		try 
+  		{
+  			stmt = conn.createStatement();
+  			ResultSet rs = stmt.executeQuery("SELECT * FROM student  WHERE StudentId = "+studentID);
+  	 		if(rs.next())
+  	 		{
+  	 			studentsInfo.add(studentID);//Student ID
+  	 			studentsInfo.add(rs.getString(2));//Student name
+  	 			studentsInfo.add(rs.getString(7));//Student Email
+  	 			studentsInfo.add(rs.getString(6));//Student Phone Number
+  	 	
+  	 			stmt1 = conn.createStatement();
+  	  			ResultSet rs1 = stmt1.executeQuery("SELECT * FROM userstudent  WHERE StudentId = "+studentID);
+  	  			
+  	  			if(rs1.next()) 
+  	  			   studentsInfo.add(rs1.getString(2));//Student Password
+  	  			
+  	  			
+  	 			return studentsInfo;
+  			}
+  	 		
+  		  else
+  		  {
+  			   rs.close();
+  	 			return studentsInfo ;
+  		  }
+  		} catch (SQLException e)
+  		{
+  			e.printStackTrace();
+  		}
+  		System.out.println(studentsInfo);
+  		return studentsInfo;
+  	}
 }
 //End of EchoServer class

@@ -43,7 +43,7 @@ public class LibrarianProfileController {
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/editStudentProfile.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/LibrarianEditStudentProfile.fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		

@@ -18,15 +18,15 @@
                   <Font name="System Bold Italic" size="37.0" />
                </font>
             </Text>
-            <TableView layoutX="18.0" layoutY="228.0" prefHeight="302.0" prefWidth="822.0">
+            <TableView fx:id="loanedBooks" fixedCellSize="10.0" layoutX="18.0" layoutY="228.0" prefHeight="302.0" prefWidth="822.0">
               <columns>
-                <TableColumn prefWidth="111.0" text="Book Name" />
-                <TableColumn prefWidth="108.0" text="Book Author" />
-                  <TableColumn minWidth="0.0" prefWidth="88.0" text="Genre" />
-                  <TableColumn prefWidth="93.0" text="Description" />
-                  <TableColumn minWidth="0.0" prefWidth="96.0" text="Publisher" />
-                  <TableColumn minWidth="0.0" prefWidth="115.0" text="Print Date" />
-                  <TableColumn prefWidth="115.0" text="Copy Number" />
+                <TableColumn fx:id="bookNamecol" prefWidth="111.0" text="Book Name" />
+                <TableColumn fx:id="bookAuthorCol" prefWidth="108.0" text="Book Author" />
+                  <TableColumn fx:id="genreCol" minWidth="0.0" prefWidth="88.0" text="Genre" />
+                  <TableColumn fx:id="DescriptionCol" prefWidth="93.0" text="Description" />
+                  <TableColumn fx:id="PublisherCol" minWidth="0.0" prefWidth="96.0" text="Publisher" />
+                  <TableColumn fx:id="PrintDateCol" minWidth="0.0" prefWidth="115.0" text="Print Date" />
+                  <TableColumn fx:id="CopyNumberCol" prefWidth="115.0" text="Copy Number" />
                   <TableColumn prefWidth="95.0" text="Quantity" />
               </columns>
             </TableView>
@@ -40,6 +40,7 @@
             <Button layoutX="674.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="17.0" prefWidth="107.0" text="Search Book" />
             <Button layoutX="581.0" layoutY="-1.0" mnemonicParsing="false" onAction="#LoanBook" prefHeight="16.0" prefWidth="93.0" text="Loan Book" />
             <Button layoutX="426.0" layoutY="-1.0" mnemonicParsing="false" onAction="#ExtendLoanDuration" prefHeight="23.0" prefWidth="165.0" text="Extend Loan Duration" />
+            <Button layoutX="112.0" layoutY="158.0" mnemonicParsing="false" onAction="#show" text="Button" />
          </children>
       </AnchorPane>
    </bottom>
