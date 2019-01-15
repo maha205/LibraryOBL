@@ -23,6 +23,24 @@ public class LibrarianProfileController {
     private Button logout;
 
     @FXML
+    void RemoveBook(ActionEvent event)
+    {
+
+    }
+
+    @FXML
+    void UpdateBook(ActionEvent event) 
+    {
+     
+    }
+    
+    @FXML
+    void addBook(ActionEvent event) 
+    {
+
+    }
+    
+    @FXML
     void returning(ActionEvent event) throws IOException 
     {
     	editStudentProfileController.editStudentBack ="LibrarianProfile";

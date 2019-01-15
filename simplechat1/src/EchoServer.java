@@ -214,6 +214,7 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
+    AddBook("123","calclus 1" , "RH" , "math","this book about thecalclus in mathmathecix","maha publisher","10/1/2000" ,5 ,"B");
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -730,5 +731,50 @@ public class EchoServer extends AbstractServer
   		System.out.println(studentsInfo);
   		return studentsInfo;
   	}
+      
+
+      public static ArrayList<String> AddBook(String bookId ,String bookName , String bookAuthor , String genre,String description,String publisher,String printdate ,int copyQuantity , String Location) throws SQLException 
+      {
+
+    		ArrayList<String> AddBook = new ArrayList<String>();
+    		Statement stmt , stmt1 ;
+       		
+       		stmt = conn.createStatement();
+    	    ResultSet rs = stmt.executeQuery("SELECT * FROM book WHERE bookID ="+bookId);
+       		if(!rs.next())
+       		{
+       		      //ordeQuantity =copyQuantity;
+    			   stmt.executeUpdate("INSERT INTO book (bookID,bookName,AuthorName,genre,description,publisher,printdate,copyQuantity,OrderQantity) VALUES('"+bookId+"','"+bookName+"','"+bookAuthor+"','"+genre+"' ,'"+description+"' , '"+publisher+"','"+printdate+"','"+copyQuantity+"','"+copyQuantity+"')"); 
+       		       AddBook.add("newBokkAdded");
+       		       for(int i=1 ; i<=copyQuantity ;i++)
+       		       {
+       		    	   String locationShelf = Location  ,stutus = "available" ,copyID = "" +i;
+       		    	   locationShelf += "-";
+       		    	   locationShelf+= ""+ i  ;
+       		    	   int ordercopy = 0;
+       		    	    
+       		    	   stmt1 = conn.createStatement();
+        			   stmt1.executeUpdate("INSERT INTO copy (idcopy,locationShelf,status,bookID) VALUES('"+copyID+"','"+ locationShelf+"','"+stutus+"','"+bookId+"')");
+       		           stmt1.executeUpdate("UPDATE copy SET order ="+ordercopy+" WHERE  idcopy ='"+copyID+"' AND bookID ='"+bookId+"';") ;
+       		           System.out.println("yesssss");
+       		       }
+       		}
+     	
+    		return AddBook;
+      }
+      
+      public static ArrayList<String> RemoveBook(String studentID) throws SQLException 
+      {
+
+    		ArrayList<String> RemoveBook = new ArrayList<String>();
+    		return RemoveBook;
+      }
+      public static ArrayList<String> UpdateBook(String studentID) throws SQLException 
+      {
+
+    		ArrayList<String> UpdateBook = new ArrayList<String>();
+    		return UpdateBook;
+      }
+      
 }
 //End of EchoServer class
