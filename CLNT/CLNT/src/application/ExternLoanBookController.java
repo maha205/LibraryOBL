@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -64,6 +66,12 @@ public class ExternLoanBookController
         	succesful.setVisible(false);
         	dayMsg.setVisible(false);
         	dateReturn.setVisible(false);
+        	
+//        	Alert alert = new Alert(AlertType.ERROR);
+//    		alert.setTitle("Error Dialog");
+//    		alert.setHeaderText("Look, an Error Dialog");
+//    		alert.setContentText("Ooops, Extend cannot be completed!");
+//    		alert.showAndWait();
         }
     }
 

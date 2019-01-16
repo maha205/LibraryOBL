@@ -214,7 +214,7 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
-    AddBook("123","calclus 1" , "RH" , "math","this book about thecalclus in mathmathecix","maha publisher","10/1/2000" ,5 ,"B");
+
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -347,6 +347,25 @@ public class EchoServer extends AbstractServer
 	 		{
 	 			if(rs1.getString(2).equals(pass))
 	 			  UserLogin.add("librarian");
+	 			return UserLogin;
+	 		}
+	
+	 		rs1.close();
+		} catch (SQLException e) {e.printStackTrace();}	
+		return loginUsermanagement (UserID, pass);
+    }
+    public static ArrayList<String> loginUsermanagement(String UserID,String pass)
+    {
+    	Statement stmt;
+		ArrayList<String> UserLogin = new ArrayList<String>();
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs1 = stmt.executeQuery("SELECT * FROM usermanagement  WHERE UserID = "+UserID);
+	 		if(rs1.next())//if the student is existing 
+	 		{
+	 			if(rs1.getString(2).equals(pass))
+	 			  UserLogin.add("management");
 	 			return UserLogin;
 	 		}
 	
@@ -667,8 +686,8 @@ public class EchoServer extends AbstractServer
 			   
 			    
    		    	stmt1 = conn.createStatement();
-   		    	stmt1.executeUpdate("UPDATE copy SET order ='"+OrderStatus+"' WHERE  idcopy ="+copyID);
-   			     
+   		    	stmt1.executeUpdate("UPDATE copy SET orderBook = '"+OrderStatus+"' WHERE idcopy = '"+copyID+"' AND bookID ='"+bookId+"';");
+   			    
    		        Order.add("ApprovedThisOrder");
    		    }
    		}
@@ -751,11 +770,11 @@ public class EchoServer extends AbstractServer
        		    	   String locationShelf = Location  ,stutus = "available" ,copyID = "" +i;
        		    	   locationShelf += "-";
        		    	   locationShelf+= ""+ i  ;
-       		    	   int ordercopy = 0;
+       		    	   String ordercopy = "0";
        		    	    
        		    	   stmt1 = conn.createStatement();
         			   stmt1.executeUpdate("INSERT INTO copy (idcopy,locationShelf,status,bookID) VALUES('"+copyID+"','"+ locationShelf+"','"+stutus+"','"+bookId+"')");
-       		           stmt1.executeUpdate("UPDATE copy SET order ="+ordercopy+" WHERE  idcopy ='"+copyID+"' AND bookID ='"+bookId+"';") ;
+       		           stmt1.executeUpdate("UPDATE copy SET orderBook ="+ordercopy+" WHERE  idcopy ='"+copyID+"' AND bookID ='"+bookId+"';") ;
        		           System.out.println("yesssss");
        		       }
        		}
