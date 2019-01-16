@@ -153,6 +153,11 @@ public class EchoServer extends AbstractServer
 			}
 	    	 System.out.println("Order Book");
 		     break;
+		     
+	     case "addBook":
+	    	// AddBook(String bookId ,String bookName , String bookAuthor , String genre,String description,String publisher,String printdate ,int copyQuantity , String Location) throws SQLException 
+		     
+		     
 	    	 }
 	    try {
     	System.out.println(msg);
