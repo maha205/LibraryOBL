@@ -155,10 +155,19 @@ public class EchoServer extends AbstractServer
 		     break;
 		     
 	     case "addBook":
-	    	// AddBook(String bookId ,String bookName , String bookAuthor , String genre,String description,String publisher,String printdate ,int copyQuantity , String Location) throws SQLException 
+	    	try {
+	    		int CopyQuantityy = Integer.parseInt(msg.get(7));
+	    		System.out.println("mahaaaa");
+				msg=AddBook(msg.get(0),msg.get(1),msg.get(2),msg.get(3),msg.get(4),msg.get(5),msg.get(6), CopyQuantityy,msg.get(8));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	 System.out.println("Order Book");
+		     break;
 		     
-		     
-	    	 }
+	    }
+	    
 	    try {
     	System.out.println(msg);
 		client.sendToClient(msg);
@@ -759,7 +768,6 @@ public class EchoServer extends AbstractServer
 
       public static ArrayList<String> AddBook(String bookId ,String bookName , String bookAuthor , String genre,String description,String publisher,String printdate ,int copyQuantity , String Location) throws SQLException 
       {
-
     		ArrayList<String> AddBook = new ArrayList<String>();
     		Statement stmt , stmt1 ;
        		
@@ -767,9 +775,10 @@ public class EchoServer extends AbstractServer
     	    ResultSet rs = stmt.executeQuery("SELECT * FROM book WHERE bookID ="+bookId);
        		if(!rs.next())
        		{
-       		      //ordeQuantity =copyQuantity;
-    			   stmt.executeUpdate("INSERT INTO book (bookID,bookName,AuthorName,genre,description,publisher,printdate,copyQuantity,OrderQantity) VALUES('"+bookId+"','"+bookName+"','"+bookAuthor+"','"+genre+"' ,'"+description+"' , '"+publisher+"','"+printdate+"','"+copyQuantity+"','"+copyQuantity+"')"); 
-       		       AddBook.add("newBokkAdded");
+       		      int ordeQuantity =0;
+    			  stmt.executeUpdate("INSERT INTO book (bookID,bookName,AuthorName,genre,description,publisher,printdate,copyQuantity,OrderQantity) VALUES('"+bookId+"','"+bookName+"','"+bookAuthor+"','"+genre+"' ,'"+description+"' , '"+publisher+"','"+printdate+"','"+copyQuantity+"','"+ordeQuantity+"')"); 
+       		      AddBook.add("newBookAdded");
+       		      System.out.println("hiiiiiiii");
        		       for(int i=1 ; i<=copyQuantity ;i++)
        		       {
        		    	   String locationShelf = Location  ,stutus = "available" ,copyID = "" +i;
@@ -780,7 +789,6 @@ public class EchoServer extends AbstractServer
        		    	   stmt1 = conn.createStatement();
         			   stmt1.executeUpdate("INSERT INTO copy (idcopy,locationShelf,status,bookID) VALUES('"+copyID+"','"+ locationShelf+"','"+stutus+"','"+bookId+"')");
        		           stmt1.executeUpdate("UPDATE copy SET orderBook ="+ordercopy+" WHERE  idcopy ='"+copyID+"' AND bookID ='"+bookId+"';") ;
-       		           System.out.println("yesssss");
        		       }
        		}
      	
