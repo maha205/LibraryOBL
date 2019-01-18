@@ -83,7 +83,7 @@ public class ExternLoanBookController
         			"ID : '"+sigINController.StudentId+"' \r\n" + 
         			"Extended his loan duration for the following book:\r\n" + 
         			"Book Name\r\n" + 
-        			"Book ID : '"+bookID.getText()+"'\r\n" + 
+        			"Book Name : '"+bookID.getText()+"'\r\n" + 
         			"Old return Date : '"+oldDate+"'\r\n" + 
         			"\r\n" + 
         			"New return date is: '"+newDate+"'\r\n" + 
