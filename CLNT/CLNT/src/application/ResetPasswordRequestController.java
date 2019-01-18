@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ public class ResetPasswordRequestController
 	private String UserTable ;
 	private String UserCod ;
 	public int flag =1 ;
+	public int flagCode =1 ;
 
     @FXML
     private Text EnterEmai;
@@ -51,16 +53,14 @@ public class ResetPasswordRequestController
     @FXML
     private Text errorInputPass;
 
-   
-
     @FXML
-    void SendEmail(ActionEvent event) 
+    private Text newPass;
+    @FXML
+    void SendEmail(ActionEvent event) throws IOException 
     {
     	ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
-        
-	     
-	    UserIDinput =UserID.getText() ;
+       
         msg.add( UserID.getText());
         msg.add("ResetPasswordRequest");
         result = (ArrayList<String>)IPController.client.Request(msg);
@@ -68,6 +68,7 @@ public class ResetPasswordRequestController
         if(result.size()>0 && !(inputTxt.getText().equals("")) && !(UserID.getText().equals("")) && flag ==1)
         {
         	flag =0;
+        	 UserIDinput =UserID.getText() ;
         	UserNotFound.setVisible(false);
         	Random  random = new Random();
             UserCod = String.format("%04d", random.nextInt(10000));
@@ -85,75 +86,159 @@ public class ResetPasswordRequestController
 	    
 	     UserID.setText("");
 	     inputTxt.setText("");
+
         }
-        if(flag == 0)
+        if(flag==1 )
         {
-        	
-            UserID.setVisible(false);
+        	errorInputPass.setVisible(false);
+    		UserNotFound.setVisible(true);
+        }
+         if(flag == 0)
+        {
+   	        UserID.setVisible(false);
        	    inputTxt.setVisible(true);
            	EnterEmai.setVisible(false);
        	    enterID.setVisible(false);
        	    errorInputPass.setVisible(false);
        	    EnterCode.setVisible(true);
         	UserID.setVisible(false);
-     	    inputTxt.setVisible(false);
+     	    
          	
         	if(inputTxt.getText().equals(UserCod))
         	{
         		flag = 2;
+        		flagCode =0;
+                UserID.setVisible(true);
+           	    inputTxt.setVisible(true);
+             	 errorInputPass.setVisible(false);
+     		    UserNotFound.setVisible(false);
+     		
         		UserID.setText("");
-       	       inputTxt.setText("");
+       	        inputTxt.setText("");
         	}
-        	else
-        	{
-        		errorInputPass.setVisible(true);
-        		UserNotFound.setVisible(false);
-        	}
-        }
-        if(flag==2)
-        {
         	
+        }
+         if(flag==2)
+        {
         	ArrayList<String> msg1 = new ArrayList<String>();
             ArrayList<String>  result1 = new ArrayList<String>();
-            
+           
             UserID.setVisible(true);
      	    inputTxt.setVisible(true);
-            
-            msg1.add(UserID.getText());
-            msg1.add(oldPassword);
-            msg1.add(UserID.getText());
-            msg1.add( inputTxt.getText());
+           	EnterEmai.setVisible(false);
+       	    enterID.setVisible(false);
+       	    errorInputPass.setVisible(false);
+       	    EnterCode.setVisible(false);
+        	assertPass.setVisible(true);
+        	newPass.setVisible(true);
+        	
+            msg1.add(UserIDinput);//user id
+            msg1.add(oldPassword);//old pass
+            msg1.add(UserID.getText());//new pass
+            msg1.add( inputTxt.getText());// assert pass
           
         	
-        	if(UserTable.equals("Management User"))
+        	if(UserTable.equals("Management User")&& !(inputTxt.getText().equals("")) && !(UserID.getText().equals("")))
         	{
-//        	//  msg1.add("ResetPasswordRequest");
-//                result1 = (ArrayList<String>)IPController.client.Request(msg1);
-//                System.out.println(result1);
+                 msg1.add("UpdatedManagementPassword");
+                 result1 = (ArrayList<String>)IPController.client.Request(msg1);
+                 System.out.println(result1);
+                 if(result1.size() >0 ) 
+                 {
+                 	   try {
+                 		   successful.setVisible(true);
+                 		   TimeUnit.SECONDS.sleep(2);
+ 					} catch (InterruptedException e) {
+ 						// TODO Auto-generated catch block
+ 						e.printStackTrace();
+ 					}
+                 	   
+                 	   ((Node)event.getSource()).getScene().getWindow().hide();
+            	   		Stage primaryStage = new Stage();
+            	   		FXMLLoader loader = new FXMLLoader();
+            	   		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
+            	   		
+            	   		Scene scene = new Scene(root);			
+            	   		
+            	   		primaryStage.setScene(scene);		
+            	   		primaryStage.show();
+                }
+                 else
+                 {
+                 	successful.setVisible(false);
+                 	errorInputPass.setVisible(true);
+             		UserNotFound.setVisible(false);
+                 }
         	}
         		
-            if(UserTable.equals("Student User"))
+            if(UserTable.equals("Student User") && !(inputTxt.getText().equals("")) && !(UserID.getText().equals("")))
             {
-               msg1.add("UpdatePasswordStudent");
+                msg1.add("UpdatePasswordStudent");
                 result1 = (ArrayList<String>)IPController.client.Request(msg1);
                 System.out.println(result1);
-                if(result1.size() >0) successful.setVisible(true);
+                if(result1.size() >0 ) 
+                {
+                	   try {
+                		   successful.setVisible(true);
+                		   TimeUnit.SECONDS.sleep(2);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                	   
+                	   ((Node)event.getSource()).getScene().getWindow().hide();
+           	   		Stage primaryStage = new Stage();
+           	   		FXMLLoader loader = new FXMLLoader();
+           	   		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
+           	   		
+           	   		Scene scene = new Scene(root);			
+           	   		
+           	   		primaryStage.setScene(scene);		
+           	   		primaryStage.show();
+               }
+                else
+                {
+                	successful.setVisible(false);
+                	errorInputPass.setVisible(true);
+            		UserNotFound.setVisible(false);
+                }
+                	
             	//UpdatePasswordStudent
             }
-            if(UserTable.equals("Librarian User"))
+            if(UserTable.equals("Librarian User")&& !(inputTxt.getText().equals("")) && !(UserID.getText().equals("")))
             {
-                 msg1.add("UpdatePasswordLibrarian");
-                result1 = (ArrayList<String>)IPController.client.Request(msg1);
-                System.out.println(result1);
+            	 msg1.add("UpdatePasswordLibrarian");
+                 result1 = (ArrayList<String>)IPController.client.Request(msg1);
+                 System.out.println(result1);
+                 if(result1.size() >0 ) 
+                 {
+                 	   try {
+                 		   successful.setVisible(true);
+                 		   TimeUnit.SECONDS.sleep(2);
+ 					} catch (InterruptedException e) {
+ 						// TODO Auto-generated catch block
+ 						e.printStackTrace();
+ 					}
+                 	   
+                 	   ((Node)event.getSource()).getScene().getWindow().hide();
+            	   		Stage primaryStage = new Stage();
+            	   		FXMLLoader loader = new FXMLLoader();
+            	   		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
+            	   		
+            	   		Scene scene = new Scene(root);			
+            	   		
+            	   		primaryStage.setScene(scene);		
+            	   		primaryStage.show();
+                }
+                 else
+                 {
+                 	successful.setVisible(false);
+                 	errorInputPass.setVisible(true);
+             		UserNotFound.setVisible(false);
+                 }
             	
-            }
-        			
+            }		
         }
-    	if(flag==1)
-    	{
-    		UserNotFound.setVisible(true);
-    		errorInputPass.setVisible(false);
-    	}
     
     	
     }

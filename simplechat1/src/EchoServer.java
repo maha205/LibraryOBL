@@ -96,17 +96,22 @@ public class EchoServer extends AbstractServer
 		      
 	      case "UpdateEmailLibrarian":
 	    	     msg = (UpdatedLibrarianEmail(msg.get(0),msg.get(1))); //student email update
-				 System.out.println("Update student Email");
+				 System.out.println("Update Librarian Email");
 		    	 break;
 		    	 
 	      case "UpdatephontLibrariant":
 	    	  msg = (UpdatedLibrarianPhone(msg.get(0),msg.get(1))); //student email update
-			  System.out.println("Update student Phone");
+			  System.out.println("Update Librarian Phone");
 		      break;
 		      
 	      case "UpdatePasswordLibrarian":
 	    	  msg = (UpdatedLibrarianPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3))); //student password update
-			  System.out.println("Update student Password");
+			  System.out.println("Update Librarian Password");
+		      break;
+		      
+	      case "UpdatedManagementPassword":
+	    	  msg=UpdatedManagementPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
+	    	  System.out.println("Update Management Password");
 		      break;
 		      
 	      case "signUP":
@@ -247,6 +252,7 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
+    UpdatedManagementPassword("123456789" ,"123456789" ,"1" ,"1");
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -543,6 +549,30 @@ public class EchoServer extends AbstractServer
      		}
      		return update;
      }
+      public static ArrayList<String> UpdatedManagementPassword(String UserID,String oldPass ,String newPass ,String AssertPass)
+      {
+     		Statement stmt;
+     		ArrayList<String> update = new ArrayList<String>();
+     		try 
+     		{
+     			stmt = conn.createStatement();
+     			ResultSet rs = stmt.executeQuery("SELECT * FROM usermanagement WHERE UserID ='"+UserID+"';");
+     			
+     	 		if(rs.next() && newPass.equals(AssertPass) && rs.getString(2).equals(oldPass))//if the librarian is existing 
+     	 		{
+     	 		   stmt.executeUpdate("UPDATE usermanagement SET Pass ='"+newPass+"' WHERE UserID ='"+UserID+"';");
+     	 		   update.add(newPass);
+     	 		   rs.close();
+     	 	       return update;
+     	 		}
+     		} catch (SQLException e)
+     		{
+     			e.printStackTrace();
+     			return update;
+     		}
+     		return update;
+     }
+      
       
       public static ArrayList<String> signUp(String studentID,String name,String Email ,String phoneNumber)
       {
