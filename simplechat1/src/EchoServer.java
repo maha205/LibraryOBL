@@ -131,7 +131,7 @@ public class EchoServer extends AbstractServer
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	    	  System.out.println("Order Book");
+	    	  System.out.println("Show Order Book");
 		      break;
 	   
 	     case "approvedOrderBook":
@@ -151,7 +151,7 @@ public class EchoServer extends AbstractServer
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	    	 System.out.println("Order Book");
+	    	 System.out.println("show student info to librarian ");
 		     break;
 		     
 	     case "addBook":
@@ -163,7 +163,7 @@ public class EchoServer extends AbstractServer
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	    	 System.out.println("Order Book");
+	    	 System.out.println("Add Book");
 		     break;
 		     
 	     case "LibrarianEmail":
@@ -173,9 +173,18 @@ public class EchoServer extends AbstractServer
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	     System.out.println("Order Book");
+	     System.out.println("Send Email to librarian");
 	     break;
-		     
+		    
+	     case "ResetPasswordRequest":
+			try {
+				msg =ResetPasswordRequest(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	      System.out.println("Reset Password Request");
+		     break;
 	    }
 	    
 	    try {
@@ -449,7 +458,7 @@ public class EchoServer extends AbstractServer
    		try 
    		{
    			stmt = conn.createStatement();
-   			ResultSet rs = stmt.executeQuery("SELECT * FROM userstudent WHERE UserID ="+UserID);
+   			ResultSet rs = stmt.executeQuery("SELECT * FROM userstudent WHERE UserID ='"+UserID+"';");
    			
    	 		if(rs.next() && newPass.equals(AssertPass) && rs.getString(2).equals(oldPass))//if the student is existing 
    	 		{
@@ -842,6 +851,44 @@ public class EchoServer extends AbstractServer
         }
   		return LibrarianEmail;
       }
+      public static ArrayList<String> ResetPasswordRequest(String UserID) throws SQLException 
+      {
+    	 ArrayList<String> LibrarianEmail = new ArrayList<String>();
+    	 Statement stmt ;
+    	 stmt = conn.createStatement();
+ 	     ResultSet rs = stmt.executeQuery("SELECT *FROM useworker");
+        while(rs.next())
+        {
+        	if(rs.getString(1).equals(UserID))
+        	{
+        		LibrarianEmail.add("Librarian User");
+        		LibrarianEmail.add(rs.getString(2));//oldPassword
+        	}
+        }
+        
+        rs = stmt.executeQuery("SELECT *FROM userstudent");
+        while(rs.next())
+        {
+        	if(rs.getString(1).equals(UserID))
+        	{
+        		LibrarianEmail.add("Student User");
+        		LibrarianEmail.add(rs.getString(2));//oldPassword
+        	}
+        }
+        
+        rs = stmt.executeQuery("SELECT *FROM usermanagement");
+        while(rs.next())
+        {
+        	if(rs.getString(1).equals(UserID))
+        	{
+        		LibrarianEmail.add("Management User");
+        		LibrarianEmail.add(rs.getString(2));//oldPassword
+        	}
+        }
+        
+  		return LibrarianEmail;
+      }
+      
       
 }
 //End of EchoServer class

@@ -35,6 +35,20 @@ public class sigINController {
     private Text NotFound;
     
     @FXML
+    void forgetPass(ActionEvent event) throws IOException 
+    {
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/ResetPasswordRequest.fxml").openStream());
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
+    }
+    
+    @FXML
     void loginFunc(ActionEvent event) throws IOException
     {
     	String UserID = userID.getText();
