@@ -8,5 +8,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="src" path="/OCSF"/>
+	<classpathentry kind="lib" path="C:/jsse.jar"/>
+	<classpathentry kind="lib" path="C:/jnet.jar"/>
+	<classpathentry kind="lib" path="C:/jcert.jar"/>
+	<classpathentry kind="lib" path="C:/javax.mail-1.4.4.jar"/>
+	<classpathentry kind="lib" path="C:/activation.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 public class ExternLoanBookController
 {
+	public EmailMsg email ;
 	@FXML
 	private Text dayMsg;   
 
@@ -45,6 +46,7 @@ public class ExternLoanBookController
     @FXML
     void ExtendLoan(ActionEvent event) 
     {
+    	String newDate = null ,oldDate = null;
     	ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
         msg.add(sigINController.StudentId);
@@ -54,11 +56,44 @@ public class ExternLoanBookController
         System.out.println(result);
         if(result.size() >0)
         {
+        	newDate=result.get(0) ;
+        	oldDate = result.get(1);
+        	
         	errorMsg.setVisible(false);
         	succesful.setVisible(true);
         	dayMsg.setVisible(true);
         	dateReturn.setText(result.get(0));
         	dateReturn.setVisible(true);
+        	
+        	ArrayList<String> msg1 = new ArrayList<String>();
+            ArrayList<String>  result1 = new ArrayList<String>();
+            msg1.add("LibrarianEmail");
+            result1 = (ArrayList<String>)IPController.client.Request(msg1);
+            System.out.println(result1);
+            if(result1.size()>0)
+            {
+            	for(int i=0;i<result1.size();i+=2)
+            	{
+        	     email = new EmailMsg();
+        	     email.Too =result1.get(i);
+        	     System.out.println(result1.get(i));
+        	     email.TextBody ="Hello "+result1.get(i+1)+" ,\r\n" + 
+        			"\r\n" + 
+        			"Please note that student: \r\n" + 
+        			"ID : '"+sigINController.StudentId+"' \r\n" + 
+        			"Extended his loan duration for the following book:\r\n" + 
+        			"Book Name\r\n" + 
+        			"Book ID : '"+bookID.getText()+"'\r\n" + 
+        			"Old return Date : '"+oldDate+"'\r\n" + 
+        			"\r\n" + 
+        			"New return date is: '"+newDate+"'\r\n" + 
+        			"\r\n" + 
+        			"Thank you,\r\n" + 
+        			"ORT Braude Library";
+        	    email.SendAction();
+            	}
+            }
+        	
         }
         else
         {
@@ -67,13 +102,9 @@ public class ExternLoanBookController
         	dayMsg.setVisible(false);
         	dateReturn.setVisible(false);
         	
-//        	Alert alert = new Alert(AlertType.ERROR);
-//    		alert.setTitle("Error Dialog");
-//    		alert.setHeaderText("Look, an Error Dialog");
-//    		alert.setContentText("Ooops, Extend cannot be completed!");
-//    		alert.showAndWait();
         }
     }
+  
 
     @FXML
     void exitGui(ActionEvent event) throws IOException {

@@ -166,6 +166,16 @@ public class EchoServer extends AbstractServer
 	    	 System.out.println("Order Book");
 		     break;
 		     
+	     case "LibrarianEmail":
+			try {
+				msg =LibrarianEmail();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	     System.out.println("Order Book");
+	     break;
+		     
 	    }
 	    
 	    try {
@@ -228,7 +238,6 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
-
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -554,6 +563,7 @@ public class EchoServer extends AbstractServer
       public static ArrayList<String> ExternLoanBook(String Studentid ,String bookName)  throws SQLException 
       {
     	Statement stmt ,stmt2;
+    	String oldDate = null;
     	int diffDays = 0;
    		ArrayList<String> Extern = new ArrayList<String>();
    		String copyID = null  ,outputtwoWeeksAfter = null ,bookID=null ;
@@ -585,7 +595,7 @@ public class EchoServer extends AbstractServer
  	 	       try {
  	 			String date1 = outputcurrentDate;
  	 			String date2 = rs.getString(6);//return day ;
-
+ 	 			 oldDate = date2;
  	 			String format = "dd/MM/yyyy";
 
  	 			SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -617,9 +627,11 @@ public class EchoServer extends AbstractServer
  	 	 		    outputtwoWeeksAfter = twoWeeksAfter.format(c2.getTime());
  	 	 		
  	 	 		     Extern.add(outputtwoWeeksAfter);
+ 	 	 		     Extern.add(oldDate);
  	 				 stmt.executeUpdate("UPDATE iteminloan SET loanDate ='"+outputcurrentDate+"' WHERE BookID ='"+bookID+"' AND CopyID ='"+copyID+"';");
  	 				 stmt.executeUpdate("UPDATE iteminloan SET returnDate ='"+outputtwoWeeksAfter+"' WHERE BookID ='"+bookID+"' AND CopyID ='"+copyID+"';");
  	 				 Extern.add("Extern");
+ 	 				 
  	 			}
  	 		  }
  	 		   rs.close();
@@ -806,6 +818,29 @@ public class EchoServer extends AbstractServer
 
     		ArrayList<String> UpdateBook = new ArrayList<String>();
     		return UpdateBook;
+      }
+      
+      public static ArrayList<String> LibrarianEmail() throws SQLException 
+      {
+    	 ArrayList<String> LibrarianEmail = new ArrayList<String>();
+    	 Statement stmt ;
+    	 String Name="" ;
+    	stmt = conn.createStatement();
+ 	    ResultSet rs = stmt.executeQuery("SELECT *FROM librarian");
+        while(rs.next())
+        {
+        	LibrarianEmail.add(rs.getString(5));//Email
+        	Name += rs.getString(2);
+        	Name +=" ";
+        	Name +=rs.getString(3);
+        	LibrarianEmail.add(Name);// Name
+        	
+        	System.out.println(Name);
+        	System.out.println(rs.getString(5));
+        	
+        	Name ="";
+        }
+  		return LibrarianEmail;
       }
       
 }

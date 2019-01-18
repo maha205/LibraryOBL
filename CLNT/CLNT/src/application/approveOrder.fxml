@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.approveOrderController">
+   <right>
+      <AnchorPane prefHeight="326.0" prefWidth="688.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Student!" />
+            <Text fill="#bc1111" layoutX="190.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thanks For Your Order!">
+               <font>
+                  <Font name="System Bold Italic" size="30.0" />
+               </font>
+            </Text>
+            <Text fill="#bc1111" layoutX="45.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="We'll notify you when the book your ordered is available">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#bc1111" layoutX="118.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thank you! Your order is saved in the system. ">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="23.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please note that if you do not take the book in 2 days, the order will be canceled.">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Button layoutX="14.0" layoutY="288.0" mnemonicParsing="false" onAction="#BackGui" text="Back to profile" />
+            <Button layoutX="613.0" layoutY="288.0" mnemonicParsing="false" onAction="#logoutGui" text="Log-Out" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

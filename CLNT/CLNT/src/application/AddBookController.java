@@ -15,32 +15,33 @@ import javafx.stage.Stage;
 
 public class AddBookController 
 {
-	   @FXML
-	    private TextField bookID;
+    @FXML
+    private TextField bookID;
 
-	    @FXML
-	    private TextField BookName;
+    @FXML
+    private TextField BookName;
 
-	    @FXML
-	    private TextField BookAuthor;
+    @FXML
+    private TextField BookAuthor;
 
-	    @FXML
-	    private TextField BookGenre;
+    @FXML
+    private TextField BookGenre;
 
-	    @FXML
-	    private Text BookPrintdate;
+    @FXML
+    private TextField BookPublisher;
 
-	    @FXML
-	    private Text CopyQuantity;
+    @FXML
+    private TextField BookPrintdate;
 
-	    @FXML
-	    private Text BookShelfLocation;
+    @FXML
+    private TextField CopyQuantity;
 
-	    @FXML
-	    private TextField BookPublisher;
+    @FXML
+    private TextField BookShelfLocation;
 
-	    @FXML
-	    private TextField BookDescription;
+    @FXML
+    private TextField BookDescription;
+
 
 	    @FXML
 	    void BackGui(ActionEvent event) throws IOException 
@@ -63,6 +64,7 @@ public class AddBookController
 	      ArrayList<String>  result = new ArrayList<String>();
 	      if(!(bookID.getText().equals("")) &&!(CopyQuantity.getText().equals("")) && !(BookName.getText().equals("")) && !( BookAuthor.getText().equals("")) && !( BookDescription.getText().equals("")) && !( BookPublisher.getText().equals("")) && !( BookPrintdate.getText().equals(null))&& !(BookShelfLocation.getText().equals("")))
 	      {
+
 	      msg.add(bookID.getText());
 	      msg.add(BookName.getText());
 	      msg.add(BookAuthor.getText());

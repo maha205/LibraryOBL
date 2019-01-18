@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,6 +60,19 @@ public class AskForOrderController
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
 	  		Pane root = loader.load(getClass().getResource("/application/OrderBook.fxml").openStream());
+	  		
+	  		 String StudentID = sigINController.StudentId ;
+    		 ArrayList<String> msg = new ArrayList<String>();
+    	     ArrayList<String>  result = new ArrayList<String>();
+    	     msg.add(""+StudentID);
+    	     msg.add(loanBookController.OrderBookID);
+    	     msg.add(loanBookController.OrderCopyID);
+    	     msg.add("ShowOrderBook");
+    	     result = (ArrayList<String>)IPController.client.Request(msg);
+    	     
+	  		OrderBookController orderBook = loader.getController();	
+			
+	  		orderBook.loadBookOrder( result);
 	  		
 	  		Scene scene = new Scene(root);			
 	  		
