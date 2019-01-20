@@ -50,7 +50,12 @@ public class StudentProfileController {
 
 	    @FXML
 	    private TableColumn<String, String> QuantityCol;
-	 
+	    
+	    @FXML
+	    void showStudentInfo(ActionEvent event) 
+	    {
+      
+	    }
 	  @FXML
 	 void ExtendLoanDuration(ActionEvent event) throws IOException 
 	 {
