@@ -3,6 +3,8 @@ import java.awt.Button;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 public class OrderBookController 
 {  
@@ -152,17 +155,24 @@ public class OrderBookController
     	     System.out.println(result);
     	     if(result.size()>0)
     	     {
-    	    	errorShow.setVisible(false);
+    	    	 
+   	    	errorShow.setVisible(false);
+   		 JOptionPane.showMessageDialog(null, "Thanks For Your Order! \r\n" +
+    	    	 "We'll notify you when the book your ordered is available  \r\n" +
+    	          "Thank you! Your order is saved in the system. \r\n" +
+    	    	 
+    	          "Please note that if you do not take the book in 2 days, the order will be canceled.");
+   		 
     	    	 ((Node)event.getSource()).getScene().getWindow().hide();
      	   		Stage primaryStage = new Stage();
      	   		FXMLLoader loader = new FXMLLoader();
-     	   		Pane root = loader.load(getClass().getResource("/application/approveOrder.fxml").openStream());
+     	   		Pane root = loader.load(getClass().getResource("/application/StudentProfile.fxml").openStream());
      	   		
      	   		Scene scene = new Scene(root);			
      	   		
      	   		primaryStage.setScene(scene);		
      	   		primaryStage.show();
-
+    	    	 
     	     }
     	     else
     	    	 {

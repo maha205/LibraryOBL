@@ -190,6 +190,19 @@ public class EchoServer extends AbstractServer
 			}
 	      System.out.println("Reset Password Request");
 		     break;
+		     
+	     case "LoanSearch":  ///JERIES
+	    	  msg = LoanSearch(msg.get(0));
+		      break;
+	      case "SearchInCopy":  ///JERIES 
+	    	  msg = SearchInCopy(msg.get(0));
+		      break;
+	      case "AddItemInLoan":   /// JERIES
+	    	  msg = AddItemInLoan(msg.get(0), msg.get(1), msg.get(2), msg.get(3));
+		      break;
+	      case "CheckStudentStatus":   /// JERIES
+	    	  msg = CheckStudentStatus(msg.get(0));
+		      break;
 	    }
 	    
 	    try {
@@ -918,7 +931,132 @@ public class EchoServer extends AbstractServer
         
   		return LibrarianEmail;
       }
-      
+      public static ArrayList<String> LoanSearch(String BookName)   ////JERIES
+      {
+      	Statement stmt;
+  		ArrayList<String> BookInfo = new ArrayList<String>();
+  		try 
+  		{
+  			stmt = conn.createStatement();
+  			System.out.println("hi");
+  			ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE bookName = '"+BookName+"';");
+  			System.out.println("hi2");
+  	 		if(rs1.next())
+  	 		{
+  	 			BookInfo.add(rs1.getString(1));
+  	 			BookInfo.add(rs1.getString(2));
+  	 			BookInfo.add(rs1.getString(3));
+  	 			BookInfo.add(rs1.getString(4));
+  	 			BookInfo.add(rs1.getString(5));
+  	 			BookInfo.add(rs1.getString(6));
+  	 			return BookInfo;
+  	 		}else BookInfo.add("No");
+  	 		
+  	 	
+  	 		    rs1.close();
+  	 		    return BookInfo;
+  		} catch (SQLException e) {e.printStackTrace();}
+	    return BookInfo;
+      }
+
+public static ArrayList<String> SearchInCopy(String BookID)   ////JERIES
+{
+	Statement stmt;
+	ArrayList<String> BookInfo = new ArrayList<String>();
+	try 
+	{
+		stmt = conn.createStatement();
+		ResultSet rs1 = stmt.executeQuery("SELECT idcopy FROM copy WHERE bookID = '"+BookID+"' AND status = 'available';");
+		
+		if(rs1.next()) {
+		BookInfo.add(rs1.getString(1));
+		BookInfo.add(rs1.getString(2));
+		BookInfo.add(rs1.getString(3));
+		 return BookInfo;
+		}
+		else BookInfo.add("NO"); 
+		rs1.close();
+	/*	while(rs1.next()){
+		BookInfo.add(rs1.getString(i));	
+			i++;
+		}*/
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return BookInfo;
+  
+  }
+
+
+public static ArrayList<String> CheckStudentStatus(String StudentID)   ////JERIES
+{
+	Statement stmt;
+	Statement stmt1;
+	ArrayList<String> StatusMembership = new ArrayList<String>();
+	try 
+	{
+		stmt = conn.createStatement();
+		ResultSet rs1 = stmt.executeQuery("SELECT StatusMembership FROM student WHERE StudentId = '"+StudentID+"';");
+		if(rs1.next()) {
+		StatusMembership.add(rs1.getString(1));
+		}
+		else rs1.close();
+
+	} catch (SQLException e) {e.printStackTrace();}
+	
+	try 
+	{
+		stmt1 = conn.createStatement();
+		ResultSet rs2 = stmt1.executeQuery("SELECT Email FROM student WHERE StudentId = '"+StudentID+"';");
+		if(rs2.next()) {
+		StatusMembership.add(rs2.getString(1));
+		}
+
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return StatusMembership;
+  
+  }
+
+
+public static ArrayList<String> AddItemInLoan(String StudentID, String BookID, String CopyID, String Delay) ////JERIES
+{
+	String loanDate = "";
+	String returnDate = "";
+	
+	    SimpleDateFormat twoWeeksAfter = new SimpleDateFormat("dd/MM/yyyy");
+	    Calendar c2 = Calendar.getInstance();
+	    c2.setTime(new Date()); // Now use today date.
+	    loanDate = twoWeeksAfter.format(c2.getTime());
+	    c2.add(Calendar.DATE, 14); // Adding 14 days
+	    returnDate = twoWeeksAfter.format(c2.getTime());
+	
+	    
+	
+	Statement stmt;
+	ArrayList<String> update = new ArrayList<String>();
+	try 
+	{
+		stmt = conn.createStatement();
+		
+		stmt.executeUpdate("INSERT INTO iteminloan (StudentID ,BookID ,CopyID ,delay, loanDate, returnDate) VALUES('"+StudentID+"','"+BookID+"','"+CopyID+"','"+Delay+"','"+loanDate+"','"+returnDate+"')");
+		update.add(loanDate);
+		update.add(returnDate);
+		
+	} catch (SQLException e) {e.printStackTrace();}
+	
+	Statement stmt1;
+	try 
+	{
+		stmt = conn.createStatement();
+		
+		stmt.executeUpdate("UPDATE copy SET status ='Loan' WHERE idcopy = '"+CopyID+"' AND bookID = '"+ BookID+"' ;");
+		
+	} catch (SQLException e) {e.printStackTrace();}
+	
+	
+  return update;
+  
+  }
       
 }
 //End of EchoServer class
