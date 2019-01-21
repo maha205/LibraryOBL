@@ -265,7 +265,6 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
-    UpdatedManagementPassword("123456789" ,"123456789" ,"1" ,"1");
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line

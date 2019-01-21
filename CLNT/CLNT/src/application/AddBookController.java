@@ -20,7 +20,6 @@ public class AddBookController
 
     @FXML
     private TextField BookName;
-
     @FXML
     private TextField BookAuthor;
 
