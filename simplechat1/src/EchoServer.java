@@ -804,7 +804,8 @@ public class EchoServer extends AbstractServer
   	 			studentsInfo.add(rs.getString(2));//Student name
   	 			studentsInfo.add(rs.getString(7));//Student Email
   	 			studentsInfo.add(rs.getString(6));//Student Phone Number
-  	 	
+  	 			studentsInfo.add(rs.getString(3));//Student status card
+  	 			
   	 			stmt1 = conn.createStatement();
   	  			ResultSet rs1 = stmt1.executeQuery("SELECT * FROM userstudent  WHERE UserID = "+studentID);
   	  			

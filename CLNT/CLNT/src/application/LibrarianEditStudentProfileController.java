@@ -54,6 +54,13 @@ public class LibrarianEditStudentProfileController
     @FXML
     private TextField id;
     
+
+    @FXML
+    private Text statusCard;
+    
+    @FXML
+    private Text CardTxt;
+    
     @FXML
     void backGui(ActionEvent event) throws IOException
     {
@@ -120,12 +127,15 @@ public class LibrarianEditStudentProfileController
          passTxt.setVisible(true);
           pass.setVisible(true);
          editProfile.setVisible(true);
+         statusCard.setVisible(true);
+         CardTxt.setVisible(true);
          
          ID.setText(result.get(0));
          Name.setText(result.get(1));
          Email.setText(result.get(2));
          phone.setText(result.get(3));
-         pass.setText(result.get(4));
+         pass.setText(result.get(5));
+         statusCard.setText(result.get(4));
        }
       
       else {
@@ -140,6 +150,8 @@ public class LibrarianEditStudentProfileController
          passTxt.setVisible(false);
           pass.setVisible(false);
          editProfile.setVisible(false);
+         statusCard.setVisible(false);
+         CardTxt.setVisible(false);
       }
     }
 

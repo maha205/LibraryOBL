@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -52,9 +53,30 @@ public class StudentProfileController {
 	    private TableColumn<String, String> QuantityCol;
 	    
 	    @FXML
-	    void showStudentInfo(ActionEvent event) 
+	    void showStudentInfo(ActionEvent event) throws IOException 
 	    {
-      
+	    	
+	    	((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/StudentInfo.fxml").openStream());
+	  		
+	  		 String StudentID = sigINController.StudentId ;
+    		 ArrayList<String> msg1 = new ArrayList<String>();
+    	     ArrayList<String>  result1 = new ArrayList<String>();
+    	     msg1.add(""+StudentID);
+    	   
+    	     msg1.add("StudentToEditByLibrarian");
+    	     result1 = (ArrayList<String>)IPController.client.Request(msg1);
+    	     
+    	     StudentInfoController  studentInfo = loader.getController();	
+			
+    	     studentInfo.loadStudentInfo(result1);
+	  		
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
 	    }
 	  @FXML
 	 void ExtendLoanDuration(ActionEvent event) throws IOException 

@@ -12,8 +12,17 @@ import javafx.stage.Stage;
 
 public class ManagementProfileController {
     @FXML
-    void LibrarianDetails(ActionEvent event) {
-
+    void LibrarianDetails(ActionEvent event) throws IOException 
+    {
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/LibraryWorkers.fxml").openStream());
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
     }
 
     @FXML

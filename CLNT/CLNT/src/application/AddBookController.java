@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 public class AddBookController 
 {
+	public static int m =0;
     @FXML
     private TextField bookID;
 

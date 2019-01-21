@@ -44,19 +44,25 @@
                </font>
             </Text>
             <Text fx:id="ID" layoutX="247.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" />
-            <Text fx:id="Name" layoutX="247.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" />
+            <Text fx:id="Name" layoutX="247.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text fx:id="Email" layoutX="247.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" />
-            <Text fx:id="phone" layoutX="247.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" />
+            <Text fx:id="phone" layoutX="243.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text fx:id="passTxt" fill="#0780c6" layoutX="91.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Password:" visible="false">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <Text fx:id="pass" layoutX="247.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" />
-            <Button fx:id="editProfile" layoutX="253.0" layoutY="421.0" mnemonicParsing="false" onAction="#editProfileFunc" text="Edit Profile" visible="false" />
+            <Text fx:id="pass" layoutX="250.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="99.0" />
+            <Button fx:id="editProfile" layoutX="254.0" layoutY="469.0" mnemonicParsing="false" onAction="#editProfileFunc" text="Edit Profile" visible="false" />
             <Button layoutX="31.0" layoutY="516.0" mnemonicParsing="false" onAction="#backGui" text="Back" />
             <Button layoutX="541.0" layoutY="516.0" mnemonicParsing="false" onAction="#logoutGui" text="Logout" />
             <TextField fx:id="id" alignment="CENTER" layoutX="222.0" layoutY="134.0" promptText="StudentID" />
+            <Text fx:id="CardTxt" fill="#0780c6" layoutX="90.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status card:" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text fx:id="statusCard" layoutX="260.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="89.0" />
          </children>
       </AnchorPane>
    </center>
