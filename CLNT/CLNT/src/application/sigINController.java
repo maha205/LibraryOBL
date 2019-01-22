@@ -133,7 +133,11 @@ public class sigINController {
     }
     
     @FXML
-    void exitGui(ActionEvent event) throws IOException {
+    void exitGui(ActionEvent event) throws IOException
+    {
+    	sigINController.LibrarianId=null;
+    	sigINController.StudentId =null;
+    	sigINController.ManagementId =null ;
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -144,6 +148,7 @@ public class sigINController {
 		primaryStage.setScene(scene);		
 		primaryStage.show();
     }
+    
 
 
 }

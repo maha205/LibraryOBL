@@ -11,8 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class mainFormController {
-    static String backSearch ;
+public class mainFormController 
+{
     @FXML
     private Button signIn;
 
@@ -26,22 +26,23 @@ public class mainFormController {
     private Button exit;
 
     @FXML
-    void exitFunc(ActionEvent event) throws IOException {
+    void exitFunc(ActionEvent event) throws IOException 
+    {
     	((Node)event.getSource()).getScene().getWindow().hide();
-		Stage primaryStage = new Stage();
-		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/IP.fxml").openStream());
-		
-		Scene scene = new Scene(root);			
-		
-		primaryStage.setScene(scene);		
-		primaryStage.show();
+  		Stage primaryStage = new Stage();
+  		FXMLLoader loader = new FXMLLoader();
+  		Pane root = loader.load(getClass().getResource("/application/IP.fxml").openStream());
+  		
+  		Scene scene = new Scene(root);			
+  		
+  		primaryStage.setScene(scene);		
+  		primaryStage.show();
     }
 
     @FXML
     void searchFunc(ActionEvent event) throws IOException 
     {
-    	backSearch ="mainForm";
+    	IPController.backGui ="mainForm";
     	((Node)event.getSource()).getScene().getWindow().hide();
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();
@@ -56,6 +57,7 @@ public class mainFormController {
     @FXML
     void signInFunc(ActionEvent event) throws IOException 
     {
+    	IPController.backGui ="mainForm";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -66,10 +68,4 @@ public class mainFormController {
 		primaryStage.setScene(scene);		
 		primaryStage.show();
     }
-
-    @FXML
-    void signupFunc(ActionEvent event) {
-
-    }
-
 }

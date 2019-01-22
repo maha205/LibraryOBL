@@ -53,7 +53,7 @@ public class LibrarianEditProfileController
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/LibrarianProfile.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/"+IPController.backGui+".fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		
@@ -64,6 +64,9 @@ public class LibrarianEditProfileController
     @FXML
     void exitFun(ActionEvent event) throws IOException
     {
+    	sigINController.LibrarianId=null;
+    	sigINController.StudentId =null;
+    	sigINController.ManagementId =null ;
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -81,7 +84,7 @@ public class LibrarianEditProfileController
     	ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
         try{
-        	if(!(emailTxt.getText().equals(null)) && phontTxt.getText().equals(null) )
+        	if(!(emailTxt.getText().equals(null)))
         	{
         		msg.add(sigINController.LibrarianId);
         		msg.add(emailTxt.getText());
@@ -94,7 +97,7 @@ public class LibrarianEditProfileController
     	
     	
        try{
-    	   if(!(phontTxt.getText().equals(null)) && emailTxt.getText().equals(null))     	
+    	   if(!(phontTxt.getText().equals(null)))     	
     	   {
     	   	msg.add(sigINController.LibrarianId);
     		msg.add(phontTxt.getText());

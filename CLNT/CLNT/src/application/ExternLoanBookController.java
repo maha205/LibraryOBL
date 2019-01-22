@@ -35,7 +35,7 @@ public class ExternLoanBookController
     	 ((Node)event.getSource()).getScene().getWindow().hide();
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
-	  		Pane root = loader.load(getClass().getResource("/application/StudentProfile.fxml").openStream());
+	  		Pane root = loader.load(getClass().getResource("/application/"+IPController.backGui+".fxml").openStream());
 	  		
 	  		Scene scene = new Scene(root);			
 	  		
@@ -107,7 +107,11 @@ public class ExternLoanBookController
   
 
     @FXML
-    void exitGui(ActionEvent event) throws IOException {
+    void exitGui(ActionEvent event) throws IOException 
+    {
+    	sigINController.LibrarianId=null;
+    	sigINController.StudentId =null;
+    	sigINController.ManagementId =null ;
     	((Node)event.getSource()).getScene().getWindow().hide();
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();

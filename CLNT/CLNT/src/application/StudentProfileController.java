@@ -55,7 +55,7 @@ public class StudentProfileController {
 	    @FXML
 	    void showStudentInfo(ActionEvent event) throws IOException 
 	    {
-	    	
+	    	IPController.backGui="StudentProfile";
 	    	((Node)event.getSource()).getScene().getWindow().hide();
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
@@ -81,6 +81,7 @@ public class StudentProfileController {
 	  @FXML
 	 void ExtendLoanDuration(ActionEvent event) throws IOException 
 	 {
+		  IPController.backGui="StudentProfile";
 		  ((Node)event.getSource()).getScene().getWindow().hide();
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
@@ -95,6 +96,7 @@ public class StudentProfileController {
 	 @FXML
 	void LoanBook(ActionEvent event) throws IOException 
 	 {
+		 IPController.backGui="StudentProfile";
 		 ((Node)event.getSource()).getScene().getWindow().hide();
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
@@ -109,7 +111,7 @@ public class StudentProfileController {
 	  @FXML
 	 void searchBook(ActionEvent event) throws IOException
 	  {
-		   mainFormController.backSearch = "StudentProfile";
+		  IPController.backGui="StudentProfile";
 		  ((Node)event.getSource()).getScene().getWindow().hide();
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
@@ -123,7 +125,7 @@ public class StudentProfileController {
     @FXML
     void editFunc(ActionEvent event)throws IOException
     {
-    	editStudentProfileController.editStudentBack ="StudentProfile";
+    	IPController.backGui="StudentProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -134,10 +136,12 @@ public class StudentProfileController {
 		primaryStage.setScene(scene);		
 		primaryStage.show();
     }
-
     @FXML
     void signUpFunc(ActionEvent event) throws IOException
     {
+    	sigINController.LibrarianId=null;
+    	sigINController.StudentId =null;
+    	sigINController.ManagementId =null ;
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -148,7 +152,6 @@ public class StudentProfileController {
 		primaryStage.setScene(scene);		
 		primaryStage.show();
     }
-    
 
     @FXML
     void show(ActionEvent event) 

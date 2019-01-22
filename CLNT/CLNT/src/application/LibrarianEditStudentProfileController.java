@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class LibrarianEditStudentProfileController
 {
-
+    static public String back = IPController.backGui ;
     @FXML
     private Text StudentIDTxt;
 
@@ -67,7 +67,7 @@ public class LibrarianEditStudentProfileController
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/LibrarianProfile.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/"+back+".fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		
@@ -78,7 +78,7 @@ public class LibrarianEditStudentProfileController
     @FXML
     void editProfileFunc(ActionEvent event) throws IOException 
     {
-
+    	IPController.backGui ="LibrarianEditStudentProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -93,6 +93,9 @@ public class LibrarianEditStudentProfileController
     @FXML
     void logoutGui(ActionEvent event) throws IOException
     {
+    	sigINController.LibrarianId=null;
+    	sigINController.StudentId =null;
+    	sigINController.ManagementId =null ;
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();

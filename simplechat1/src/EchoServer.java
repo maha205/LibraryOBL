@@ -11,7 +11,8 @@ import java.time.LocalDate;
 
 import ocsf.server.*;
 import java.util.*;
-import java.util.Date; 
+import java.util.Date;
+import Entity.Librarian ;
 /**
  * This class overrides some of the methods in the abstract 
  * superclass in order to give more functionality to the server.
@@ -22,7 +23,7 @@ import java.util.Date;
  * @author Paul Holden
  * @version July 2000
  */
-public class EchoServer extends AbstractServer 
+public class EchoServer extends AbstractServer
 {
   //Class variables *************************************************
 	static Connection conn ; 
@@ -203,6 +204,20 @@ public class EchoServer extends AbstractServer
 	      case "CheckStudentStatus":   /// JERIES
 	    	  msg = CheckStudentStatus(msg.get(0));
 		      break;
+		      
+	      case "AllLibrarianWorker":
+	    	  try {
+	    		 ArrayList<Librarian> msg1= new ArrayList<Librarian>();
+				msg1 =AllLibrarianWorker();
+				client.sendToClient(msg1);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  break;
 	    }
 	    
 	    try {
@@ -1057,6 +1072,25 @@ public static ArrayList<String> AddItemInLoan(String StudentID, String BookID, S
   return update;
   
   }
-      
+public static ArrayList<Librarian> AllLibrarianWorker() throws SQLException ,IOException
+{
+	ArrayList<Librarian> LibrarianList = new ArrayList<Librarian>() ;
+	String name;
+	Statement stmt;
+	stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery("SELECT * FROM librarian ");
+	while(rs.next())
+	{
+		Librarian Temp =null ;
+		name = rs.getString(2);
+		name+=" ";
+		name += rs.getString(3);
+		Temp = new Librarian(rs.getString(1),name,rs.getString(4),rs.getString(5),rs.getInt(6),rs.getString(7),rs.getString(8));
+		System.out.println(Temp.toString());
+		LibrarianList.add(Temp);
+		name ="";
+	}
+	return LibrarianList;
+}
 }
 //End of EchoServer class

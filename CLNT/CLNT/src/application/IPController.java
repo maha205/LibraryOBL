@@ -11,8 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class IPController {
-
+public class IPController
+{
+	public static String backGui =null;
 	public static Client client = null;
     @FXML
     private TextField ipaddr;
@@ -25,6 +26,7 @@ public class IPController {
     @FXML
     void connect(ActionEvent event) throws IOException 
     {
+    	backGui ="IP";
     	if(ipaddr.getText().equals(null) || portTxt.getText().equals(null)) IPError() ;
         Config.getConfig().setHost(ipaddr.getText());
         Config.getConfig().setPort(Integer.parseInt(portTxt.getText()));

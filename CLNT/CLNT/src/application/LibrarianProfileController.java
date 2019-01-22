@@ -13,10 +13,9 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class LibrarianProfileController {
-
-
-    @FXML
+public class LibrarianProfileController 
+{
+  @FXML
     private Button editBtn;
 
     @FXML
@@ -37,7 +36,7 @@ public class LibrarianProfileController {
     @FXML
     void addBook(ActionEvent event) throws IOException
     {
-    	editStudentProfileController.editStudentBack ="LibrarianProfile";
+    	IPController.backGui ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -52,7 +51,7 @@ public class LibrarianProfileController {
     @FXML
     void returning(ActionEvent event) throws IOException 
     {
-    	editStudentProfileController.editStudentBack ="LibrarianProfile";
+    	IPController.backGui ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -66,7 +65,7 @@ public class LibrarianProfileController {
     @FXML
     void editStudentProfile(ActionEvent event) throws IOException
     {
-    	editStudentProfileController.editStudentBack ="LibrarianProfile";
+    	IPController.backGui ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -80,7 +79,7 @@ public class LibrarianProfileController {
     @FXML
     void OpenNewSubscription(ActionEvent event) throws IOException 
     {
-    	editStudentProfileController.editStudentBack ="LibrarianProfile";
+    	IPController.backGui ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -95,6 +94,7 @@ public class LibrarianProfileController {
     @FXML
     void UpdateStudentdCard(ActionEvent event) throws IOException 
     {
+    	IPController.backGui ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -109,7 +109,7 @@ public class LibrarianProfileController {
     @FXML
     void editFunc(ActionEvent event) throws IOException 
     {
-
+    	IPController.backGui ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -124,6 +124,9 @@ public class LibrarianProfileController {
     @FXML
     void logoutFunc(ActionEvent event) throws IOException 
     {
+    	sigINController.LibrarianId=null;
+    	sigINController.StudentId =null;
+    	sigINController.ManagementId =null ;
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();

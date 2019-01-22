@@ -117,7 +117,7 @@ public class OrderBookController
     	((Node)event.getSource()).getScene().getWindow().hide();
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();
-  		Pane root = loader.load(getClass().getResource("/application/StudentProfile.fxml").openStream());
+  		Pane root = loader.load(getClass().getResource("/application/"+IPController.backGui+".fxml").openStream());
   		
   		Scene scene = new Scene(root);			
   		
@@ -128,6 +128,10 @@ public class OrderBookController
     @FXML
     void logoutGui(ActionEvent event) throws IOException 
     {
+        sigINController.LibrarianId=null;
+    	sigINController.StudentId =null;
+    	sigINController.ManagementId =null ;
+    	
     	((Node)event.getSource()).getScene().getWindow().hide();
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();
@@ -162,7 +166,7 @@ public class OrderBookController
     	          "Thank you! Your order is saved in the system. \r\n" +
     	    	 
     	          "Please note that if you do not take the book in 2 days, the order will be canceled.");
-   		 
+   		        
     	    	 ((Node)event.getSource()).getScene().getWindow().hide();
      	   		Stage primaryStage = new Stage();
      	   		FXMLLoader loader = new FXMLLoader();

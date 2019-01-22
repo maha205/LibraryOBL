@@ -179,6 +179,7 @@ public class loanBookController
 	    	        	    	((Node)event.getSource()).getScene().getWindow().hide();
 	    	        	  		Stage primaryStage = new Stage();
 	    	        	  		FXMLLoader loader = new FXMLLoader();
+	    	        	  		IPController.backGui="loanBook";
 	    	        	  		Pane root = loader.load(getClass().getResource("/application/OrderBook.fxml").openStream());
 	    	        	  		
 	    	        	  	 	 String StudentID = sigINController.StudentId ;
@@ -245,30 +246,33 @@ public class loanBookController
     @FXML
     void BackGui(ActionEvent event) throws IOException 
     {
-    	  ((Node)event.getSource()).getScene().getWindow().hide();
-	  		Stage primaryStage = new Stage();
-	  		FXMLLoader loader = new FXMLLoader();
-	  		Pane root = loader.load(getClass().getResource("/application/StudentProfile.fxml").openStream());
-	  		
-	  		Scene scene = new Scene(root);			
-	  		
-	  		primaryStage.setScene(scene);		
-	  		primaryStage.show();
+    	((Node)event.getSource()).getScene().getWindow().hide();
+  		Stage primaryStage = new Stage();
+  		FXMLLoader loader = new FXMLLoader();
+  		Pane root = loader.load(getClass().getResource("/application/"+IPController.backGui+".fxml").openStream());
+  		
+  		Scene scene = new Scene(root);			
+  		
+  		primaryStage.setScene(scene);		
+  		primaryStage.show();
     }
 
 
     @FXML
     void exitGui(ActionEvent event) throws IOException 
     {
-    	  ((Node)event.getSource()).getScene().getWindow().hide();
-	  		Stage primaryStage = new Stage();
-	  		FXMLLoader loader = new FXMLLoader();
-	  		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
-	  		
-	  		Scene scene = new Scene(root);			
-	  		
-	  		primaryStage.setScene(scene);		
-	  		primaryStage.show();
+    	sigINController.LibrarianId=null;
+	   sigINController.StudentId =null;
+	   sigINController.ManagementId =null ;
+	   ((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
     }
 
  

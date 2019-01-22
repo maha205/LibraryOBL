@@ -18,7 +18,7 @@ public class returnBookController
     	((Node)event.getSource()).getScene().getWindow().hide();
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();
-  		Pane root = loader.load(getClass().getResource("/application/LibrarianProfile.fxml").openStream());
+  		Pane root = loader.load(getClass().getResource("/application/"+IPController.backGui+".fxml").openStream());
   		
   		Scene scene = new Scene(root);			
   		
@@ -29,6 +29,9 @@ public class returnBookController
     @FXML
     void exitGui(ActionEvent event) throws IOException
     {
+    	sigINController.LibrarianId=null;
+    	sigINController.StudentId =null;
+    	sigINController.ManagementId =null ;
     	((Node)event.getSource()).getScene().getWindow().hide();
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();
@@ -43,7 +46,7 @@ public class returnBookController
     @FXML
     void returnFunc(ActionEvent event) 
     {
-
+    	IPController.backGui="returnBookController";
     }
 
 }

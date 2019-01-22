@@ -32,11 +32,11 @@ public class singUpController {
     @FXML
     void back(ActionEvent event) throws IOException 
     {
-    	editStudentProfileController.editStudentBack ="LibrarianProfile";
+    	IPController.backGui ="LibrarianProfile";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/LibrarianProfile.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/"+IPController.backGui+".fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		
@@ -47,7 +47,12 @@ public class singUpController {
     @FXML
     void logout(ActionEvent event) throws IOException
     {
-    	editStudentProfileController.editStudentBack ="LibrarianProfile";
+    	IPController.backGui ="LibrarianProfile";
+
+    	sigINController.LibrarianId=null;
+    	sigINController.StudentId =null;
+    	sigINController.ManagementId =null ;
+    	
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
