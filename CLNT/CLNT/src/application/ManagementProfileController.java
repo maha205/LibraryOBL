@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Entity.Librarian;
+import Entity.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,9 +39,27 @@ public class ManagementProfileController
     }
 
     @FXML
-    void StudentDetails(ActionEvent event) 
+    void StudentDetails(ActionEvent event) throws IOException 
     {
-    	IPController.backGui=" ManagementProfile";
+
+    	IPController.backGui="ManagementProfile";
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/LibrarySubscriptions.fxml").openStream());
+		
+		 ArrayList<String> msg1 = new ArrayList<String>();
+	     ArrayList<Student>  result1 = new ArrayList<Student>();
+	     msg1.add("AllStudents");
+	     result1 = (ArrayList<Student>)IPController.client.Request(msg1);
+	     
+	     LibrarySubscriptionsController LibraryStudents = loader.getController();	
+	     LibraryStudents.loadLibraryStudents(result1);
+  		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
     }
 
     @FXML

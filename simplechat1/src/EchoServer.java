@@ -13,6 +13,7 @@ import ocsf.server.*;
 import java.util.*;
 import java.util.Date;
 import Entity.Librarian ;
+import Entity.Student;
 /**
  * This class overrides some of the methods in the abstract 
  * superclass in order to give more functionality to the server.
@@ -207,7 +208,7 @@ public class EchoServer extends AbstractServer
 		      
 	      case "AllLibrarianWorker":
 	    	  try {
-	    		 ArrayList<Librarian> msg1= new ArrayList<Librarian>();
+	    	    ArrayList<Librarian> msg1= new ArrayList<Librarian>();
 				msg1 =AllLibrarianWorker();
 				client.sendToClient(msg1);
 			} catch (SQLException e1) {
@@ -218,6 +219,21 @@ public class EchoServer extends AbstractServer
 				e1.printStackTrace();
 			}
 	    	  break;
+	    	  
+	      case "AllStudents":
+	    	  ArrayList<Student> msg1= new ArrayList<Student>();
+			try {
+				msg1 =AllStudents();
+				client.sendToClient(msg1);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				break;	
+				
 	    }
 	    
 	    try {
@@ -1091,6 +1107,21 @@ public static ArrayList<Librarian> AllLibrarianWorker() throws SQLException ,IOE
 		name ="";
 	}
 	return LibrarianList;
+}
+public static ArrayList<Student> AllStudents() throws SQLException ,IOException
+{
+	ArrayList<Student> StudentList = new ArrayList<Student>() ;
+	Statement stmt;
+	stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery("SELECT * FROM student ");
+	while(rs.next())
+	{
+		Student Temp =null ;
+		Temp = new Student(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(6),rs.getString(7),rs.getInt(8));
+		System.out.println(Temp.toString());
+		StudentList.add(Temp);
+	}
+	return StudentList;
 }
 }
 //End of EchoServer class
