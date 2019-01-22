@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class LibraryWorkersController  
 {  
-	static private ArrayList<Librarian> librarians;
+	static private ArrayList<Librarian> librarians = new ArrayList<Librarian>();
 	static public int i=0;
 	static public String back = IPController.backGui ;
 	@FXML
@@ -53,6 +53,7 @@ public class LibraryWorkersController
     public void loadLibraryWorkers(ArrayList<Librarian> librarians)
     {
     	this.librarians =librarians;
+    	if( librarians!=null)
     	usernotfound.setVisible(false);
     	LibrarianSerialNumber.setText(""+librarians.get(0).getLibrarianSerialNumber());
     	LibrarianPhone.setText(librarians.get(0).getLibrarianPhone());

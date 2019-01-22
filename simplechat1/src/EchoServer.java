@@ -8,7 +8,6 @@ import java.text.DecimalFormat;
 //import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-
 import ocsf.server.*;
 import java.util.*;
 import java.util.Date;
@@ -64,66 +63,67 @@ public class EchoServer extends AbstractServer
 	    System.out.println("Message received: " + message + " from " + client);
 	    ArrayList<String> msg= new ArrayList<String>();
 	    msg = (ArrayList<String>) message ; 
+	    Object result = null;
 	    switch(msg.get(msg.size()-1))
 	    {
 	      case "GetData":
-	    	 msg = (printCUserData(msg.get(0)));
+	    	  result =(ArrayList<String>)(printCUserData(msg.get(0)));
 			 System.out.println("Return User data");
 	    	 break;
 	    	
 	      case "Update":
-	    	msg = UpdatedUserStatusMembership(msg.get(0),msg.get(1));
+	    	  result =(ArrayList<String>) UpdatedUserStatusMembership(msg.get(0),msg.get(1));
 	    	 System.out.println("Update User data");
 	    	break;
 	    	
 	      case "login":
-		    	 msg = (loginUser(msg.get(0),msg.get(1))); //student login
+	    	  result =(ArrayList<String>) (loginUser(msg.get(0),msg.get(1))); //student login
 				 System.out.println("login User");
 		    	 break;
 		    	 
 	      case "UpdateEmailStudent":
-	    	     msg = (UpdatedStudentEmail(msg.get(0),msg.get(1))); //student email update
+	    	  result =(ArrayList<String>)(UpdatedStudentEmail(msg.get(0),msg.get(1))); //student email update
 				 System.out.println("Update student Email");
 		    	 break;
 		    	 
 	      case "UpdatephontStudent":
-	    	  msg = (UpdatedStudentPhone(msg.get(0),msg.get(1))); //student email update
+	    	  result =(ArrayList<String>) (UpdatedStudentPhone(msg.get(0),msg.get(1))); //student email update
 			  System.out.println("Update student Phone");
 		      break;
 		      
 	      case "UpdatePasswordStudent":
-	    	  msg = (UpdatedStudentPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3))); //student password update
+	    	  result =(ArrayList<String>) (UpdatedStudentPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3))); //student password update
 			  System.out.println("Update student Password");
 		      break;
 		      
 	      case "UpdateEmailLibrarian":
-	    	     msg = (UpdatedLibrarianEmail(msg.get(0),msg.get(1))); //student email update
+	    	  result =(ArrayList<String>)(UpdatedLibrarianEmail(msg.get(0),msg.get(1))); //student email update
 				 System.out.println("Update Librarian Email");
 		    	 break;
 		    	 
 	      case "UpdatephontLibrariant":
-	    	  msg = (UpdatedLibrarianPhone(msg.get(0),msg.get(1))); //student email update
+	    	  result =(ArrayList<String>)(UpdatedLibrarianPhone(msg.get(0),msg.get(1))); //student email update
 			  System.out.println("Update Librarian Phone");
 		      break;
 		      
 	      case "UpdatePasswordLibrarian":
-	    	  msg = (UpdatedLibrarianPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3))); //student password update
+	    	  result =(ArrayList<String>)(UpdatedLibrarianPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3))); //student password update
 			  System.out.println("Update Librarian Password");
 		      break;
 		      
 	      case "UpdatedManagementPassword":
-	    	  msg=UpdatedManagementPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
+	    	  result =(ArrayList<String>)UpdatedManagementPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
 	    	  System.out.println("Update Management Password");
 		      break;
 		      
 	      case "signUP":
-	    	  msg = signUp(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
+	    	  result =(ArrayList<String>)signUp(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
 	    	  System.out.println("Insert Student");
 		      break;
 		      
 	      case "ExtendLoan":
 			try {
-				msg = ExternLoanBook(msg.get(0),msg.get(1));
+				result =(ArrayList<String>) ExternLoanBook(msg.get(0),msg.get(1));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -133,7 +133,7 @@ public class EchoServer extends AbstractServer
 	      
 	      case "ShowOrderBook":
 	    	  try {
-				msg=ShowOrderBook(msg.get(0),msg.get(1),msg.get(2));
+	    		  result =(ArrayList<String>)ShowOrderBook(msg.get(0),msg.get(1),msg.get(2));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -143,7 +143,7 @@ public class EchoServer extends AbstractServer
 	   
 	     case "approvedOrderBook":
 	    	 try {
-				msg=approvedOrderBook(msg.get(0),msg.get(1),msg.get(2));
+	    		 result =(ArrayList<String>)approvedOrderBook(msg.get(0),msg.get(1),msg.get(2));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -153,7 +153,7 @@ public class EchoServer extends AbstractServer
 	    	 
 	     case "StudentToEditByLibrarian":
 	    	 try {
-				msg =StudentToEditByLibrarian(msg.get(0));
+	    		 result =(ArrayList<String>)StudentToEditByLibrarian(msg.get(0));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -165,7 +165,7 @@ public class EchoServer extends AbstractServer
 	    	try {
 	    		int CopyQuantityy = Integer.parseInt(msg.get(7));
 	    		System.out.println("mahaaaa");
-				msg=AddBook(msg.get(0),msg.get(1),msg.get(2),msg.get(3),msg.get(4),msg.get(5),msg.get(6), CopyQuantityy,msg.get(8));
+	    		result =(ArrayList<String>)AddBook(msg.get(0),msg.get(1),msg.get(2),msg.get(3),msg.get(4),msg.get(5),msg.get(6), CopyQuantityy,msg.get(8));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -175,7 +175,7 @@ public class EchoServer extends AbstractServer
 		     
 	     case "LibrarianEmail":
 			try {
-				msg =LibrarianEmail();
+				result =(ArrayList<String>)LibrarianEmail();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -185,7 +185,7 @@ public class EchoServer extends AbstractServer
 		    
 	     case "ResetPasswordRequest":
 			try {
-				msg =ResetPasswordRequest(msg.get(0));
+				result =(ArrayList<String>)ResetPasswordRequest(msg.get(0));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -194,23 +194,21 @@ public class EchoServer extends AbstractServer
 		     break;
 		     
 	     case "LoanSearch":  ///JERIES
-	    	  msg = LoanSearch(msg.get(0));
+	    	 result =(ArrayList<String>) LoanSearch(msg.get(0));
 		      break;
 	      case "SearchInCopy":  ///JERIES 
-	    	  msg = SearchInCopy(msg.get(0));
+	    	  result =(ArrayList<String>) SearchInCopy(msg.get(0));
 		      break;
 	      case "AddItemInLoan":   /// JERIES
-	    	  msg = AddItemInLoan(msg.get(0), msg.get(1), msg.get(2), msg.get(3));
+	    	  result =(ArrayList<String>)AddItemInLoan(msg.get(0), msg.get(1), msg.get(2), msg.get(3));
 		      break;
 	      case "CheckStudentStatus":   /// JERIES
-	    	  msg = CheckStudentStatus(msg.get(0));
+	    	  result =(ArrayList<String>)CheckStudentStatus(msg.get(0));
 		      break;
 		      
 	      case "AllLibrarianWorker":
 	    	  try {
-	    	    ArrayList<Librarian> msg1= new ArrayList<Librarian>();
-				msg1 =AllLibrarianWorker();
-				client.sendToClient(msg1);
+	    	    result =(ArrayList<Librarian>)AllLibrarianWorker();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -221,10 +219,8 @@ public class EchoServer extends AbstractServer
 	    	  break;
 	    	  
 	      case "AllStudents":
-	    	  ArrayList<Student> msg1= new ArrayList<Student>();
 			try {
-				msg1 =AllStudents();
-				client.sendToClient(msg1);
+				 result =(ArrayList<Student>)AllStudents();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -237,8 +233,7 @@ public class EchoServer extends AbstractServer
 	    }
 	    
 	    try {
-    	System.out.println(msg);
-		client.sendToClient(msg);
+		client.sendToClient(result);
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

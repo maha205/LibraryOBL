@@ -7,8 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.LibrarySubscriptionsController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LibrarySubscriptionsController">
    <center>
       <AnchorPane prefHeight="562.0" prefWidth="647.0" BorderPane.alignment="CENTER">
          <children>
@@ -53,8 +52,8 @@
                   <Font name="System Bold" size="19.0" />
                </font>
             </Text>
-            <TextField alignment="CENTER" layoutX="240.0" layoutY="125.0" promptText="Subscription ID" />
-            <Button layoutX="427.0" layoutY="125.0" mnemonicParsing="false" text="search" />
+            <TextField fx:id="searchinput" alignment="CENTER" layoutX="240.0" layoutY="125.0" promptText="Subscription ID" />
+            <Button layoutX="427.0" layoutY="125.0" mnemonicParsing="false" onAction="#search" text="search" />
             <Text fx:id="SubscriptionID" layoutX="399.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text fx:id="SubscriptionName" layoutX="399.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text fx:id="SubscriptionStatus" layoutX="399.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" />
@@ -66,8 +65,8 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <Button layoutX="353.0" layoutY="430.0" mnemonicParsing="false" onAction="#next" text="&gt;&gt;" />
-            <Button layoutX="296.0" layoutY="430.0" mnemonicParsing="false" onAction="#prv" text="&lt;&lt;" />
+            <Button fx:id="nextBtn" layoutX="353.0" layoutY="430.0" mnemonicParsing="false" onAction="#next" text="&gt;&gt;" />
+            <Button fx:id="prevBtn" layoutX="296.0" layoutY="430.0" mnemonicParsing="false" onAction="#prv" text="&lt;&lt;" />
             <Button layoutX="252.0" layoutY="469.0" mnemonicParsing="false" onAction="#editStudentProfile" text="Edit Subscription Profile" />
             <Button layoutX="14.0" layoutY="517.0" mnemonicParsing="false" onAction="#back" text="Back" />
             <Button layoutX="568.0" layoutY="517.0" mnemonicParsing="false" onAction="#logout" text="Log-Out" />

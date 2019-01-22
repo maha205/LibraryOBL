@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 public class ManagementProfileController
 {
+	static private ArrayList<Librarian>  result1 ;
+	static private ArrayList<Student>  result2 ;
     @FXML
     void LibrarianDetails(ActionEvent event) throws IOException 
     {
@@ -25,8 +27,8 @@ public class ManagementProfileController
 		Pane root = loader.load(getClass().getResource("/application/LibraryWorkers.fxml").openStream());
 		
 		 ArrayList<String> msg1 = new ArrayList<String>();
-	     ArrayList<Librarian>  result1 = new ArrayList<Librarian>();
 	     msg1.add("AllLibrarianWorker");
+	     result1=new ArrayList<Librarian>();
 	     result1 = (ArrayList<Librarian>)IPController.client.Request(msg1);
 	     
 	     LibraryWorkersController LibraryWorkers = loader.getController();	
@@ -49,12 +51,12 @@ public class ManagementProfileController
 		Pane root = loader.load(getClass().getResource("/application/LibrarySubscriptions.fxml").openStream());
 		
 		 ArrayList<String> msg1 = new ArrayList<String>();
-	     ArrayList<Student>  result1 = new ArrayList<Student>();
 	     msg1.add("AllStudents");
-	     result1 = (ArrayList<Student>)IPController.client.Request(msg1);
+	     result2=new ArrayList<Student>();
+	     result2 = (ArrayList<Student>)IPController.client.Request(msg1);
 	     
 	     LibrarySubscriptionsController LibraryStudents = loader.getController();	
-	     LibraryStudents.loadLibraryStudents(result1);
+	     LibraryStudents.loadLibraryStudents(result2);
   		
 		Scene scene = new Scene(root);			
 		
