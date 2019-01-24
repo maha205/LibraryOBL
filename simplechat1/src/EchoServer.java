@@ -205,6 +205,21 @@ public class EchoServer extends AbstractServer
 	      case "CheckStudentStatus":   /// JERIES
 	    	  result =(ArrayList<String>)CheckStudentStatus(msg.get(0));
 		      break;
+	      case "BookReturn":   /// JERIES
+	    	  result =(ArrayList<String>) BookReturn(msg.get(0), msg.get(1));
+		      break;
+	      case "LateReturn":   /// JERIES
+	    	  result =(ArrayList<String>) LateReturn(msg.get(0), msg.get(1), msg.get(2));
+		      break;
+	      case "OnTimeReturn":   /// JERIES
+	    	  result =(ArrayList<String>) OnTimeReturn(msg.get(0), msg.get(1), msg.get(2));
+		      break;
+	      case "CheckIfBookExists":   /// JERIES
+	    	  result =(ArrayList<String>) CheckIfBookExists(msg.get(0));
+		      break;
+	      case "CheckIfCopyExists":   /// JERIES
+	    	  result =(ArrayList<String>)CheckIfCopyExists(msg.get(0), msg.get(1));
+		      break;
 		      
 	      case "AllLibrarianWorker":
 	    	  try {
@@ -229,6 +244,55 @@ public class EchoServer extends AbstractServer
 				e1.printStackTrace();
 			}
 				break;	
+				
+	      case "SearchByName"://Reem
+	    	  try {
+	    		  result =(ArrayList<String>)SearchFuncByName(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Name");
+	          break;
+	          
+	      case "SearchByGenre"://Reem
+	    	  try {
+	    		  result =(ArrayList<String>)SearchFuncByGenre(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Genre");
+	          break;
+	          
+	      case "SearchByDescription"://Reem
+	    	  try {
+	    		  result =(ArrayList<String>)SearchFuncByDescription(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Description");
+	          break;
+	          
+	      case "SearchByAuthor"://Reem
+	    	  try {
+	    		  result =(ArrayList<String>)SearchFuncByAuthor(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Author");
+	          break;
+	     case "SearchBookStatusAndLocation":
+	    	  try {
+	    		  result =(ArrayList<String>)SearchBookStatusAndLocation(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Author");
+	          break;
 				
 	    }
 	    
@@ -1117,6 +1181,241 @@ public static ArrayList<Student> AllStudents() throws SQLException ,IOException
 		StudentList.add(Temp);
 	}
 	return StudentList;
+}
+public static ArrayList<String> BookReturn(String BookID, String CopyID)   ////JERIES
+{
+	Statement stmt, stmt2;
+	ArrayList<String> StudentID = new ArrayList<String>();
+	try 
+	{
+		stmt = conn.createStatement();
+		ResultSet rs1 = stmt.executeQuery("SELECT StudentID FROM iteminloan WHERE BookID = '"+BookID+"' AND CopyID = '"+CopyID+"';");
+		
+		if(rs1.next()) {
+		StudentID.add(rs1.getString(1));
+		}
+	} catch (SQLException e) {e.printStackTrace();}
+	
+	
+	
+	try 
+	{
+		stmt2 = conn.createStatement();
+		ResultSet rs2 = stmt2.executeQuery("SELECT returnDate FROM iteminloan WHERE BookID = '"+BookID+"' AND CopyID = '"+CopyID+"';");
+		
+		if(rs2.next()) {
+		StudentID.add(rs2.getString(1));
+		}
+	} catch (SQLException e) {e.printStackTrace();}
+  return StudentID;
+  }
+
+public static ArrayList<String> LateReturn(String BookID, String CopyID, String UserID)   ////JERIES
+{
+	Statement stmt, stmt1, stmt2, stmt3;
+	ArrayList<String> res = new ArrayList<String>();
+	try 
+	{
+		stmt = conn.createStatement();
+	//	ResultSet rs1 = stmt.executeQuery("SELECT StudentID FROM iteminloan WHERE BookID = '"+BookID+"' AND CopyID = '"+CopyID+"';");
+		stmt.executeUpdate("UPDATE student SET Delay = Delay + 1 WHERE StudentId = '"+UserID+"';");
+		
+		stmt1 = conn.createStatement();
+		stmt1.executeUpdate("UPDATE student SET StatusMembership = 'Frozen' WHERE StudentId = '"+UserID+"';");
+		
+		
+		stmt2 = conn.createStatement();
+		stmt2.executeUpdate("UPDATE copy SET status = 'available' WHERE idcopy = '"+CopyID+"' AND bookID = '"+BookID+"';");
+		
+		stmt3 = conn.createStatement();
+		stmt3.executeUpdate("DELETE FROM iteminloan WHERE StudentID = '"+UserID+"' AND CopyID = '"+CopyID+"' AND BookID = '"+BookID+"';");
+		
+		res.add("LateDone");
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return res;
+  }
+
+
+public static ArrayList<String> OnTimeReturn(String BookID, String CopyID, String UserID)   ////JERIES
+{
+	Statement stmt, stmt1, stmt2, stmt3;
+	ArrayList<String> res = new ArrayList<String>();
+	try 
+	{
+		stmt2 = conn.createStatement();
+		stmt2.executeUpdate("UPDATE copy SET status = 'available' WHERE idcopy = '"+CopyID+"' AND bookID = '"+BookID+"';");
+		
+		stmt3 = conn.createStatement();
+		stmt3.executeUpdate("DELETE FROM iteminloan WHERE StudentID = '"+UserID+"' AND CopyID = '"+CopyID+"' AND BookID = '"+BookID+"';");
+		
+		res.add("OnTimeDone");
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return res;
+  }
+
+
+public static ArrayList<String> CheckIfBookExists(String BookID)   ////JERIES
+{
+	Statement stmt;
+	ArrayList<String> BookInfo = new ArrayList<String>();
+	try 
+	{
+		stmt = conn.createStatement();
+		ResultSet rs1 = stmt.executeQuery("SELECT bookName FROM book WHERE bookID = '"+BookID+"';");
+		if(rs1.next()) {
+		BookInfo.add("Exists");
+		 return BookInfo;
+		}
+		
+		else BookInfo.add("NotExists"); 
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return BookInfo;
+  }
+
+
+
+public static ArrayList<String> CheckIfCopyExists(String BookID, String CopyID)   ////JERIES
+{
+	Statement stmt1;
+	ArrayList<String> copyInfo = new ArrayList<String>();
+	try 
+	{
+		stmt1 = conn.createStatement();
+		ResultSet rs = stmt1.executeQuery("SELECT status FROM copy WHERE idcopy = '"+CopyID+"' AND bookID = '"+BookID+"';");
+		if(rs.next()) {
+		copyInfo.add("Exists");
+		 return copyInfo;
+		}
+	   else copyInfo.add("NotExists"); 
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return copyInfo;
+  }
+
+
+////Reem
+public static ArrayList<String> SearchFuncByName(String Des)  throws SQLException 
+{
+	Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE bookName = '"+Des+"';");
+	if(rs1.next())//
+	{
+		for(int i = 0 ; i <8;i++) {
+		BookList.add(rs1.getString(i+1));
+		}
+		return BookList;
+	}
+	System.out.println("Error in Search Book");
+	
+	rs1.close();
+	return BookList;
+
+}
+
+
+////Reem
+public static ArrayList<String> SearchFuncByGenre(String Des)  throws SQLException 
+{
+	Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE genre = '"+Des+"';");
+	if(rs1.next())//
+	{
+		for(int i = 0 ; i <8;i++) {
+		BookList.add(rs1.getString(i+1));
+		}
+		return BookList;
+	}
+	System.out.println("Error in Search Book");
+	
+	rs1.close();
+	return BookList;
+
+}
+////Reem
+public static ArrayList<String> SearchFuncByDescription(String Des)  throws SQLException 
+{
+	Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE description = '"+Des+"';");
+	if(rs1.next())//
+	{
+		for(int i = 0 ; i <8;i++) {
+		BookList.add(rs1.getString(i+1));
+		}
+		return BookList;
+	}
+	System.out.println("Error in Search Book");
+	
+	rs1.close();
+	return BookList;
+
+}
+
+/////Reem
+public static ArrayList<String> SearchFuncByAuthor(String Des)  throws SQLException 
+{
+	Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE AuthorName = '"+Des+"';");
+	if(rs1.next())//
+	{
+		for(int i = 0 ; i <8;i++) {
+		BookList.add(rs1.getString(i+1));
+		}
+		return BookList;
+	}
+	System.out.println("Error in Search Book");
+	
+	rs1.close();
+	return BookList;
+
+}
+
+
+//Reem
+public static ArrayList<String> SearchBookStatusAndLocation(String Des)  throws SQLException 
+{
+	Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM copy WHERE bookID = '"+Des+"';");
+	//BookList=null;
+	
+	while(rs1.next())//
+	{
+		if(rs1.getString(3).equals("available")) {
+		BookList.add(rs1.getString(2));
+		return BookList;
+		}
+		
+	}
+		
+	
+	
+	System.out.println("Error in Search Book");
+	
+	rs1.close();
+	
+	return BookList;
+
+}
+//Reem 
+public static ArrayList<String> sortDate(String Des)  throws SQLException 
+{
+	 Statement stmt;
+	ArrayList<String> sortDate = new ArrayList<String>();
+	stmt = conn.createStatement();
+	
+	return sortDate;
 }
 }
 //End of EchoServer class
