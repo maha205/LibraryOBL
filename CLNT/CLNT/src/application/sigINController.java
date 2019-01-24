@@ -1,6 +1,9 @@
 package application;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -64,17 +67,21 @@ public class sigINController {
     	{
     	  if(result.get(0).equals("student"))
     	  {
-    		  NotFound.setVisible(false);
-    		  StudentId=userID.getText();
-    		((Node)event.getSource()).getScene().getWindow().hide();
-    		Stage primaryStage = new Stage();
-    		FXMLLoader loader = new FXMLLoader();
-    		Pane root = loader.load(getClass().getResource("/application/StudentProfile.fxml").openStream());
+    		  if(result.size()==1) {
+        		  NotFound.setVisible(false);
+        		  StudentId=userID.getText();
+        		((Node)event.getSource()).getScene().getWindow().hide();
+        		Stage primaryStage = new Stage();
+        		FXMLLoader loader = new FXMLLoader();
+        		Pane root = loader.load(getClass().getResource("/application/StudentProfile.fxml").openStream());
+        		
+        		Scene scene = new Scene(root);			
+        		
+        		primaryStage.setScene(scene);		
+        		primaryStage.show();
+        		  }
+    		  else JOptionPane.showMessageDialog(null, "Your account is locked !!");
     		
-    		Scene scene = new Scene(root);			
-    		
-    		primaryStage.setScene(scene);		
-    		primaryStage.show();
     	   }
     	  
     	   if(result.get(0).equals("librarian"))

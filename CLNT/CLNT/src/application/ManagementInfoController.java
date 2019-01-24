@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 public class ManagementInfoController 
 {
+	static private String back =IPController.backGui;
     @FXML
     private Text ManagementName;
 
@@ -40,7 +41,7 @@ public class ManagementInfoController
     	((Node)event.getSource()).getScene().getWindow().hide();
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();
-  		Pane root = loader.load(getClass().getResource("/application/"+IPController.backGui+".fxml").openStream());
+  		Pane root = loader.load(getClass().getResource("/application/"+back+".fxml").openStream());
   		
   		Scene scene = new Scene(root);			
   		

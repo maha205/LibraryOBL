@@ -22,9 +22,18 @@ public class LibrarianProfileController
     private Button logout;
 
     @FXML
-    void RemoveBook(ActionEvent event)
+    void RemoveBook(ActionEvent event) throws IOException
     {
-
+    	IPController.backGui ="LibrarianProfile";
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/deleteBook.fxml").openStream());
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
     }
 
     @FXML

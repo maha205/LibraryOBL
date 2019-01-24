@@ -7,8 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.ManagementEditController ">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManagementEditController">
    <center>
       <AnchorPane prefHeight="558.0" prefWidth="675.0" BorderPane.alignment="CENTER">
          <children>
@@ -21,14 +20,19 @@
             <Button layoutX="109.0" layoutY="204.0" mnemonicParsing="false" onAction="#updateEmailFunc" prefHeight="31.0" prefWidth="174.0" text="Update E-mail" />
             <Button layoutX="109.0" layoutY="249.0" mnemonicParsing="false" onAction="#updatePhoneFunc" text="Update Phone Number" />
             <Button layoutX="109.0" layoutY="295.0" mnemonicParsing="false" onAction="#updatePassFunc" prefHeight="31.0" prefWidth="175.0" text="Update Password" />
-            <TextField fx:id="emailTxt" alignment="CENTER" layoutX="326.0" layoutY="204.0" prefHeight="31.0" prefWidth="211.0" promptText="example@example.example" visible="false" />
-            <TextField fx:id="phontTxt" alignment="CENTER" layoutX="350.0" layoutY="204.0" promptText="05*-*******" visible="false" />
-            <TextField fx:id="oldPassTxt" alignment="CENTER" layoutX="360.0" layoutY="204.0" promptText="********" visible="false" />
-            <TextField fx:id="newPassTxt" alignment="CENTER" layoutX="360.0" layoutY="249.0" promptText="********" visible="false" />
-            <TextField fx:id="assertPassTxt" alignment="CENTER" layoutX="360.0" layoutY="295.0" promptText="********" visible="false" />
+            <TextField fx:id="emailTxt" alignment="CENTER" layoutX="370.0" layoutY="204.0" prefHeight="31.0" prefWidth="211.0" promptText="example@example.example" visible="false" />
+            <TextField fx:id="phontTxt" alignment="CENTER" layoutX="423.0" layoutY="204.0" promptText="05*-*******" visible="false" />
+            <TextField fx:id="oldPassTxt" alignment="CENTER" layoutX="457.0" layoutY="205.0" promptText="********" visible="false" />
+            <TextField fx:id="newPassTxt" alignment="CENTER" layoutX="457.0" layoutY="249.0" promptText="********" visible="false" />
+            <TextField fx:id="assertPassTxt" alignment="CENTER" layoutX="457.0" layoutY="295.0" promptText="********" visible="false" />
             <Button layoutX="360.0" layoutY="386.0" mnemonicParsing="false" onAction="#saveFunc" text="save" />
             <Button layoutX="14.0" layoutY="513.0" mnemonicParsing="false" onAction="#backFunc" text="Back" />
             <Button layoutX="610.0" layoutY="520.0" mnemonicParsing="false" onAction="#exitFun" text="Logout" />
+            <Text fx:id="email" layoutX="312.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:" visible="false" />
+            <Text fx:id="phone" layoutX="306.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:" visible="false" />
+            <Text fx:id="oldPasswordTochange" layoutX="306.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Old Password:" visible="false" />
+            <Text fx:id="newPass" layoutX="306.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password:" visible="false" />
+            <Text fx:id="AssertPass" layoutX="306.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assert New Password:" visible="false" />
          </children>
       </AnchorPane>
    </center>

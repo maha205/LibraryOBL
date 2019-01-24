@@ -19,6 +19,20 @@ public class ManagementProfileController
 	static private ArrayList<Student>  result2 ;
 
     @FXML
+    void editProfile(ActionEvent event) throws IOException
+    {
+    	IPController.backGui="ManagementProfile";
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/ManagementEdit.fxml").openStream());
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
+    }
+    @FXML
     void ManagementInfo(ActionEvent event) throws IOException 
     {
     	IPController.backGui="ManagementProfile";

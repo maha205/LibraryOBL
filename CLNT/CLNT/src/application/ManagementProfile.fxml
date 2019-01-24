@@ -20,6 +20,7 @@
             <Button layoutX="56.0" layoutY="126.0" mnemonicParsing="false" onAction="#StudentDetails" prefHeight="31.0" prefWidth="137.0" text="Student's Details" />
             <Button layoutX="54.0" layoutY="172.0" mnemonicParsing="false" onAction="#LibrarianDetails" prefHeight="31.0" prefWidth="140.0" text="Librarian's Details" />
             <Button layoutX="56.0" layoutY="217.0" mnemonicParsing="false" onAction="#ManagementInfo" text="Management Info" />
+            <Button layoutX="555.0" layoutY="-1.0" mnemonicParsing="false" onAction="#editProfile" text="Edit Profile" />
          </children>
       </AnchorPane>
    </center>

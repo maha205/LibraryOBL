@@ -115,6 +115,16 @@ public class EchoServer extends AbstractServer
 	    	  result =(ArrayList<String>)UpdatedManagementPassword(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
 	    	  System.out.println("Update Management Password");
 		      break;
+		     
+	      case "UpdatedManagementEmail":
+	        result =(ArrayList<String>)UpdatedManagementEmail(msg.get(0),msg.get(1)); //student email update
+	        System.out.println("Update Management Email");
+		     break;
+		     
+	      case "UpdatedManagementPhone":
+		        result =(ArrayList<String>)UpdatedManagementPhone(msg.get(0),msg.get(1)); //student email update
+		        System.out.println("Update Management Email");
+			     break;
 		      
 	      case "signUP":
 	    	  result =(ArrayList<String>)signUp(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
@@ -245,54 +255,6 @@ public class EchoServer extends AbstractServer
 			}
 				break;	
 				
-	      case "SearchByName"://Reem
-	    	  try {
-	    		  result =(ArrayList<String>)SearchFuncByName(msg.get(0));
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	    	  System.out.println("Search Book By Name");
-	          break;
-	          
-	      case "SearchByGenre"://Reem
-	    	  try {
-	    		  result =(ArrayList<String>)SearchFuncByGenre(msg.get(0));
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	    	  System.out.println("Search Book By Genre");
-	          break;
-	          
-	      case "SearchByDescription"://Reem
-	    	  try {
-	    		  result =(ArrayList<String>)SearchFuncByDescription(msg.get(0));
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	    	  System.out.println("Search Book By Description");
-	          break;
-	          
-	      case "SearchByAuthor"://Reem
-	    	  try {
-	    		  result =(ArrayList<String>)SearchFuncByAuthor(msg.get(0));
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	    	  System.out.println("Search Book By Author");
-	          break;
-	     case "SearchBookStatusAndLocation":
-	    	  try {
-	    		  result =(ArrayList<String>)SearchBookStatusAndLocation(msg.get(0));
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	    	  System.out.println("Search Book By Author");
-	          break;
 	          
 	     case "ManagementInfo":
 	    	 try {
@@ -302,6 +264,16 @@ public class EchoServer extends AbstractServer
 				e1.printStackTrace();
 			}
 	    	 System.out.println("Management Info");
+	          break;
+	       
+	     case "RemoveBook":
+	    	 try {
+				result=(ArrayList<String>) RemoveBook(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	 System.out.println("Delete book");
 	          break;
 	    }
 	    
@@ -475,8 +447,10 @@ public class EchoServer extends AbstractServer
 			ResultSet rs1 = stmt.executeQuery("SELECT * FROM userstudent  WHERE UserID = "+UserID);
 	 		if(rs1.next())//if the student is existing 
 	 		{
+	 			
 	 			if(rs1.getString(2).equals(pass))
 	 		    	UserLogin.add("student");
+	 			if(LocedCard(UserID)==1)UserLogin.add("LocedCard");
 	 			return UserLogin;
 	 		}
 	 		rs1.close();
@@ -660,6 +634,52 @@ public class EchoServer extends AbstractServer
      		}
      		return update;
      }
+      public static ArrayList<String> UpdatedManagementEmail(String ManagementID,String Email)
+    	{
+    		Statement stmt;
+    		ArrayList<String> update = new ArrayList<String>();
+    		try 
+    		{
+    			stmt = conn.createStatement();
+    			ResultSet rs = stmt.executeQuery("SELECT * FROM management WHERE id = "+ManagementID);
+    			
+    	 		if(rs.next())//if the librarian is existing 
+    	 		{
+    	 			stmt.executeUpdate("UPDATE management SET email ='"+Email+"' WHERE id = '"+ManagementID+"';");
+    	 			update.add(Email);
+    	 			  rs.close();
+    	 			return update;
+    	 		}
+    		} catch (SQLException e)
+    		{
+    			e.printStackTrace();
+    			return update;
+    		}
+    		return update;
+    	}
+      public static ArrayList<String> UpdatedManagementPhone(String managementID,String Phone)
+   	{
+   		Statement stmt;
+   		ArrayList<String> update = new ArrayList<String>();
+   		try 
+   		{
+   			stmt = conn.createStatement();
+   			ResultSet rs = stmt.executeQuery("SELECT * FROM management WHERE id = "+managementID);
+   			
+   	 		if(rs.next())//if the librarian is existing 
+   	 		{
+   	 			stmt.executeUpdate("UPDATE management SET phone ='"+Phone+"' WHERE id = '"+managementID+"';");
+   	 			update.add(Phone);
+   	 			  rs.close();
+   	 			return update;
+   	 		}
+   		} catch (SQLException e)
+   		{
+   			e.printStackTrace();
+   			return update;
+   		}
+   		return update;
+   	}
       public static ArrayList<String> UpdatedManagementPassword(String UserID,String oldPass ,String newPass ,String AssertPass)
       {
      		Statement stmt;
@@ -992,10 +1012,21 @@ public class EchoServer extends AbstractServer
     		return AddBook;
       }
       
-      public static ArrayList<String> RemoveBook(String studentID) throws SQLException 
+      public static ArrayList<String> RemoveBook(String bookID) throws SQLException 
       {
 
     		ArrayList<String> RemoveBook = new ArrayList<String>();
+            Statement stmt ;
+       		stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM book WHERE bookID = '"+bookID+"'");
+            if(rs.next())
+            {
+            	int copyQuantity =rs.getInt(8) ;
+            	for(int i=1;i<=copyQuantity ;i++)
+            		stmt.executeUpdate("DELETE FROM copy WHERE bookID = '"+bookID+"' AND idcopy ='"+i+"' ;");
+            	stmt.executeUpdate("DELETE FROM book WHERE bookID = '"+bookID+"'");
+            	RemoveBook.add("DeleteBook");
+            }	
     		return RemoveBook;
       }
       public static ArrayList<String> UpdateBook(String studentID) throws SQLException 
@@ -1339,126 +1370,18 @@ public static ArrayList<String> CheckIfCopyExists(String BookID, String CopyID) 
   }
 
 
-////Reem
-public static ArrayList<String> SearchFuncByName(String Des)  throws SQLException 
-{
-	Statement stmt;
-	ArrayList<String> BookList = new ArrayList<String>();
-	stmt = conn.createStatement();
-	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE bookName = '"+Des+"';");
-	if(rs1.next())//
-	{
-		for(int i = 0 ; i <8;i++) {
-		BookList.add(rs1.getString(i+1));
-		}
-		return BookList;
-	}
-	System.out.println("Error in Search Book");
-	
-	rs1.close();
-	return BookList;
-
-}
-
-
-////Reem
-public static ArrayList<String> SearchFuncByGenre(String Des)  throws SQLException 
-{
-	Statement stmt;
-	ArrayList<String> BookList = new ArrayList<String>();
-	stmt = conn.createStatement();
-	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE genre = '"+Des+"';");
-	if(rs1.next())//
-	{
-		for(int i = 0 ; i <8;i++) {
-		BookList.add(rs1.getString(i+1));
-		}
-		return BookList;
-	}
-	System.out.println("Error in Search Book");
-	
-	rs1.close();
-	return BookList;
-
-}
-////Reem
-public static ArrayList<String> SearchFuncByDescription(String Des)  throws SQLException 
-{
-	Statement stmt;
-	ArrayList<String> BookList = new ArrayList<String>();
-	stmt = conn.createStatement();
-	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE description = '"+Des+"';");
-	if(rs1.next())//
-	{
-		for(int i = 0 ; i <8;i++) {
-		BookList.add(rs1.getString(i+1));
-		}
-		return BookList;
-	}
-	System.out.println("Error in Search Book");
-	
-	rs1.close();
-	return BookList;
-
-}
-
-/////Reem
-public static ArrayList<String> SearchFuncByAuthor(String Des)  throws SQLException 
-{
-	Statement stmt;
-	ArrayList<String> BookList = new ArrayList<String>();
-	stmt = conn.createStatement();
-	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE AuthorName = '"+Des+"';");
-	if(rs1.next())//
-	{
-		for(int i = 0 ; i <8;i++) {
-		BookList.add(rs1.getString(i+1));
-		}
-		return BookList;
-	}
-	System.out.println("Error in Search Book");
-	
-	rs1.close();
-	return BookList;
-
-}
-
-
-//Reem
-public static ArrayList<String> SearchBookStatusAndLocation(String Des)  throws SQLException 
-{
-	Statement stmt;
-	ArrayList<String> BookList = new ArrayList<String>();
-	stmt = conn.createStatement();
-	ResultSet rs1 = stmt.executeQuery("SELECT * FROM copy WHERE bookID = '"+Des+"';");
-	//BookList=null;
-	
-	while(rs1.next())//
-	{
-		if(rs1.getString(3).equals("available")) {
-		BookList.add(rs1.getString(2));
-		return BookList;
-		}
-		
-	}
-		
-	
-	
-	System.out.println("Error in Search Book");
-	
-	rs1.close();
-	
-	return BookList;
-
-}
-//Reem 
-public static ArrayList<String> sortDate(String Des)  throws SQLException 
+public static int LocedCard(String UserID) throws SQLException
 {
 	 Statement stmt;
-	ArrayList<String> sortDate = new ArrayList<String>();
-	stmt = conn.createStatement();
-	
-	return sortDate;
+	 stmt = conn.createStatement();
+	 ResultSet rs1 = stmt.executeQuery("SELECT * FROM student WHERE StudentId = '"+UserID+"';");
+	 if(rs1.next()) 
+	 {
+		 if(rs1.getString(3).equals("Locked"))
+		   return 1;
+	 }
+	 return 0;
+	 
 }
 }
 //End of EchoServer class
