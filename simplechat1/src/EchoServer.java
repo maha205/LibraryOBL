@@ -293,7 +293,16 @@ public class EchoServer extends AbstractServer
 			}
 	    	  System.out.println("Search Book By Author");
 	          break;
-				
+	          
+	     case "ManagementInfo":
+	    	 try {
+				result=(ArrayList<String>)ManagementInfo(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	 System.out.println("Management Info");
+	          break;
 	    }
 	    
 	    try {
@@ -918,7 +927,41 @@ public class EchoServer extends AbstractServer
   		System.out.println(studentsInfo);
   		return studentsInfo;
   	}
-      
+      public static ArrayList<String> ManagementInfo(String managementID) throws SQLException 
+    	{
+    		Statement stmt ,stmt1;
+    		ArrayList<String> ManagementInfo = new ArrayList<String>();
+            String name="";
+    		try 
+    		{
+    			stmt = conn.createStatement();
+    			ResultSet rs = stmt.executeQuery("SELECT * FROM management  WHERE id = "+managementID);
+    	 		if(rs.next())
+    	 		{
+    	 			name+=rs.getString(2);
+    	 			name+=" ";
+    	 			name+=rs.getString(3);
+    	 			
+    	 			ManagementInfo.add(managementID);//management ID
+    	 			ManagementInfo.add(name);//management name
+    	 			ManagementInfo.add(rs.getString(4));//management Phone Number
+    	 			ManagementInfo.add(rs.getString(5));//management Email 
+    	 			
+    	 			return ManagementInfo;
+    			}
+    	 		
+    		  else
+    		  {
+    			   rs.close();
+    	 		return ManagementInfo ;
+    		  }
+    		} catch (SQLException e)
+    		{
+    			e.printStackTrace();
+    		}
+    		System.out.println(ManagementInfo);
+    		return ManagementInfo;
+    	}
 
       public static ArrayList<String> AddBook(String bookId ,String bookName , String bookAuthor , String genre,String description,String publisher,String printdate ,int copyQuantity , String Location) throws SQLException 
       {

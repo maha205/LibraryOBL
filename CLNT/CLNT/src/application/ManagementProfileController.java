@@ -17,6 +17,34 @@ public class ManagementProfileController
 {
 	static private ArrayList<Librarian>  result1 ;
 	static private ArrayList<Student>  result2 ;
+
+    @FXML
+    void ManagementInfo(ActionEvent event) throws IOException 
+    {
+    	IPController.backGui="ManagementProfile";
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/ManagementInfo.fxml").openStream());
+		//ManagementInfo
+		String ManagementID = sigINController.ManagementId ;
+		 ArrayList<String> msg1 = new ArrayList<String>();
+	     ArrayList<String>  result1 = new ArrayList<String>();
+	     msg1.add(ManagementID);
+	   
+	     msg1.add("ManagementInfo");
+	     result1 = (ArrayList<String>)IPController.client.Request(msg1);
+	     
+	     ManagementInfoController   ManagementInfo = loader.getController();	
+		
+	     ManagementInfo.loadStudentInfo(result1);
+	     
+		 Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
+    }
+    
     @FXML
     void LibrarianDetails(ActionEvent event) throws IOException 
     {
