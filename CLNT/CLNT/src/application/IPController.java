@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class IPController
@@ -23,9 +24,13 @@ public class IPController
 
     @FXML
     private TextField portTxt;
+
+    @FXML
+    private Text error;
     @FXML
     void connect(ActionEvent event) throws IOException 
     {
+    	 if(ipaddr.getText().equals("")|| portTxt.getText().equals("")) error.setVisible(true);
     	backGui ="IP";
     	if(ipaddr.getText().equals(null) || portTxt.getText().equals(null)) IPError() ;
         Config.getConfig().setHost(ipaddr.getText());
@@ -54,13 +59,17 @@ public class IPController
 		}
 		else
 		{
-			IPError() ;
+			error.setVisible(true);
+	        //IPError() ;
 		}
+		 
+		
     	
     }
     
     public void IPError() 
     {
     	System.out.println("is not Connected !!!!");
+    	error.setVisible(true);
     }
 }

@@ -38,6 +38,16 @@
             <Button fx:id="saveBtn" layoutX="367.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveFunc" text="Save" />
             <Button fx:id="exitBtn" layoutX="650.0" layoutY="467.0" mnemonicParsing="false" onAction="#exitFun" text="Exit" />
             <Text layoutX="23.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Student!" />
+            <Text fx:id="saveOKTxt" fill="#09b91d" layoutX="322.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Save succeeded" visible="false">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <Text fx:id="NotOKTxt" fill="RED" layoutX="329.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="something is wrong" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </center>

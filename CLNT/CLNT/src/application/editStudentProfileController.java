@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,19 +33,25 @@ public class editStudentProfileController
     private Text oldPasswordTochange;
  
     @FXML
-    private TextField emailTxt = null;
+    private TextField emailTxt ;
 
     @FXML
-    private TextField phontTxt = null;
+    private TextField phontTxt ;
 
     @FXML
-    private TextField oldPassTxt = null;
+    private TextField oldPassTxt ;
 
     @FXML
-    private TextField newPassTxt = null;
+    private TextField newPassTxt ;
 
     @FXML
-    private TextField assertPassTxt = null;
+    private TextField assertPassTxt ;
+    @FXML
+    private Text saveOKTxt;
+
+    @FXML
+    private Text NotOKTxt;
+    
     @FXML
     void backFunc(ActionEvent event) throws IOException 
     {
@@ -66,31 +74,43 @@ public class editStudentProfileController
     	ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
         try{
-        	if(!(emailTxt.getText().equals(null)))
+        	if(emailTxt.getText().equals("") && (phontTxt.getText().equals("")) && (oldPassTxt.getText().equals("")) && (newPassTxt.getText().equals("")) && (assertPassTxt.getText().equals("")))
+        		JOptionPane.showMessageDialog(null, "something is wrong");
+        	if(!(emailTxt.getText().equals("")))
         	{
         		msg.add(sigINController.StudentId);
         		msg.add(emailTxt.getText());
         		msg.add("UpdateEmailStudent");
         		result = (ArrayList<String>)IPController.client.Request(msg);
             	System.out.println(result);
+            	emailTxt.clear();
+            	if(result.size()>0) 
+            		JOptionPane.showMessageDialog(null, "Save succeeded");
+            	else
+            		JOptionPane.showMessageDialog(null, "something is wrong");
         	}
         	
         }catch( NullPointerException  e) {e.printStackTrace();  }
     	
     	
        try{
-           if(!(phontTxt.getText().equals(null)))  	
+           if(!(phontTxt.getText().equals("")))  	
     	   {
     	   	msg.add(sigINController.StudentId);
     		msg.add(phontTxt.getText());
     		msg.add("UpdatephontStudent");
     		result = (ArrayList<String>)IPController.client.Request(msg);
     	    System.out.println(result);
+    	    phontTxt.clear();
+    	    if(result.size()>0) 
+            	JOptionPane.showMessageDialog(null, "Save succeeded");
+              else
+            	JOptionPane.showMessageDialog(null, "something is wrong");
     	   }
        }catch( NullPointerException  e) {e.printStackTrace();  }
     		
        try{
-    	if(!(oldPassTxt.getText().equals(null)) && !(newPassTxt.getText().equals(null)) && !(assertPassTxt.getText().equals(null))) 
+    	if(!(oldPassTxt.getText().equals("")) && !(newPassTxt.getText().equals("")) && !(assertPassTxt.getText().equals(""))) 
     	{
     		
     		msg.add(sigINController.StudentId);
@@ -100,12 +120,21 @@ public class editStudentProfileController
     		msg.add("UpdatePasswordStudent");
     		result = (ArrayList<String>)IPController.client.Request(msg);
     	    System.out.println(result);
+    	    oldPassTxt.clear();
+    	    newPassTxt.clear();
+    	    assertPassTxt.clear();
+    	    if(result.size()>0) 
+            	JOptionPane.showMessageDialog(null, "Save succeeded");
+            else
+            	JOptionPane.showMessageDialog(null, "something is wrong");
     	}
        }catch( NullPointerException  e) {e.printStackTrace();  }
     }
     @FXML
     void updateEmailFunc(ActionEvent event) 
     {
+    	saveOKTxt.setVisible(false);
+		 NotOKTxt.setVisible(false);
     	emailTxt.setVisible(true);
     	email.setVisible(true);
     	phontTxt.setVisible(false);
@@ -117,15 +146,17 @@ public class editStudentProfileController
     	assertPassTxt.setVisible(false);
     	oldPasswordTochange.setVisible(false);
     	
-    	phontTxt.setText(null);
-    	newPassTxt.setText(null);
-    	assertPassTxt.setText(null);
-    	oldPassTxt.setText(null);
+    	phontTxt.clear();
+    	newPassTxt.clear();
+    	assertPassTxt.clear();
+    	oldPassTxt.clear();
     }
 
     @FXML
     void updatePassFunc(ActionEvent event) 
     {
+    	saveOKTxt.setVisible(false);
+		 NotOKTxt.setVisible(false);
     	emailTxt.setVisible(false);
     	email.setVisible(false);
     	phontTxt.setVisible(false);
@@ -137,13 +168,15 @@ public class editStudentProfileController
     	assertPassTxt.setVisible(true);
     	oldPasswordTochange.setVisible(true);
     	
-    	phontTxt.setText(null);
-    	emailTxt.setText(null);
+    	phontTxt.clear();
+    	emailTxt.clear();
     }
 
     @FXML
     void updatePhoneFunc(ActionEvent event) 
     {
+    	saveOKTxt.setVisible(false);
+		 NotOKTxt.setVisible(false);
     	emailTxt.setVisible(false);
     	email.setVisible(false);
     	phontTxt.setVisible(true);
@@ -155,10 +188,10 @@ public class editStudentProfileController
     	assertPassTxt.setVisible(false);
     	oldPasswordTochange.setVisible(false);
     	
-    	emailTxt.setText(null);
-    	newPassTxt.setText(null);
-    	assertPassTxt.setText(null);
-    	oldPassTxt.setText(null);
+    	emailTxt.clear();
+    	newPassTxt.clear();
+    	assertPassTxt.clear();
+    	oldPassTxt.clear();
     }
     @FXML
     void exitFun(ActionEvent event) throws IOException 

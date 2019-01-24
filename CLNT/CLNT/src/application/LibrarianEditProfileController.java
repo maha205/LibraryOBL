@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,19 +34,19 @@ public class LibrarianEditProfileController
     private Text AssertPass;
 
     @FXML
-    private TextField emailTxt = null;
+    private TextField emailTxt ;
 
     @FXML
-    private TextField phontTxt = null;
+    private TextField phontTxt ;
 
     @FXML
-    private TextField oldPassTxt = null;
+    private TextField oldPassTxt;
 
     @FXML
-    private TextField newPassTxt = null;
+    private TextField newPassTxt ;
 
     @FXML
-    private TextField assertPassTxt = null;
+    private TextField assertPassTxt ;
 
     @FXML
     void backFunc(ActionEvent event) throws IOException
@@ -70,7 +72,7 @@ public class LibrarianEditProfileController
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/application/login.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
 		
 		Scene scene = new Scene(root);			
 		
@@ -84,31 +86,43 @@ public class LibrarianEditProfileController
     	ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
         try{
-        	if(!(emailTxt.getText().equals(null)))
+        	if(emailTxt.getText().equals("") && (phontTxt.getText().equals("")) && (oldPassTxt.getText().equals("")) && (newPassTxt.getText().equals("")) && (assertPassTxt.getText().equals("")))
+        		JOptionPane.showMessageDialog(null, "something is wrong");
+        	if(!(emailTxt.getText().equals("")))
         	{
         		msg.add(sigINController.LibrarianId);
         		msg.add(emailTxt.getText());
         		msg.add("UpdateEmailLibrarian");
         		result = (ArrayList<String>)IPController.client.Request(msg);
             	System.out.println(result);
+            	emailTxt.clear();
+            	if(result.size()>0)
+            		JOptionPane.showMessageDialog(null, "Save succeeded");
+            	else
+            		JOptionPane.showMessageDialog(null, "something is wrong");
         	}
         	
-        }catch( NullPointerException  e) {e.printStackTrace();  }
+        }catch( NullPointerException  e) {e.printStackTrace(); }
     	
     	
        try{
-    	   if(!(phontTxt.getText().equals(null)))     	
+    	   if(!(phontTxt.getText().equals("")))     	
     	   {
     	   	msg.add(sigINController.LibrarianId);
     		msg.add(phontTxt.getText());
     		msg.add("UpdatephontLibrariant");
     		result = (ArrayList<String>)IPController.client.Request(msg);
     	    System.out.println(result);
+    	    phontTxt.clear();
+    	    if(result.size()>0)
+        		JOptionPane.showMessageDialog(null, "Save succeeded");
+        	else
+        		JOptionPane.showMessageDialog(null, "something is wrong");
     	   }
        }catch( NullPointerException  e) {e.printStackTrace();  }
     		
      try{
-    	if(!(oldPassTxt.getText().equals(null)) && !(newPassTxt.getText().equals(null)) && !(assertPassTxt.getText().equals(null)) )
+    	if(!(oldPassTxt.getText().equals("")) && !(newPassTxt.getText().equals("")) && !(assertPassTxt.getText().equals("")) )
     	{
     		
     		msg.add(sigINController.LibrarianId);
@@ -118,6 +132,13 @@ public class LibrarianEditProfileController
     		msg.add("UpdatePasswordLibrarian");
     		result = (ArrayList<String>)IPController.client.Request(msg);
     	    System.out.println(result);
+    	    oldPassTxt.clear();
+    	    newPassTxt.clear();
+    	    assertPassTxt.clear();
+    	    if(result.size()>0)
+        		JOptionPane.showMessageDialog(null, "Save succeeded");
+        	else
+        		JOptionPane.showMessageDialog(null, "something is wrong");
     	}
        }catch( NullPointerException  e) {e.printStackTrace();  }
     }
@@ -136,10 +157,10 @@ public class LibrarianEditProfileController
     	assertPassTxt.setVisible(false);
     	oldPasswordTochange.setVisible(false);
     	
-    	phontTxt.setText(null);
-    	newPassTxt.setText(null);
-    	assertPassTxt.setText(null);
-    	oldPassTxt.setText(null);
+    	phontTxt.clear();
+    	newPassTxt.clear();
+    	assertPassTxt.clear();
+    	oldPassTxt.clear();
     }
 
     @FXML
@@ -156,8 +177,8 @@ public class LibrarianEditProfileController
     	assertPassTxt.setVisible(true);
     	oldPasswordTochange.setVisible(true);
     	
-    	phontTxt.setText(null);
-    	emailTxt.setText(null);
+    	phontTxt.clear();
+    	emailTxt.clear();
     }
 
     @FXML
@@ -174,10 +195,10 @@ public class LibrarianEditProfileController
     	assertPassTxt.setVisible(false);
     	oldPasswordTochange.setVisible(false);
     	
-    	emailTxt.setText(null);
-    	newPassTxt.setText(null);
-    	assertPassTxt.setText(null);
-    	oldPassTxt.setText(null);
+    	emailTxt.clear();
+    	newPassTxt.clear();
+    	assertPassTxt.clear();
+    	oldPassTxt.clear();
     }
 
 }

@@ -16,7 +16,7 @@
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font></Text>
-            <Button fx:id="ConnectButton" layoutX="174.0" layoutY="188.0" mnemonicParsing="false" onAction="#connect" text="Connect" />
+            <Button fx:id="ConnectButton" layoutX="188.0" layoutY="177.0" mnemonicParsing="false" onAction="#connect" text="Connect" />
             <Text fill="#177f36" layoutX="70.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP Address:">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
@@ -27,6 +27,11 @@
                </font></Text>
             <TextField fx:id="portTxt" alignment="CENTER" layoutX="155.0" layoutY="130.0" promptText="        port" />
             <Text layoutX="9.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, User!" />
+            <Text fx:id="error" fill="RED" layoutX="182.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error Input !" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </left>

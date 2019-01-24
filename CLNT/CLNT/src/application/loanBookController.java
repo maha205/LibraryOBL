@@ -60,9 +60,8 @@ public class loanBookController
 
 
 	    @FXML
-	    void LoanFunc(ActionEvent event) throws IOException {
-	    	
-	    	
+	    void LoanFunc(ActionEvent event) throws IOException 
+	    {
 	    	if(BookID == "NO") {
 	    		JOptionPane.showMessageDialog(null, "Please search for a book");
 	    	}
