@@ -37,9 +37,21 @@ public class LibrarianProfileController
     }
 
     @FXML
-    void UpdateBook(ActionEvent event) 
+    void UpdateBook(ActionEvent event) throws IOException 
     {
-     
+    	IPController.backGui ="LibrarianProfile";
+    	((Node)event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/application/UpdateBook.fxml").openStream());
+		
+		UpdateBookController updateBook =loader.getController();	
+		updateBook.loadComboList();
+		
+		Scene scene = new Scene(root);			
+		
+		primaryStage.setScene(scene);		
+		primaryStage.show();
     }
     
     @FXML

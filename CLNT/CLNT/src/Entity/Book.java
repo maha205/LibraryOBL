@@ -13,8 +13,9 @@ public class Book implements Serializable
   public String printdate;
   public int copyQuantity;
   public int OrderQantity;
+  public String Location ;
   
-	public Book(String BookID ,String BookName,String Author ,String genre ,String description,String publisher,String printdate,int copyQuantity,int OrderQantity) 
+	public Book(String BookID ,String BookName,String Author ,String genre ,String description,String publisher,String printdate,int copyQuantity,int OrderQantity,String Location) 
 	{
 		this.BookID = BookID;
 		this.BookName = BookName ;
@@ -25,6 +26,7 @@ public class Book implements Serializable
 		this.printdate=printdate;
 		this.copyQuantity=copyQuantity;
 		this.OrderQantity=OrderQantity;
+		this.Location=Location;
 	}
 	/* (non-Javadoc)
  * @see java.lang.Object#toString()

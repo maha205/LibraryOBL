@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import ocsf.server.*;
 import java.util.*;
 import java.util.Date;
+
+import Entity.Book;
 import Entity.Librarian ;
 import Entity.Student;
 /**
@@ -336,6 +338,7 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
+    System.out.println(UpdateBook("123485697").get(0).toString());
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -1029,13 +1032,7 @@ public class EchoServer extends AbstractServer
             }	
     		return RemoveBook;
       }
-      public static ArrayList<String> UpdateBook(String studentID) throws SQLException 
-      {
-
-    		ArrayList<String> UpdateBook = new ArrayList<String>();
-    		return UpdateBook;
-      }
-      
+   
       public static ArrayList<String> LibrarianEmail() throws SQLException 
       {
     	 ArrayList<String> LibrarianEmail = new ArrayList<String>();
@@ -1383,5 +1380,26 @@ public static int LocedCard(String UserID) throws SQLException
 	 return 0;
 	 
 }
+public static ArrayList<Book> UpdateBook(String BookID) throws SQLException 
+{
+
+		ArrayList<Book> UpdateBook = new ArrayList<Book>();
+	    Statement stmt;
+	    Book temp ;
+		stmt = conn.createStatement();
+		ResultSet rs1 = stmt.executeQuery("SELECT * FROM book WHERE bookID = '"+BookID+"';");
+		if(rs1.next())
+		{
+			String i = "1";
+			ResultSet rs2 = stmt.executeQuery("SELECT * FROM copy WHERE bookID = '"+BookID+"' AND idcopy ='"+i+"' ;");
+			if(rs2.next())
+			{
+				temp =new Book(rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5),rs1.getString(6),rs1.getString(7),rs1.getInt(8),rs1.getInt(9),rs2.getString(2));
+				UpdateBook.add(temp);
+			}
+		}
+		return UpdateBook;
+}
+
 }
 //End of EchoServer class
