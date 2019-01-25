@@ -60,7 +60,7 @@ public class StudentProfileController {
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
 	  		Pane root = loader.load(getClass().getResource("/application/StudentInfo.fxml").openStream());
-	  		
+	  		primaryStage.setTitle("Student Details");
 	  		 String StudentID = sigINController.StudentId ;
     		 ArrayList<String> msg1 = new ArrayList<String>();
     	     ArrayList<String>  result1 = new ArrayList<String>();
@@ -86,7 +86,7 @@ public class StudentProfileController {
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
 	  		Pane root = loader.load(getClass().getResource("/application/ExternLoanBook.fxml").openStream());
-	  		
+	  		primaryStage.setTitle("Extern Loan Book");
 	  		Scene scene = new Scene(root);			
 	  		
 	  		primaryStage.setScene(scene);		
@@ -101,7 +101,7 @@ public class StudentProfileController {
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
 	  		Pane root = loader.load(getClass().getResource("/application/loanBook.fxml").openStream());
-	  		
+	  		primaryStage.setTitle("Loan Book");
 	  		Scene scene = new Scene(root);			
 	  		
 	  		primaryStage.setScene(scene);		
@@ -116,7 +116,7 @@ public class StudentProfileController {
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
 	  		Pane root = loader.load(getClass().getResource("/application/SearchBook.fxml").openStream());
-	  		
+	  		primaryStage.setTitle("Search Book");
 	  		Scene scene = new Scene(root);			
 	  		
 	  		primaryStage.setScene(scene);		
@@ -130,7 +130,7 @@ public class StudentProfileController {
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/editStudentProfile.fxml").openStream());
-		
+		primaryStage.setTitle("Edit Student Profile");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -146,7 +146,7 @@ public class StudentProfileController {
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
-		
+		primaryStage.setTitle("Sign-IN");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -156,38 +156,6 @@ public class StudentProfileController {
     @FXML
     void show(ActionEvent event) 
     {
-//    	@FXML
-//   	 private TableView<String> loanedBooks;
-//
-//   	    @FXML
-//   	    private TableColumn<String, String> bookNamecol;
-//
-//   	    @FXML
-//   	    private TableColumn<String, String> bookAuthorCol;
-//
-//   	    @FXML
-//   	    private TableColumn<String, String> genreCol;
-//
-//   	    @FXML
-//   	    private TableColumn<String, String> DescriptionCol;
-//
-//   	    @FXML
-//   	    private TableColumn<String, String> PublisherCol;
-//
-//   	    @FXML
-//   	    private TableColumn<String, String> PrintDateCol;
-//
-//   	    @FXML
-//   	    private TableColumn<String, String> CopyNumberCol;
-//
-//   	    @FXML
-//   	    private TableColumn<String, String> QuantityCol;
-    	System.out.println(loanedBooks.getItems().size());
-    	for(int i=0;i<2;i++) {
-    		System.out.println("fghjk");
-    	  bookNamecol.setCellValueFactory(c->new SimpleStringProperty(new String("maha")));
-    	  loanedBooks.getItems().setAll(toString());
-    	  }
-    	
+
     }
 }

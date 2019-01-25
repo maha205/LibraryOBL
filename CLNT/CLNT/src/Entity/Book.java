@@ -28,143 +28,155 @@ public class Book implements Serializable
 		this.OrderQantity=OrderQantity;
 		this.Location=Location;
 	}
-	/* (non-Javadoc)
- * @see java.lang.Object#toString()
- */
-@Override
-public String toString() {
-	return "Book [BookID=" + BookID + ", BookName=" + BookName + ", Author=" + Author + ", genre=" + genre
-			+ ", description=" + description + ", publisher=" + publisher + ", printdate=" + printdate
-			+ ", copyQuantity=" + copyQuantity + ", OrderQantity=" + OrderQantity + ", getBookID()=" + getBookID()
-			+ ", getBookName()=" + getBookName() + ", getAuthor()=" + getAuthor() + ", getGenre()=" + getGenre()
-			+ ", getDescription()=" + getDescription() + ", getPublisher()=" + getPublisher() + ", getPrintdate()="
-			+ getPrintdate() + ", getCopyQuantity()=" + getCopyQuantity() + ", getOrderQantity()=" + getOrderQantity()
-			+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-}
 
 	/**
- * @return the bookID
- */
-public String getBookID() {
-	return BookID;
-}
+	 * @return the bookID
+	 */
+	public String getBookID() {
+		return BookID;
+	}
 
-/**
- * @param bookID the bookID to set
- */
-public void setBookID(String bookID) {
-	BookID = bookID;
-}
+	/**
+	 * @param bookID the bookID to set
+	 */
+	public void setBookID(String bookID) {
+		BookID = bookID;
+	}
 
-/**
- * @return the bookName
- */
-public String getBookName() {
-	return BookName;
-}
+	/**
+	 * @return the bookName
+	 */
+	public String getBookName() {
+		return BookName;
+	}
 
-/**
- * @param bookName the bookName to set
- */
-public void setBookName(String bookName) {
-	BookName = bookName;
-}
+	/**
+	 * @param bookName the bookName to set
+	 */
+	public void setBookName(String bookName) {
+		BookName = bookName;
+	}
 
-/**
- * @return the author
- */
-public String getAuthor() {
-	return Author;
-}
+	/**
+	 * @return the author
+	 */
+	public String getAuthor() {
+		return Author;
+	}
 
-/**
- * @param author the author to set
- */
-public void setAuthor(String author) {
-	Author = author;
-}
+	/**
+	 * @param author the author to set
+	 */
+	public void setAuthor(String author) {
+		Author = author;
+	}
 
-/**
- * @return the genre
- */
-public String getGenre() {
-	return genre;
-}
+	/**
+	 * @return the genre
+	 */
+	public String getGenre() {
+		return genre;
+	}
 
-/**
- * @param genre the genre to set
- */
-public void setGenre(String genre) {
-	this.genre = genre;
-}
+	/**
+	 * @param genre the genre to set
+	 */
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 
-/**
- * @return the description
- */
-public String getDescription() {
-	return description;
-}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
 
-/**
- * @param description the description to set
- */
-public void setDescription(String description) {
-	this.description = description;
-}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-/**
- * @return the publisher
- */
-public String getPublisher() {
-	return publisher;
-}
+	/**
+	 * @return the publisher
+	 */
+	public String getPublisher() {
+		return publisher;
+	}
 
-/**
- * @param publisher the publisher to set
- */
-public void setPublisher(String publisher) {
-	this.publisher = publisher;
-}
+	/**
+	 * @param publisher the publisher to set
+	 */
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
 
-/**
- * @return the printdate
- */
-public String getPrintdate() {
-	return printdate;
-}
+	/**
+	 * @return the printdate
+	 */
+	public String getPrintdate() {
+		return printdate;
+	}
 
-/**
- * @param printdate the printdate to set
- */
-public void setPrintdate(String printdate) {
-	this.printdate = printdate;
-}
+	/**
+	 * @param printdate the printdate to set
+	 */
+	public void setPrintdate(String printdate) {
+		this.printdate = printdate;
+	}
 
-/**
- * @return the copyQuantity
- */
-public int getCopyQuantity() {
-	return copyQuantity;
-}
+	/**
+	 * @return the copyQuantity
+	 */
+	public int getCopyQuantity() {
+		return copyQuantity;
+	}
 
-/**
- * @param copyQuantity the copyQuantity to set
- */
-public void setCopyQuantity(int copyQuantity) {
-	this.copyQuantity = copyQuantity;
-}
+	/**
+	 * @param copyQuantity the copyQuantity to set
+	 */
+	public void setCopyQuantity(int copyQuantity) {
+		this.copyQuantity = copyQuantity;
+	}
 
-/**
- * @return the orderQantity
- */
-public int getOrderQantity() {
-	return OrderQantity;
-}
+	/**
+	 * @return the orderQantity
+	 */
+	public int getOrderQantity() {
+		return OrderQantity;
+	}
 
-/**
- * @param orderQantity the orderQantity to set
- */
-public void setOrderQantity(int orderQantity) {
-	OrderQantity = orderQantity;
-}
+	/**
+	 * @param orderQantity the orderQantity to set
+	 */
+	public void setOrderQantity(int orderQantity) {
+		OrderQantity = orderQantity;
+	}
+
+	/**
+	 * @return the location
+	 */
+	public String getLocation() {
+		return Location;
+	}
+
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(String location) {
+		Location = location;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Book [BookID=" + BookID + ", BookName=" + BookName + ", Author=" + Author + ", genre=" + genre
+				+ ", description=" + description + ", publisher=" + publisher + ", printdate=" + printdate
+				+ ", copyQuantity=" + copyQuantity + ", OrderQantity=" + OrderQantity + ", Location=" + Location + "]";
+	}
+
 }

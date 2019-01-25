@@ -51,7 +51,7 @@ public class IPController
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
 			Pane root = loader.load(getClass().getResource("/application/mainForm.fxml").openStream());
-			
+			primaryStage.setTitle("Welcome to OBL Library");
 			Scene scene = new Scene(root);			
 			
 			primaryStage.setScene(scene);		

@@ -83,7 +83,7 @@ public class LibrarianEditStudentProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/editStudentProfile.fxml").openStream());
-		
+		primaryStage.setTitle("Edit Student Profile");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		

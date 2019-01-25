@@ -58,7 +58,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Text>
-            <TextField layoutX="220.0" layoutY="121.0" />
+            <TextField fx:id="searchInput" layoutX="220.0" layoutY="121.0" />
             <Text fx:id="locationTxt" fill="#625eff" layoutX="151.0" layoutY="570.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location Shelf:" visible="false">
                <font>
                   <Font name="System Bold" size="20.0" />

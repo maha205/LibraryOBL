@@ -47,7 +47,7 @@ public class mainFormController
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();
   		Pane root = loader.load(getClass().getResource("/application/SearchBook.fxml").openStream());
-  		
+  		primaryStage.setTitle("Search Book");
   		Scene scene = new Scene(root);			
   		
   		primaryStage.setScene(scene);		
@@ -62,7 +62,7 @@ public class mainFormController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/sigIN.fxml").openStream());
-		
+		primaryStage.setTitle("Sign-In");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		

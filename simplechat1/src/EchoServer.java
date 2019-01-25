@@ -337,6 +337,15 @@ public class EchoServer extends AbstractServer
 			}
 	    	  System.out.println("sorting");
 	          break;
+	          
+	     case "SearchBookAndReturn":
+	    	 try {
+				result =(ArrayList<Book>)SearchBookAndReturn(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	 break;
 	    }
 	    
 	    try {
@@ -398,7 +407,6 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
- //   System.out.println(UpdateBook("123485697").get(0).toString());
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -1697,23 +1705,27 @@ public static ArrayList<String> sortDate(String Des)  throws SQLException
  	if(returnDate!=null) sortDate.add(returnDate);
  	return sortDate;
 }
-public static ArrayList<Book> UpdateBook(String BookID) throws SQLException 
+public static ArrayList<Book> SearchBookAndReturn(String BookID) throws SQLException 
 {
 
 		ArrayList<Book> UpdateBook = new ArrayList<Book>();
-	    Statement stmt;
+	    Statement stmt ,stmt1;
 	    Book temp ;
 		stmt = conn.createStatement();
 		ResultSet rs1 = stmt.executeQuery("SELECT * FROM book WHERE bookID = '"+BookID+"';");
 		if(rs1.next())
 		{
 			String i = "1";
-			ResultSet rs2 = stmt.executeQuery("SELECT * FROM copy WHERE bookID = '"+BookID+"' AND idcopy ='"+i+"' ;");
+			 stmt1 = conn.createStatement();
+			ResultSet rs2 = stmt1.executeQuery("SELECT * FROM copy WHERE bookID = '"+BookID+"' AND idcopy ='"+i+"' ;");
 			if(rs2.next())
 			{
-				temp =new Book(rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5),rs1.getString(6),rs1.getString(7),rs1.getInt(8),rs1.getInt(9),rs2.getString(2));
-				UpdateBook.add(temp);
+				System.out.println(BookID);
+			  	temp =new Book(rs1.getString(1),rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5),rs1.getString(6),rs1.getString(7),rs1.getInt(8),rs1.getInt(9),rs2.getString(2));
+				System.out.println(temp.toString());
+			  	UpdateBook.add(temp);
 			}
+			
 		}
 		return UpdateBook;
 }

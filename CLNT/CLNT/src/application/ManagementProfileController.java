@@ -26,7 +26,7 @@ public class ManagementProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/ManagementEdit.fxml").openStream());
-		
+		primaryStage.setTitle("Edit Management Profile");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -40,7 +40,7 @@ public class ManagementProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/ManagementInfo.fxml").openStream());
-		//ManagementInfo
+		primaryStage.setTitle("Management Details");
 		String ManagementID = sigINController.ManagementId ;
 		 ArrayList<String> msg1 = new ArrayList<String>();
 	     ArrayList<String>  result1 = new ArrayList<String>();
@@ -67,7 +67,7 @@ public class ManagementProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/LibraryWorkers.fxml").openStream());
-		
+		primaryStage.setTitle("Librarian Details");
 		 ArrayList<String> msg1 = new ArrayList<String>();
 	     msg1.add("AllLibrarianWorker");
 	     result1=new ArrayList<Librarian>();
@@ -91,7 +91,7 @@ public class ManagementProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/LibrarySubscriptions.fxml").openStream());
-		
+		primaryStage.setTitle("Subscription Details");
 		 ArrayList<String> msg1 = new ArrayList<String>();
 	     msg1.add("AllStudents");
 	     result2=new ArrayList<Student>();

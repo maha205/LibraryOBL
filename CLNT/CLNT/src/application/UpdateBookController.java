@@ -1,7 +1,11 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import Entity.Book;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,7 +100,8 @@ public class UpdateBookController {
 
     @FXML
     private Text LocationNotEdit;
-
+    @FXML
+    private TextField searchInput;
     public void loadComboList()
     {
     	comboEdit.setDisable(true);
@@ -408,8 +413,91 @@ public class UpdateBookController {
     @FXML
     void serach(ActionEvent event) 
     {
-    	comboEdit.setDisable(false);
-    	edit.setDisable(false);
+    	
+    	 ArrayList<String> msg = new ArrayList<String>();
+         ArrayList<Book>  result = new ArrayList<Book>();
+         if(searchInput.getText().equals(""))
+         {
+        	comboEdit.setDisable(true);
+           	edit.setDisable(true);
+           	NameNotEdit.setVisible(false);
+            AuthorNotEdit.setVisible(false);
+            DescNotEdit.setVisible(false);
+            genreNotEdit.setVisible(false);
+            publisherNotEdit.setVisible(false);
+            printDateNotEdit.setVisible(false);
+            copyQNotEdit.setVisible(false);
+            LocationNotEdit.setVisible(false);
+        	saveAll.setVisible(false);
+        	bookNametxt.setVisible(false);
+            authorTxt.setVisible(false);
+            desTxt.setVisible(false);
+            genreTxt.setVisible(false);
+            publisherTxt.setVisible(false);
+            printedatetxt.setVisible(false);
+            cqTxt.setVisible(false);
+            locationTxt.setVisible(false);
+            nemeEdit.setVisible(false);
+            AuthorNameInput.setVisible(false);
+            GenreEdit.setVisible(false);
+            DescEdit.setVisible(false);
+            publisherEdit.setVisible(false);
+            printDateEdit.setVisible(false);
+           cQuantyEdit.setVisible(false);
+            locationEdit.setVisible(false);
+        	 JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+         }
+         else 
+         {
+          msg.add(searchInput.getText());
+          msg.add("SearchBookAndReturn");
+          result = (ArrayList<Book>)IPController.client.Request(msg);
+          System.out.println(result);
+          if(result.size()>0)
+          {
+        	comboEdit.setDisable(false);
+          	edit.setDisable(false);
+        	NameNotEdit.setText(result.get(0).getBookName());
+            AuthorNotEdit.setText(result.get(0).getAuthor());
+            DescNotEdit.setText(result.get(0).getDescription());
+            genreNotEdit.setText(result.get(0).getGenre());
+            publisherNotEdit.setText(result.get(0).getPublisher());
+            printDateNotEdit.setText(result.get(0).getPrintdate());
+            copyQNotEdit.setText(""+result.get(0).getCopyQuantity());
+            LocationNotEdit.setText(result.get(0).getLocation());
+          }
+          else {
+        	  JOptionPane.showMessageDialog(null, "The book you are trying to update is not exists !!");
+        	  comboEdit.setDisable(true);
+             	edit.setDisable(true);
+             	NameNotEdit.setVisible(false);
+              AuthorNotEdit.setVisible(false);
+              DescNotEdit.setVisible(false);
+              genreNotEdit.setVisible(false);
+              publisherNotEdit.setVisible(false);
+              printDateNotEdit.setVisible(false);
+              copyQNotEdit.setVisible(false);
+              LocationNotEdit.setVisible(false);
+          	saveAll.setVisible(false);
+          	bookNametxt.setVisible(false);
+              authorTxt.setVisible(false);
+              desTxt.setVisible(false);
+              genreTxt.setVisible(false);
+              publisherTxt.setVisible(false);
+              printedatetxt.setVisible(false);
+              cqTxt.setVisible(false);
+              locationTxt.setVisible(false);
+              nemeEdit.setVisible(false);
+              AuthorNameInput.setVisible(false);
+              GenreEdit.setVisible(false);
+              DescEdit.setVisible(false);
+              publisherEdit.setVisible(false);
+              printDateEdit.setVisible(false);
+             cQuantyEdit.setVisible(false);
+              locationEdit.setVisible(false);
+          }
+          }
+    	
     }
 
 

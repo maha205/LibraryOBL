@@ -75,7 +75,7 @@ public class LibraryWorkersController
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();
   		Pane root = loader.load(getClass().getResource("/application/LibrarianEditProfile.fxml").openStream());
-  		
+  		primaryStage.setTitle("Edit Librarian Profile");
   		Scene scene = new Scene(root);			
   		
   		primaryStage.setScene(scene);		

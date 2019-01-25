@@ -44,7 +44,7 @@ public class sigINController {
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/ResetPasswordRequest.fxml").openStream());
-		
+		primaryStage.setTitle("Reset Password");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -74,7 +74,7 @@ public class sigINController {
         		Stage primaryStage = new Stage();
         		FXMLLoader loader = new FXMLLoader();
         		Pane root = loader.load(getClass().getResource("/application/StudentProfile.fxml").openStream());
-        		
+        		primaryStage.setTitle("Student Profile");
         		Scene scene = new Scene(root);			
         		
         		primaryStage.setScene(scene);		
@@ -92,7 +92,7 @@ public class sigINController {
         	  Stage primaryStage = new Stage();
         	  FXMLLoader loader = new FXMLLoader();
         	  Pane root = loader.load(getClass().getResource("/application/LibrarianProfile.fxml").openStream());
-        		
+        	  primaryStage.setTitle("Librarian Profile");
         	  Scene scene = new Scene(root);			
         		
         	  primaryStage.setScene(scene);		
@@ -106,7 +106,7 @@ public class sigINController {
         	  Stage primaryStage = new Stage();
         	  FXMLLoader loader = new FXMLLoader();
         	  Pane root = loader.load(getClass().getResource("/application/ManagementProfile.fxml").openStream());
-        		
+        	  primaryStage.setTitle("Management Profile");
         	  Scene scene = new Scene(root);			
         		
         	  primaryStage.setScene(scene);		
@@ -115,14 +115,8 @@ public class sigINController {
     	   
     	}
     	else
-    	{
     		NotFound.setVisible(true);
-//    		Alert alert = new Alert(AlertType.ERROR);
-//    		alert.setTitle("Error Dialog");
-//    		alert.setHeaderText("Look, an Error Dialog");
-//    		alert.setContentText("Ooops, there was an error please check your input!");
-//    		alert.showAndWait();
-    	}
+
     		
     }
 

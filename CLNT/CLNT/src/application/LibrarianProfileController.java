@@ -29,7 +29,7 @@ public class LibrarianProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/deleteBook.fxml").openStream());
-		
+		primaryStage.setTitle("Delete Book");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -44,7 +44,7 @@ public class LibrarianProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/UpdateBook.fxml").openStream());
-		
+		primaryStage.setTitle("Update Book");
 		UpdateBookController updateBook =loader.getController();	
 		updateBook.loadComboList();
 		
@@ -62,7 +62,7 @@ public class LibrarianProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/AddBook.fxml").openStream());
-		
+		primaryStage.setTitle("Add Book");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -77,7 +77,7 @@ public class LibrarianProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/returnBook.fxml").openStream());
-		
+		primaryStage.setTitle("Return Book");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -91,7 +91,7 @@ public class LibrarianProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/LibrarianEditStudentProfile.fxml").openStream());
-		
+		primaryStage.setTitle("Edit Librarian Profile");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -105,7 +105,7 @@ public class LibrarianProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/singUp.fxml").openStream());
-		
+		primaryStage.setTitle("Sign-Up");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -120,7 +120,7 @@ public class LibrarianProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/UpdateStudentStatus.fxml").openStream());
-		
+		primaryStage.setTitle("Update Student Status");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		
@@ -135,7 +135,7 @@ public class LibrarianProfileController
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/application/LibrarianEditProfile.fxml").openStream());
-		
+		primaryStage.setTitle("Edit Librarian Profile");
 		Scene scene = new Scene(root);			
 		
 		primaryStage.setScene(scene);		

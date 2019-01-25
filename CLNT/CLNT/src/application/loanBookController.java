@@ -180,7 +180,7 @@ public class loanBookController
 	    	        	  		FXMLLoader loader = new FXMLLoader();
 	    	        	  		IPController.backGui="loanBook";
 	    	        	  		Pane root = loader.load(getClass().getResource("/application/OrderBook.fxml").openStream());
-	    	        	  		
+	    	        	  		primaryStage.setTitle("Order Book");
 	    	        	  	 	 String StudentID = sigINController.StudentId ;
 		    	        		 ArrayList<String> msg1 = new ArrayList<String>();
 		    	        	     ArrayList<String>  result1 = new ArrayList<String>();
