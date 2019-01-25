@@ -19,7 +19,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class UpdateBookController {
-
+	public static ArrayList<Book>  result = new ArrayList<Book>();
     @FXML
     private Text bookNametxt;
 
@@ -409,13 +409,218 @@ public class UpdateBookController {
     void saveAllFunc(ActionEvent event) 
     {
 
+   	 ArrayList<String> msg1 = new ArrayList<String>();
+        ArrayList<String>  result1 = new ArrayList<String>();
+        String choose =(String)comboEdit.getSelectionModel().getSelectedItem();
+        System.out.println(choose);
+        switch(choose)
+        {
+          case "All details":
+          	  if(locationEdit.getText().equals("")||cQuantyEdit.getText().equals("")||printDateEdit.getText().equals("")||publisherEdit.getText().equals("") ||nemeEdit.getText().equals("")||AuthorNameInput.getText().equals("")||GenreEdit.getText().equals("")||DescEdit.getText().equals(""))
+          		   JOptionPane.showMessageDialog(null, "Please fill out the fields !!");
+          	  else {
+             msg1.add(nemeEdit.getText());
+             msg1.add(AuthorNameInput.getText());
+             msg1.add(GenreEdit.getText());
+             msg1.add(DescEdit.getText());
+             msg1.add(publisherEdit.getText());
+             msg1.add(printDateEdit.getText());
+             msg1.add(cQuantyEdit.getText());
+             msg1.add(locationEdit.getText());
+             msg1.add("UpdateBook");
+             result1 = (ArrayList<String>)IPController.client.Request(msg1);
+             if(result1.isEmpty())
+           	  JOptionPane.showMessageDialog(null, "Please check your book details !!");
+             else
+           	  JOptionPane.showMessageDialog(null, "Save succeeded");
+          	  }
+          	break ;
+          	
+          case "Book Name":
+       	   if(nemeEdit.getText().equals(""))
+          		   JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+          	  else {
+          	  msg1.add(searchInput.getText());
+             msg1.add(nemeEdit.getText());
+             msg1.add(result.get(0).getAuthor());
+             msg1.add(result.get(0).getGenre());
+             msg1.add(result.get(0).getDescription());
+             msg1.add(result.get(0).getPublisher());
+             msg1.add(result.get(0).getPrintdate());
+             msg1.add(""+result.get(0).getCopyQuantity());
+             msg1.add(result.get(0).getLocation());
+             msg1.add("UpdateBook");
+             result1 = (ArrayList<String>)IPController.client.Request(msg1);
+             if(result1.isEmpty())
+           	  JOptionPane.showMessageDialog(null, "Please check your book details !!");
+             else
+           	  JOptionPane.showMessageDialog(null, "Save succeeded");
+          	  }
+          	break ;
+          	
+          case "Author Name":
+              if(AuthorNameInput.getText().equals(""))
+          		   JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+          	  else {
+          	  msg1.add(searchInput.getText());
+             msg1.add(result.get(0).getBookName());
+             msg1.add(AuthorNameInput.getText());
+             msg1.add(result.get(0).getGenre());
+             msg1.add(result.get(0).getDescription());
+             msg1.add(result.get(0).getPublisher());
+             msg1.add(result.get(0).getPrintdate());
+             msg1.add(""+result.get(0).getCopyQuantity());
+             msg1.add(result.get(0).getLocation());
+             msg1.add("UpdateBook");
+             result1 = (ArrayList<String>)IPController.client.Request(msg1);
+             if(result1.isEmpty())
+           	  JOptionPane.showMessageDialog(null, "Please check your book details !!");
+             else
+           	  JOptionPane.showMessageDialog(null, "Save succeeded");
+          	  }
+          	break ;
+          	
+          case "Description":
+              if( DescEdit.getText().equals(""))
+          		   JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+          	  else {
+          	  msg1.add(searchInput.getText());
+             msg1.add(result.get(0).getBookName());
+             msg1.add(result.get(0).getAuthor());
+             msg1.add(result.get(0).getGenre());
+             msg1.add(DescEdit.getText());
+             msg1.add(result.get(0).getPublisher());
+             msg1.add(result.get(0).getPrintdate());
+             msg1.add(""+result.get(0).getCopyQuantity());
+             msg1.add(result.get(0).getLocation());
+             msg1.add("UpdateBook");
+             result1 = (ArrayList<String>)IPController.client.Request(msg1);
+             if(result1.isEmpty())
+           	  JOptionPane.showMessageDialog(null, "Please check your book details !!");
+             else
+           	  JOptionPane.showMessageDialog(null, "Save succeeded");
+          	  }
+          	break ;
+          	
+          case "Genre":
+              if(GenreEdit.getText().equals(""))
+          		   JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+          	  else {
+          	  msg1.add(searchInput.getText());
+             msg1.add(result.get(0).getBookName());
+             msg1.add(result.get(0).getAuthor());
+             msg1.add(GenreEdit.getText());
+             msg1.add(result.get(0).getDescription());
+             msg1.add(result.get(0).getPublisher());
+             msg1.add(result.get(0).getPrintdate());
+             msg1.add(""+result.get(0).getCopyQuantity());
+             msg1.add(result.get(0).getLocation());
+             msg1.add("UpdateBook");
+             result1 = (ArrayList<String>)IPController.client.Request(msg1);
+             if(result1.isEmpty())
+           	  JOptionPane.showMessageDialog(null, "Please check your book details !!");
+             else
+           	  JOptionPane.showMessageDialog(null, "Save succeeded");
+          	  }
+          	break ;
+          	
+          case "Publisher":
+              if(publisherEdit.getText().equals(""))
+          		   JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+          	  else {
+          	  msg1.add(searchInput.getText());
+             msg1.add(result.get(0).getBookName());
+             msg1.add(result.get(0).getAuthor());
+             msg1.add(result.get(0).getGenre());
+             msg1.add(result.get(0).getDescription());
+             msg1.add(publisherEdit.getText());
+             msg1.add(result.get(0).getPrintdate());
+             msg1.add(""+result.get(0).getCopyQuantity());
+             msg1.add(result.get(0).getLocation());
+             msg1.add("UpdateBook");
+             result1 = (ArrayList<String>)IPController.client.Request(msg1);
+             if(result1.isEmpty())
+           	  JOptionPane.showMessageDialog(null, "Please check your book details !!");
+             else
+           	  JOptionPane.showMessageDialog(null, "Save succeeded");
+          	  }
+          	break ;
+          	
+          case "Printdate":
+              if( printDateEdit.getText().equals(""))
+          		   JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+          	  else {
+          	  msg1.add(searchInput.getText());
+             msg1.add(result.get(0).getBookName());
+             msg1.add(result.get(0).getAuthor());
+             msg1.add(result.get(0).getGenre());
+             msg1.add(result.get(0).getDescription());
+             msg1.add(result.get(0).getPublisher());
+             msg1.add(printDateEdit.getText());
+             msg1.add(""+result.get(0).getCopyQuantity());
+             msg1.add(result.get(0).getLocation());
+             msg1.add("UpdateBook");
+             result1 = (ArrayList<String>)IPController.client.Request(msg1);
+             if(result1.isEmpty())
+           	  JOptionPane.showMessageDialog(null, "Please check your book details !!");
+             else
+           	  JOptionPane.showMessageDialog(null, "Save succeeded");
+          	  }
+          	break ;
+          	
+          case "Copy Quantity":;
+            if(cQuantyEdit.getText().equals(""))
+        		   JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+        	  else {
+        	msg1.add(searchInput.getText());
+           msg1.add(result.get(0).getBookName());
+           msg1.add(result.get(0).getAuthor());
+           msg1.add(result.get(0).getGenre());
+           msg1.add(result.get(0).getDescription());
+           msg1.add(result.get(0).getPublisher());
+           msg1.add(result.get(0).getPrintdate());
+           msg1.add(cQuantyEdit.getText());
+           msg1.add(result.get(0).getLocation());
+           msg1.add("UpdateBook");
+           result1 = (ArrayList<String>)IPController.client.Request(msg1);
+           if(result1.isEmpty())
+         	  JOptionPane.showMessageDialog(null, "Please check your book details !!");
+           else
+         	  JOptionPane.showMessageDialog(null, "Save succeeded");
+        	  }
+              break;
+              
+          case "Location Shelf":
+       	   if(locationEdit.getText().equals(""))
+        		   JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+        	  else {
+        	msg1.add(searchInput.getText());
+           msg1.add(result.get(0).getBookName());
+           msg1.add(result.get(0).getAuthor());
+           msg1.add(result.get(0).getGenre());
+           msg1.add(result.get(0).getDescription());
+           msg1.add(result.get(0).getPublisher());
+           msg1.add(result.get(0).getPrintdate());
+           msg1.add(""+result.get(0).getCopyQuantity());
+           msg1.add(locationEdit.getText());
+           msg1.add("UpdateBook");
+           result1 = (ArrayList<String>)IPController.client.Request(msg1);
+           if(result1.isEmpty())
+         	  JOptionPane.showMessageDialog(null, "Please check your book details !!");
+           else
+         	  JOptionPane.showMessageDialog(null, "Save succeeded");
+        	  }
+          	break ;
+          	
+        }
     }
     @FXML
     void serach(ActionEvent event) 
     {
-    	
     	 ArrayList<String> msg = new ArrayList<String>();
-         ArrayList<Book>  result = new ArrayList<Book>();
+         
+        
+         
          if(searchInput.getText().equals(""))
          {
         	comboEdit.setDisable(true);
@@ -455,6 +660,7 @@ public class UpdateBookController {
           System.out.println(result);
           if(result.size()>0)
           {
+                
         	comboEdit.setDisable(false);
           	edit.setDisable(false);
         	NameNotEdit.setText(result.get(0).getBookName());
@@ -497,8 +703,5 @@ public class UpdateBookController {
               locationEdit.setVisible(false);
           }
           }
-    	
     }
-
-
 }

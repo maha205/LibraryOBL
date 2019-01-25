@@ -346,6 +346,15 @@ public class EchoServer extends AbstractServer
 				e1.printStackTrace();
 			}
 	    	 break;
+	    	 
+	     case "UpdateBook":
+	    	 try {
+				result =(ArrayList<String>)UpdateBook(msg.get(0),msg.get(1),msg.get(2),msg.get(3),msg.get(4),msg.get(5),msg.get(6),msg.get(7),msg.get(8));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	          break ;
 	    }
 	    
 	    try {
@@ -1705,6 +1714,7 @@ public static ArrayList<String> sortDate(String Des)  throws SQLException
  	if(returnDate!=null) sortDate.add(returnDate);
  	return sortDate;
 }
+
 public static ArrayList<Book> SearchBookAndReturn(String BookID) throws SQLException 
 {
 
@@ -1729,5 +1739,59 @@ public static ArrayList<Book> SearchBookAndReturn(String BookID) throws SQLExcep
 		}
 		return UpdateBook;
 }
+public static ArrayList<String> UpdateBook(String BookID ,String BookName,String Author ,String genre ,String description,String publisher,String printdate,String copyQuantity1,String Location) throws SQLException 
+{
+  ArrayList<String> UpdateBook = new ArrayList<String>();
+  Statement stmt ,stmt1;
+  stmt = conn.createStatement();
+  Book bookUpdate= new Book(BookID ,BookName,Author ,genre ,description,publisher, printdate,Integer.parseInt(copyQuantity1),0, Location);
+  int copyQuantity ;
+  ResultSet rs = stmt.executeQuery("SELECT * FROM book WHERE bookID = '"+bookUpdate.getBookID()+"'");
+  if(rs.next()) 
+  {
+	  copyQuantity =rs.getInt(8) ;
+	 
+     if(bookUpdate.getCopyQuantity() < copyQuantity)
+     {
+    	 System.out.println("noooooooo");
+    	 return UpdateBook;
+     }
+       
+    
+  
+
+  stmt.executeUpdate("UPDATE book SET bookName ='"+bookUpdate.getBookName()+"' WHERE bookID = '"+bookUpdate.getBookID()+"';");
+  stmt.executeUpdate("UPDATE book SET AuthorName ='"+bookUpdate.getAuthor()+"' WHERE bookID = '"+bookUpdate.getBookID()+"';");
+  stmt.executeUpdate("UPDATE book SET genre ='"+bookUpdate.getGenre()+"' WHERE bookID = '"+bookUpdate.getBookID()+"';");
+  stmt.executeUpdate("UPDATE book SET description ='"+bookUpdate.getDescription()+"' WHERE bookID = '"+bookUpdate.getBookID()+"';");
+  stmt.executeUpdate("UPDATE book SET publisher ='"+bookUpdate.getPublisher()+"' WHERE bookID = '"+bookUpdate.getBookID()+"';");
+  stmt.executeUpdate("UPDATE book SET printdate ='"+bookUpdate.getPrintdate()+"' WHERE bookID = '"+bookUpdate.getBookID()+"';");
+  stmt.executeUpdate("UPDATE book SET copyQuantity ='"+bookUpdate.getCopyQuantity()+"' WHERE bookID = '"+bookUpdate.getBookID()+"';");
+ if( bookUpdate.getCopyQuantity() > copyQuantity) {
+  for(int i=copyQuantity ;i<=bookUpdate.getCopyQuantity();i++)
+  {
+	  String locationShelf = bookUpdate.getLocation() ,stutus = "available" ,copyID = "" +i;
+ 	   locationShelf += "-";
+ 	   locationShelf+= ""+ i  ;
+	   String ordercopy = "0";
+	    
+	   stmt1 = conn.createStatement();
+	   stmt1.executeUpdate("INSERT INTO copy (idcopy,locationShelf,status,bookID) VALUES('"+copyID+"','"+ locationShelf+"','"+stutus+"','"+bookUpdate.getBookID()+"')");
+       stmt1.executeUpdate("UPDATE copy SET orderBook ="+ordercopy+" WHERE  idcopy ='"+copyID+"' AND bookID ='"+bookUpdate.getBookID()+"';") ;
+  }}
+	  for(int i=1 ;i<bookUpdate.getCopyQuantity();i++)
+     {
+	  String locationShelf = bookUpdate.getLocation() ,stutus = "available" ,copyID = "" +i;
+  	   locationShelf += "-";
+  	   locationShelf+= ""+ i  ;
+ 	   String ordercopy = "0";
+	  stmt.executeUpdate("UPDATE copy SET locationShelf ='"+locationShelf+"' WHERE bookID = '"+bookUpdate.getBookID()+"' AND idcopy = '"+i+"';");
+     System.out.println("yesssssssssssssss");
+     }
+  }
+  UpdateBook.add("Updated");
+return UpdateBook;
+}
+  
 }
 //End of EchoServer class
