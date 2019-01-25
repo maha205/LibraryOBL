@@ -277,6 +277,66 @@ public class EchoServer extends AbstractServer
 			}
 	    	 System.out.println("Delete book");
 	          break;
+	          
+
+	      case "SearchByName"://Reem
+	    	  try {
+	    		  result=(ArrayList<String>) SearchFuncByName(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Name");
+	          break;
+	          
+	      case "SearchByGenre"://Reem
+	    	  try {
+	    		  result=(ArrayList<String>) SearchFuncByGenre(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Genre");
+	          break;
+	          
+	      case "SearchByDescription"://Reem
+	    	  try {
+	    		  result=(ArrayList<String>) SearchFuncByDescription(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Description");
+	          break;
+	          
+	      case "SearchByAuthor"://Reem
+	    	  try {
+	    		  result=(ArrayList<String>) SearchFuncByAuthor(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Author");
+	          break;
+	     case "SearchBookStatusAndLocation":
+	    	  try {
+	    		  result=(ArrayList<String>)SearchBookStatusAndLocation(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("Search Book By Author");
+	          break;
+	          
+	     case "sortDate":
+	    	  try {
+	    		  result=(ArrayList<String>) sortDate(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  System.out.println("sorting");
+	          break;
 	    }
 	    
 	    try {
@@ -338,7 +398,7 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
-    System.out.println(UpdateBook("123485697").get(0).toString());
+ //   System.out.println(UpdateBook("123485697").get(0).toString());
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -1380,6 +1440,263 @@ public static int LocedCard(String UserID) throws SQLException
 	 return 0;
 	 
 }
+////Reem
+public static ArrayList<String> SearchFuncByName(String Des)  throws SQLException 
+{
+	////Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	Statement stmt = conn.createStatement();
+
+	//stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE bookName = " + "'" + Des + "'");
+	while(rs1.next())//
+	{
+		String BookID = rs1.getString("bookID");
+		String BookName = rs1.getString("bookName");
+		String AuthorName = rs1.getString("AuthorName");
+		String genre = rs1.getString("genre");
+		String description = rs1.getString("description");
+		String publisher = rs1.getString("publisher");
+		String printdate = rs1.getString("printdate");
+		String copyNumber = ""+rs1.getInt("copyQuantity");
+		
+		//System.out.println("Search Book");
+		//for(int i = 0 ; i <8;i++) {
+		BookList.add(BookID);
+		BookList.add(BookName);
+		BookList.add(AuthorName);
+		BookList.add(genre);
+		BookList.add(description);
+		BookList.add(publisher);
+		BookList.add(printdate);
+		BookList.add(copyNumber);
+		ArrayList<String> copyData = SearchBookStatusAndLocation(BookID);
+		BookList.add(copyData.get(0));//status
+		BookList.add(copyData.get(1));//location
+		//}
+		//rs1.next();
+		//System.out.println(BookList+"test");
+		//return BookList;
+	}
+	//System.out.println("Error in Search Book");
+	System.out.println("Book List "+ BookList);
+	rs1.close();
+	return BookList;
+
+}
+
+
+////Reem
+public static ArrayList<String> SearchFuncByGenre(String Des)  throws SQLException 
+{
+	Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE genre = '"+Des+"';");
+	while(rs1.next())//
+	{
+		String BookID = rs1.getString("bookID");
+		String BookName = rs1.getString("bookName");
+		String AuthorName = rs1.getString("AuthorName");
+		String genre = rs1.getString("genre");
+		String description = rs1.getString("description");
+		String publisher = rs1.getString("publisher");
+		String printdate = rs1.getString("printdate");
+		String copyNumber = ""+rs1.getInt("copyQuantity");
+		
+		//System.out.println("Search Book");
+		//for(int i = 0 ; i <8;i++) {
+		BookList.add(BookID);
+		BookList.add(BookName);
+		BookList.add(AuthorName);
+		BookList.add(genre);
+		BookList.add(description);
+		BookList.add(publisher);
+		BookList.add(printdate);
+		BookList.add(copyNumber);
+		ArrayList<String> copyData = SearchBookStatusAndLocation(BookID);
+		BookList.add(copyData.get(0));//status
+		BookList.add(copyData.get(1));//location
+	}
+	System.out.println("Error in Search Book");
+	
+	rs1.close();
+	return BookList;
+
+}
+////Reem
+public static ArrayList<String> SearchFuncByDescription(String Des)  throws SQLException 
+{
+	Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE description = " + "'" + Des + "'");
+	while(rs1.next())//
+	{
+		String BookID = rs1.getString("bookID");
+		String BookName = rs1.getString("bookName");
+		String AuthorName = rs1.getString("AuthorName");
+		String genre = rs1.getString("genre");
+		String description = rs1.getString("description");
+		String publisher = rs1.getString("publisher");
+		String printdate = rs1.getString("printdate");
+		String copyNumber = ""+rs1.getInt("copyQuantity");
+		
+		//System.out.println("Search Book");
+		//for(int i = 0 ; i <8;i++) {
+		BookList.add(BookID);
+		BookList.add(BookName);
+		BookList.add(AuthorName);
+		BookList.add(genre);
+		BookList.add(description);
+		BookList.add(publisher);
+		BookList.add(printdate);
+		BookList.add(copyNumber);
+		ArrayList<String> copyData = SearchBookStatusAndLocation(BookID);
+		BookList.add(copyData.get(0));//status
+		BookList.add(copyData.get(1));//location
+	}
+	System.out.println("Error in Search Book");
+	
+	rs1.close();
+	return BookList;
+
+}
+
+
+/**
+ * @author Reem
+ * @param Des
+ * @return
+ * @throws SQLException
+ */
+public static ArrayList<String> SearchFuncByAuthor(String Des)  throws SQLException 
+{
+	Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE AuthorName = '"+Des+"';");
+	while(rs1.next())//
+	{
+		String BookID = rs1.getString("bookID");
+		String BookName = rs1.getString("bookName");
+		String AuthorName = rs1.getString("AuthorName");
+		String genre = rs1.getString("genre");
+		String description = rs1.getString("description");
+		String publisher = rs1.getString("publisher");
+		String printdate = rs1.getString("printdate");
+		String copyNumber = ""+rs1.getInt("copyQuantity");
+		
+		//System.out.println("Search Book");
+		//for(int i = 0 ; i <8;i++) {
+		BookList.add(BookID);
+		BookList.add(BookName);
+		BookList.add(AuthorName);
+		BookList.add(genre);
+		BookList.add(description);
+		BookList.add(publisher);
+		BookList.add(printdate);
+		BookList.add(copyNumber);
+		ArrayList<String> copyData = SearchBookStatusAndLocation(BookID);
+		BookList.add(copyData.get(0));//status
+		BookList.add(copyData.get(1));//location
+	}
+	System.out.println("Error in Search Book");
+	
+	rs1.close();
+	return BookList;
+
+}
+
+
+
+/**
+ * @author Reem
+ * @param Des
+ * @return
+ * @throws SQLException
+ */
+public static ArrayList<String> SearchBookStatusAndLocation(String Des)  throws SQLException 
+{
+	//Statement stmt;
+	ArrayList<String> BookList = new ArrayList<String>();
+	//stmt = conn.createStatement();
+// ResultSet rs1 = stmt.executeQuery("SELECT * FROM copy WHERE bookID=  " + "'" + Des + "'");
+
+	Statement stmt = conn.createStatement();
+	
+	//stmt = conn.createStatement();
+	ResultSet rs1 = stmt.executeQuery("SELECT * FROM copy WHERE bookID=  " + "'" + Des + "'");
+	//BookList=null;
+	
+	while(rs1.next())//
+	{
+		String locationShelf = rs1.getString("locationShelf");
+		String status = rs1.getString("status");
+		BookList.add(status);
+		BookList.add(locationShelf);
+			
+		
+	}
+		
+	
+	
+	System.out.println("Books status "+ BookList);
+	
+	rs1.close();
+	
+	return BookList;
+
+}
+
+//Reem 
+public static ArrayList<String> sortDate(String Des)  throws SQLException 
+{
+	ArrayList<String> sortDate =new ArrayList<String> ();
+	Statement stmt;
+    stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery("SELECT * FROM iteminloan WHERE BookID = '"+Des+ "'");
+	int min =999999  , diffDays ;
+	String returnDate =null;
+	 while(rs.next()) {
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+	    Calendar c1 = Calendar.getInstance();
+	    c1.setTime(new Date()); // Now use today date.
+	    String outputcurrentDate = currentDate.format(c1.getTime());
+	    System.out.println(outputcurrentDate);
+
+     try {
+		String date1 = outputcurrentDate;
+		String date2 = rs.getString(6);//return day ;
+		String format = "dd/MM/yyyy";
+
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+
+		Date dateObj1 = sdf.parse(date1);
+		Date dateObj2 = sdf.parse(date2);
+		System.out.println(dateObj1);
+		System.out.println(dateObj2 + "\n");
+
+		DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+
+		// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+		long diff = dateObj2.getTime() - dateObj1.getTime();
+
+		  diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+		  if(diffDays < min && diffDays >0)
+		  {
+			  min =diffDays;
+			  returnDate=date2;
+		  }
+		System.out.println("difference between days: " +diffDays);
+     } catch (Exception e) {
+			e.printStackTrace();
+		}
+     }
+ 	rs.close();
+ 	if(returnDate!=null) sortDate.add(returnDate);
+ 	return sortDate;
+}
 public static ArrayList<Book> UpdateBook(String BookID) throws SQLException 
 {
 
@@ -1400,6 +1717,5 @@ public static ArrayList<Book> UpdateBook(String BookID) throws SQLException
 		}
 		return UpdateBook;
 }
-
 }
 //End of EchoServer class

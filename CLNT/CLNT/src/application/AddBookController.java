@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -77,12 +79,15 @@ public class AddBookController
 	      msg.add("addBook");
 	      result = (ArrayList<String>)IPController.client.Request(msg);
 	      System.out.println(result);
+	      if(result.isEmpty())JOptionPane.showMessageDialog(null, "The book you are trying to add is exists !! !!");
 	      
-	      if(result.get(0).equals("newBookAdded"))
-	    	  System.out.println("yessssssssss");
+	      if(result.size()>0 &&result.get(0).equals("newBookAdded"))
+      		JOptionPane.showMessageDialog(null, "The book is Added");
+
 	      }
 	      else
-	    	  System.out.println("noooooooooooooooooooooo");
+      		JOptionPane.showMessageDialog(null, "Please fill out the fieldS !!");
+
 	    }
 
 	    @FXML
