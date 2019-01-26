@@ -809,29 +809,40 @@ public class EchoServer extends AbstractServer
      		}
      		return update;
      }
-      
-      public static ArrayList<String> ExternLoanBook(String Studentid ,String bookName)  throws SQLException 
+      public static ArrayList<String> ExternLoanBook(String Studentid ,String BookID)  throws SQLException 
       {
     	Statement stmt ,stmt2;
     	String oldDate = null;
     	int diffDays = 0;
    		ArrayList<String> Extern = new ArrayList<String>();
-   		String copyID = null  ,outputtwoWeeksAfter = null ,bookID=null ;
+   		String copyID = null  ,outputtwoWeeksAfter = null ,BookName=null ;
+   		int OrderNumber1=0;         
    		
+   		Statement stmt3;
+   		try   
+   	    {
+   			stmt3 = conn.createStatement();
+   			ResultSet rs3 = stmt3.executeQuery("SELECT * FROM book WHERE bookID ="+BookID);		
+   			while(rs3.next()) {
+   				OrderNumber1 = rs3.getInt(9);
+   			                  }
+   		} catch (SQLException e) {e.printStackTrace();}
+   		
+
  		stmt = conn.createStatement();
- 		ResultSet rs2 = stmt.executeQuery("SELECT * FROM book WHERE bookName ='"+bookName+"';");
+ 		ResultSet rs2 = stmt.executeQuery("SELECT bookName FROM book WHERE bookID ='"+BookID+"';");
  		
  		if(rs2.next())
  		{
- 			bookID=rs2.getString(1);
- 			System.out.println(bookID);
+ 			BookName=rs2.getString(1);
+ 			System.out.println(BookName);
  			ResultSet rs = stmt.executeQuery("SELECT * FROM iteminloan WHERE StudentID ="+Studentid);
  			if(rs.next())
  			{
  		     copyID = rs.getString(3);
  		     System.out.println(copyID);
  			
- 	 		  if( rs.getString(2).equals(bookID) && rs.getString(3).equals(copyID))//if the student loan the book
+ 	 		  if( rs.getString(2).equals(BookID) && rs.getString(3).equals(copyID) && OrderNumber1==0)//if the student loan the book
  	 		  {
  	 			stmt2 = conn.createStatement();
  	 			ResultSet rs1 = stmt2.executeQuery("SELECT * FROM copy WHERE idcopy ="+copyID);
@@ -878,17 +889,16 @@ public class EchoServer extends AbstractServer
  	 	 		
  	 	 		     Extern.add(outputtwoWeeksAfter);
  	 	 		     Extern.add(oldDate);
- 	 				 stmt.executeUpdate("UPDATE iteminloan SET loanDate ='"+outputcurrentDate+"' WHERE BookID ='"+bookID+"' AND CopyID ='"+copyID+"';");
- 	 				 stmt.executeUpdate("UPDATE iteminloan SET returnDate ='"+outputtwoWeeksAfter+"' WHERE BookID ='"+bookID+"' AND CopyID ='"+copyID+"';");
- 	 				 Extern.add("Extern");
- 	 				 
+ 	 	 		     Extern.add(BookName);
+ 	 				 stmt.executeUpdate("UPDATE iteminloan SET loanDate ='"+outputcurrentDate+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
+ 	 				 stmt.executeUpdate("UPDATE iteminloan SET returnDate ='"+outputtwoWeeksAfter+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
+
  	 			}
  	 		  }
  	 		   rs.close();
  	 		 return Extern;
  	 		}
  		}
- 		
    		return Extern;
       }
       
@@ -1255,23 +1265,46 @@ public static ArrayList<String> CheckStudentStatus(String StudentID)   ////JERIE
   
   }
 
-
 public static ArrayList<String> AddItemInLoan(String StudentID, String BookID, String CopyID, String Delay) ////JERIES
 {
 	String loanDate = "";
 	String returnDate = "";
 	
+	int OrderNumber1=0;         
+	
+	Statement stmt2;
+	try   
+    {
+		stmt2 = conn.createStatement();
+		ResultSet rs2 = stmt2.executeQuery("SELECT * FROM book WHERE bookID ="+BookID);		
+		while(rs2.next()) {
+			OrderNumber1 = rs2.getInt(9);
+		                  }
+	} catch (SQLException e) {e.printStackTrace();}
+	
+
+	   if(OrderNumber1>=1) {
+	    	 SimpleDateFormat twoWeeksAfter = new SimpleDateFormat("dd/MM/yyyy");
+	   	    Calendar c2 = Calendar.getInstance();
+	   	    c2.setTime(new Date()); // Now use today date.
+	  	    loanDate = twoWeeksAfter.format(c2.getTime());
+	   	    c2.add(Calendar.DATE, 3); // Adding 3 days
+	   	    returnDate = twoWeeksAfter.format(c2.getTime());
+	    }else
+	    	
+	    {
 	    SimpleDateFormat twoWeeksAfter = new SimpleDateFormat("dd/MM/yyyy");
 	    Calendar c2 = Calendar.getInstance();
 	    c2.setTime(new Date()); // Now use today date.
 	    loanDate = twoWeeksAfter.format(c2.getTime());
 	    c2.add(Calendar.DATE, 14); // Adding 14 days
 	    returnDate = twoWeeksAfter.format(c2.getTime());
-	
+	   }
 	    
-	
+	    
 	Statement stmt;
 	ArrayList<String> update = new ArrayList<String>();
+	
 	try 
 	{
 		stmt = conn.createStatement();
@@ -1283,8 +1316,10 @@ public static ArrayList<String> AddItemInLoan(String StudentID, String BookID, S
 	} catch (SQLException e) {e.printStackTrace();}
 	
 	Statement stmt1;
+	
 	try 
 	{
+	
 		stmt = conn.createStatement();
 		
 		stmt.executeUpdate("UPDATE copy SET status ='Loan' WHERE idcopy = '"+CopyID+"' AND bookID = '"+ BookID+"' ;");

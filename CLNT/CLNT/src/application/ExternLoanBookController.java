@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +22,6 @@ public class ExternLoanBookController
 	public EmailMsg email ;
 	@FXML
 	private Text dayMsg;   
-
 	 @FXML
     private Text dateReturn;
     @FXML
@@ -46,7 +47,10 @@ public class ExternLoanBookController
     @FXML
     void ExtendLoan(ActionEvent event) 
     {
-    	String newDate = null ,oldDate = null;
+    	if(bookID.getText().equals(""))
+    		JOptionPane.showMessageDialog(null, "Please fill out the field !!");
+    	else {
+    	String newDate = null ,oldDate = null ,nameBook =null;
     	ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
         msg.add(sigINController.StudentId);
@@ -56,8 +60,10 @@ public class ExternLoanBookController
         System.out.println(result);
         if(result.size() >0)
         {
+        	JOptionPane.showMessageDialog(null, "Extend successful");
         	newDate=result.get(0) ;
         	oldDate = result.get(1);
+        	nameBook=result.get(2);
         	
         	errorMsg.setVisible(false);
         	succesful.setVisible(true);
@@ -80,13 +86,13 @@ public class ExternLoanBookController
         	     email.TextBody ="Hello "+result1.get(i+1)+" ,\r\n" + 
         			"\r\n" + 
         			"Please note that student: \r\n" + 
-        			"ID : '"+sigINController.StudentId+"' \r\n" + 
+        			"ID : "+sigINController.StudentId+" \r\n" + 
         			"Extended his loan duration for the following book:\r\n" + 
-        			"Book Name\r\n" + 
-        			"Book Name : '"+bookID.getText()+"'\r\n" + 
-        			"Old return Date : '"+oldDate+"'\r\n" + 
+        			"Book Name : "+nameBook+" \r\n" + 
+        			"Book ID : "+bookID.getText()+"\r\n" + 
+        			"Old return Date : "+oldDate+"\r\n" + 
         			"\r\n" + 
-        			"New return date is: '"+newDate+"'\r\n" + 
+        			"New return date is: "+newDate+"\r\n" + 
         			"\r\n" + 
         			"Thank you,\r\n" + 
         			"ORT Braude Library";
@@ -97,12 +103,14 @@ public class ExternLoanBookController
         }
         else
         {
+        	JOptionPane.showMessageDialog(null, "Extend cannot be completed!!");
         	errorMsg.setVisible(true);
         	succesful.setVisible(false);
         	dayMsg.setVisible(false);
         	dateReturn.setVisible(false);
         	
         }
+    	}
     }
   
 

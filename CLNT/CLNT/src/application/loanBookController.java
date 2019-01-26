@@ -57,11 +57,10 @@ public class loanBookController
 	    @FXML
 	    private Text PUBLISHERLabel;
 
-
-
 	    @FXML
-	    void LoanFunc(ActionEvent event) throws IOException 
-	    {
+	    void LoanFunc(ActionEvent event) throws IOException {
+	    	
+	    	
 	    	if(BookID == "NO") {
 	    		JOptionPane.showMessageDialog(null, "Please search for a book");
 	    	}
@@ -72,9 +71,15 @@ public class loanBookController
 	    	       msg.add("SearchInCopy");
 	    	       result = (ArrayList<String>)IPController.client.Request(msg);
 	    	       System.out.println(result);
-	    	       if(!result.get(0).equals("NO"))
+	    	       if(!result.get(0).equals("NO")) { 
+	    	    	   System.out.println(result.get(0));
 	    	    	   bookstatus = 1;
+	    	       }else
+	    	       {
+	    	    	bookstatus=0;
+	    	       }
 	    	       String copyid = result.get(0);
+	    	       
 	    	       
 	    	       msg.clear();
 	    	       result.clear();
@@ -178,9 +183,8 @@ public class loanBookController
 	    	        	    	((Node)event.getSource()).getScene().getWindow().hide();
 	    	        	  		Stage primaryStage = new Stage();
 	    	        	  		FXMLLoader loader = new FXMLLoader();
-	    	        	  		IPController.backGui="loanBook";
 	    	        	  		Pane root = loader.load(getClass().getResource("/application/OrderBook.fxml").openStream());
-	    	        	  		primaryStage.setTitle("Order Book");
+	    	        	  		
 	    	        	  	 	 String StudentID = sigINController.StudentId ;
 		    	        		 ArrayList<String> msg1 = new ArrayList<String>();
 		    	        	     ArrayList<String>  result1 = new ArrayList<String>();
@@ -260,7 +264,7 @@ public class loanBookController
     @FXML
     void exitGui(ActionEvent event) throws IOException 
     {
-    	sigINController.LibrarianId=null;
+       sigINController.LibrarianId=null;
 	   sigINController.StudentId =null;
 	   sigINController.ManagementId =null ;
 	   ((Node)event.getSource()).getScene().getWindow().hide();
