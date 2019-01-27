@@ -20,7 +20,44 @@ public class LibrarianProfileController
 
     @FXML
     private Button logout;
+    
+    @FXML
+    void ExtendLoanDuration(ActionEvent event) {
+    	IPController.backGui="LibrarianProfile";
 
+    }
+
+    @FXML
+    void LibrarianInfo(ActionEvent event) {
+
+    }
+
+    @FXML
+    void LoanBook(ActionEvent event) throws IOException {
+    	IPController.backGui="LibrarianProfile";
+		 ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/loanBook.fxml").openStream());
+	  		primaryStage.setTitle("Loan Book");
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
+    }
+    @FXML
+    void searchBook(ActionEvent event) throws IOException {
+    	IPController.backGui="LibrarianProfile";
+		  ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/SearchBook.fxml").openStream());
+	  		primaryStage.setTitle("Search Book");
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
+    }
     @FXML
     void RemoveBook(ActionEvent event) throws IOException
     {

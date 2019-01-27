@@ -21,6 +21,7 @@
             <Button layoutX="54.0" layoutY="172.0" mnemonicParsing="false" onAction="#LibrarianDetails" prefHeight="31.0" prefWidth="140.0" text="Librarian's Details" />
             <Button layoutX="56.0" layoutY="217.0" mnemonicParsing="false" onAction="#ManagementInfo" text="Management Info" />
             <Button layoutX="555.0" layoutY="-1.0" mnemonicParsing="false" onAction="#editProfile" text="Edit Profile" />
+            <Button layoutX="56.0" layoutY="265.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="31.0" prefWidth="140.0" text="Search Book" />
          </children>
       </AnchorPane>
    </center>

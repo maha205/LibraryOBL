@@ -200,9 +200,15 @@ public class SearchBookController {
 										e.printStackTrace();
 										}
         	                           }
-        	                           
         	                           else {
-        	                        	   JOptionPane.showMessageDialog(null, "Please log-In !");
+        	                           //if(sigINController.LibrarianId!=null)
+        	                            int response = JOptionPane.showConfirmDialog(null, "Hello ,Are you a librarian?","",
+	    	        	        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+	    	        	    if (response == JOptionPane.NO_OPTION) {
+	    	        	      System.out.println("Yo can't lend the book , you must go to the librarian and lend the book ");
+	    	        	    } else if (response == JOptionPane.YES_OPTION) {
+        	                        
+        	                        	   JOptionPane.showMessageDialog(null, "Hello Librarian Please log-In !");
         	                        	   ((Node)event.getSource()).getScene().getWindow().hide();
             	                       Stage primaryStage = new Stage();
             	                       FXMLLoader loader = new FXMLLoader();
@@ -217,7 +223,7 @@ public class SearchBookController {
     										e.printStackTrace();
     										}
             	                           } 
-        	                         }});
+        	                           }}});
         	                          btncon.setOnAction(new EventHandler<ActionEvent>() {
            	                                        @Override
            	                                       public void handle(ActionEvent event) {
@@ -358,12 +364,6 @@ public class SearchBookController {
 
        Achor.getChildren().add(scroll);
        ArrayList<String> msg1 = new ArrayList<String>();
- 		//msg1.add(result.get(0));
- 	//	msg1.add(result.get(8));
- 	//	msg1.add("SearchBookStatusAndLocation");
- 	//	ArrayList<String>  result1 = new ArrayList<String>();
- 	//	result1 = (ArrayList<String>)IPController.client.Request(msg1);
- 	//	System.out.println(result1);
 
         for (int i=0;i < result.size();i+=10) 
         {
@@ -414,7 +414,11 @@ public class SearchBookController {
     	                           }
     	                           
     	                           else {
-    	                        	   JOptionPane.showMessageDialog(null, "Please log-In !");
+    	                        	   int response = JOptionPane.showConfirmDialog(null, "Hello ,", "Are you a librarian?",
+    	       	    	        	        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    	       	    	        	    if (response == JOptionPane.NO_OPTION) {
+    	       	    	        	      System.out.println("Yo can't lend the book , you must go to the librarian and lend the book ");
+    	       	    	        	    } else if (response == JOptionPane.YES_OPTION) {
     	                        	   ((Node)event.getSource()).getScene().getWindow().hide();
         	                       Stage primaryStage = new Stage();
         	                       FXMLLoader loader = new FXMLLoader();
@@ -429,7 +433,7 @@ public class SearchBookController {
 										e.printStackTrace();
 										}
         	                           } 
-    	                         }});
+    	                           }}});
     	                          btncon.setOnAction(new EventHandler<ActionEvent>() {
        	                                        @Override
        	                                       public void handle(ActionEvent event) {
@@ -624,7 +628,10 @@ public class SearchBookController {
     	                           }
     	                           
     	                           else {
-    	                        	   JOptionPane.showMessageDialog(null, "Please log-In !");
+    	                        	   int response = JOptionPane.showConfirmDialog(null, "Hello ,Are you a librarian?","",    	       	    	        	        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    	       	    	        	    if (response == JOptionPane.NO_OPTION) {
+    	       	    	        	      System.out.println("Yo can't lend the book , you must go to the librarian and lend the book ");
+    	       	    	        	    } else if (response == JOptionPane.YES_OPTION) {
     	                        	   ((Node)event.getSource()).getScene().getWindow().hide();
         	                       Stage primaryStage = new Stage();
         	                       FXMLLoader loader = new FXMLLoader();
@@ -639,7 +646,7 @@ public class SearchBookController {
 										e.printStackTrace();
 										}
         	                           } 
-    	                         }});
+    	                         }}});
     	                          btncon.setOnAction(new EventHandler<ActionEvent>() {
        	                                        @Override
        	                                       public void handle(ActionEvent event) {
@@ -835,7 +842,10 @@ public class SearchBookController {
     	                           }
     	                           
     	                           else {
-    	                        	   JOptionPane.showMessageDialog(null, "Please log-In !");
+    	                        	   int response = JOptionPane.showConfirmDialog(null, "Hello ,Are you a librarian?","",    	       	    	        	        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    	       	    	        	    if (response == JOptionPane.NO_OPTION) {
+    	       	    	        	      System.out.println("Yo can't lend the book , you must go to the librarian and lend the book ");
+    	       	    	        	    } else if (response == JOptionPane.YES_OPTION) {
     	                        	   ((Node)event.getSource()).getScene().getWindow().hide();
         	                       Stage primaryStage = new Stage();
         	                       FXMLLoader loader = new FXMLLoader();
@@ -850,7 +860,7 @@ public class SearchBookController {
 										e.printStackTrace();
 										}
         	                           } 
-    	                         }});
+    	                         }}});
     	                          btncon.setOnAction(new EventHandler<ActionEvent>() {
        	                                        @Override
        	                                       public void handle(ActionEvent event) {
