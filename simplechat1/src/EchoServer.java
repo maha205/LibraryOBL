@@ -4,6 +4,7 @@
 
 import java.io.*;
 import java.sql.*;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 //import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.Date;
 import Entity.Book;
 import Entity.Librarian ;
 import Entity.Student;
+import java.util.Date;
 /**
  * This class overrides some of the methods in the abstract 
  * superclass in order to give more functionality to the server.
@@ -68,6 +70,14 @@ public class EchoServer extends AbstractServer
 	    Object result = null;
 	    switch(msg.get(msg.size()-1))
 	    {
+	    case "UserAction":
+	    	result =(ArrayList<String>)UserAction(msg.get(0),msg.get(1));
+	    	break;
+	    	
+	    case "historyAction":
+	    	result =(ArrayList<String>)historyAction(msg.get(0));
+	    	break;
+	    	
 	      case "GetData":
 	    	  result =(ArrayList<String>)(printCUserData(msg.get(0)));
 			 System.out.println("Return User data");
@@ -434,6 +444,7 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
+ 
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -1948,6 +1959,45 @@ public static String ReturnBookName(String Bookid)
 	} catch (SQLException e) {e.printStackTrace();}
 	
   return  null;
+  }
+
+public static ArrayList<String> UserAction(String UserID , String Action)  
+{
+	Statement stmt =null;
+	ArrayList<String> userAction = new ArrayList<String>();
+try 
+	{
+	   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		String s=dateFormat.format(date).toString();
+		System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
+		stmt = conn.createStatement();
+		stmt.executeUpdate("INSERT INTO subscriberactions (subscriberID ,date,Action ) VALUES('"+UserID+"','"+s+"','"+Action+"')");
+		 userAction.add("insert");
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return userAction;
+  }
+
+
+
+public static ArrayList<String> historyAction(String UserID )  
+{
+	Statement stmt =null;
+	ArrayList<String> historyAction = new ArrayList<String>();
+   try 
+	{
+		stmt = conn.createStatement();
+		ResultSet rs=	stmt.executeQuery("SELECT *FROM subscriberactions WHERE subscriberID ='"+UserID+"' ");
+		while(rs.next())
+		{
+			historyAction.add(rs.getString(1));
+			historyAction.add(rs.getString(2));
+			historyAction.add(rs.getString(3));
+		}
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return historyAction;
   }
 
 }

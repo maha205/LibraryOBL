@@ -122,7 +122,15 @@ public class loanBookController
 	   	    	     		+ "\nBook Name:"+tmp.get(1)+""
 	   	    	     				+ "\nLoan Date:"+result.get(0)+""
 	   	    	     						+ "\nReturn Date:"+result.get(1)+"");
-	   	    	     
+	   	    	  
+	   	    	  
+	          		ArrayList<String> msg2 = new ArrayList<String>();
+	                  ArrayList<String>  result2 = new ArrayList<String>();
+	                  msg2.add(StudentID);
+	                  msg2.add("Lend Book");
+	                  msg2.add("UserAction");
+	                  result2 = (ArrayList<String>)IPController.client.Request(msg2);
+	          	
 	   	
 	   	    	  try{
 	   	            String host ="smtp.gmail.com" ;

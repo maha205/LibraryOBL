@@ -84,8 +84,16 @@ public class editStudentProfileController
         		result = (ArrayList<String>)IPController.client.Request(msg);
             	System.out.println(result);
             	emailTxt.clear();
-            	if(result.size()>0) 
+            	if(result.size()>0) {
+            		if(sigINController.StudentId!=null) {
+            		ArrayList<String> msg1 = new ArrayList<String>();
+                    ArrayList<String>  result1 = new ArrayList<String>();
+                    msg1.add(sigINController.StudentId);
+                    msg1.add("Edit Email");
+                    msg1.add("UserAction");
+                    result1 = (ArrayList<String>)IPController.client.Request(msg1);
             		JOptionPane.showMessageDialog(null, "Save succeeded");
+            	}}
             	else
             		JOptionPane.showMessageDialog(null, "something is wrong");
         	}
@@ -102,8 +110,15 @@ public class editStudentProfileController
     		result = (ArrayList<String>)IPController.client.Request(msg);
     	    System.out.println(result);
     	    phontTxt.clear();
-    	    if(result.size()>0) 
-            	JOptionPane.showMessageDialog(null, "Save succeeded");
+    	    if(result.size()>0) {
+    	    	if(sigINController.StudentId!=null) {
+            		ArrayList<String> msg1 = new ArrayList<String>();
+                    ArrayList<String>  result1 = new ArrayList<String>();
+                    msg1.add(sigINController.StudentId);
+                    msg1.add("Edit Phone Number");
+                    msg1.add("UserAction");
+                    result1 = (ArrayList<String>)IPController.client.Request(msg1);
+                    JOptionPane.showMessageDialog(null, "Save succeeded");}}
               else
             	JOptionPane.showMessageDialog(null, "something is wrong");
     	   }
@@ -123,8 +138,16 @@ public class editStudentProfileController
     	    oldPassTxt.clear();
     	    newPassTxt.clear();
     	    assertPassTxt.clear();
-    	    if(result.size()>0) 
+    	    if(result.size()>0) {
+    	    	if(sigINController.StudentId!=null) {
+            		ArrayList<String> msg1 = new ArrayList<String>();
+                    ArrayList<String>  result1 = new ArrayList<String>();
+                    msg1.add(sigINController.StudentId);
+                    msg1.add("Edit Password");
+                    msg1.add("UserAction");
+                    result1 = (ArrayList<String>)IPController.client.Request(msg1);
             	JOptionPane.showMessageDialog(null, "Save succeeded");
+    	    }}
             else
             	JOptionPane.showMessageDialog(null, "something is wrong");
     	}

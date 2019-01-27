@@ -169,6 +169,13 @@ public class returnBookController {
 			   System.out.println(result);
 			   JOptionPane.showMessageDialog(null, "You successfully returned the book.");
 			   
+			   ArrayList<String> msg1 = new ArrayList<String>();
+               ArrayList<String>  result1 = new ArrayList<String>();
+               msg1.add(StudentID);
+               msg1.add("Return Book");
+               msg1.add("UserAction");
+               result1 = (ArrayList<String>)IPController.client.Request(msg1);
+			   
 		    	
 		    }
 		    else { //RETURN ON TIME, To Do: Delete ITEMINLOAN row, change copy status to available
@@ -181,6 +188,14 @@ public class returnBookController {
 				   result = (ArrayList<String>)IPController.client.Request(msg);
 				   System.out.println(result);
 				   JOptionPane.showMessageDialog(null, "You successfully returned the book.");
+					
+	            		ArrayList<String> msg1 = new ArrayList<String>();
+	                    ArrayList<String>  result1 = new ArrayList<String>();
+	                    msg1.add(StudentID);
+	                    msg1.add("Return Book");
+	                    msg1.add("UserAction");
+	                    result1 = (ArrayList<String>)IPController.client.Request(msg1);
+	            
 	   }
     }
  }

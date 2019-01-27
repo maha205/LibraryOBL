@@ -136,6 +136,14 @@ public class ExternLoanBookController
         if(result.size() >0)
         {
         	JOptionPane.showMessageDialog(null, "Extend successful");
+        	if(sigINController.StudentId!=null) {
+        		ArrayList<String> msg1 = new ArrayList<String>();
+                ArrayList<String>  result1 = new ArrayList<String>();
+                msg1.add(sigINController.StudentId);
+                msg1.add("Extern Book");
+                msg1.add("UserAction");
+                result1 = (ArrayList<String>)IPController.client.Request(msg1);
+        	}
         	newDate=result.get(0) ;
         	oldDate = result.get(1);
         	nameBook=result.get(2);

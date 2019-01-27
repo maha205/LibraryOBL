@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,24 +12,12 @@
       <AnchorPane prefHeight="579.0" prefWidth="876.0" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Student!" />
-            <Text fill="#ae1d1d" layoutX="283.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Profile">
+            <Text fill="#ae1d1d" layoutX="283.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subscriber Profile">
                <font>
                   <Font name="System Bold Italic" size="37.0" />
                </font>
             </Text>
-            <TableView fx:id="loanedBooks" fixedCellSize="10.0" layoutX="18.0" layoutY="228.0" prefHeight="302.0" prefWidth="822.0">
-              <columns>
-                <TableColumn fx:id="bookNamecol" prefWidth="111.0" text="Book Name" />
-                <TableColumn fx:id="bookAuthorCol" prefWidth="108.0" text="Book Author" />
-                  <TableColumn fx:id="genreCol" minWidth="0.0" prefWidth="88.0" text="Genre" />
-                  <TableColumn fx:id="DescriptionCol" prefWidth="93.0" text="Description" />
-                  <TableColumn fx:id="PublisherCol" minWidth="0.0" prefWidth="96.0" text="Publisher" />
-                  <TableColumn fx:id="PrintDateCol" minWidth="0.0" prefWidth="115.0" text="Print Date" />
-                  <TableColumn fx:id="CopyNumberCol" prefWidth="115.0" text="Copy Number" />
-                  <TableColumn prefWidth="95.0" text="Quantity" />
-              </columns>
-            </TableView>
-            <Text fill="#ae1d1d" layoutX="292.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Current Loaned Books">
+            <Text fill="#ae1d1d" layoutX="283.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="System Bold Italic" size="17.0" />
                </font>
@@ -40,6 +27,8 @@
             <Button layoutX="674.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="17.0" prefWidth="107.0" text="Search Book" />
             <Button layoutX="518.0" layoutY="-1.0" mnemonicParsing="false" onAction="#ExtendLoanDuration" prefHeight="23.0" prefWidth="165.0" text="Extend Loan Duration" />
             <Button layoutX="416.0" layoutY="-1.0" mnemonicParsing="false" onAction="#showStudentInfo" text="Student Info" />
+            <TableView fx:id="loanedBooks" layoutX="36.0" layoutY="187.0" prefHeight="339.0" prefWidth="797.0" />
+            <Button layoutX="329.0" layoutY="156.0" mnemonicParsing="false" onAction="#historyShow" text="Click To Show Your history Action" />
          </children>
       </AnchorPane>
    </top>

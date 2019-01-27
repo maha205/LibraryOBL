@@ -148,7 +148,7 @@ public class OrderBookController
     {
     	if(!(loanBookController.OrderBookID.equals(null)) && !(loanBookController.OrderCopyID.equals(null)))
     	{   
-    	     String StudentID = sigINController.StudentId ;
+    	     String StudentID = loanBookController.StudentID ;
     		 ArrayList<String> msg = new ArrayList<String>();
     	     ArrayList<String>  result = new ArrayList<String>();
     	     msg.add(""+StudentID);
@@ -160,7 +160,14 @@ public class OrderBookController
     	     if(result.size()>0)
     	     {
     	    	 
-   	    	errorShow.setVisible(false);
+   	    	  errorShow.setVisible(false);
+        		ArrayList<String> msg1 = new ArrayList<String>();
+                ArrayList<String>  result1 = new ArrayList<String>();
+                msg1.add(StudentID);
+                msg1.add("Order Book");
+                msg1.add("UserAction");
+                result1 = (ArrayList<String>)IPController.client.Request(msg1);
+        	
    		 JOptionPane.showMessageDialog(null, "Thanks For Your Order! \r\n" +
     	    	 "We'll notify you when the book your ordered is available  \r\n" +
     	          "Thank you! Your order is saved in the system. \r\n" +

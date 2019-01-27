@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import TableView.itemInLoan;
+import TableView.subscriberActions;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,31 +28,51 @@ public class StudentProfileController {
 	 private Button signUp;
 	 
 	 @FXML
-	 private TableView<String> loanedBooks;
+	 private TableView<subscriberActions> loanedBooks;
 
-	    @FXML
-	    private TableColumn<String, String> bookNamecol;
+	  @FXML
+	  void historyShow(ActionEvent event) {
+// subscriberActions
+		  //STEP 1: Get relevant data from Server + Put it in ArrayList
+        //STEP 2: Create Columns and add data to TableView
+    	
+    	ArrayList<String> msg = new ArrayList<String>();
+        ArrayList<String>  result = new ArrayList<String>();
+        msg.add(sigINController.StudentId);
+        msg.add("historyAction");
+    	result = (ArrayList<String>)IPController.client.Request(msg);
+    	System.out.println(result);
+    	try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
+    	TableColumn SubscriberID = new TableColumn("Subscriber ID");
+    	SubscriberID.setMinWidth(200);
+    	TableColumn date= new TableColumn("Date "); 
+        date.setMinWidth(200);
+        TableColumn Action = new TableColumn("Action");
+        Action.setMinWidth(200);
+         
+         loanedBooks.getColumns().addAll(SubscriberID,date, Action);
+        
+    
+        final ObservableList<subscriberActions> data = FXCollections.observableArrayList();
+        
+        for (int i = 0; i < result.size(); i += 3) {
+         data.add(new subscriberActions(result.get(i),result.get(i+1), result.get(i + 2)));
+        }
+        
+        
+        SubscriberID.setCellValueFactory(new PropertyValueFactory<subscriberActions,String>("SubscriberID"));
+        
+        date.setCellValueFactory(new PropertyValueFactory<subscriberActions,String>("date"));
 
-	    @FXML
-	    private TableColumn<String, String> bookAuthorCol;
+        Action.setCellValueFactory(new PropertyValueFactory<subscriberActions,String>("Action"));
 
-	    @FXML
-	    private TableColumn<String, String> genreCol;
-
-	    @FXML
-	    private TableColumn<String, String> DescriptionCol;
-
-	    @FXML
-	    private TableColumn<String, String> PublisherCol;
-
-	    @FXML
-	    private TableColumn<String, String> PrintDateCol;
-
-	    @FXML
-	    private TableColumn<String, String> CopyNumberCol;
-
-	    @FXML
-	    private TableColumn<String, String> QuantityCol;
+         loanedBooks.setItems(data);
+	  }
 	    
 	    @FXML
 	    void showStudentInfo(ActionEvent event) throws IOException 
