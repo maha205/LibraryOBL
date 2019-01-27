@@ -1179,7 +1179,7 @@ public class EchoServer extends AbstractServer
         
   		return LibrarianEmail;
       }
-      public static ArrayList<String> LoanSearch(String BookName)   ////JERIES
+      public static ArrayList<String> LoanSearch(String BookID)   ////JERIES
       {
       	Statement stmt;
   		ArrayList<String> BookInfo = new ArrayList<String>();
@@ -1187,7 +1187,7 @@ public class EchoServer extends AbstractServer
   		{
   			stmt = conn.createStatement();
   			System.out.println("hi");
-  			ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE bookName = '"+BookName+"';");
+  			ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE bookID = '"+BookID+"';");
   			System.out.println("hi2");
   	 		if(rs1.next())
   	 		{

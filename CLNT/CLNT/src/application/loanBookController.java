@@ -32,8 +32,12 @@ public class loanBookController
 	public static String OrderBookID = null;
 	public static String OrderCopyID = null;
 	public static String BookID = "NO";
+	public static String StudentID ;
 	public static int bookstatus = 0, memberstatus = 0;
-	  @FXML
+
+    @FXML
+    private TextField userID;
+	@FXML
 	    private TextField BOOKNAMEField;
 
 	    @FXML
@@ -61,7 +65,7 @@ public class loanBookController
 	    void LoanFunc(ActionEvent event) throws IOException {
 	    	
 	    	
-	    	if(BookID == "NO") {
+	    	if(BookID == "NO" ||StudentID.equals("")) {
 	    		JOptionPane.showMessageDialog(null, "Please search for a book");
 	    	}
 	    	else {
@@ -84,7 +88,7 @@ public class loanBookController
 	    	       msg.clear();
 	    	       result.clear();
 	    	       
-	    	       msg.add(sigINController.StudentId);
+	    	       msg.add(StudentID);
 	    	       msg.add("CheckStudentStatus");
 	    	       result = (ArrayList<String>)IPController.client.Request(msg);
 	    	       StudentEmail = result.get(1);
@@ -104,14 +108,14 @@ public class loanBookController
 	    	        if(memberstatus == 1 && bookstatus == 1) {
 	    	        	msg.clear();
 	    	        	result.clear();
-	    	        	msg.add(sigINController.StudentId);
+	    	        	msg.add(StudentID);
 	    	        	msg.add(BookID);
 	    	        	msg.add(copyid);
 	    	        	msg.add("0");
 	    	        	msg.add("AddItemInLoan");
 	    	            result = (ArrayList<String>)IPController.client.Request(msg);
 	   	    	        System.out.println(result);
-	   	    	        
+	   	    	  
 	   	    	          
 	   	    	        
 	   	    	     JOptionPane.showMessageDialog(null, "Thank you! You successfully loaned the book."
@@ -185,7 +189,7 @@ public class loanBookController
 	    	        	  		FXMLLoader loader = new FXMLLoader();
 	    	        	  		Pane root = loader.load(getClass().getResource("/application/OrderBook.fxml").openStream());
 	    	        	  		
-	    	        	  	 	 String StudentID = sigINController.StudentId ;
+	    	        	  	 	
 		    	        		 ArrayList<String> msg1 = new ArrayList<String>();
 		    	        	     ArrayList<String>  result1 = new ArrayList<String>();
 		    	        	     msg1.add(""+StudentID);
@@ -210,12 +214,17 @@ public class loanBookController
 	    	        } //end else
 	    	  }
 	    	}
+	        
 	    }
 
 		@FXML
 	    void SearchFunc(ActionEvent event) throws IOException {
         String BookName = BOOKNAMEField.getText();
+        StudentID=userID.getText();
         BOOKNAMEField.clear();
+        userID.clear();
+        if(BookName.equals("") || StudentID.equals("")) JOptionPane.showMessageDialog(null, "Please fill out the fields !!");
+        else {
         ArrayList<String> msg = new ArrayList<String>();
         ArrayList<String>  result = new ArrayList<String>();
         msg.add(BookName);
@@ -242,7 +251,7 @@ public class loanBookController
         	DESCRIPTIONLabel.setText("");;
         	PUBLISHERLabel.setText("");  
           	}
-    
+        }
 	    }
 	    
 	    

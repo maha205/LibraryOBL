@@ -7,21 +7,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="355.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.loanBookController">
+<BorderPane prefHeight="421.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.loanBookController">
    <top>
-      <AnchorPane prefHeight="350.0" prefWidth="432.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="426.0" prefWidth="456.0" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Student!" />
-            <Text fill="#545454" layoutX="77.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loan A Book">
+            <Text fill="#545454" layoutX="114.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loan A Book">
                <font>
                   <Font name="Arial Bold" size="45.0" />
                </font>
             </Text>
-            <TextField fx:id="BOOKNAMEField" alignment="CENTER" layoutX="101.0" layoutY="130.0" prefHeight="31.0" prefWidth="195.0" promptText="Book's Name" />
-            <Button fx:id="SEARCHBtn" layoutX="302.0" layoutY="133.0" mnemonicParsing="false" onAction="#SearchFunc" text="Search" />
+            <TextField fx:id="BOOKNAMEField" alignment="CENTER" layoutX="124.0" layoutY="135.0" prefHeight="31.0" prefWidth="195.0" promptText="Book's ID" />
+            <Button fx:id="SEARCHBtn" layoutX="326.0" layoutY="120.0" mnemonicParsing="false" onAction="#SearchFunc" text="Search" />
             <Button fx:id="LOANBtn" layoutX="163.0" layoutY="304.0" mnemonicParsing="false" onAction="#LoanFunc" text="Loan Book" />
-            <Button layoutX="23.0" layoutY="275.0" mnemonicParsing="false" onAction="#BackGui" text="Back" />
-            <Button layoutX="25.0" layoutY="304.0" mnemonicParsing="false" onAction="#exitGui" text="Exit" />
+            <Button layoutX="2.0" layoutY="357.0" mnemonicParsing="false" onAction="#BackGui" text="Back" />
+            <Button layoutX="6.0" layoutY="388.0" mnemonicParsing="false" onAction="#exitGui" text="Exit" />
             <Text layoutX="115.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Name:">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -52,6 +52,9 @@
             <Text fx:id="GENRELabel" layoutX="188.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
             <Text fx:id="DESCRIPTIONLabel" layoutX="188.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
             <Text fx:id="PUBLISHERLabel" layoutX="188.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
+            <TextField fx:id="userID" alignment="CENTER" layoutX="122.0" layoutY="90.0" prefHeight="31.0" prefWidth="200.0" promptText="Subscriber ID" />
+            <Text layoutX="28.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subscriber ID:" />
+            <Text layoutX="28.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book's ID:" />
          </children>
       </AnchorPane>
    </top>
