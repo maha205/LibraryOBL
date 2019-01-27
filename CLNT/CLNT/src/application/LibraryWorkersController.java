@@ -84,7 +84,7 @@ public class LibraryWorkersController
     @FXML
     void nextLibrarian(ActionEvent event)
     {
-    	 if(i>=librarians.size())
+    	 if(i>=librarians.size()-1)
          {
        	  System.out.println("The last librarian");
        	  nextBtn.setDisable(true);

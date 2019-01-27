@@ -2,7 +2,9 @@ package application;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import Entity.Librarian;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 
 public class LibrarianProfileController 
 {
+	static private ArrayList<Librarian>  result1 ;
   @FXML
     private Button editBtn;
 
@@ -22,14 +25,40 @@ public class LibrarianProfileController
     private Button logout;
     
     @FXML
-    void ExtendLoanDuration(ActionEvent event) {
+    void ExtendLoanDuration(ActionEvent event) throws IOException {
     	IPController.backGui="LibrarianProfile";
-
+		 ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/ManualExtension.fxml").openStream());
+	  		primaryStage.setTitle("Loan Book");
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
     }
 
     @FXML
-    void LibrarianInfo(ActionEvent event) {
-
+    void LibrarianInfo(ActionEvent event) throws IOException {
+    	IPController.backGui="LibrarianProfile";
+		 ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/LibrarianInfo.fxml").openStream());
+	  		
+	  		ArrayList<String> msg1 = new ArrayList<String>();
+		     msg1.add("AllLibrarianWorker");
+		     result1=new ArrayList<Librarian>();
+		     result1 = (ArrayList<Librarian>)IPController.client.Request(msg1);
+		     
+		     LibrarianInfoController LibraryInfo = loader.getController();	
+		     LibraryInfo.loadLibraryInfo(result1);
+	  		
+	  		primaryStage.setTitle("Loan Book");
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
     }
 
     @FXML

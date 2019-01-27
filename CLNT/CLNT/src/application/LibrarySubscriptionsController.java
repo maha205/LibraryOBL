@@ -137,7 +137,7 @@ public class LibrarySubscriptionsController
     @FXML
     void next(ActionEvent event) 
     {
-    	if(i>=LibrarySubscriptions.size())
+    	if(i >=LibrarySubscriptions.size()-1)
         {
       	  System.out.println("The last librarian");
       	  nextBtn.setDisable(true);

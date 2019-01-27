@@ -355,6 +355,24 @@ public class EchoServer extends AbstractServer
 				e1.printStackTrace();
 			}
 	          break ;
+	          
+	     case "CheckLock":   /// JERIES
+	    	 result =(ArrayList<String>)CheckLock();
+		      break;
+	      case "CheckUnlock":   /// JERIES
+	    	  result =(ArrayList<String>) CheckUnlock();
+		      break;
+	      case "LockUser":   /// JERIES
+	    	  result =(ArrayList<String>)LockUser(msg.get(0));
+		      break;
+	      case "UnlockUser":   /// JERIES
+	    	  result =(ArrayList<String>)UnlockUser(msg.get(0));
+		      break;
+		      
+	      case "CheckitemLoan":
+	    	  result=(ArrayList<String>)CheckitemLoan(msg.get(0));
+	    	  break;
+	      	
 	    }
 	    
 	    try {
@@ -1827,6 +1845,110 @@ public static ArrayList<String> UpdateBook(String BookID ,String BookName,String
   UpdateBook.add("Updated");
 return UpdateBook;
 }
-  
+public static ArrayList<String> CheckLock()   ////JERIES
+{
+	Statement stmt1;
+	ArrayList<String> LockStudents = new ArrayList<String>();
+	try 
+	{
+		stmt1 = conn.createStatement();
+		ResultSet rs = stmt1.executeQuery("SELECT StudentId, StudentName, Email, Delay FROM student WHERE Delay > '2' AND StatusMembership<>'Locked';");
+		int counter = 0;
+		while(rs.next()) {
+		LockStudents.add(rs.getString(1));
+		LockStudents.add(rs.getString(2));
+		LockStudents.add(rs.getString(3));
+		LockStudents.add(String.valueOf(rs.getInt(4)));
+		}
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return LockStudents;
+  }
+
+public static ArrayList<String> LockUser(String StudentID)   ////JERIES
+{
+	Statement stmt1;
+	ArrayList<String> res = new ArrayList<String>();
+	try 
+	{
+		stmt1 = conn.createStatement();
+		stmt1.executeUpdate("UPDATE student SET StatusMembership = 'Locked' WHERE StudentId = '"+StudentID+"';");
+		res.add("Successfully locked user");
+	} catch (SQLException e) {e.printStackTrace();}
+  return res;
+  }
+
+
+public static ArrayList<String> CheckUnlock()   ////JERIES
+{
+	Statement stmt1;
+	ArrayList<String> UnlockStudents = new ArrayList<String>();
+	try 
+	{
+		stmt1 = conn.createStatement();
+		ResultSet rs = stmt1.executeQuery("SELECT StudentId, StudentName, Email, Delay FROM student WHERE StatusMembership = 'Locked';");
+		while(rs.next()) {
+			UnlockStudents.add(rs.getString(1));
+			UnlockStudents.add(rs.getString(2));
+			UnlockStudents.add(rs.getString(3));
+			UnlockStudents.add(String.valueOf(rs.getInt(4)));
+		}
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return UnlockStudents;
+  }
+
+
+public static ArrayList<String> UnlockUser(String StudentID)   ////JERIES
+{
+	Statement stmt1;
+	ArrayList<String> res = new ArrayList<String>();
+	try 
+	{
+		stmt1 = conn.createStatement();
+		stmt1.executeUpdate("UPDATE student SET StatusMembership = 'Active', Delay = '0' WHERE StudentId = '"+StudentID+"';");
+		res.add("Successfully locked user");
+	} catch (SQLException e) {e.printStackTrace();}
+  return res;
+  }
+
+public static ArrayList<String> CheckitemLoan(String Studentid)   
+{
+	Statement stmt1;
+	ArrayList<String> itemLoan = new ArrayList<String>();
+	try 
+	{
+		stmt1 = conn.createStatement();
+		ResultSet rs = stmt1.executeQuery("SELECT *FROM iteminloan WHERE StudentID ='"+Studentid+"' ");
+		int counter = 0;
+		while(rs.next()) {
+			itemLoan.add(rs.getString(1));
+			itemLoan.add(rs.getString(2));
+			itemLoan.add(rs.getString(3));
+			itemLoan.add(rs.getString(5));
+			itemLoan.add(rs.getString(6));
+			itemLoan.add(ReturnBookName(rs.getString(2)));
+		}
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return itemLoan;
+  }
+public static String ReturnBookName(String Bookid)  
+{
+	Statement stmt1;
+	ArrayList<String> bookName = new ArrayList<String>();
+	try 
+	{
+		stmt1 = conn.createStatement();
+		ResultSet rs = stmt1.executeQuery("SELECT *FROM book WHERE bookID ='"+Bookid+"' ");
+		int counter = 0;
+		if(rs.next()) {
+			return (rs.getString(2));
+		}
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return  null;
+  }
+
 }
 //End of EchoServer class

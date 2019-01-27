@@ -52,7 +52,7 @@ public class ManagementInfoController
     @FXML
     void editProfile(ActionEvent event) throws IOException 
     {
-    	IPController.backGui="ManagementInfo";
+    	//IPController.backGui="ManagementInfo";
     	((Node)event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();

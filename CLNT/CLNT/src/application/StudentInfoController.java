@@ -59,7 +59,7 @@ public class StudentInfoController
     @FXML
     void editProfile(ActionEvent event) throws IOException 
     {
-    	IPController.backGui="StudentInfo";
+    	//IPController.backGui="StudentInfo";
     	((Node)event.getSource()).getScene().getWindow().hide();
   		Stage primaryStage = new Stage();
   		FXMLLoader loader = new FXMLLoader();
