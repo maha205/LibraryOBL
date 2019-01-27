@@ -21,6 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class StudentProfileController {
+	
 	 @FXML
 	 private Button edit;
 
@@ -32,7 +33,7 @@ public class StudentProfileController {
 
 	  @FXML
 	  void historyShow(ActionEvent event) {
-// subscriberActions
+     // subscriberActions
 		  //STEP 1: Get relevant data from Server + Put it in ArrayList
         //STEP 2: Create Columns and add data to TableView
     	
@@ -61,7 +62,7 @@ public class StudentProfileController {
         final ObservableList<subscriberActions> data = FXCollections.observableArrayList();
         
         for (int i = 0; i < result.size(); i += 3) {
-         data.add(new subscriberActions(result.get(i),result.get(i+1), result.get(i + 2)));
+         data.add(new subscriberActions(result.get(i),result.get(i+1), result.get(i+2)));
         }
         
         

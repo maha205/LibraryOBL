@@ -100,24 +100,6 @@ public class LibrarySubscriptionsController
     }
 
     @FXML
-    void editStudentProfile(ActionEvent event) throws IOException
-    {
-    	sigINController.StudentId =SubscriptionID.getText();
-    	System.out.println(sigINController.StudentId);
-    	 IPController.backGui ="LibrarySubscriptions";
-    	 
-    	((Node)event.getSource()).getScene().getWindow().hide();
-  		Stage primaryStage = new Stage();
-  		FXMLLoader loader = new FXMLLoader();
-  		Pane root = loader.load(getClass().getResource("/application/editStudentProfile.fxml").openStream());
-  		primaryStage.setTitle("Edit Student Profile");
-  		Scene scene = new Scene(root);			
-  		
-  		primaryStage.setScene(scene);		
-  		primaryStage.show();
-    }
-
-    @FXML
     void logout(ActionEvent event) throws IOException 
     {
     	sigINController.LibrarianId=null;

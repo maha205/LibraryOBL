@@ -67,7 +67,6 @@
             </Text>
             <Button fx:id="nextBtn" layoutX="353.0" layoutY="430.0" mnemonicParsing="false" onAction="#next" text="&gt;&gt;" />
             <Button fx:id="prevBtn" layoutX="296.0" layoutY="430.0" mnemonicParsing="false" onAction="#prv" text="&lt;&lt;" />
-            <Button layoutX="252.0" layoutY="469.0" mnemonicParsing="false" onAction="#editStudentProfile" text="Edit Subscription Profile" />
             <Button layoutX="14.0" layoutY="517.0" mnemonicParsing="false" onAction="#back" text="Back" />
             <Button layoutX="568.0" layoutY="517.0" mnemonicParsing="false" onAction="#logout" text="Log-Out" />
          </children>

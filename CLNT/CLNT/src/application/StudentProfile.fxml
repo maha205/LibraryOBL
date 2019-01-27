@@ -27,7 +27,7 @@
             <Button layoutX="674.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="17.0" prefWidth="107.0" text="Search Book" />
             <Button layoutX="518.0" layoutY="-1.0" mnemonicParsing="false" onAction="#ExtendLoanDuration" prefHeight="23.0" prefWidth="165.0" text="Extend Loan Duration" />
             <Button layoutX="416.0" layoutY="-1.0" mnemonicParsing="false" onAction="#showStudentInfo" text="Student Info" />
-            <TableView fx:id="loanedBooks" layoutX="36.0" layoutY="187.0" prefHeight="339.0" prefWidth="797.0" />
+            <TableView fx:id="loanedBooks" layoutX="153.0" layoutY="203.0" prefHeight="308.0" prefWidth="595.0" />
             <Button layoutX="329.0" layoutY="156.0" mnemonicParsing="false" onAction="#historyShow" text="Click To Show Your history Action" />
          </children>
       </AnchorPane>

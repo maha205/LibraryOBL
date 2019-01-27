@@ -63,24 +63,6 @@ public class LibraryWorkersController
     	LibrarianRole.setText(librarians.get(0).getLibrarianRole());
     	LibrarianOrganizationalAffiliation.setText(librarians.get(0).getLibrarianOrganizationalAffiliation());
     }
-    
-    @FXML
-    void EditLibrarianInfo(ActionEvent event) throws IOException
-    {
-    	sigINController.LibrarianId =LibrarianID.getText();
-    	System.out.println(sigINController.LibrarianId);
-    	 IPController.backGui ="LibraryWorkers";
-    	 
-    	((Node)event.getSource()).getScene().getWindow().hide();
-  		Stage primaryStage = new Stage();
-  		FXMLLoader loader = new FXMLLoader();
-  		Pane root = loader.load(getClass().getResource("/application/LibrarianEditProfile.fxml").openStream());
-  		primaryStage.setTitle("Edit Librarian Profile");
-  		Scene scene = new Scene(root);			
-  		
-  		primaryStage.setScene(scene);		
-  		primaryStage.show();
-    }
     @FXML
     void nextLibrarian(ActionEvent event)
     {

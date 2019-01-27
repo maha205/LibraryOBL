@@ -62,7 +62,6 @@
             <Button fx:id="nextBtn" layoutX="381.0" layoutY="486.0" mnemonicParsing="false" onAction="#nextLibrarian" text="&gt;&gt;" />
             <Button layoutX="612.0" layoutY="613.0" mnemonicParsing="false" onAction="#logout" text="Log-Out" />
             <Button layoutX="22.0" layoutY="619.0" mnemonicParsing="false" onAction="#back" text="Back" />
-            <Button layoutX="312.0" layoutY="533.0" mnemonicParsing="false" onAction="#EditLibrarianInfo" text="Edit Librarian Info" />
             <Text fill="#12ae72" layoutX="180.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Librarian ID:">
                <font>
                   <Font name="System Bold" size="19.0" />
