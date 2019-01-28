@@ -14,6 +14,7 @@ import java.util.Date;
 import Entity.Book;
 import Entity.Librarian ;
 import Entity.Student;
+import Entity.ReportActivity;
 /**
  * This class overrides some of the methods in the abstract 
  * superclass in order to give more functionality to the server.
@@ -379,6 +380,10 @@ public class EchoServer extends AbstractServer
 	      case "CheckitemLoan":
 	    	  result=(ArrayList<String>)CheckitemLoan(msg.get(0));
 	    	  break;
+	    	  
+	      case "ReportActivity":
+	    	  result=(ArrayList<ReportActivity>)ReportActivity() ;
+	    	  break ;
 	      	
 	    }
 	    
@@ -1991,6 +1996,23 @@ public static ArrayList<String> historyAction(String UserID )
 			historyAction.add(rs.getString(1));
 			historyAction.add(rs.getString(2));
 			historyAction.add(rs.getString(3));
+		}
+	} catch (SQLException e) {e.printStackTrace();}
+	
+  return historyAction;
+ }
+
+public static ArrayList<ReportActivity> ReportActivity()  
+{
+	Statement stmt =null;
+	ArrayList<ReportActivity> historyAction = new ArrayList<ReportActivity>();
+   try 
+	{
+		stmt = conn.createStatement();
+		ResultSet rs=	stmt.executeQuery("SELECT *FROM reportaction ");
+		while(rs.next())
+		{
+			historyAction.add(new ReportActivity(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
 		}
 	} catch (SQLException e) {e.printStackTrace();}
 	

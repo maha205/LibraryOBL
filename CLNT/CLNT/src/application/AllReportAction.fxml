@@ -20,7 +20,7 @@
                </font>
             </Text>
             <Button layoutX="64.0" layoutY="727.0" mnemonicParsing="false" text="Button" />
-            <TableView fx:id="ReportTable" layoutX="14.0" layoutY="208.0" onMouseClicked="#selectItem" prefHeight="580.0" prefWidth="1431.0">
+            <TableView fx:id="ReportTable" layoutX="14.0" layoutY="208.0" prefHeight="580.0" prefWidth="1431.0">
               <columns>
                   <TableColumn fx:id="reportDate" prefWidth="132.00003051757812" text="Report Date" />
                 <TableColumn fx:id="activeSubscribers" prefWidth="221.0" text="Number Of Active Subscribers" />
@@ -45,6 +45,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
+            <Button layoutX="64.0" layoutY="160.0" mnemonicParsing="false" onAction="#viewAgain" text="To view again" />
          </children>
       </AnchorPane>
    </top>

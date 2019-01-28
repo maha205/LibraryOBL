@@ -1,7 +1,9 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import Entity.ReportActivity;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ReportActivityLogController {
+public class ReportActivityController {
 
 	private static String back =IPController.backGui;
     @FXML
@@ -40,8 +42,31 @@ public class ReportActivityLogController {
     private ComboBox<String> comboYear;
 
     @FXML
-    void ActivityLog(ActionEvent event) {
-
+    void ActivityLog(ActionEvent event) throws IOException {
+    	IPController.backGui="ReportActivity";
+		  ((Node)event.getSource()).getScene().getWindow().hide();
+	  		Stage primaryStage = new Stage();
+	  		FXMLLoader loader = new FXMLLoader();
+	  		Pane root = loader.load(getClass().getResource("/application/AllReportAction.fxml").openStream());
+	  		
+	  		//ReportActivity
+	  		ArrayList<String> msg = new ArrayList<String>();
+	        ArrayList<ReportActivity>  result = new ArrayList<ReportActivity>();
+	        msg.add("ReportActivity");
+	    	result = (ArrayList<ReportActivity>)IPController.client.Request(msg);
+	    	System.out.println(result);
+	  		
+  
+	    	AllReportActionController  reports = loader.getController();	
+		 	
+	    	reports.loadReports(result);
+	  		
+	  		
+	  		primaryStage.setTitle("Report Activity Log");
+	  		Scene scene = new Scene(root);			
+	  		
+	  		primaryStage.setScene(scene);		
+	  		primaryStage.show();
     }
 
     @FXML

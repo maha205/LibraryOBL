@@ -23,7 +23,7 @@ public class ManagementProfileController
 		  ((Node)event.getSource()).getScene().getWindow().hide();
 	  		Stage primaryStage = new Stage();
 	  		FXMLLoader loader = new FXMLLoader();
-	  		Pane root = loader.load(getClass().getResource("/application/AllReportAction.fxml").openStream());
+	  		Pane root = loader.load(getClass().getResource("/application/ReportActivity.fxml").openStream());
 	  		primaryStage.setTitle("Report Activity Log");
 	  		Scene scene = new Scene(root);			
 	  		

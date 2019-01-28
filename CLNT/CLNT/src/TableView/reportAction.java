@@ -9,15 +9,28 @@ public class reportAction
 	SimpleStringProperty lockedSubscribers;
 	SimpleStringProperty copiesNumber;
 	SimpleStringProperty delayReurning;
+	SimpleStringProperty reportDate;
 	
-	public reportAction(String activeSubscribers,String frozenSubscribers, String lockedSubscribers, String copiesNumber,String delayReurning) {
+	
+	public reportAction(String activeSubscribers,String frozenSubscribers, String lockedSubscribers, String copiesNumber,String delayReurning,String reportDate) {
 		this.activeSubscribers = new SimpleStringProperty(activeSubscribers);
 		this.frozenSubscribers=new SimpleStringProperty(frozenSubscribers);
 		this.lockedSubscribers= new SimpleStringProperty(lockedSubscribers);
 	    this.copiesNumber = new SimpleStringProperty(copiesNumber);
 	    this.delayReurning = new SimpleStringProperty(delayReurning);
+	    this. reportDate = new SimpleStringProperty( reportDate);
 	}
 
+	public String getReportDate() {
+		return reportDate.get();
+	}
+
+	/**
+	 * @param activeSubscribers the activeSubscribers to set
+	 */
+	public void setReportDate(SimpleStringProperty reportDate) {
+		this.reportDate = reportDate;
+	}
 	/**
 	 * @return the activeSubscribers
 	 */
