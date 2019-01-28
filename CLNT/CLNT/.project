@@ -20,11 +20,4 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>PDFs</name>
-			<type>2</type>
-			<location>C:/Users/Maha Gazalen/Desktop/PDFs</location>
-		</link>
-	</linkedResources>
 </projectDescription>
