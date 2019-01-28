@@ -17,13 +17,14 @@
                </font>
             </Text>
             <Button layoutX="535.0" layoutY="451.0" mnemonicParsing="false" onAction="#logout" text="Log-out" />
-            <Button layoutX="56.0" layoutY="126.0" mnemonicParsing="false" onAction="#StudentDetails" prefHeight="31.0" prefWidth="184.0" text="Subscriber 's Details" />
-            <Button layoutX="54.0" layoutY="172.0" mnemonicParsing="false" onAction="#LibrarianDetails" prefHeight="31.0" prefWidth="183.0" text="Librarian's Details" />
-            <Button layoutX="56.0" layoutY="217.0" mnemonicParsing="false" onAction="#ManagementInfo" prefHeight="31.0" prefWidth="180.0" text="Management Info" />
+            <Button layoutX="126.0" layoutY="126.0" mnemonicParsing="false" onAction="#StudentDetails" prefHeight="31.0" prefWidth="184.0" text="Subscriber 's Details" />
+            <Button layoutX="332.0" layoutY="126.0" mnemonicParsing="false" onAction="#LibrarianDetails" prefHeight="31.0" prefWidth="183.0" text="Librarian's Details" />
+            <Button layoutX="242.0" layoutY="297.0" mnemonicParsing="false" onAction="#ManagementInfo" prefHeight="31.0" prefWidth="180.0" text="Management Info" />
             <Button layoutX="555.0" layoutY="-1.0" mnemonicParsing="false" onAction="#editProfile" text="Edit Profile" />
-            <Button layoutX="56.0" layoutY="265.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="31.0" prefWidth="182.0" text="Search Book" />
-            <Button layoutX="56.0" layoutY="315.0" mnemonicParsing="false" onAction="#lockCard" prefHeight="31.0" prefWidth="183.0" text="Lock Subscriber Card" />
-            <Button layoutX="56.0" layoutY="358.0" mnemonicParsing="false" onAction="#unlockCard" text="Un-Lock Subscriber Card" />
+            <Button layoutX="333.0" layoutY="179.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="31.0" prefWidth="182.0" text="Search Book" />
+            <Button layoutX="127.0" layoutY="179.0" mnemonicParsing="false" onAction="#lockCard" prefHeight="31.0" prefWidth="183.0" text="Lock Subscriber Card" />
+            <Button layoutX="126.0" layoutY="233.0" mnemonicParsing="false" onAction="#unlockCard" text="Un-Lock Subscriber Card" />
+            <Button layoutX="333.0" layoutY="233.0" mnemonicParsing="false" onAction="#ActivityReport" prefHeight="31.0" prefWidth="183.0" text=" Activity Log Report" />
          </children>
       </AnchorPane>
    </center>

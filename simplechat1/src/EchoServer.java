@@ -6,17 +6,14 @@ import java.io.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-//import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import ocsf.server.*;
 import java.util.*;
 import java.util.Date;
-
 import Entity.Book;
 import Entity.Librarian ;
 import Entity.Student;
-import java.util.Date;
 /**
  * This class overrides some of the methods in the abstract 
  * superclass in order to give more functionality to the server.
@@ -444,7 +441,7 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
- 
+    
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -903,7 +900,6 @@ public class EchoServer extends AbstractServer
  	 			 diffDays = (int) (diff / (24 * 60 * 60 * 1000));
  	 			System.out.println("difference between days: " + diffDays);
 
-
  	 		} catch (Exception e) {
  	 			e.printStackTrace();
  	 		}
@@ -914,7 +910,7 @@ public class EchoServer extends AbstractServer
  	 	 		    SimpleDateFormat twoWeeksAfter = new SimpleDateFormat("dd/MM/yyyy");
  	 	 		    Calendar c2 = Calendar.getInstance();
  	 	 		    c2.setTime(new Date()); // Now use today date.
- 	 	 		    c2.add(Calendar.DATE, 14); // Adding 14 days
+ 	 	 		    c2.add(Calendar.DATE, 7); // Adding 14 days
  	 	 		    outputtwoWeeksAfter = twoWeeksAfter.format(c2.getTime());
  	 	 		
  	 	 		     Extern.add(outputtwoWeeksAfter);
@@ -1999,7 +1995,7 @@ public static ArrayList<String> historyAction(String UserID )
 	} catch (SQLException e) {e.printStackTrace();}
 	
   return historyAction;
-  }
+ }
 
 }
 //End of EchoServer class

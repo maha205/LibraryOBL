@@ -33,8 +33,10 @@ public class IPController
     	 if(ipaddr.getText().equals("")|| portTxt.getText().equals("")) error.setVisible(true);
     	backGui ="IP";
     	if(ipaddr.getText().equals(null) || portTxt.getText().equals(null)) IPError() ;
-        Config.getConfig().setHost(ipaddr.getText());
-        Config.getConfig().setPort(Integer.parseInt(portTxt.getText()));
+        //Config.getConfig().setHost(ipaddr.getText());
+        //Config.getConfig().setPort(Integer.parseInt(portTxt.getText()));
+        Config.getConfig().setHost("localhost");
+        Config.getConfig().setPort(Integer.parseInt("5555"));
     	Config cfg = Config.getConfig();
 		if (client != null)
 		{
