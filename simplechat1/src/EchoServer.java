@@ -145,7 +145,7 @@ public class EchoServer extends AbstractServer
 		      
 	      case "ExtendLoan":
 			try {
-				result =(ArrayList<String>) ExternLoanBook(msg.get(0),msg.get(1));
+				result =(ArrayList<String>) ExternLoanBook(msg.get(0),msg.get(1),msg.get(2));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -838,13 +838,13 @@ public class EchoServer extends AbstractServer
      		}
      		return update;
      }
-      public static ArrayList<String> ExternLoanBook(String Studentid ,String BookID)  throws SQLException 
+      public static ArrayList<String> ExternLoanBook(String Studentid ,String BookID,String copyID)  throws SQLException 
       {
     	Statement stmt ,stmt2;
     	String oldDate = null;
     	int diffDays = 0;
    		ArrayList<String> Extern = new ArrayList<String>();
-   		String copyID = null  ,outputtwoWeeksAfter = null ,BookName=null ;
+   		String outputtwoWeeksAfter = null ,BookName=null ;
    		int OrderNumber1=0;         
    		
    		Statement stmt3;
@@ -865,16 +865,16 @@ public class EchoServer extends AbstractServer
  		{
  			BookName=rs2.getString(1);
  			System.out.println(BookName);
- 			ResultSet rs = stmt.executeQuery("SELECT * FROM iteminloan WHERE StudentID ="+Studentid);
+ 			ResultSet rs = stmt.executeQuery("SELECT * FROM iteminloan WHERE StudentID ='"+Studentid+"' AND BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
  			if(rs.next())
  			{
- 		     copyID = rs.getString(3);
+ 		  //   copyID = rs.getString(3);
  		     System.out.println(copyID);
  			
  	 		  if( rs.getString(2).equals(BookID) && rs.getString(3).equals(copyID) && OrderNumber1==0)//if the student loan the book
  	 		  {
  	 			stmt2 = conn.createStatement();
- 	 			ResultSet rs1 = stmt2.executeQuery("SELECT * FROM copy WHERE idcopy ="+copyID);
+ 	 			ResultSet rs1 = stmt2.executeQuery("SELECT * FROM copy WHERE idcopy ='"+copyID+"' AND bookID ="+BookID );
  	 			
  	 	        SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
  	 		    Calendar c1 = Calendar.getInstance();
@@ -909,7 +909,8 @@ public class EchoServer extends AbstractServer
  	 		}
  	 			
  	 			if(rs1.next() && rs1.getInt(5)==0 && diffDays <= 7 && diffDays >= 0) //there are no orders for this book 
- 	 			{	 	 		
+ 	 			{	 	 	
+ 	 				System.out.println("yesssssssssssssss");
  	 	 		    SimpleDateFormat twoWeeksAfter = new SimpleDateFormat("dd/MM/yyyy");
  	 	 		    Calendar c2 = Calendar.getInstance();
  	 	 		    c2.setTime(new Date()); // Now use today date.

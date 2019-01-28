@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 public class ExternLoanBookController
 {
 	public static String Bookid  = null;
+	public static String Copyid  = null;
 	public EmailMsg email ;
 	@FXML
 	private Text dayMsg;   
@@ -116,8 +117,9 @@ public class ExternLoanBookController
     @FXML
     void SelectedItem(MouseEvent event) {
      itemInLoan s = extendTable.getSelectionModel().getSelectedItem();
-    	System.out.println(s.getBookID());
+    //	System.out.println(s.getBookID());
     	Bookid = s.getBookID() ;
+    	Copyid=s.getCopyID();
     }
     @FXML
     void ExtendLoan(ActionEvent event) 
@@ -130,6 +132,7 @@ public class ExternLoanBookController
         ArrayList<String>  result = new ArrayList<String>();
         msg.add(sigINController.StudentId);
         msg.add(Bookid);
+        msg.add(Copyid);
         msg.add("ExtendLoan");
         result = (ArrayList<String>)IPController.client.Request(msg);
         System.out.println(result);
@@ -176,7 +179,7 @@ public class ExternLoanBookController
         			"ORT Braude Library";
         	    email.SendAction();
             	}
-            }
+           }
         	
         }
         else

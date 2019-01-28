@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 public class ManualExtensionController {
 	
 	public static String Bookid  = null;
+	public static String Copyid  = null;
     @FXML
     private TextField userID;
 
@@ -70,6 +71,7 @@ public class ManualExtensionController {
         ArrayList<String>  result = new ArrayList<String>();
         msg.add(userID.getText());
         msg.add(Bookid);
+        msg.add(Copyid);
         msg.add("ExtendLoan");
         result = (ArrayList<String>)IPController.client.Request(msg);
         System.out.println(result);
@@ -85,7 +87,8 @@ public class ManualExtensionController {
     @FXML
     void SelectedItem(MouseEvent event) {
     	 itemInLoan s = extendTable.getSelectionModel().getSelectedItem();
-     	System.out.println(s.getBookID());
+     	//System.out.println(s.getBookID());
+    	 Copyid=s.getCopyID();
      	Bookid = s.getBookID() ;
     }
 
