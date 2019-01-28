@@ -1,7 +1,8 @@
 package Entity;
 
+import java.io.Serializable;
 
-public class ReportActivity 
+public class ReportActivity implements Serializable
 {
 	String activeSubscribers ;
 	String frozenSubscribers;

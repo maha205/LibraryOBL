@@ -97,9 +97,32 @@ public class AllReportActionController {
     	  for (int i = 0; i < reports.size(); i ++) 
     	  {
     	    if(reports.get(i).getReportDate().equals(reportSearch.getText()))
-    	    	{
+    	    {
+               final ObservableList<reportAction> data = FXCollections.observableArrayList();
+    	        
+    	      //  for (int i = 0; i < reports.size(); i ++) {
+    	         data.add(new reportAction  (reports.get(i).getActiveSubscribers(),
+    	        		 reports.get(i).getFrozenSubscribers(), reports.get(i).getLockedSubscribers(),
+    	        		 reports.get(i).getCopiesNumber(),
+    	        		 reports.get(i).getDelayReurning(),reports.get(i).getReportDate()));
+    	       // }
+    	        
+    	        
+    	        activeSubscribers.setCellValueFactory(new PropertyValueFactory<reportAction,String>("activeSubscribers"));
+    	        
+    	        frozenSubscribers.setCellValueFactory(new PropertyValueFactory<reportAction,String>("frozenSubscribers"));
+
+    	        lockedSubscribers.setCellValueFactory(new PropertyValueFactory<reportAction,String>("lockedSubscribers"));
+
+    	        copiesNumber.setCellValueFactory(new PropertyValueFactory<reportAction,String>("copiesNumber"));
+    	        
+    	        delayReurning.setCellValueFactory(new PropertyValueFactory<reportAction,String>("delayReurning"));
+    	        
+    	        reportDate.setCellValueFactory(new PropertyValueFactory<reportAction,String>("reportDate"));
+    	        
+    	        ReportTable.setItems(data);
     	    	   flag=1 ;
-    	    	};
+    	    };
     	  }
     	  
     	  if(flag==0) 
@@ -154,7 +177,29 @@ public class AllReportActionController {
     @FXML
     void viewAgain(ActionEvent event) 
     {
-    	loadReports(reports);
+    	 final ObservableList<reportAction> data = FXCollections.observableArrayList();
+	        
+	        for (int i = 0; i < reports.size(); i ++) {
+	         data.add(new reportAction  (reports.get(i).getActiveSubscribers(),
+	        		 reports.get(i).getFrozenSubscribers(), reports.get(i).getLockedSubscribers(),
+	        		 reports.get(i).getCopiesNumber(),
+	        		 reports.get(i).getDelayReurning(),reports.get(i).getReportDate()));
+	        }
+	        
+	        
+	        activeSubscribers.setCellValueFactory(new PropertyValueFactory<reportAction,String>("activeSubscribers"));
+	        
+	        frozenSubscribers.setCellValueFactory(new PropertyValueFactory<reportAction,String>("frozenSubscribers"));
+
+	        lockedSubscribers.setCellValueFactory(new PropertyValueFactory<reportAction,String>("lockedSubscribers"));
+
+	        copiesNumber.setCellValueFactory(new PropertyValueFactory<reportAction,String>("copiesNumber"));
+	        
+	        delayReurning.setCellValueFactory(new PropertyValueFactory<reportAction,String>("delayReurning"));
+	        
+	        reportDate.setCellValueFactory(new PropertyValueFactory<reportAction,String>("reportDate"));
+	        
+	        ReportTable.setItems(data);
     }
 
 }

@@ -61,7 +61,6 @@ public class ReportActivityController {
 		 	
 	    	reports.loadReports(result);
 	  		
-	  		
 	  		primaryStage.setTitle("Report Activity Log");
 	  		Scene scene = new Scene(root);			
 	  		

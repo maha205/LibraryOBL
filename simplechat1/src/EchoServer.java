@@ -13,8 +13,9 @@ import java.util.*;
 import java.util.Date;
 import Entity.Book;
 import Entity.Librarian ;
-import Entity.Student;
 import Entity.ReportActivity;
+import Entity.Student;
+
 /**
  * This class overrides some of the methods in the abstract 
  * superclass in order to give more functionality to the server.
@@ -382,7 +383,7 @@ public class EchoServer extends AbstractServer
 	    	  break;
 	    	  
 	      case "ReportActivity":
-	    	  result=(ArrayList<ReportActivity>)ReportActivity() ;
+	    	  result=(ArrayList<ReportActivity>)ReportActivityLog() ;
 	    	  break ;
 	      	
 	    }
@@ -446,7 +447,6 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
-    
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -2002,17 +2002,20 @@ public static ArrayList<String> historyAction(String UserID )
   return historyAction;
  }
 
-public static ArrayList<ReportActivity> ReportActivity()  
+public static ArrayList<ReportActivity> ReportActivityLog()  
 {
 	Statement stmt =null;
 	ArrayList<ReportActivity> historyAction = new ArrayList<ReportActivity>();
+	
    try 
 	{
 		stmt = conn.createStatement();
-		ResultSet rs=	stmt.executeQuery("SELECT *FROM reportaction ");
+		ResultSet rs=	stmt.executeQuery("SELECT *FROM reportaction");
 		while(rs.next())
 		{
-			historyAction.add(new ReportActivity(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
+			ReportActivity temp =new ReportActivity(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+			System.out.println(temp.toString());
+			historyAction.add(temp);
 		}
 	} catch (SQLException e) {e.printStackTrace();}
 	
