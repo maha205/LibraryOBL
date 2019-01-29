@@ -10,8 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="application.ReportActivityLogController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ReportActivityLogController">
    <top>
       <AnchorPane prefHeight="825.0" prefWidth="853.0" BorderPane.alignment="CENTER">
          <children>
@@ -56,17 +55,17 @@
             <ComboBox fx:id="comboMonth" layoutX="345.0" layoutY="231.0" prefWidth="150.0" promptText="Month" />
             <ComboBox fx:id="comboYear" layoutX="504.0" layoutY="231.0" prefWidth="150.0" promptText="Year" />
             <Line endX="257.0" layoutX="345.0" layoutY="277.0" startX="-100.0" stroke="#1da89e" />
-            <CheckBox layoutX="342.0" layoutY="179.0" mnemonicParsing="false" onAction="#MonthlyReport" text="Monthly report" textFill="#1da89e">
+            <CheckBox fx:id="monthchoose" layoutX="342.0" layoutY="179.0" mnemonicParsing="false" onAction="#MonthlyReport" text="Monthly report" textFill="#1da89e">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </CheckBox>
-            <CheckBox layoutX="494.0" layoutY="179.0" mnemonicParsing="false" onAction="#AnnualReport" text="Annual Report" textFill="#1da89e">
+            <CheckBox fx:id="yearchoose" layoutX="494.0" layoutY="179.0" mnemonicParsing="false" onAction="#AnnualReportt" text="Annual Report" textFill="#1da89e">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </CheckBox>
-            <CheckBox layoutX="216.0" layoutY="179.0" mnemonicParsing="false" onAction="#DailyReport" text="Daily report" textFill="#1da89e">
+            <CheckBox fx:id="daychoose" layoutX="216.0" layoutY="179.0" mnemonicParsing="false" onAction="#DailyReport" text="Daily report" textFill="#1da89e">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

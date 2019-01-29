@@ -177,7 +177,7 @@ public class OrderBookController
     	    	 ((Node)event.getSource()).getScene().getWindow().hide();
      	   		Stage primaryStage = new Stage();
      	   		FXMLLoader loader = new FXMLLoader();
-     	   		Pane root = loader.load(getClass().getResource("/application/StudentProfile.fxml").openStream());
+     	   		Pane root = loader.load(getClass().getResource("/application/LibrarianProfile.fxml").openStream());
      	   	primaryStage.setTitle("Student Profile");
      	   		Scene scene = new Scene(root);			
      	   		

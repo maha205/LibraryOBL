@@ -6,6 +6,7 @@ import java.io.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import ocsf.server.*;
@@ -185,7 +186,6 @@ public class EchoServer extends AbstractServer
 	     case "addBook":
 	    	try {
 	    		int CopyQuantityy = Integer.parseInt(msg.get(7));
-	    		System.out.println("mahaaaa");
 	    		result =(ArrayList<String>)AddBook(msg.get(0),msg.get(1),msg.get(2),msg.get(3),msg.get(4),msg.get(5),msg.get(6), CopyQuantityy,msg.get(8));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -384,6 +384,24 @@ public class EchoServer extends AbstractServer
 	    	  
 	      case "ReportActivity":
 	    	  result=(ArrayList<ReportActivity>)ReportActivityLog() ;
+	    	  break ;
+	    	  
+	      case "NumberOfDelays":
+	    	  try {
+				result =NumberOfDelays(msg.get(0),msg.get(1));
+			} catch (SQLException | ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  break ;
+	    	  
+	      case "copiesNumber":
+	    	  try {
+				result =copiesNumber(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	    	  break ;
 	      	
 	    }
@@ -1116,7 +1134,18 @@ public class EchoServer extends AbstractServer
        		      int ordeQuantity =0;
     			  stmt.executeUpdate("INSERT INTO book (bookID,bookName,AuthorName,genre,description,publisher,printdate,copyQuantity,OrderQantity) VALUES('"+bookId+"','"+bookName+"','"+bookAuthor+"','"+genre+"' ,'"+description+"' , '"+publisher+"','"+printdate+"','"+copyQuantity+"','"+ordeQuantity+"')"); 
        		      AddBook.add("newBookAdded");
-       		      System.out.println("hiiiiiiii");
+
+       			Statement stmt5;
+       			stmt5 = conn.createStatement();
+       			String action="Add";
+       			 SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+       			    Calendar c1 = Calendar.getInstance();
+       			    c1.setTime(new Date()); // Now use today date.
+       			    String outputcurrentDate = currentDate.format(c1.getTime());
+       			    System.out.println(outputcurrentDate);
+       			
+       			stmt5.executeUpdate("INSERT INTO bookhiestorty (BookID,BookQuantity,Action,historyDate) VALUES('"+bookId+"','"+copyQuantity+"','"+action+"','"+outputcurrentDate+"' )"); 
+
        		       for(int i=1 ; i<=copyQuantity ;i++)
        		       {
        		    	   String locationShelf = Location  ,stutus = "available" ,copyID = "" +i;
@@ -1143,6 +1172,18 @@ public class EchoServer extends AbstractServer
             if(rs.next())
             {
             	int copyQuantity =rs.getInt(8) ;
+            	Statement stmt5;
+       			stmt5 = conn.createStatement();
+       			String action="Delete";
+       			 SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+       			    Calendar c1 = Calendar.getInstance();
+       			    c1.setTime(new Date()); // Now use today date.
+       			    String outputcurrentDate = currentDate.format(c1.getTime());
+       			    System.out.println(outputcurrentDate);
+       			String bookQ ="-";
+       			bookQ+=copyQuantity;
+       			stmt5.executeUpdate("INSERT INTO bookhiestorty (BookID,BookQuantity,Action,historyDate) VALUES('"+bookID+"','"+bookQ+"','"+action+"','"+outputcurrentDate+"' )"); 
+
             	for(int i=1;i<=copyQuantity ;i++)
             		stmt.executeUpdate("DELETE FROM copy WHERE bookID = '"+bookID+"' AND idcopy ='"+i+"' ;");
             	stmt.executeUpdate("DELETE FROM book WHERE bookID = '"+bookID+"'");
@@ -1441,8 +1482,15 @@ public static ArrayList<String> LateReturn(String BookID, String CopyID, String 
 		stmt2 = conn.createStatement();
 		stmt2.executeUpdate("UPDATE copy SET status = 'available' WHERE idcopy = '"+CopyID+"' AND bookID = '"+BookID+"';");
 		
+		 SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+		    Calendar c1 = Calendar.getInstance();
+		    c1.setTime(new Date()); // Now use today date.
+		    String outputcurrentDate = currentDate.format(c1.getTime());
+		    System.out.println(outputcurrentDate);
+		    
 		stmt3 = conn.createStatement();
-		stmt3.executeUpdate("DELETE FROM iteminloan WHERE StudentID = '"+UserID+"' AND CopyID = '"+CopyID+"' AND BookID = '"+BookID+"';");
+		stmt3.executeUpdate("UPDATE iteminloan SET returnOnTime = '"+outputcurrentDate+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+CopyID+"' AND StudentID ='"+UserID+"';");
+
 		
 		res.add("LateDone");
 	} catch (SQLException e) {e.printStackTrace();}
@@ -1823,7 +1871,17 @@ public static ArrayList<String> UpdateBook(String BookID ,String BookName,String
     	 return UpdateBook;
      }
        
-    
+     Statement stmt5;
+		stmt5 = conn.createStatement();
+		String action="Update";
+		 SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+		    Calendar c1 = Calendar.getInstance();
+		    c1.setTime(new Date()); // Now use today date.
+		    String outputcurrentDate = currentDate.format(c1.getTime());
+		    System.out.println(outputcurrentDate);
+		String Q =""+( bookUpdate.getCopyQuantity()- copyQuantity);
+		stmt5.executeUpdate("INSERT INTO bookhiestorty (BookID,BookQuantity,Action,historyDate) VALUES('"+bookUpdate.getBookID()+"','"+Q+"','"+action+"','"+outputcurrentDate+"' )"); 
+
   
 
   stmt.executeUpdate("UPDATE book SET bookName ='"+bookUpdate.getBookName()+"' WHERE bookID = '"+bookUpdate.getBookID()+"';");
@@ -2021,6 +2079,222 @@ public static ArrayList<ReportActivity> ReportActivityLog()
 	
   return historyAction;
  }
-
+public int NumberOfDelays(String date1,String searchDate) throws SQLException, ParseException
+{
+	String date2;
+	int countDelay =0;
+	Statement stmt=null;
+	stmt = conn.createStatement();
+	ResultSet rs=stmt.executeQuery("SELECT *FROM iteminloan");
+	while(rs.next())
+	{
+		date2 = rs.getString(7);//return the book 
+		 try {
+				String date11 =date1;
+				String date22 = date2;
+				String format = "dd/MM/yyyy";
+	
+				SimpleDateFormat sdf = new SimpleDateFormat(format);
+	
+				Date dateObj1 = sdf.parse(date11);
+				Date dateObj2 = sdf.parse(date22);
+				System.out.println(dateObj1);
+				System.out.println(dateObj2 + "\n");
+	
+				DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+	
+				// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+				long diff = dateObj2.getTime() - dateObj1.getTime();
+	
+				 int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+				 System.out.println("difference between days: " + diffDays);
+				 
+				 if(diffDays <=0) {
+					    try {
+						String date111 =rs.getString(7);;
+						String date222 = rs.getString(6);;
+						String format1 = "dd/MM/yyyy";
+			
+						SimpleDateFormat sdf1 = new SimpleDateFormat(format1);
+			
+						Date dateObj11 = sdf.parse(date111);
+						Date dateObj22 = sdf.parse(date222);
+						System.out.println(dateObj11);
+						System.out.println(dateObj22 + "\n");
+			
+						DecimalFormat crunchifyFormatter1 = new DecimalFormat("###,###");
+			
+						// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+						long diff1 = dateObj22.getTime() - dateObj11.getTime();
+			
+						 int diffDays1 = (int) (diff1 / (24 * 60 * 60 * 1000));
+						 System.out.println("difference between days: " + diffDays1);
+						 
+						 if(diffDays1<0) //delay
+							 countDelay++;
+			
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				 }
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+	}
+    return countDelay;
+}
+//public static int theSameDay(String date1String , String date2String) throws ParseException
+//{
+//	Date date1=null , date2=null;
+//	String format = "dd/MM/yyyy";
+//	SimpleDateFormat sdf = new SimpleDateFormat(format);
+//	
+//	date1 = sdf.parse(date1String);
+//	date2 = sdf.parse(date2String);
+//	
+//	  Calendar cal = Calendar.getInstance();
+//	  cal.setTime(date1);
+//	  int day1 = cal.get(Calendar.DAY_OF_MONTH);
+//	  
+//	  cal.setTime(date2);
+//	  int day2 = cal.get(Calendar.DAY_OF_MONTH);
+//	  
+//	if(day1==day2) {
+//		System.out.println("the same day");
+//		return 1;
+//	}
+//	else {
+//		System.out.println("Nooo it's not a same year");
+//		return 0;
+//	}
+//	
+//}
+//public static int  theSameMonth(String date1String , String date2String) throws ParseException
+//{
+//	Date date1=null , date2=null;
+//		String format = "dd/MM/yyyy";
+//		SimpleDateFormat sdf = new SimpleDateFormat(format);
+//		
+//		date1 = sdf.parse(date1String);
+//		date2 = sdf.parse(date2String);
+//		
+//		  Calendar cal = Calendar.getInstance();
+//		  cal.setTime(date1);
+//		  int month1 = cal.get(Calendar.MONTH) +1;
+//		  
+//		  cal.setTime(date2);
+//		  int month2 = cal.get(Calendar.MONTH) +1;
+//		  
+//		if(month1==month2) {
+//			System.out.println("the same month");
+//			return 1;
+//		}
+//		else {
+//			System.out.println("Nooo it's not a same month");
+//			return 0;
+//		}
+//}
+//public static int theSameYear(String date1String , String date2String) throws ParseException
+//{
+//	 Date date1=null , date2=null;
+//		String format = "dd/MM/yyyy";
+//		SimpleDateFormat sdf = new SimpleDateFormat(format);
+//		
+//		date1 = sdf.parse(date1String);
+//		date2 = sdf.parse(date2String);
+//		
+//		  Calendar cal = Calendar.getInstance();
+//		  cal.setTime(date1);
+//		   int year1 = cal.get(Calendar.YEAR);
+//		  
+//		  cal.setTime(date2);
+//		   int year2 = cal.get(Calendar.YEAR);
+//		  
+//		if(year1==year2) {
+//			System.out.println("the same year");
+//			return 1;
+//		}
+//		else {
+//			System.out.println("Nooo it's not a same year");
+//			return 0;
+//			}
+//   }
+public static int copiesNumber(String Date) throws SQLException
+{
+	int copyNumber =0;
+	Statement stmt =null;
+	stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery("SELECT * FROM bookhiestorty ");
+     while(rs.next())
+     {
+    	 try {
+				String date11 =Date;
+				String date22 = rs.getString(4);
+				String format = "dd/MM/yyyy";
+	
+				SimpleDateFormat sdf = new SimpleDateFormat(format);
+	
+				Date dateObj1 = sdf.parse(date11);
+				Date dateObj2 = sdf.parse(date22);
+				System.out.println(dateObj1);
+				System.out.println(dateObj2 + "\n");
+	
+				DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+	
+				// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+				long diff = dateObj2.getTime() - dateObj1.getTime();
+	
+				 int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+				 System.out.println("difference between days: " + diffDays);
+				 
+				 if(diffDays <=0) //NumberCopies
+					 copyNumber = copyNumber+Integer.parseInt(rs.getString(2));
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+     }
+	
+	return copyNumber;
+}
+/*public static int ActiveSubscriberNumber(String Date) throws SQLException
+{
+	int ActiveSubscriberNumber=0 ,MaxDay =0;
+	String status =null ;
+	Statement stmt =null;
+	stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery("SELECT * FROM statushistory ");
+     while(rs.next())
+     {
+    	 try {
+				String date11 =Date;
+				String date22 = rs.getString(4);
+				String format = "dd/MM/yyyy";
+	
+				SimpleDateFormat sdf = new SimpleDateFormat(format);
+	
+				Date dateObj1 = sdf.parse(date11);
+				Date dateObj2 = sdf.parse(date22);
+				System.out.println(dateObj1);
+				System.out.println(dateObj2 + "\n");
+	
+				DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+	
+				// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+				long diff = dateObj2.getTime() - dateObj1.getTime();
+	
+				 int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+				 System.out.println("difference between days: " + diffDays);
+				 
+				 if(diffDays <=0) //NumberCopies
+					 copyNumber = copyNumber+Integer.parseInt(rs.getString(2));
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+	return ActiveSubscriberNumber;
+	
+}*/
 }
 //End of EchoServer class
