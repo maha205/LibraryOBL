@@ -465,6 +465,7 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
+
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -865,7 +866,7 @@ public class EchoServer extends AbstractServer
     	int diffDays = 0;
    		ArrayList<String> Extern = new ArrayList<String>();
    		String outputtwoWeeksAfter = null ,BookName=null ;
-   		int OrderNumber1=0;         
+   		int OrderNumber1=0 ,copyQuantity =0;         
    		
    		Statement stmt3;
    		try   
@@ -874,6 +875,7 @@ public class EchoServer extends AbstractServer
    			ResultSet rs3 = stmt3.executeQuery("SELECT * FROM book WHERE bookID ="+BookID);		
    			while(rs3.next()) {
    				OrderNumber1 = rs3.getInt(9);
+   				copyQuantity=rs3.getInt(8);
    			                  }
    		} catch (SQLException e) {e.printStackTrace();}
    		
@@ -891,7 +893,7 @@ public class EchoServer extends AbstractServer
  		  //   copyID = rs.getString(3);
  		     System.out.println(copyID);
  			
- 	 		  if( rs.getString(2).equals(BookID) && rs.getString(3).equals(copyID) && OrderNumber1==0)//if the student loan the book
+ 	 		  if( rs.getString(2).equals(BookID) && rs.getString(3).equals(copyID) && OrderNumber1 ==0)//if the student loan the book
  	 		  {
  	 			stmt2 = conn.createStatement();
  	 			ResultSet rs1 = stmt2.executeQuery("SELECT * FROM copy WHERE idcopy ='"+copyID+"' AND bookID ="+BookID );
@@ -1342,7 +1344,7 @@ public static ArrayList<String> AddItemInLoan(String StudentID, String BookID, S
 	String loanDate = "";
 	String returnDate = "";
 	
-	int OrderNumber1=0;         
+	int OrderNumber1=0 ,copyQuantity =0;         
 	
 	Statement stmt2;
 	try   
@@ -1351,11 +1353,12 @@ public static ArrayList<String> AddItemInLoan(String StudentID, String BookID, S
 		ResultSet rs2 = stmt2.executeQuery("SELECT * FROM book WHERE bookID ="+BookID);		
 		while(rs2.next()) {
 			OrderNumber1 = rs2.getInt(9);
+			copyQuantity = rs2.getInt(8);
 		                  }
 	} catch (SQLException e) {e.printStackTrace();}
 	
 
-	   if(OrderNumber1>=1) {
+	   if(OrderNumber1 >= 1) {
 	    	 SimpleDateFormat twoWeeksAfter = new SimpleDateFormat("dd/MM/yyyy");
 	   	    Calendar c2 = Calendar.getInstance();
 	   	    c2.setTime(new Date()); // Now use today date.
