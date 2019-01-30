@@ -403,7 +403,24 @@ public class EchoServer extends AbstractServer
 				e1.printStackTrace();
 			}
 	    	  break ;
+	    	  
+	      case "ActiveLockedFrozenSubscribersNumber":
+	    	  try {
+				result =(ArrayList<String>)ActiveLockedFrozenSubscribersNumber(msg.get(0));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  break ;
 	      	
+	      case "RequestActionReport":
+	    	  try {
+				result =(String)RequestActionReport(msg.get(0),msg.get(1),msg.get(2),msg.get(3),msg.get(4),msg.get(5));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  break ;
 	    }
 	    
 	    try {
@@ -465,7 +482,10 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
     connectToDB();
-
+    Statement st = conn.createStatement();
+    st = conn.createStatement();
+    ResultSet rs = st.executeQuery("SELECT *FROM statushistory GROUP BY SubscriberID");
+  
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -848,6 +868,19 @@ public class EchoServer extends AbstractServer
      	 		{
      	 		   stmt.executeUpdate("INSERT INTO student (StudentId ,StudentName ,Email,phone) VALUES('"+studentID+"','"+name+"','"+Email+"','"+phoneNumber+"')");
      	 		   stmt.executeUpdate("INSERT INTO userstudent (UserID ,Password ) VALUES('"+studentID+"','"+studentID+"')");
+     	 		   
+     	 		   
+     	 		    SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+     	 			    Calendar c1 = Calendar.getInstance();
+     	 			    c1.setTime(new Date()); // Now use today date.
+     	 			    String outputcurrentDate = currentDate.format(c1.getTime());
+     	 			    System.out.println(outputcurrentDate);
+     	 		    Statement st1 = conn.createStatement();
+     	 		    st1 = conn.createStatement();
+     	 		    String  status = "Active";
+     	 		    st1.executeUpdate("INSERT INTO statushistory (SubscriberID ,status ,date) VALUES('"+studentID+"','"+status+"','"+outputcurrentDate+"')");
+
+     	 		    
      	 		   update.add("signUP");
      	 		   rs.close();
      	 	       return update;
@@ -941,7 +974,7 @@ public class EchoServer extends AbstractServer
  	 	 		     Extern.add(outputtwoWeeksAfter);
  	 	 		     Extern.add(oldDate);
  	 	 		     Extern.add(BookName);
- 	 				 stmt.executeUpdate("UPDATE iteminloan SET loanDate ='"+outputcurrentDate+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
+ 	 				// stmt.executeUpdate("UPDATE iteminloan SET loanDate ='"+outputcurrentDate+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
  	 				 stmt.executeUpdate("UPDATE iteminloan SET returnDate ='"+outputtwoWeeksAfter+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
 
  	 			}
@@ -1511,9 +1544,15 @@ public static ArrayList<String> OnTimeReturn(String BookID, String CopyID, Strin
 		stmt2 = conn.createStatement();
 		stmt2.executeUpdate("UPDATE copy SET status = 'available' WHERE idcopy = '"+CopyID+"' AND bookID = '"+BookID+"';");
 		
+		 SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+		    Calendar c1 = Calendar.getInstance();
+		    c1.setTime(new Date()); // Now use today date.
+		    String outputcurrentDate = currentDate.format(c1.getTime());
+		    System.out.println(outputcurrentDate);
+		    
 		stmt3 = conn.createStatement();
-		stmt3.executeUpdate("DELETE FROM iteminloan WHERE StudentID = '"+UserID+"' AND CopyID = '"+CopyID+"' AND BookID = '"+BookID+"';");
-		
+		stmt3.executeUpdate("UPDATE iteminloan SET returnOnTime = '"+outputcurrentDate+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+CopyID+"' AND StudentID ='"+UserID+"';");
+
 		res.add("OnTimeDone");
 	} catch (SQLException e) {e.printStackTrace();}
 	
@@ -1947,6 +1986,16 @@ public static ArrayList<String> LockUser(String StudentID)   ////JERIES
 	{
 		stmt1 = conn.createStatement();
 		stmt1.executeUpdate("UPDATE student SET StatusMembership = 'Locked' WHERE StudentId = '"+StudentID+"';");
+		  SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+		    Calendar c1 = Calendar.getInstance();
+		    c1.setTime(new Date()); // Now use today date.
+		    String outputcurrentDate = currentDate.format(c1.getTime());
+		    System.out.println(outputcurrentDate);
+	    Statement st1 = conn.createStatement();
+	    st1 = conn.createStatement();
+	    String  status = "Locked";
+	    st1.executeUpdate("INSERT INTO statushistory (SubscriberID ,status ,date) VALUES('"+StudentID+"','"+status+"','"+outputcurrentDate+"')");
+
 		res.add("Successfully locked user");
 	} catch (SQLException e) {e.printStackTrace();}
   return res;
@@ -1981,6 +2030,16 @@ public static ArrayList<String> UnlockUser(String StudentID)   ////JERIES
 	{
 		stmt1 = conn.createStatement();
 		stmt1.executeUpdate("UPDATE student SET StatusMembership = 'Active', Delay = '0' WHERE StudentId = '"+StudentID+"';");
+		  SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+		    Calendar c1 = Calendar.getInstance();
+		    c1.setTime(new Date()); // Now use today date.
+		    String outputcurrentDate = currentDate.format(c1.getTime());
+		    System.out.println(outputcurrentDate);
+	    Statement st1 = conn.createStatement();
+	    st1 = conn.createStatement();
+	    String  status = "Active";
+	    st1.executeUpdate("INSERT INTO statushistory (SubscriberID ,status ,date) VALUES('"+StudentID+"','"+status+"','"+outputcurrentDate+"')");
+
 		res.add("Successfully locked user");
 	} catch (SQLException e) {e.printStackTrace();}
   return res;
@@ -2147,82 +2206,7 @@ public int NumberOfDelays(String date1,String searchDate) throws SQLException, P
 	}
     return countDelay;
 }
-//public static int theSameDay(String date1String , String date2String) throws ParseException
-//{
-//	Date date1=null , date2=null;
-//	String format = "dd/MM/yyyy";
-//	SimpleDateFormat sdf = new SimpleDateFormat(format);
-//	
-//	date1 = sdf.parse(date1String);
-//	date2 = sdf.parse(date2String);
-//	
-//	  Calendar cal = Calendar.getInstance();
-//	  cal.setTime(date1);
-//	  int day1 = cal.get(Calendar.DAY_OF_MONTH);
-//	  
-//	  cal.setTime(date2);
-//	  int day2 = cal.get(Calendar.DAY_OF_MONTH);
-//	  
-//	if(day1==day2) {
-//		System.out.println("the same day");
-//		return 1;
-//	}
-//	else {
-//		System.out.println("Nooo it's not a same year");
-//		return 0;
-//	}
-//	
-//}
-//public static int  theSameMonth(String date1String , String date2String) throws ParseException
-//{
-//	Date date1=null , date2=null;
-//		String format = "dd/MM/yyyy";
-//		SimpleDateFormat sdf = new SimpleDateFormat(format);
-//		
-//		date1 = sdf.parse(date1String);
-//		date2 = sdf.parse(date2String);
-//		
-//		  Calendar cal = Calendar.getInstance();
-//		  cal.setTime(date1);
-//		  int month1 = cal.get(Calendar.MONTH) +1;
-//		  
-//		  cal.setTime(date2);
-//		  int month2 = cal.get(Calendar.MONTH) +1;
-//		  
-//		if(month1==month2) {
-//			System.out.println("the same month");
-//			return 1;
-//		}
-//		else {
-//			System.out.println("Nooo it's not a same month");
-//			return 0;
-//		}
-//}
-//public static int theSameYear(String date1String , String date2String) throws ParseException
-//{
-//	 Date date1=null , date2=null;
-//		String format = "dd/MM/yyyy";
-//		SimpleDateFormat sdf = new SimpleDateFormat(format);
-//		
-//		date1 = sdf.parse(date1String);
-//		date2 = sdf.parse(date2String);
-//		
-//		  Calendar cal = Calendar.getInstance();
-//		  cal.setTime(date1);
-//		   int year1 = cal.get(Calendar.YEAR);
-//		  
-//		  cal.setTime(date2);
-//		   int year2 = cal.get(Calendar.YEAR);
-//		  
-//		if(year1==year2) {
-//			System.out.println("the same year");
-//			return 1;
-//		}
-//		else {
-//			System.out.println("Nooo it's not a same year");
-//			return 0;
-//			}
-//   }
+
 public static int copiesNumber(String Date) throws SQLException
 {
 	int copyNumber =0;
@@ -2261,43 +2245,74 @@ public static int copiesNumber(String Date) throws SQLException
 	
 	return copyNumber;
 }
-/*public static int ActiveSubscriberNumber(String Date) throws SQLException
+public static ArrayList<String> ActiveLockedFrozenSubscribersNumber(String Date) throws SQLException
 {
-	int ActiveSubscriberNumber=0 ,MaxDay =0;
-	String status =null ;
+	ArrayList<String> statusList = new ArrayList<String>();
+	int ActiveSubscriberNumber=0 , LockedSubscriberNumber =0 , FrozenNumber =0 ,MaxDay =3700;
+	String status = null  , ID =null;
 	Statement stmt =null;
 	stmt = conn.createStatement();
 	ResultSet rs = stmt.executeQuery("SELECT * FROM statushistory ");
      while(rs.next())
      {
-    	 try {
-				String date11 =Date;
-				String date22 = rs.getString(4);
-				String format = "dd/MM/yyyy";
-	
-				SimpleDateFormat sdf = new SimpleDateFormat(format);
-	
-				Date dateObj1 = sdf.parse(date11);
-				Date dateObj2 = sdf.parse(date22);
-				System.out.println(dateObj1);
-				System.out.println(dateObj2 + "\n");
-	
-				DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
-	
-				// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
-				long diff = dateObj2.getTime() - dateObj1.getTime();
-	
-				 int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
-				 System.out.println("difference between days: " + diffDays);
-				 
-				 if(diffDays <=0) //NumberCopies
-					 copyNumber = copyNumber+Integer.parseInt(rs.getString(2));
-	
-			} catch (Exception e) {
-				e.printStackTrace();
-			} 
-	return ActiveSubscriberNumber;
-	
-}*/
+    	 do {
+    	 MaxDay = 3700;
+    	 ID=rs.getString(1);	
+         try {
+    		String date1 = Date;
+    		String date2 = rs.getString(3);//day ;
+    		String format = "dd/MM/yyyy";
+
+    		SimpleDateFormat sdf = new SimpleDateFormat(format);
+
+    		Date dateObj1 = sdf.parse(date1);
+    		Date dateObj2 = sdf.parse(date2);
+    		System.out.println(dateObj1);
+    		System.out.println(dateObj2 + "\n");
+
+    		DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+
+    		// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+    		long diff = dateObj2.getTime() - dateObj1.getTime();
+
+    		  int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+    		  if(diffDays < MaxDay && diffDays <=0 )
+    		  {
+    			  MaxDay =diffDays;
+    			  status =rs.getString(2);
+    		  }
+    			System.out.println("difference between days: " +diffDays);
+         } catch (Exception e) {
+    			e.printStackTrace();
+    		}
+     }while(rs.next() && ID.equals(rs.getString(1)));
+    	
+    	 if(status.equals("Active")) ActiveSubscriberNumber++;
+    	 if(status.equals("Locked")) LockedSubscriberNumber++;
+    	 if(status.equals("Frozen")) FrozenNumber++ ;
+    	 
+   rs.previous();
+ //  rs.previous();
 }
-//End of EchoServer class
+     statusList.add(""+ActiveSubscriberNumber); 
+     statusList.add(""+LockedSubscriberNumber);
+     statusList.add(""+FrozenNumber);
+	return statusList;
+}
+public static String RequestActionReport(String s1,String s2 ,String s3,String s4 ,String s5 ,String s6) throws SQLException 
+{
+	String Request =null;
+   Statement stmt = null;
+   try {
+	stmt = conn.createStatement();
+	stmt.executeUpdate("INSERT INTO reportaction (activeSubscribers ,frozenSubscribers,lockedSubscribers,copiesNumber,delayReurning,reportDate ) VALUES('"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"')");
+	 Request="Suscceded";
+} catch (SQLException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+   
+   return Request ;
+}
+}//End of EchoServer class
+

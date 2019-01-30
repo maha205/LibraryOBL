@@ -108,17 +108,7 @@ public class ReportActivityController
     }
     @FXML
     void requestReport(ActionEvent event)
-    {
-    	 if(searchYear==1 && searchDay==1)
-    		 JOptionPane.showMessageDialog(null, "Please select only one !!");
-    	 if(searchMonth==1 && searchDay==1)
-    		 JOptionPane.showMessageDialog(null, "Please select only one !!");
-    	 if(searchYear==1 && searchMonth==1)
-    		 JOptionPane.showMessageDialog(null, "Please select only one !!");
-    	 
-    	 if(searchYear==1 && searchMonth==1 && searchDay==1)
-    		 JOptionPane.showMessageDialog(null, "Please select only one !!");
-    	 
+    { 
      if(searchYear==1 && searchMonth==0 && searchDay==0)
      {
     	 if((String)comboYear.getSelectionModel().getSelectedItem()==null)
@@ -143,7 +133,30 @@ public class ReportActivityController
 		  result1 =(int) IPController.client.Request(msg1);
 		  System.out.println(result);
 		  copiesNumber.setText(""+result1);
-		
+		  
+		  ArrayList<String> msg2 = new ArrayList<String>();
+		  ArrayList<String> result2 = new ArrayList<String>();
+		  msg2.add(date);
+		  msg2.add("ActiveLockedFrozenSubscribersNumber");
+		  result2 =( ArrayList<String>) IPController.client.Request(msg2);
+		  ActiveSubscribers.setText(result2.get(0));
+          FrozenSubscribers.setText(result2.get(2));
+          LockedSubscribers.setText(result2.get(1));
+          
+          ArrayList<String> msg3 = new ArrayList<String>();
+          String result3 =null;
+		  msg3.add(result2.get(0));//Active
+		  msg3.add(result2.get(2));//Frozen
+		  msg3.add(result2.get(1));//Locked
+		  msg3.add(""+result1);
+		  msg3.add(""+result);
+		  msg3.add(date);
+		  msg3.add("RequestActionReport");
+		  result3 =(String) IPController.client.Request(msg3);
+		  if(result3==null)
+	 			 JOptionPane.showMessageDialog(null, "Failed to save report! ");
+	 		 else
+	 			 JOptionPane.showMessageDialog(null, "Successfuly saved report! ");
 		  }
     	 flag=0;
      }
@@ -180,6 +193,31 @@ public class ReportActivityController
 		  result1 =(int) IPController.client.Request(msg1);
 		  System.out.println(result);
 		  copiesNumber.setText(""+result1);
+		  
+		  ArrayList<String> msg2 = new ArrayList<String>();
+		  ArrayList<String> result2 = new ArrayList<String>();
+		  msg2.add(date);
+		  msg2.add("ActiveLockedFrozenSubscribersNumber");
+		  result2 =( ArrayList<String>) IPController.client.Request(msg2);
+		  
+			  ActiveSubscribers.setText(result2.get(0));
+	          FrozenSubscribers.setText(result2.get(2));
+	          LockedSubscribers.setText(result2.get(1));
+		
+          ArrayList<String> msg3 = new ArrayList<String>();
+		  String result3;
+		  msg3.add(result2.get(0));
+		  msg3.add(result2.get(2));
+		  msg3.add(result2.get(1));
+		  msg3.add(""+result1);
+		  msg3.add(""+result);
+		  msg3.add(date);
+		  msg3.add("RequestActionReport");
+		  result3 =(String) IPController.client.Request(msg3);
+		  if(result3==null)
+	 			 JOptionPane.showMessageDialog(null, "Failed to save report! ");
+	 		 else
+	 			 JOptionPane.showMessageDialog(null, "Successfuly saved report! ");
 		  }
 		  flag=0;
         }
@@ -217,6 +255,35 @@ public class ReportActivityController
 		  result1 =(int) IPController.client.Request(msg1);
 		  System.out.println(result);
 		  copiesNumber.setText(""+result1);
+		  
+		  ArrayList<String> msg2 = new ArrayList<String>();
+		  ArrayList<String> result2 = new ArrayList<String>();
+		  msg2.add(date);
+		  msg2.add("ActiveLockedFrozenSubscribersNumber");
+		  result2 =( ArrayList<String>) IPController.client.Request(msg2);
+		 
+			  ActiveSubscribers.setText(result2.get(0));
+	          FrozenSubscribers.setText(result2.get(2));
+	          LockedSubscribers.setText(result2.get(1));
+			 
+			
+          
+          //RequestActionReport
+		  ArrayList<String> msg3 = new ArrayList<String>();
+		  String result3;
+		  msg3.add(result2.get(0));
+		  msg3.add(result2.get(2));
+		  msg3.add(result2.get(1));
+		  msg3.add(""+result1);
+		  msg3.add(""+result);
+		  msg3.add(date);
+		  msg3.add("RequestActionReport");
+		  result3 =(String) IPController.client.Request(msg3);
+ 		 if(result3==null)
+ 			 JOptionPane.showMessageDialog(null, "Failed to save report! ");
+ 		 else
+ 			 JOptionPane.showMessageDialog(null, "Successfuly saved report! ");
+
 		  }
 		  flag=0;
         }
@@ -234,7 +301,9 @@ public class ReportActivityController
   @FXML
     void AnnualReport(ActionEvent event) //year
     {
-	  searchYear = 1- searchYear;
+	  searchYear = 1;
+	  searchDay =0;
+	  searchMonth =0;
 	  if(flag ==0)
 	  {
 		  flag =1 ;
@@ -250,8 +319,10 @@ public class ReportActivityController
     @FXML
     void DailyReport(ActionEvent event) //day
     {
-       searchDay =1- searchDay ;
-    	
+       searchDay =1 ;
+       searchYear =0;
+ 	  searchMonth =0;
+ 	  
       if(flag ==0)
    	  {
    		  flag =1 ;
@@ -267,8 +338,9 @@ public class ReportActivityController
     @FXML
     void MonthlyReport(ActionEvent event) //month
     {
-        searchMonth = 1- searchMonth;
-      
+        searchMonth = 1;
+        searchDay =0;
+  	  searchYear =0;
      if(flag ==0)
    	  {
    		  flag =1 ;
@@ -338,5 +410,4 @@ public class ReportActivityController
 	  		primaryStage.setScene(scene);		
 	  		primaryStage.show();
     }
-
 }
