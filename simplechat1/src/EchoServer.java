@@ -14,8 +14,10 @@ import java.util.*;
 import java.util.Date;
 import Entity.Book;
 import Entity.Librarian ;
+import Entity.NormalLending;
 import Entity.ReportActivity;
 import Entity.Student;
+import Entity.RequestLending;
 
 /**
  * This class overrides some of the methods in the abstract 
@@ -421,6 +423,23 @@ public class EchoServer extends AbstractServer
 				e1.printStackTrace();
 			}
 	    	  break ;
+	    	  
+	      case "DurationLendingNormal":
+	    	  try {
+				result =(ArrayList<NormalLending>)DurationLendingNormal();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  break ;
+	      case "DurationLendingRequest": 
+	    	  try {
+					result =(ArrayList<RequestLending>)DurationLendingRequest();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	    	  break ;
 	    }
 	    
 	    try {
@@ -485,7 +504,7 @@ public class EchoServer extends AbstractServer
     Statement st = conn.createStatement();
     st = conn.createStatement();
     ResultSet rs = st.executeQuery("SELECT *FROM statushistory GROUP BY SubscriberID");
-  
+   
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -2255,9 +2274,9 @@ public static ArrayList<String> ActiveLockedFrozenSubscribersNumber(String Date)
 	ResultSet rs = stmt.executeQuery("SELECT * FROM statushistory ");
      while(rs.next())
      {
+    	 MaxDay = 999999;
+    	 ID=rs.getString(1);
     	 do {
-    	 MaxDay = 3700;
-    	 ID=rs.getString(1);	
          try {
     		String date1 = Date;
     		String date2 = rs.getString(3);//day ;
@@ -2276,7 +2295,7 @@ public static ArrayList<String> ActiveLockedFrozenSubscribersNumber(String Date)
     		long diff = dateObj2.getTime() - dateObj1.getTime();
 
     		  int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
-    		  if(diffDays < MaxDay && diffDays <=0 )
+    		  if(diffDays < MaxDay && diffDays <=0 )// if(diffDays < min && diffDays >0)
     		  {
     			  MaxDay =diffDays;
     			  status =rs.getString(2);
@@ -2291,8 +2310,8 @@ public static ArrayList<String> ActiveLockedFrozenSubscribersNumber(String Date)
     	 if(status.equals("Locked")) LockedSubscriberNumber++;
     	 if(status.equals("Frozen")) FrozenNumber++ ;
     	 
+   //rs.previous();
    rs.previous();
- //  rs.previous();
 }
      statusList.add(""+ActiveSubscriberNumber); 
      statusList.add(""+LockedSubscriberNumber);
@@ -2313,6 +2332,146 @@ public static String RequestActionReport(String s1,String s2 ,String s3,String s
 }
    
    return Request ;
+}
+public static int RequestBook(String bookid) throws SQLException
+{
+	int flag =0;
+	Statement st = conn.createStatement();
+	st = conn.createStatement();
+	ResultSet rs = st.executeQuery("SELECT *FROM book WHERE bookID = '"+bookid+"' ;");
+	if(rs.next())
+		if(rs.getInt(9)>=rs.getInt(8)/2.0) flag =1 ;
+	return flag ;
+}
+public static ArrayList<RequestLending> DurationLendingRequest() throws SQLException
+{
+	ArrayList<RequestLending> r = new  ArrayList<RequestLending>();
+	ArrayList<Integer> Duration =new ArrayList<Integer>();
+	Statement st = conn.createStatement();
+    st = conn.createStatement();
+    ResultSet rs = st.executeQuery("SELECT *FROM iteminloan");
+    String date1 ,date2;
+    while(rs.next())
+    {
+    	 date2 = rs.getString(7);//return date ;
+         date1 =  rs.getString(5);//loan date
+         if(date2==null) System.out.println("Item is not in loan");
+         else {
+ 		    try {
+      		String format = "dd/MM/yyyy";
+
+      		SimpleDateFormat sdf = new SimpleDateFormat(format);
+
+      		Date dateObj1 = sdf.parse(date1);
+      		Date dateObj2 = sdf.parse(date2);
+      		System.out.println(dateObj1);
+      		System.out.println(dateObj2 + "\n");
+
+      		DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+
+      		// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+      		long diff = dateObj2.getTime() - dateObj1.getTime();
+
+      		  int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+      		  if(diffDays >0 && RequestBook(rs.getString(2))==1 )// if(diffDays < min && diffDays >0)
+      		  {
+      			 Duration.add(diffDays);
+      		  }
+      			System.out.println("difference between days: " +diffDays);
+      		
+ 		   } catch (Exception e) {
+   			e.printStackTrace();
+   		}
+        }
+    }
+    Collections.sort(Duration);//Sort list
+    int x  ,count ;
+    if(Duration.size()>0)
+    {
+    x = Duration.get(0) ;
+    count = 1;
+    for(int i=1;i<Duration.size();i++)
+    {
+    	if(Duration.get(i)!=x)
+    	{
+    		r.add(new RequestLending(""+x,""+count));
+    		x =Duration.get(i) ;
+    		count =0 ;
+    	}
+    	else
+    	count++ ;
+    }
+    r.add(new RequestLending(""+x,""+(count+1)));
+    }
+    System.out.println("yesssssss Request");
+    System.out.println(r);
+    return r ;  
+}
+public static ArrayList<NormalLending> DurationLendingNormal() throws SQLException
+{
+	ArrayList<NormalLending> r = new  ArrayList<NormalLending>();
+	ArrayList<Integer> Duration =new ArrayList<Integer>();
+	Statement st = conn.createStatement();
+    st = conn.createStatement();
+    ResultSet rs = st.executeQuery("SELECT *FROM iteminloan");
+    String date1 ,date2;
+    while(rs.next())
+    {
+    	 date2 = rs.getString(7);//return date ;
+         date1 =  rs.getString(5);//loan date
+         if(date2==null) System.out.println("Item is not in loan");
+         else {
+ 		    try {
+      		String format = "dd/MM/yyyy";
+
+      		SimpleDateFormat sdf = new SimpleDateFormat(format);
+
+      		Date dateObj1 = sdf.parse(date1);
+      		Date dateObj2 = sdf.parse(date2);
+      		System.out.println(dateObj1);
+      		System.out.println(dateObj2 + "\n");
+
+      		DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+
+      		// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+      		long diff = dateObj2.getTime() - dateObj1.getTime();
+
+      		  int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+      		  if(diffDays >0 && RequestBook(rs.getString(2))==0 )// if(diffDays < min && diffDays >0)
+      		  {
+      			 Duration.add(diffDays);
+      		  }
+      			System.out.println("difference between days: " +diffDays);
+      		
+ 		   } catch (Exception e) {
+   			e.printStackTrace();
+   		}
+        }
+    }
+    Collections.sort(Duration);//Sort list
+    
+    int x  ,count ;
+    if(Duration.size()>0)
+    {
+    	x = Duration.get(0);
+    	count = 1;
+    
+    for(int i=1;i<Duration.size();i++)
+    {
+    	if(Duration.get(i)!=x)
+    	{
+    		r.add(new NormalLending(""+x,""+count));
+    		x =Duration.get(i) ;
+    		count =0;
+    	}
+    	else
+    	count++ ;
+    }
+    r.add(new NormalLending(""+x,""+(count+1)));
+    }
+    System.out.println("yesssssss Normal");
+    System.out.println(r);
+    return r ;  
 }
 }//End of EchoServer class
 

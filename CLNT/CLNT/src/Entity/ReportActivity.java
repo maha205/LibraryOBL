@@ -90,6 +90,8 @@ public class ReportActivity implements Serializable
 		this.delayReurning = delayReurning;
 	}
 
+	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -97,10 +99,7 @@ public class ReportActivity implements Serializable
 	public String toString() {
 		return "ReportActivity [activeSubscribers=" + activeSubscribers + ", frozenSubscribers=" + frozenSubscribers
 				+ ", lockedSubscribers=" + lockedSubscribers + ", copiesNumber=" + copiesNumber + ", delayReurning="
-				+ delayReurning + ", getActiveSubscribers()=" + getActiveSubscribers() + ", getFrozenSubscribers()="
-				+ getFrozenSubscribers() + ", getLockedSubscribers()=" + getLockedSubscribers() + ", getCopiesNumber()="
-				+ getCopiesNumber() + ", getDelayReurning()=" + getDelayReurning() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ delayReurning + ", reportDate=" + reportDate + "]";
 	}
 
 	public String getReportDate() {
