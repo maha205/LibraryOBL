@@ -51,14 +51,6 @@ public class ReportActivityController
 
     @FXML
     private ComboBox<String> comboYear;
-    @FXML
-    private CheckBox monthchoose;
-
-    @FXML
-    private CheckBox yearchoose;
-
-    @FXML
-    private CheckBox daychoose;
     
     public static String convertMonth(String month)
     {
