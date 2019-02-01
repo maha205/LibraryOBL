@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="UserAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0" prefWidth="977.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SearchBookController">
-   <children>
-      <TextField fx:id="bookID" alignment="CENTER" layoutX="265.0" layoutY="96.0" promptText="Enter Information" style="-fx-background-color: #FDF5E6;" />
-      <Button fx:id="Search" layoutX="471.0" layoutY="96.0" mnemonicParsing="false" onAction="#Search" text="Search">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font></Button>
-      <Text fx:id="SEARCHBYlabel" fontSmoothingType="LCD" layoutX="304.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Searching By: ">
-         <font>
-            <Font name="David Bold" size="15.0" />
-         </font></Text>
-      <Button fx:id="NAMEBtn" layoutX="69.0" layoutY="96.0" mnemonicParsing="false" onAction="#NameFun" prefHeight="31.0" prefWidth="174.0" text="Search By Name">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="GENREBtn" layoutX="69.0" layoutY="143.0" mnemonicParsing="false" onAction="#GenreFunc" prefHeight="31.0" prefWidth="174.0" text="Search By Genre">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="DESCRIPTIONBtn" layoutX="69.0" layoutY="185.0" mnemonicParsing="false" onAction="#DescriptionFunc" text="Search By Description">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="AUTHORBtn" layoutX="69.0" layoutY="227.0" mnemonicParsing="false" onAction="#AuthorFunc" prefHeight="31.0" prefWidth="174.0" text="Search By Author">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="prev" alignment="CENTER" layoutX="16.0" layoutY="672.0" mnemonicParsing="false" onAction="#prevbtn" prefHeight="31.0" prefWidth="94.0" text="Back">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="NONE" />
-         </cursor></Button>
-      <Button fx:id="Exit" layoutX="862.0" layoutY="26.0" mnemonicParsing="false" onAction="#Exitbtn" prefHeight="31.0" prefWidth="94.0" text="Exit">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font></Button>
-      <AnchorPane fx:id="Achor" layoutX="15.0" layoutY="315.0" prefHeight="335.0" prefWidth="947.0" style="-fx-background-color: white;" />
-   </children>
-</AnchorPane>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SearchBookController">
+   <center>
+      <AnchorPane prefHeight="947.0" prefWidth="1072.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello!" />
+            <Text fill="#2395c6" layoutX="348.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Book">
+               <font>
+                  <Font name="Impact" size="53.0" />
+               </font>
+            </Text>
+            <Button fx:id="prev" layoutX="8.0" layoutY="918.0" mnemonicParsing="false" onAction="#prevbtn" text="Back" />
+            <Button fx:id="Exit" layoutX="1077.0" layoutY="-1.0" mnemonicParsing="false" onAction="#Exitbtn" text="Exit" />
+            <Button fx:id="NAMEBtn" layoutX="107.0" layoutY="136.0" mnemonicParsing="false" onAction="#NameFun" prefHeight="31.0" prefWidth="160.0" text="Search By Name" />
+            <Button fx:id="GENREBtn" layoutX="107.0" layoutY="179.0" mnemonicParsing="false" onAction="#GenreFunc" prefHeight="31.0" prefWidth="163.0" text="Search By Genre" />
+            <Button fx:id="AUTHORBtn" layoutX="107.0" layoutY="225.0" mnemonicParsing="false" onAction="#AuthorFunc" prefHeight="31.0" prefWidth="163.0" text="Search By Author" />
+            <Text fx:id="SEARCHBYlabel" fill="#2395c6" layoutX="339.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Searching By: ">
+               <font>
+                  <Font name="System Bold Italic" size="19.0" />
+               </font>
+            </Text>
+            <TextField fx:id="bookID" alignment="CENTER" layoutX="324.0" layoutY="141.0" promptText="Enter Information" />
+            <Button layoutX="511.0" layoutY="141.0" mnemonicParsing="false" onAction="#Search" text="Search" />
+            <TableView fx:id="BookTable" layoutX="58.0" layoutY="276.0" onMouseClicked="#selectBook" prefHeight="476.0" prefWidth="972.0">
+              <columns>
+                <TableColumn fx:id="NameCol" prefWidth="147.0" text="Book Name" />
+                <TableColumn fx:id="IDCol" prefWidth="104.0" text="Book ID" />
+                  <TableColumn fx:id="AuthorCol" prefWidth="133.0" text="Author Name" />
+                  <TableColumn fx:id="GenreCol" prefWidth="120.0" text="Genre" />
+                  <TableColumn fx:id="DescriptionCol" prefWidth="130.0" text="Description" />
+                  <TableColumn fx:id="shelfCol" prefWidth="127.0" text="Shelf" />
+                  <TableColumn fx:id="retundDateCol" prefWidth="210.0" text="Closest Retun Date" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnContent" layoutX="482.0" layoutY="811.0" mnemonicParsing="false" onAction="#bookContent" text="Book Content" visible="false" />
+            <Text fx:id="contentTxt" fill="RED" layoutX="336.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can view the book content you selected from the table" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnLend" layoutX="492.0" layoutY="884.0" mnemonicParsing="false" onAction="#lendBook" text="Lend Book" visible="false" />
+            <Text fx:id="lendTxt" fill="RED" layoutX="464.0" layoutY="879.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can lend this book" visible="false">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Button layoutX="984.0" layoutY="908.0" mnemonicParsing="false" onAction="#searchGoogle" text="Serach By Google" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

@@ -1737,10 +1737,10 @@ public static ArrayList<String> SearchFuncByGenre(String Des)  throws SQLExcepti
 ////Reem
 public static ArrayList<String> SearchFuncByDescription(String Des)  throws SQLException 
 {
-	Statement stmt;
 	ArrayList<String> BookList = new ArrayList<String>();
-	stmt = conn.createStatement();
-	ResultSet rs1 = stmt.executeQuery("SELECT * FROM book  WHERE description = " + "'" + Des + "'");
+	PreparedStatement pst =conn.prepareStatement("SELECT * FROM book  WHERE description LIKE ?");
+	pst.setString(1, "%" + Des + "%");
+	ResultSet rs1=pst.executeQuery();
 	while(rs1.next())//
 	{
 		String BookID = rs1.getString("bookID");
@@ -1770,7 +1770,6 @@ public static ArrayList<String> SearchFuncByDescription(String Des)  throws SQLE
 	
 	rs1.close();
 	return BookList;
-
 }
 
 
