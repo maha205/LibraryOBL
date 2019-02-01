@@ -440,6 +440,24 @@ public class EchoServer extends AbstractServer
 					e1.printStackTrace();
 				}
 	    	  break ;
+	    	  
+	      case "RangeNumberOfDelays":
+	    	  try {
+				result = (ArrayList<Integer>)NumberOfDelays();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  break ;
+	    	  
+	      case "DurationDelays":
+	    	  try {
+				result = (ArrayList<Integer>) DurationDelays();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  break ;
 	    }
 	    
 	    try {
@@ -504,7 +522,7 @@ public class EchoServer extends AbstractServer
     Statement st = conn.createStatement();
     st = conn.createStatement();
     ResultSet rs = st.executeQuery("SELECT *FROM statushistory GROUP BY SubscriberID");
-   
+ 
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -2472,6 +2490,63 @@ public static ArrayList<NormalLending> DurationLendingNormal() throws SQLExcepti
     System.out.println("yesssssss Normal");
     System.out.println(r);
     return r ;  
+}
+//student
+public static ArrayList<Integer> NumberOfDelays() throws SQLException
+{
+	ArrayList<Integer> Duration =new ArrayList<Integer>();
+	Statement st = conn.createStatement();
+    st = conn.createStatement();
+    ResultSet rs = st.executeQuery("SELECT *FROM student");
+ 
+    while(rs.next())
+        Duration.add(rs.getInt(9));
+    
+    Collections.sort(Duration);//Sort list
+    return Duration ;  
+}
+public static ArrayList<Integer> DurationDelays() throws SQLException
+{
+	ArrayList<Integer> Duration =new ArrayList<Integer>();
+	Statement st = conn.createStatement();
+    st = conn.createStatement();
+    ResultSet rs = st.executeQuery("SELECT *FROM iteminloan");
+    String date1 ,date2;
+    while(rs.next())
+    {
+    	 date2 = rs.getString(7);//return date ;
+         date1 =  rs.getString(6);//loan date
+         if(date2==null) System.out.println("Item is not in loan");
+         else {
+ 		    try {
+      		String format = "dd/MM/yyyy";
+
+      		SimpleDateFormat sdf = new SimpleDateFormat(format);
+
+      		Date dateObj1 = sdf.parse(date1);
+      		Date dateObj2 = sdf.parse(date2);
+      		System.out.println(dateObj1);
+      		System.out.println(dateObj2 + "\n");
+
+      		DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+
+      		// getTime() returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Date object
+      		long diff = dateObj2.getTime() - dateObj1.getTime();
+
+      		  int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+      		  if(diffDays >=0)// if(diffDays < min && diffDays >0)
+      		  {
+      			 Duration.add(diffDays);
+      		  }
+      			System.out.println("difference between days: " +diffDays);
+      		
+ 		   } catch (Exception e) {
+   			e.printStackTrace();
+   		}
+        }
+    }
+    Collections.sort(Duration);//Sort list
+    return Duration ;  
 }
 }//End of EchoServer class
 

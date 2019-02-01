@@ -250,7 +250,6 @@ public void VarChartNormal()
       series1.getData().add(new XYChart.Data(rang9, arr[8]));
       series1.getData().add(new XYChart.Data(rang10, arr[9]));
       
-   
       BarcharNormal.getData().addAll(series1);
       
     }

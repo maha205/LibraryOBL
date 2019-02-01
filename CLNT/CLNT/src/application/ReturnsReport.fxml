@@ -64,10 +64,10 @@
             <Button layoutY="905.0" mnemonicParsing="false" onAction="#back" text="Back" />
             <Button layoutX="1170.0" layoutY="890.0" mnemonicParsing="false" onAction="#logout" text="Log-Out" />
             <Button fx:id="requestReport" layoutX="554.0" layoutY="102.0" mnemonicParsing="false" onAction="#requestReportFunc" text="Request Report" />
-            <Text fx:id="avgDelaysNumbers" layoutX="275.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text fx:id="medianDelaysNumbers" layoutX="275.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text fx:id="AvgDuration" layoutX="918.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text fx:id="medianDuration" layoutX="918.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text fx:id="avgDelaysNumbers" layoutX="275.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="medianDelaysNumbers" layoutX="275.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="AvgDuration" layoutX="918.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="medianDuration" layoutX="918.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Separator layoutX="269.0" layoutY="169.0" prefHeight="4.0" prefWidth="91.0" />
             <Separator layoutX="257.0" layoutY="223.0" prefHeight="2.0" prefWidth="101.0" />
             <Separator layoutX="918.0" layoutY="179.0" prefHeight="4.0" prefWidth="91.0" />
