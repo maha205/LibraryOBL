@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StudentInfoController">
+   <bottom>
+      <AnchorPane prefHeight="485.0" prefWidth="599.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Student!" />
+            <Text fill="#3377c9" layoutX="199.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Info">
+               <font>
+                  <Font name="System Bold Italic" size="41.0" />
+               </font>
+            </Text>
+            <Text fill="#3377c9" layoutX="63.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#3377c9" layoutX="63.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#3377c9" layoutX="63.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#3377c9" layoutX="63.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#3377c9" layoutX="63.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="516.0" layoutY="440.0" mnemonicParsing="false" onAction="#logout" text="Log-out" />
+            <Button layoutX="14.0" layoutY="440.0" mnemonicParsing="false" onAction="#back" text="Back" />
+            <Button layoutX="507.0" layoutY="-1.0" mnemonicParsing="false" onAction="#editProfile" text="Edit Profile" />
+            <Text fill="#3377c9" layoutX="64.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Status:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="studentID" layoutX="282.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="studentName" layoutX="282.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="email" layoutX="282.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="phoneNumbet" layoutX="282.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="pass" layoutX="282.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="cardStatus" layoutX="282.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

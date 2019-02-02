@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AllReportActionController">
+   <top>
+      <AnchorPane prefHeight="928.0" prefWidth="1466.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Management!" />
+            <Text fill="#1da89e" layoutX="612.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity Log">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="56.0" />
+               </font>
+            </Text>
+            <Button layoutX="64.0" layoutY="727.0" mnemonicParsing="false" text="Button" />
+            <TableView fx:id="ReportTable" layoutX="14.0" layoutY="208.0" prefHeight="580.0" prefWidth="1431.0">
+              <columns>
+                  <TableColumn fx:id="reportDate" prefWidth="132.00003051757812" text="Report Date" />
+                <TableColumn fx:id="activeSubscribers" prefWidth="221.0" text="Number Of Active Subscribers" />
+                <TableColumn fx:id="frozenSubscribers" minWidth="1.0" prefWidth="224.0" text="Number Of Frozen Subscribers" />
+                  <TableColumn fx:id="lockedSubscribers" prefWidth="231.0" text="Number Of Locked Subscribers" />
+                  <TableColumn fx:id="copiesNumber" minWidth="0.0" prefWidth="140.0" text="Number Of Copies" />
+                  <TableColumn fx:id="delayReurning" minWidth="0.0" prefWidth="562.0" text="Number Of Subscribers Who Are Late In Returning Book" />
+              </columns>
+            </TableView>
+            <Button layoutX="705.0" layoutY="807.0" mnemonicParsing="false" onAction="#requestNewReport" text="Request a new report" />
+            <Button layoutX="1383.0" layoutY="880.0" mnemonicParsing="false" onAction="#logout" text="Log-Out" />
+            <Button layoutX="14.0" layoutY="849.0" mnemonicParsing="false" onAction="#backGui" text="Back" />
+            <Text fill="RED" layoutX="612.0" layoutY="856.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can request a new report from the system!">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="reportSearch" layoutX="645.0" layoutY="151.0" promptText="Report Date" />
+            <Button layoutX="832.0" layoutY="151.0" mnemonicParsing="false" onAction="#searchReport" text="Search Report" />
+            <Text fill="#1da89e" layoutX="549.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Date:">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Button layoutX="64.0" layoutY="160.0" mnemonicParsing="false" onAction="#viewAgain" text="To view again" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

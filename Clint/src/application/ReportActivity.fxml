@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ReportActivityController">
+   <top>
+      <AnchorPane prefHeight="825.0" prefWidth="853.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#1da89e" layoutX="156.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Activity Log Report" wrappingWidth="547.5625">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="56.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Mangment!" />
+            <Text fill="#1da89e" layoutX="88.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Active Subscribers:">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <Text fill="#1da89e" layoutX="88.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Frozen Subscribers: ">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <Text fill="#1da89e" layoutX="88.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Locked Subscribers:">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <Text fill="#1da89e" layoutX="88.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Copies:">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <Text fill="#1da89e" layoutX="88.0" layoutY="587.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Subscribers Who Did't Return The Book In Time:">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <Separator layoutX="690.0" layoutY="333.0" orientation="VERTICAL" prefHeight="271.0" prefWidth="7.0" />
+            <Text fx:id="ActiveSubscribers" layoutX="705.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="FrozenSubscribers" layoutX="705.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="LockedSubscribers" layoutX="705.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="copiesNumber" layoutX="705.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="delayReturning" layoutX="705.0" layoutY="585.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <ComboBox fx:id="comboDay" layoutX="179.0" layoutY="231.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" promptText="Day" />
+            <ComboBox fx:id="comboMonth" layoutX="345.0" layoutY="231.0" prefWidth="150.0" promptText="Month" />
+            <ComboBox fx:id="comboYear" layoutX="504.0" layoutY="231.0" prefWidth="150.0" promptText="Year" />
+            <Line endX="257.0" layoutX="345.0" layoutY="277.0" startX="-100.0" stroke="#1da89e" />
+            <Text fill="RED" layoutX="199.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <Text fill="RED" layoutX="160.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <Button layoutX="1.0" layoutY="787.0" mnemonicParsing="false" onAction="#back" text="Back" />
+            <Button layoutX="788.0" layoutY="-1.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+            <Button layoutX="625.0" layoutY="638.0" mnemonicParsing="false" onAction="#ActivityLog" text="Activity Log" />
+            <Button layoutX="338.0" layoutY="285.0" mnemonicParsing="false" onAction="#requestReport" text="Request Report" />
+            <RadioButton layoutX="216.0" layoutY="181.0" mnemonicParsing="false" onAction="#DailyReport" text="Daily report">
+               <toggleGroup>
+                  <ToggleGroup fx:id="mygroup" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton layoutX="345.0" layoutY="181.0" mnemonicParsing="false" onAction="#MonthlyReport" text="Monthly report" toggleGroup="$mygroup" />
+            <RadioButton layoutX="495.0" layoutY="181.0" mnemonicParsing="false" onAction="#AnnualReport" text="Annual Report" toggleGroup="$mygroup" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>
