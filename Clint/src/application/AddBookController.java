@@ -53,8 +53,7 @@ public class AddBookController
 	  		FXMLLoader loader = new FXMLLoader();
 	  		Pane root = loader.load(getClass().getResource("/application/"+IPController.backGui+".fxml").openStream());
 	  		
-	  		Scene scene = new Scene(root);			
-	  		
+	  		Scene scene = new Scene(root);	
 	  		primaryStage.setScene(scene);		
 	  		primaryStage.show();
 	    }

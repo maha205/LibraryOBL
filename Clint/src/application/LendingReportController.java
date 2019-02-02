@@ -95,15 +95,19 @@ public void VarChartNormal()
     	
     	int median=0;
     	int size =sum.size() ;
-		 if (size % 2 == 0) {
+    	if(size!=0) {
+		 if (size % 2 == 0 ) {
 		        int x1 = sum.get(size / 2 - 1);
 		        int x2 = sum.get(size / 2);
 		        median = (x1 + x2) / 2;
 		    } else {
 		        median = sum.get(size / 2);
 		    }
+    	}
 		 medianNormal.setText(""+median);
+    	
 		 System.out.println("The median is: "+median);
+    	
     }
 
     public void avgRequest(ArrayList<RequestLending> normal)
@@ -126,13 +130,14 @@ public void VarChartNormal()
     	
     	int median=0;
     	int size =sum.size() ;
-		 if (size % 2 == 0) {
+    	if(size!=0) {
+		 if (size % 2 == 0 ) {
 		        int x1 = sum.get(size / 2 - 1);
 		        int x2 = sum.get(size / 2);
 		        median = (x1 + x2) / 2;
 		    } else {
 		        median = sum.get(size / 2);
-		    }
+		    }}
 		 MedianRequest.setText(""+median);
 		 System.out.println("The median is: "+median);
     }

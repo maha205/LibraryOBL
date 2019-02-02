@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManualExtensionController">
-   <center>
+   <bottom>
       <AnchorPane prefHeight="735.0" prefWidth="776.0" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, Librarian!" />
@@ -29,7 +29,12 @@
             <TableView fx:id="extendTable" layoutX="28.0" layoutY="236.0" onMouseClicked="#SelectedItem" prefHeight="346.0" prefWidth="720.0" />
             <Button layoutX="14.0" layoutY="690.0" mnemonicParsing="false" onAction="#back" text="Back" />
             <Button layoutX="697.0" layoutY="690.0" mnemonicParsing="false" onAction="#logout" text="Log-out" />
+            <Text fx:id="libraryName" fill="#5160ff" layoutX="144.0" layoutY="660.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-   </center>
+   </bottom>
 </BorderPane>

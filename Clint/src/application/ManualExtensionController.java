@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import Entity.Librarian;
 import TableView.itemInLoan;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ManualExtensionController {
@@ -27,7 +29,8 @@ public class ManualExtensionController {
 	public static String Copyid  = null;
     @FXML
     private TextField userID;
-
+    @FXML
+    private Text libraryName; //The extension was performed by the librarian:
     @FXML
     private TableView<itemInLoan> extendTable;
    
@@ -75,13 +78,40 @@ public class ManualExtensionController {
         msg.add("ExtendLoan");
         result = (ArrayList<String>)IPController.client.Request(msg);
         System.out.println(result);
-        if(result.size() >0)
+        if(result.size() >0) {
     	  JOptionPane.showMessageDialog(null, "Extend successful");
-       
+    	  ArrayList<String> msg1 = new ArrayList<String>();
+    	  ArrayList<Librarian>  result1 = new ArrayList<Librarian>();
+		     msg1.add("AllLibrarianWorker");
+		     result1=new ArrayList<Librarian>();
+		     result1 = (ArrayList<Librarian>)IPController.client.Request(msg1);
+		     if(result1.size()>0) {
+		    	// libraryName.setText(result1.get(0));; //The extension was performed by the librarian:
+		    	 for(int j=0;j<result1.size();j++)
+		         {
+		      	   if(result1.get(j).getLibrarianID().equals(sigINController.LibrarianId)) {
+		      		 libraryName.setText("The extension was performed by the librarian: "+result1.get(j).getLibrarianName());
+		      	   
+		      	   ArrayList<String> msg5 = new ArrayList<String>();
+		      	   String result5 = null ;
+		      	  //LibrarianExtern
+		      	    msg5.add(result1.get(j).getLibrarianName());
+		      	    msg5.add(userID.getText());
+		      	    msg5.add(Bookid) ;
+		      	    msg5.add(Copyid);
+		      	    msg5.add("LibrarianExtern");
+		      	    
+		            result5 = (String)IPController.client.Request(msg5);
+		            System.out.println(result5);
+   }
+		      			 
+		        }
+		    	 
+             }
+        }
         else
           JOptionPane.showMessageDialog(null, "Extend cannot be completed!!");
-       
-    	}
+        } 
     }
 
     @FXML

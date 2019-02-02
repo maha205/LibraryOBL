@@ -468,6 +468,16 @@ public class EchoServer extends AbstractServer
 				e1.printStackTrace();
 			}
 	    	  break ;
+	    	  
+	      case "LibrarianExtern":
+	    	  try {
+	    		  System.out.println("yessssss 1");
+				result = (String)LibrarianExtern(msg.get(0),msg.get(1),msg.get(2),msg.get(3));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	  break ;
 	    }
 	    
 	    try {
@@ -533,6 +543,7 @@ public class EchoServer extends AbstractServer
     st = conn.createStatement();
     ResultSet rs = st.executeQuery("SELECT *FROM statushistory GROUP BY SubscriberID");
     RemindBeforeOneDay remindMe = new RemindBeforeOneDay();
+    
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
@@ -1011,19 +1022,30 @@ public class EchoServer extends AbstractServer
  	 		}
  	 			
  	 			if(rs1.next() && rs1.getInt(5)==0 && diffDays <= 7 && diffDays >= 0) //there are no orders for this book 
- 	 			{	 	 	
+ 	 			{	 
+ 	 				 String sDate1=rs.getString(6);  
+                      Date date1=null;
+					try {
+						date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}  
+                      System.out.println(sDate1+"\t"+date1);  
+                     
+                      
  	 				System.out.println("yesssssssssssssss");
  	 	 		    SimpleDateFormat twoWeeksAfter = new SimpleDateFormat("dd/MM/yyyy");
  	 	 		    Calendar c2 = Calendar.getInstance();
- 	 	 		    c2.setTime(new Date()); // Now use today date.
+ 	 	 		    c2.setTime(date1); // Now use today date.
  	 	 		    c2.add(Calendar.DATE, 7); // Adding 14 days
  	 	 		    outputtwoWeeksAfter = twoWeeksAfter.format(c2.getTime());
  	 	 		
  	 	 		     Extern.add(outputtwoWeeksAfter);
  	 	 		     Extern.add(oldDate);
  	 	 		     Extern.add(BookName);
- 	 				 stmt.executeUpdate("UPDATE iteminloan SET loanDate ='"+outputcurrentDate+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
- 	 				// stmt.executeUpdate("UPDATE iteminloan SET returnDate ='"+outputtwoWeeksAfter+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
+ 	 				// stmt.executeUpdate("UPDATE iteminloan SET loanDate ='"+outputcurrentDate+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
+ 	 				 stmt.executeUpdate("UPDATE iteminloan SET returnDate ='"+outputtwoWeeksAfter+"' WHERE BookID ='"+BookID+"' AND CopyID ='"+copyID+"';");
 
  	 			}
  	 		  }
@@ -3134,6 +3156,15 @@ public static ArrayList<Integer> DurationDelays() throws SQLException
     }
     Collections.sort(Duration);//Sort list
     return Duration ;  
+}
+public static String LibrarianExtern(String LibrarianName , String UserId , String BookId , String copyID) throws SQLException
+{
+	System.out.println("yessssss 2");
+	Statement st = conn.createStatement();
+    st = conn.createStatement();
+    st.executeUpdate("UPDATE iteminloan SET LibrarianExternName ='"+LibrarianName+"' WHERE  StudentID ='"+UserId+"' AND BookID ='"+BookId+"' AND CopyID ='"+copyID+"' AND returnOnTime IS NULL;");
+    System.out.println("yessssss 3");
+    return "suscceded" ;
 }
 }//End of EchoServer class
 

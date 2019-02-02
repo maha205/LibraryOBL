@@ -114,13 +114,14 @@ public class ReturnsReportController {
        	
        	int median=0;
        	int size =noDelays.size() ;
+       	if(size!=0) {
    		 if (size % 2 == 0) {
    		        int x1 = noDelays.get(size / 2 - 1);
    		        int x2 = noDelays.get(size / 2);
    		        median = (x1 + x2) / 2;
    		    } else {
    		        median = noDelays.get(size / 2);
-   		    }
+   		    }}
    		medianDuration.setText(""+median);
    		 System.out.println("The median is: "+median);
      	   	
@@ -192,13 +193,14 @@ public class ReturnsReportController {
         	
         	int median=0;
         	int size =noDelays.size() ;
+        	if(size!=0) {
     		 if (size % 2 == 0) {
     		        int x1 = noDelays.get(size / 2 - 1);
     		        int x2 = noDelays.get(size / 2);
     		        median = (x1 + x2) / 2;
     		    } else {
     		        median = noDelays.get(size / 2);
-    		    }
+    		    }}
     		 medianDelaysNumbers.setText(""+median);
     		 System.out.println("The median is: "+median);
     		 
