@@ -17,8 +17,18 @@ import Entity.Librarian ;
 import Entity.NormalLending;
 import Entity.ReportActivity;
 import Entity.Student;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import Entity.RequestLending;
-
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 /**
  * This class overrides some of the methods in the abstract 
  * superclass in order to give more functionality to the server.
@@ -563,7 +573,18 @@ public class EchoServer extends AbstractServer
     {
       System.out.println("ERROR - Could not listen for clients!");
     }
-     remindMe.start();
+    
+	try {
+		
+		Application.launch(ServerController.class, args);
+
+		
+	} catch(Exception e) {
+		e.printStackTrace();
+	}
+
+    remindMe.start();
+	
   }
   //connectToDB() func to connect to data base //schema's name : librarysys
   public static void connectToDB()
