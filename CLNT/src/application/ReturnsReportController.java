@@ -91,6 +91,7 @@ public class ReturnsReportController {
     	TableDuration.getColumns().addAll(Range,numbers);
         
     	 final ObservableList<DurationOfLateness> data = FXCollections.observableArrayList();
+    	 if(noDelays.size()>0) {
     	 for(int k =0 , w=0;k<20;k+=2 ,w++)   
   	   {
   	   	 for(int j=0 ;j<noDelays.size();j++)
@@ -99,6 +100,7 @@ public class ReturnsReportController {
   	   		 if( x >= k && x <= (k+1)) arr[w]++;
   	   	}
   	   }
+    	 }
     	   	 for (int i = 0 ,k=0; i < 20 ; i +=2 ,k++)
     	   	 {
     	   		String s = ""+i;
@@ -109,7 +111,7 @@ public class ReturnsReportController {
      	   	Range.setCellValueFactory(new PropertyValueFactory<DurationOfLateness,String>("Range"));
      	   	numbers.setCellValueFactory(new PropertyValueFactory<DurationOfLateness,String>("no"));
      	   	TableDuration.setItems(data);
-     	   	
+     	   if(noDelays.size()>0) {  	
      	   int total = 0;
        	double avg =0;
        	for(int i = 0; i < noDelays.size(); i++)
@@ -132,6 +134,12 @@ public class ReturnsReportController {
    		    }}
    		medianDuration.setText(""+median);
    		 System.out.println("The median is: "+median);
+     	   }
+     	   else {
+     		  medianDuration.setText("0");
+     		 AvgDuration.setText("0");
+     	   }
+     	   
      	   	
      	   XYChart.Series series1 = new XYChart.Series();
  	      series1.setName("This month");       
@@ -172,7 +180,7 @@ public class ReturnsReportController {
     	TableDelaysNumbers.getColumns().addAll(Range,numbers);
     	
     	 final ObservableList<NumberOfDelays> data = FXCollections.observableArrayList();
-    	
+    	 if(noDelays.size()>0) { 
     	   for(int k =0 , w=0;k<20;k+=2 ,w++)   
     	   {
     	   	 for(int j=0 ;j<noDelays.size();j++)
@@ -181,6 +189,7 @@ public class ReturnsReportController {
     	   		 if( x >= k && x <= (k+1)) arr[w]++;
     	   	}
     	   }
+    	 }
     	   
     	   	 for (int i = 0 ,k=0; i < 20 ; i +=2 ,k++)
     	   	 {
@@ -192,7 +201,7 @@ public class ReturnsReportController {
     	   	Range.setCellValueFactory(new PropertyValueFactory<NumberOfDelays,String>("Range"));
     	   	numbers.setCellValueFactory(new PropertyValueFactory<NumberOfDelays,String>("no"));
     	   	TableDelaysNumbers.setItems(data);
-    	   	
+    	   	if(noDelays.size()>0) { 
     		int total = 0;
         	double avg =0;
         	for(int i = 0; i < noDelays.size(); i++)
@@ -215,7 +224,11 @@ public class ReturnsReportController {
     		    }}
     		 medianDelaysNumbers.setText(""+median);
     		 System.out.println("The median is: "+median);
-    		 
+    	   	}
+    	   	else {
+    	   		medianDelaysNumbers.setText("0");
+    	   		avgDelaysNumbers.setText("0");
+    	   	}
     	   	  XYChart.Series series1 = new XYChart.Series();
     	      series1.setName("This month");       
     	      series1.getData().add(new XYChart.Data(rang1, arr[0]));

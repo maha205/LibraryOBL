@@ -137,7 +137,7 @@ public class SearchBookController {
 		    
 	        final ObservableList<BookTable> data = FXCollections.observableArrayList();
 	        
-	        for (int i = 0; i < result.size(); i+=11) {
+	        for (int i = 0; i < result.size(); i+=10) {
 	         if(result.get(i+8).equals("available"))
 	           data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),result.get(i+9),""));
 	       
@@ -150,7 +150,7 @@ public class SearchBookController {
              	msg3.add("sortDate");
              	result3 = (ArrayList<String>)IPController.client.Request(msg3);
                 System.out.println(result3);
-                
+                if(result3.size()>0)
  	           data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),"",result3.get(0)));
 
              	//System.out.println(result3.get(0));
@@ -226,6 +226,7 @@ public class SearchBookController {
                  	result3 = (ArrayList<String>)IPController.client.Request(msg3);
                     System.out.println(result3);
                     
+                    if(result3.size()>0)
       	           data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),result.get(i+9),result3.get(0)));
 
                  	//System.out.println(result3.get(0));
@@ -301,6 +302,7 @@ public class SearchBookController {
                  	result3 = (ArrayList<String>)IPController.client.Request(msg3);
                     System.out.println(result3);
                     
+                    if(result3.size()>0)
       	           data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),result.get(i+9),result3.get(0)));
 
                  	//System.out.println(result3.get(0));
@@ -377,6 +379,7 @@ public class SearchBookController {
                  	result3 = (ArrayList<String>)IPController.client.Request(msg3);
                     System.out.println(result3);
                     
+                    if(result3.size()>0)
       	           data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),result.get(i+9),result3.get(0)));
 
                  	//System.out.println(result3.get(0));

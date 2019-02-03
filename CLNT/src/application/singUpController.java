@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -92,10 +94,16 @@ public class singUpController {
        	 msg.add("signUP");
        	 result = (ArrayList<String>)IPController.client.Request(msg);
        	 System.out.println(result);
-       	 if(result.size() >0)
+       	 if(result.size() >0) {
        		userExist.setVisible(false); 
-       	 else
+    		JOptionPane.showMessageDialog(null, "Sing Up successful");
+
+       	 }
+       	 else {
        		userExist.setVisible(true); 
+    		JOptionPane.showMessageDialog(null, "Subscriber is existes !!");
+
+       	 }
     	
     }
 

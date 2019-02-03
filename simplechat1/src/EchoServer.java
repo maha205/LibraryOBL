@@ -424,7 +424,7 @@ public class EchoServer extends AbstractServer
 	    	  
 	      case "NumberOfDelays":
 	    	  try {
-				result =NumberOfDelays(msg.get(0),msg.get(1));
+				result =(int)NumberOfDelays(msg.get(0),msg.get(1));
 			} catch (SQLException | ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -433,7 +433,7 @@ public class EchoServer extends AbstractServer
 	    	  
 	      case "copiesNumber":
 	    	  try {
-				result =copiesNumber(msg.get(0));
+				result =(int)copiesNumber(msg.get(0));
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -1071,7 +1071,8 @@ public class EchoServer extends AbstractServer
      			
      	 		if(!rs.next())//if the student is not existing 
      	 		{
-     	 		   stmt.executeUpdate("INSERT INTO student (StudentId ,StudentName ,Email,phone) VALUES('"+studentID+"','"+name+"','"+Email+"','"+phoneNumber+"')");
+     	 			String stuts ="Active" ;
+     	 		   stmt.executeUpdate("INSERT INTO student (StudentId ,StudentName ,Email,phone,StatusMembership) VALUES('"+studentID+"','"+name+"','"+Email+"','"+phoneNumber+"','"+ stuts+"')");
      	 		   stmt.executeUpdate("INSERT INTO userstudent (UserID ,Password ) VALUES('"+studentID+"','"+studentID+"')");
      	 		   
      	 		   
@@ -3445,7 +3446,7 @@ public static ArrayList<String> ActiveLockedFrozenSubscribersNumber(String Date)
     		long diff = dateObj2.getTime() - dateObj1.getTime();
 
     		  int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
-    		  if(diffDays < MaxDay && diffDays <=0 )// if(diffDays < min && diffDays >0)
+    		  if(diffDays < MaxDay && diffDays >=0 )// if(diffDays < min && diffDays >0)
     		  {
     			  MaxDay =diffDays;
     			  status =rs.getString(2);

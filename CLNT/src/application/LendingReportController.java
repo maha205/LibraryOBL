@@ -86,6 +86,7 @@ public void VarChartNormal()
     public void AvgNormal(ArrayList<NormalLending> normal)
     {
     	ArrayList<Integer> sum = new ArrayList<Integer>() ;
+    	if( normal.size()>0) {
     	for(int i =0;i<normal.size();i++)
     	{
     		sum.add(Integer.parseInt(normal.get(i).getDuringNormalLending()));
@@ -116,6 +117,12 @@ public void VarChartNormal()
 		 medianNormal.setText(""+median);
     	
 		 System.out.println("The median is: "+median);
+    	}
+    	else
+    	{
+    		 medianNormal.setText("0");
+    		 AvgNormal.setText("0");
+    	}
     	
     }
     /**
@@ -125,6 +132,7 @@ public void VarChartNormal()
     public void avgRequest(ArrayList<RequestLending> normal)
     {
     	ArrayList<Integer> sum = new ArrayList<Integer>() ;
+    	if( normal.size()>0) {
     	for(int i =0;i<normal.size();i++)
     	{
     		sum.add(Integer.parseInt(normal.get(i).getDuringRequestLending()));
@@ -152,6 +160,11 @@ public void VarChartNormal()
 		    }}
 		 MedianRequest.setText(""+median);
 		 System.out.println("The median is: "+median);
+    	}
+    	else {
+    		MedianRequest.setText("0");
+    		avgRequest.setText("0");
+    	}
     }
     /**
      * Saving Requests in table
@@ -178,6 +191,7 @@ public void VarChartNormal()
         
     
     	 final ObservableList<LendingReportRequestBook> data = FXCollections.observableArrayList();
+    	 if(request.size()>0) {
     	 for(int k =0 , w=0;k<40;k+=4 ,w++)    
     	  {
     	   	 for(int j=0 ;j<request.size();j++)
@@ -188,6 +202,7 @@ public void VarChartNormal()
     	   		 if( x >=k && x <= (k+3)) arr[w]+=y;
     	   	}
     	  }
+    	 }
     	   	 for (int i = 0 ,k=0; i < 40 ; i +=4 ,k++)
     	   	 {
     	   		String s = ""+i;
@@ -239,8 +254,9 @@ public void VarChartNormal()
         
    	 normalTable.getColumns().addAll(DuringNormalLending,noNormalSubscribers);
        
-   
+  
    	 final ObservableList<LendingReportNormalBook> data = FXCollections.observableArrayList();
+   	 if(normal.size()>0) {
    for(int k =0 , w=0;k<40;k+=4 ,w++)   
    {
    	 for(int j=0 ;j<normal.size();j++)
@@ -250,6 +266,7 @@ public void VarChartNormal()
    		 if(y==0) y++;
    		 if( x >= k && x <= (k+3) ) arr[w]+=y;
    	}
+   }
    }
    	 for (int i = 0 ,k=0; i < 40; i +=4,k++) {
    		String s = ""+i;
@@ -339,7 +356,7 @@ public void VarChartNormal()
 	    
 	    RequestTable(result1);
     	NormalTable(result);
-    	 AvgNormal(result);
+    	AvgNormal(result);
     	 avgRequest(result1);
     	
     }

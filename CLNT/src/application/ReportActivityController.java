@@ -133,7 +133,7 @@ public class ReportActivityController
 		  msg.add(date);
 		  msg.add("year");
 		  msg.add("NumberOfDelays");
-		  result =(int) IPController.client.Request(msg);
+		  result =(int)IPController.client.Request(msg);
 		  System.out.println(result);
 		  delayReturning.setText(""+result);
 
@@ -141,7 +141,7 @@ public class ReportActivityController
 		  int result1 ;
 		  msg1.add(date);
 		  msg1.add("copiesNumber");
-		  result1 =(int) IPController.client.Request(msg1);
+		  result1 =(int)IPController.client.Request(msg1);
 		  System.out.println(result);
 		  copiesNumber.setText(""+result1);
 		  
@@ -149,10 +149,17 @@ public class ReportActivityController
 		  ArrayList<String> result2 = new ArrayList<String>();
 		  msg2.add(date);
 		  msg2.add("ActiveLockedFrozenSubscribersNumber");
-		  result2 =( ArrayList<String>) IPController.client.Request(msg2);
+		  result2 =( ArrayList<String>)IPController.client.Request(msg2);
+		  if(result2.size()>0) {
 		  ActiveSubscribers.setText(result2.get(0));
           FrozenSubscribers.setText(result2.get(2));
           LockedSubscribers.setText(result2.get(1));
+		  }
+		  else {
+			  ActiveSubscribers.setText("0");
+	          FrozenSubscribers.setText("0");
+	          LockedSubscribers.setText("0");
+		  }
           
           ArrayList<String> msg3 = new ArrayList<String>();
           String result3 =null;
@@ -210,10 +217,16 @@ public class ReportActivityController
 		  msg2.add(date);
 		  msg2.add("ActiveLockedFrozenSubscribersNumber");
 		  result2 =( ArrayList<String>) IPController.client.Request(msg2);
-		  
+		  if(result2.size()>0) {
 			  ActiveSubscribers.setText(result2.get(0));
 	          FrozenSubscribers.setText(result2.get(2));
 	          LockedSubscribers.setText(result2.get(1));
+			  }
+			  else {
+				  ActiveSubscribers.setText("0");
+		          FrozenSubscribers.setText("0");
+		          LockedSubscribers.setText("0");
+			  }
 		
           ArrayList<String> msg3 = new ArrayList<String>();
 		  String result3;
@@ -272,10 +285,16 @@ public class ReportActivityController
 		  msg2.add(date);
 		  msg2.add("ActiveLockedFrozenSubscribersNumber");
 		  result2 =( ArrayList<String>) IPController.client.Request(msg2);
-		 
+		  if(result2.size()>0) {
 			  ActiveSubscribers.setText(result2.get(0));
 	          FrozenSubscribers.setText(result2.get(2));
 	          LockedSubscribers.setText(result2.get(1));
+			  }
+			  else {
+				  ActiveSubscribers.setText("0");
+		          FrozenSubscribers.setText("0");
+		          LockedSubscribers.setText("0");
+			  }
 			 
 			
           

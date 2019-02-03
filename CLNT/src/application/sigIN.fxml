@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.sigINController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.sigINController">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="420.0" BorderPane.alignment="CENTER">
          <children>
@@ -32,13 +32,13 @@
             <TextField fx:id="pass" alignment="CENTER" layoutX="148.0" layoutY="279.0" promptText="Password" />
             <Button layoutX="188.0" layoutY="320.0" mnemonicParsing="false" onAction="#loginFunc" text="Login" />
             <Button layoutX="14.0" layoutY="331.0" mnemonicParsing="false" onAction="#backGui" text="Back" />
-            <Button layoutX="15.0" layoutY="361.0" mnemonicParsing="false" onAction="#exitGui" prefHeight="25.0" prefWidth="40.0" text="Exit" />
-            <Text fx:id="NotFound" fill="RED" layoutX="161.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Not Found !" visible="false">
+            <Button layoutX="15.0" layoutY="361.0" mnemonicParsing="false" onAction="#exitGui" prefHeight="31.0" prefWidth="47.0" text="Exit" />
+            <Text fx:id="NotFound" fill="RED" layoutX="145.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Not Found !" visible="false">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <CheckBox layoutX="151.0" layoutY="357.0" mnemonicParsing="false" onAction="#forgetPass" text="Forget your password?" />
+            <CheckBox layoutX="145.0" layoutY="352.0" mnemonicParsing="false" onAction="#forgetPass" text="Forget your password?" />
             <ImageView fitHeight="132.0" fitWidth="132.0" layoutX="145.0" layoutY="96.0">
                <image>
                   <Image url="@../Pictures/team.png" />
