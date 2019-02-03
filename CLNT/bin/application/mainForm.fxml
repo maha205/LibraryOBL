@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.mainFormController">
+   <center>
+      <AnchorPane prefHeight="380.0" prefWidth="457.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#434340" layoutX="164.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ORT BRAUDE ">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Text>
+            <Button fx:id="signIn" layoutX="181.0" layoutY="286.0" mnemonicParsing="false" onAction="#signInFunc" prefHeight="31.0" prefWidth="95.0" text="Sign-In" />
+            <Button fx:id="search" layoutX="176.0" layoutY="324.0" mnemonicParsing="false" onAction="#searchFunc" prefHeight="31.0" prefWidth="106.0" text="Search Book" />
+            <Button fx:id="exit" layoutX="14.0" layoutY="343.0" mnemonicParsing="false" onAction="#exitFunc" text="Exit" />
+            <Text fill="#64c3e3" layoutX="162.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY">
+               <font>
+                  <Font name="System Bold" size="33.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="130.0" layoutY="71.0">
+               <image>
+                  <Image url="@../Pictures/reading.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
