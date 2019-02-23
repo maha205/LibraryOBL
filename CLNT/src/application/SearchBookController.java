@@ -227,8 +227,7 @@ public class SearchBookController {
                     System.out.println(result3);
                     
                     if(result3.size()>0)
-      	           data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),result.get(i+9),result3.get(0)));
-
+          	        data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),"",result3.get(0)));
                  	//System.out.println(result3.get(0));
     	         }
     	        }
@@ -303,8 +302,7 @@ public class SearchBookController {
                     System.out.println(result3);
                     
                     if(result3.size()>0)
-      	           data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),result.get(i+9),result3.get(0)));
-
+          	        data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),"",result3.get(0)));
                  	//System.out.println(result3.get(0));
     	         }
     	        }
@@ -380,7 +378,7 @@ public class SearchBookController {
                     System.out.println(result3);
                     
                     if(result3.size()>0)
-      	           data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),result.get(i+9),result3.get(0)));
+          	        data.add(new BookTable (result.get(i+1),result.get(i),result.get(i+2),result.get(i+3),result.get(i+4),"",result3.get(0)));
 
                  	//System.out.println(result3.get(0));
     	         }

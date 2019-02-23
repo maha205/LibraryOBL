@@ -89,6 +89,7 @@ public class OrderCheck implements ReminderInterface, Runnable{
 			    System.out.println(result);
 				if(result.get(0)!="NotOkay")
 				{		
+					index--;
 	    		String OrderNumber=result.get(1);
 	    		int OrderNumber1=Integer.parseInt(OrderNumber);
 	    		String StudentID=result.get(2);
@@ -102,10 +103,11 @@ public class OrderCheck implements ReminderInterface, Runnable{
 	    		String BookName=result.get(10);
 	    		OrderDetails studentInOrder=new OrderDetails(StudentID,StudentName,Email,BookName,BookID,copyID,OrderDate,OrderStatus,OrderNumber1,EpiredDay);
 	    		addObserver(studentInOrder);
-			    
-	    	}	 
-	    		    if(index>0)
+	    		 
+	    	}	 else
+	    		
 	   	    		 index--;
+	    		    System.out.println("times ");
 		    }
 	}
 

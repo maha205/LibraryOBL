@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -18,8 +21,8 @@
                </font>
             </Text>
             <Button layoutX="262.0" layoutY="547.0" mnemonicParsing="false" onAction="#ExtendLoan" text="Extend Loan Duration " />
-            <Button layoutX="14.0" layoutY="590.0" mnemonicParsing="false" onAction="#BackGui" text="Back" />
-            <Button layoutX="654.0" layoutY="590.0" mnemonicParsing="false" onAction="#exitGui" text="logOut" />
+            <Button layoutY="606.0" mnemonicParsing="false" onAction="#BackGui" text="Back" />
+            <Button layoutX="666.0" layoutY="-1.0" mnemonicParsing="false" onAction="#exitGui" text="logOut" />
             <Text fx:id="errorMsg" fill="RED" layoutX="181.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extend cannot be completed!" visible="false">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -41,8 +44,16 @@
                </font>
             </Text>
             <TableView fx:id="extendTable" layoutX="18.0" layoutY="218.0" onMouseClicked="#SelectedItem" prefHeight="319.0" prefWidth="703.0" />
-            <Button layoutX="262.0" layoutY="174.0" mnemonicParsing="false" onAction="#checkBookToExtend" prefHeight="31.0" prefWidth="176.0" text="Check book to extend" />
+            <Button layoutX="284.0" layoutY="171.0" mnemonicParsing="false" onAction="#checkBookToExtend" prefHeight="31.0" prefWidth="176.0" text="Check book to extend" />
+            <ImageView fitHeight="33.0" fitWidth="36.0" layoutX="244.0" layoutY="170.0">
+               <image>
+                  <Image url="@../../../../../database-search-2797375_960_720.png" />
+               </image>
+            </ImageView>
          </children>
+         <effect>
+            <ColorAdjust />
+         </effect>
       </AnchorPane>
    </center>
 </BorderPane>

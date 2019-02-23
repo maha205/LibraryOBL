@@ -1176,6 +1176,7 @@ public class EchoServer extends AbstractServer
  	 		} catch (Exception e) {
  	 			e.printStackTrace();
  	 		}
+ 	 	      
  	 			
  	 			if(rs1.next() && rs1.getInt(5)==0 && diffDays <= 7 && diffDays >= 0) //there are no orders for this book 
  	 			{	 
@@ -1205,6 +1206,7 @@ public class EchoServer extends AbstractServer
 
  	 			}
  	 		  }
+ 	 		  
  	 		   rs.close();
  	 		 return Extern;
  	 		}
@@ -3072,7 +3074,7 @@ static ArrayList<String> CheckCopyStatus(String bookID,int number) {      ////Fa
 	try {
 		
 		stmt = conn.createStatement();
-		rs2 = stmt.executeQuery("SELECT * FROM booksorder WHERE BookID ='"+bookID+"' AND OrderNumber = "+number+" AND OrderStatus=1 ;");
+		rs2 = stmt.executeQuery("SELECT * FROM booksorder WHERE BookID ='"+bookID+"' AND OrderID = '"+number+"' AND OrderStatus=1 ;");
 		
 	if(rs2.next()) {	
 		stmt = conn.createStatement();
@@ -3083,8 +3085,8 @@ static ArrayList<String> CheckCopyStatus(String bookID,int number) {      ////Fa
 			OrderData.add("Exist");     //                  0
 			stmt1 = conn.createStatement();
 			stmt2 = conn.createStatement();
-			stmt1.executeUpdate("UPDATE copy SET copyStatus = 1  WHERE idcopy = '"+CopyID+"' AND bookID='"+bookID+"' ;");
-			stmt2.executeUpdate("UPDATE booksorder SET OrderStatus = 0  WHERE BookID = '"+bookID+"' AND OrderNumber = "+number+" ;");
+			stmt1.executeUpdate("UPDATE copy SET copyStatus = 1  WHERE idcopy = '"+CopyID+"' AND bookID= '"+bookID+"' ;");
+			stmt2.executeUpdate("UPDATE booksorder SET OrderStatus = 0  WHERE BookID = '"+bookID+"' AND OrderID = '"+number+"' ;");
 			return OrderData;
 		}
 	}
